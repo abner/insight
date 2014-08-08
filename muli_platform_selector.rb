@@ -2,7 +2,7 @@ platforms :jruby do
   gem "activerecord-jdbcsqlite3-adapter"
 end
 
-platforms :mri do
+platforms :ruby do
   gem "sqlite3"
 end
 
@@ -10,7 +10,7 @@ end
 
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.1.4'
 
 group :development do
   gem 'pry-rails'
