@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-require 'devise/orm/mongoid'
+#require 'devise/orm/mongoid'  # Ver se é realmente necessário
 
 module AppRailsJruby
   class Application < Rails::Application

@@ -39,10 +39,6 @@ class User
   # field :authentication_token, :type => String
 
   class << self
-    # #  def serialize_from_session(key,salt)
-    # #    record = to_adapter.get(key[0])
-    # #    record if record && record.authenticatable_salt == salt
-    # #  end
     def serialize_into_session(record)
       [record.id.to_s, record.authenticatable_salt]
     end
