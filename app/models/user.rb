@@ -4,9 +4,11 @@ class User
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :ldap_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable#, :validatable
+         :recoverable, :rememberable, :trackable,
+         :authentication_keys => [:username]#, :validatable
 
   ## Database authenticatable
+  field :username, :type => String, :default => ''
   field :email,              :type => String, :default => ""
   field :encrypted_password, :type => String, :default => ""
 

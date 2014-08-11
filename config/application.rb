@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 #require 'devise/orm/mongoid'  # Ver se é realmente necessário
 
-module AppRailsJruby
+module FeedbackServer
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

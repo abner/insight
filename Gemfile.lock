@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/cschiewek/devise_ldap_authenticatable.git
+  revision: 350b78431dbfe8e945c7f104bd8d0ae58f04f873
+  specs:
+    devise_ldap_authenticatable (0.8.3)
+      devise (>= 3.0)
+      net-ldap (>= 0.3.1, < 0.6.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -59,9 +67,6 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    devise_ldap_authenticatable (0.8.1)
-      devise (>= 3.0)
-      net-ldap (>= 0.3.1, < 0.6.0)
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
     dotenv-deployment (0.0.2)
@@ -134,9 +139,9 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
-    sdoc (0.4.0)
-      json (~> 1.8)
-      rdoc (~> 4.0, < 5.0)
+    sdoc (0.4.1)
+      json (~> 1.7, >= 1.7.7)
+      rdoc (~> 4.0)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -179,7 +184,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   compass-rails
   devise (~> 3.2.4)
-  devise_ldap_authenticatable (~> 0.8.0)
+  devise_ldap_authenticatable!
   foreman
   jbuilder (~> 2.0)
   jquery-rails

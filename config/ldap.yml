@@ -30,6 +30,15 @@ development:
   ssl: false
   # <<: *AUTHORIZATIONS
 
+#development:
+#    host: 127.0.0.1
+#    port: 389
+#    base: dc=kanban,dc=com
+#    attribute: uid
+#    admin_user: cn=admin,dc=kanban,dc=com
+#    admin_password: r3dfr0g
+#    ssl: false
+
 test:
   host: localhost
   port: 3389

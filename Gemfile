@@ -46,8 +46,10 @@
 
   gem 'devise',  '~> 3.2.4'
   gem 'net-ldap',  '~> 0.3.1'
-  gem "devise_ldap_authenticatable", '~> 0.8.0'
 
+  #gem "devise_ldap_authenticatable", '~> 0.8.1'
+  gem "devise_ldap_authenticatable", :git => "git://github.com/cschiewek/devise_ldap_authenticatable.git"
+  
   gem 'foreman'
 
   # Use Capistrano for deployment
