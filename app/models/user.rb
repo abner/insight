@@ -39,6 +39,12 @@ class User
 
   ## Token authenticatable
   # field :authentication_token, :type => String
+  has_many :projects
+
+  validates_presence_of :username, :email
+
+  validates :username, uniqueness: {:case_sensitive => false }
+  validates :email, uniqueness: { :case_sensitive => false }
 
   class << self
     def serialize_into_session(record)

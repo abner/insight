@@ -42,6 +42,14 @@
 
   group :development do
     gem 'rails_layout'
+
+  end
+
+  group :test do
+    gem 'rspec'
+    #gem 'rspec-rails'
+    #gem 'shoulda-matchers', require: false
+    gem 'mongoid-rspec'
   end
 
   gem 'devise',  '~> 3.2.4'
@@ -49,7 +57,7 @@
 
   #gem "devise_ldap_authenticatable", '~> 0.8.1'
   gem "devise_ldap_authenticatable", :git => "git://github.com/cschiewek/devise_ldap_authenticatable.git"
-  
+
   gem 'foreman'
 
   # Use Capistrano for deployment
