@@ -2,6 +2,12 @@ module Tokenable
   extend ActiveSupport::Concern
 
   included do
+    field :token, type: String
+
+    validates_presence_of :name
+
+    validates :token, uniqueness: { :case_sensitive => false }
+
     before_create :generate_token
   end
 

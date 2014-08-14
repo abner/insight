@@ -42,14 +42,19 @@
 
   group :development do
     gem 'rails_layout'
-
+    gem 'pry-rails'
+    gem 'guard-rspec', :require => false
   end
 
   group :test do
+    gem 'database_cleaner', "~> 1.3"
     gem 'rspec'
     #gem 'rspec-rails'
     #gem 'shoulda-matchers', require: false
     gem 'mongoid-rspec'
+    gem 'rspec-collection_matchers'
+    #gem "factory_girl", "~> 4.0"
+    gem 'factory_girl_rails', "~> 4.0", :require => false
   end
 
   gem 'devise',  '~> 3.2.4'
