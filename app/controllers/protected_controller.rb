@@ -3,9 +3,8 @@ class ProtectedController < ApplicationController
   #after_action :verify_authorized
 
   def index
-    #current_user.ldap_get_param(current_user.login_with, 'email')
-    puts current_user.ldap_entry.inspect
-    puts current_user.ldap_get_param(:mail)
-    render text: "<h1>Protected</h1><p>#{current_user.ldap_dn}</p>"
+
+    #puts current_user.public_methods.sort.inspect
+    render text: "<h1>Protected</h1><div style='width=840px'>#{current_user.ldap_entry.inspect}</div>"
   end
 end

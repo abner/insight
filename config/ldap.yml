@@ -15,7 +15,7 @@ authorizations: &AUTHORIZATIONS
   ## Requires config.ldap_check_attributes in devise.rb to be true
   ## Can have multiple attributes and values, must match all to be authorized
   require_attribute:
-    objectClass: inetOrgPerson
+    objectClass: organizationalPerson
     authorizationRole: postsAdmin
 
 ## Environment

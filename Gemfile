@@ -4,7 +4,8 @@
   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
   gem 'rails', '4.1.4'
 
-
+  gem 'grape'
+  
   gem 'sqlite3', :platform => :ruby
   gem "mongoid", "~> 4.0.0"
 

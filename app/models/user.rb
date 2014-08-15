@@ -4,8 +4,8 @@ class User
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :ldap_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable,
-         :authentication_keys => [:username]#, :validatable
+  :recoverable, :rememberable, :trackable,
+  :authentication_keys => [:username]#, :validatable
 
   ## Database authenticatable
   field :username, :type => String, :default => ''
@@ -39,16 +39,29 @@ class User
 
   ## Token authenticatable
   # field :authentication_token, :type => String
-  has_many :projects
+  has_many :user_applications
 
-  validates_presence_of :username, :email
+  validates_presence_of :username
+  validates_presence_of :email, :unless => Proc.new { |user| user.new_record? }
 
   validates :username, uniqueness: {:case_sensitive => false }
   validates :email, uniqueness: { :case_sensitive => false }
+
+  before_create :get_missing_info_from_ldap
+
+  #add_index  :users, :authentication_token, :unique => true
 
   class << self
     def serialize_into_session(record)
       [record.id.to_s, record.authenticatable_salt]
     end
   end
+
+  protected
+
+  def get_missing_info_from_ldap
+    attributes[:email] = ldap_get_param(:mail)
+    raise "email not provided" if attributes[:email].nil?
+  end
+
 end

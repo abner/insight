@@ -5,13 +5,13 @@ FactoryGirl.define do
 
   end
 
-  factory :project do
+  factory :user_application do
     name { "SISCOAF #{SecureRandom.hex(4)}" }
     owner
   end
 
   factory :feedback do
-    datetime { DateTime.now }
-    project
+    text "Feedback Text provided by application user"
+    user_application
   end
 end

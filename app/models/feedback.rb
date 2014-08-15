@@ -2,18 +2,24 @@ class Feedback
   include Mongoid::Document
   #include Mongoid::Attributes::Dynamic
 
-  belongs_to :webapp
+  belongs_to :user_application
 
-  field :datetime, type: DateTime
+  field :server_date_time, type: DateTime
 
-  field :ip, type:String
-  field :browser, type: String
-  
-
-  field :category, type: String
+  field :text, type: String
 
   field :screenshot_path, type: String
 
+  embeds_one :feedback_requester
 
+  validates_presence_of :text
+
+  before_save :fill_automatic_fields
+
+
+  protected
+  def fill_automatic_fields
+      self.server_date_time = DateTime.now
+  end
 
 end

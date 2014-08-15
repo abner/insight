@@ -21,6 +21,6 @@ RSpec.describe Feedback, :type => :model do
     expect(feedback.save).to be(true)
 
     feedback_reloaded = Feedback.find(feedback.id)
-    expect(feedback.custom_attribute_created).to eq("Anything")
+    expect(feedback[:custom_attribute_created]).to eq("Anything")
   end
 end

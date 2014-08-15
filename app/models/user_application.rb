@@ -1,4 +1,4 @@
-class Project
+class UserApplication
   include Mongoid::Document
   include Tokenable
 
@@ -10,4 +10,7 @@ class Project
 
   validates_presence_of :owner
 
+  validates_presence_of :name
+
+  has_many :feedbacks
 end
