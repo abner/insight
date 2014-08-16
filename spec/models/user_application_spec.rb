@@ -9,7 +9,7 @@ RSpec.describe UserApplication, :type => :model do
     user_application
   end
 
-  let!(:token_format) { /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i }
+  #let!(:token_format) { /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i }
 
   #it { should validate_uniqueness_of(:name).case_insensitive }
   #it { should validate_uniqueness_of(:token).case_insensitive }
@@ -30,10 +30,10 @@ RSpec.describe UserApplication, :type => :model do
 
   it 'receives a token number after creation' do
     user_application = valid_factory
-    expect(user_application.token).to be_blank
+    expect(user_application.authentication_token).to be_blank
     user_application.save
-    expect(user_application.token).not_to be_blank
-    expect(user_application.token).to match(token_format)
+    expect(user_application.authentication_token).not_to be_blank
+    #expect(user_application.token).to match(token_format)
   end
 
   it 'not allow store user_applications with same name' do
@@ -61,10 +61,10 @@ RSpec.describe UserApplication, :type => :model do
     expect(user_application1.save).to be(true)
     expect(user_application2.save).to be(true)
 
-    user_application2.token = user_application1.token
+    user_application2.authentication_token = user_application1.authentication_token
 
     expect(user_application2.save).to be(false)
-    expect(user_application2.errors[:token]).to include('is already taken')
+    expect(user_application2.errors[:authentication_token]).to include('is already taken')
   end
 
 end

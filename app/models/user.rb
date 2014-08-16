@@ -60,8 +60,8 @@ class User
   protected
 
   def get_missing_info_from_ldap
-    attributes[:email] = ldap_get_param(:mail)
-    raise "email not provided" if attributes[:email].nil?
+    self.email = ldap_get_param(:mail) if self.email.blank?
+    raise "email not provided" if self.email.nil?
   end
 
 end

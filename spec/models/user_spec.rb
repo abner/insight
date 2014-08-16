@@ -11,9 +11,10 @@ RSpec.describe User, :type => :model do
   end
 
   it 'requires an email' do
-    new_user = FactoryGirl.build(:user, :email => '')
-    expect(new_user.save).to eq(false)
-    expect(new_user.errors[:email]).to include "can't be blank"
+    user = FactoryGirl.build(:user, :email => '')
+    allow(user).to receive(:new_record?).and_return(false)
+    expect(user.save).to eq(false)
+    expect(user.errors[:email]).to include "can't be blank"
   end
 
   it 'does not allow to store users with same username' do
