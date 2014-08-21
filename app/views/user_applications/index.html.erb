@@ -1,0 +1,29 @@
+<h1><%= translate('My applications') %></h1>
+
+<% if @user_applications.empty? %>
+
+<p> translate("You don't have any application registered yet")</p>
+
+<% else  %>
+<table>
+  <tr>
+    <th><%= translate('Name') %></th>
+    <th><%= translate('Token') %></th>
+    <th><%= translate('Actions') %></th>
+  <tr>
+  <% @user_applications.each do  |user_application | %>
+  <tr>
+    <td><%= user_application.name %></td>
+    <td><%= user_application.authentication_token %></td>
+    <td>
+      <%= link_to translate('Edit'), edit_user_application_path(user_application), :class=> 'action'%>
+      <%= link_to translate('Destroy'), user_application_path(user_application), :method=> 'DELETE'%>
+      <%= link_to translate('Feedbacks'), user_application_feedbacks_path(user_application)%>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<% end %>
+
+<%= link_to translate('Create new application'), new_user_application_path, :class => 'button' %>

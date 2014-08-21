@@ -1,0 +1,22 @@
+<h1><%= translate('Feedbacks for application') %> <%= @user_application.name %></h1>
+
+<table id="feedbacks" class="display" data-source="<%= user_application_feedbacks_url(:id=> params[:id], format: "json") %>">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Category</th>
+      <th>Date</th>
+      <th>Text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @feedbacks.each do |feedback| %>
+      <td><%= feedback.view_id %></td>
+      <td><%= feedback.category %></td>
+      <td><%= feedback.server_date_time %></td>
+      <td><%= feedback.text %></td>
+    <% end %>
+  </tbody>
+</table>
+<hr />
+<%= link_to translate('Return'), user_applications_url %>

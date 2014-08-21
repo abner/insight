@@ -8,6 +8,8 @@ class Feedback
 
   field :text, type: String
 
+  field :category, type: String
+
   field :screenshot_path, type: String
 
   embeds_one :feedback_requester
@@ -16,10 +18,14 @@ class Feedback
 
   before_save :fill_automatic_fields
 
+  def view_id
+    id.to_s
+  end
+
 
   protected
   def fill_automatic_fields
-      self.server_date_time = DateTime.now
+    #check app region information
+    self.server_date_time = DateTime.now
   end
-
 end

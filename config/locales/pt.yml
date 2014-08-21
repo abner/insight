@@ -19,6 +19,17 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
-  "My applications": "My Applications"
+pt:
+  hello: "Olá"
+  "My applications": "Minhas Aplicações"
+  "User application changed successfully!": "Aplicação alterada com sucesso!"
+  "User application removed successfully!": "Aplicação removida com sucesso!"
+  "User application created!": Aplicação criada!
+  "Edit": "Alterar"
+  "Destroy": "Excluir"
+  "Create new application": "Adicionar uma nova Aplicação"
+  "Name": "Nome"
+  "Actions": "Ações"
+  "FeedbackSERPRO": "Feedback.SERPRO"
+  "Feedbacks for application": "Feedbacks da Aplicação"
+  "Return": "Retornar"

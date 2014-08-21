@@ -5,7 +5,7 @@
   gem 'rails', '4.1.4'
 
   gem 'grape'
-  
+
   gem 'sqlite3', :platform => :ruby
   gem "mongoid", "~> 4.0.0"
 
@@ -68,3 +68,12 @@
 
   # Use Capistrano for deployment
   # gem 'capistrano-rails', group: :development
+
+#group :assets do
+
+  gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+  gem 'jquery-ui-rails'
+#end
+
+  gem 'will_paginate'
+  gem "will_paginate_mongoid"

@@ -1,15 +1,34 @@
 Rails.application.routes.draw do
 
+  # get 'user_applications/index'
+  #
+  # get 'user_applications/create'
+  #
+  # get 'user_applications/update'
+  #
+  # get 'user_applications/destroy'
+
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  mount FeedbackServerAPI => '/api/'
-
-  # You can have the root of your site routed with "root"
   root 'welcome#index'
 
   get 'protected' => 'protected#index'
+
+  #get 'user_applications' => 'user_applications#index'
+
+  resources  :user_applications do
+    # member do
+    #   get 'feedbacks' => 'feedbacks#index'
+    # end
+    resources :feedbacks
+  end
+
+  mount FeedbackServerAPI => '/api/'
+
+  # You can have the root of your site routed with "root"
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -13,4 +13,8 @@ class UserApplication
   validates_presence_of :name
 
   has_many :feedbacks
+
+  def to_param
+    name
+  end
 end
