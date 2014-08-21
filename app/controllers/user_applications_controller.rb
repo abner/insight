@@ -17,11 +17,12 @@ class UserApplicationsController < ProtectedController
   end
 
   def create
-    if @user_application = current_user.user_applications.create(user_application_params)
+    @user_application =  current_user.user_applications.build(user_application_params)
+    if @user_application.save
       flash[:notice] = translate('User application created!')
       redirect_to :action => :index
     else
-      render :show
+      render :edit
     end
   end
 

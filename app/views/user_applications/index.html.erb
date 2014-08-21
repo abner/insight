@@ -17,7 +17,8 @@
     <td><%= user_application.authentication_token %></td>
     <td>
       <%= link_to translate('Edit'), edit_user_application_path(user_application), :class=> 'action'%>
-      <%= link_to translate('Destroy'), user_application_path(user_application), :method=> 'DELETE'%>
+      <%= link_to translate('Destroy'),
+        user_application_path(user_application), :method=> 'DELETE', :data => {:confirm => translate('Are you sure')} %>
       <%= link_to translate('Feedbacks'), user_application_feedbacks_path(user_application)%>
     </td>
   </tr>

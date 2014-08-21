@@ -39,7 +39,11 @@
   gem 'puma'
 
   gem 'compass-rails'
-  gem 'zurb-foundation'
+
+  #gem 'zurb-foundation'
+  gem 'therubyracer'
+  gem 'less-rails'
+  gem "twitter-bootstrap-rails"
 
   group :development do
     gem 'rails_layout'
