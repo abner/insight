@@ -82,3 +82,5 @@
 
   gem 'will_paginate'
   gem "will_paginate_mongoid"
+
+  gem 'rack-cors',  require: 'rack/cors'

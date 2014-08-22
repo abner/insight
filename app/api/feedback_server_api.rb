@@ -4,7 +4,7 @@ class FeedbackServerAPI < Grape::API
   version 'v1', using: :path, vendor: 'serpro'
   format :json
 
-  rescue_from :all, :backtrace => true
+  #rescue_from :all, :backtrace => true
   #error_formatter :json, Grape::API::ErrorFormatter
 
   before do
@@ -38,21 +38,34 @@ class FeedbackServerAPI < Grape::API
   resource :feedbacks do
     desc "Cria um registro de feedback"
     params do
-      requires :data, type: Array, desc: "Dados do feedback"
-      requires :app_token, type: String, desc: "Token da aplicação cadastrada em Feedback.serpro."
+      #requires :data, type: Array, desc: "Dados do feedback"
+      requires :access_token, type: String, desc: "Token da aplicação cadastrada em Feedback.serpro."
     end
     post do
-      authenticate!
-      Feedback.create!({
-        user_application: current_user_application,
-        attributes: params[:data][0],
-        screenshot: params[:data][1]
-        })
+      data_object = JSON.parse(params[:data])
+      #authenticate!
+      base_64_param = data_object[1]
+
+      public_folder = "#{Rails.root}/public/"
+
+      filename = "images/screenshots/#{SecureRandom.urlsafe_base64}.png"
+      full_filename = "#{public_folder}#{filename}"
+
+      File.open(full_filename, 'w:binary') do |f|
+        data = base_64_param.split(',')[1]
+        f.write(Base64.decode64(data))
       end
 
-      desc 'Retorna últimos 10 feedbacks de uma app'
-      get do
-        current_user_application.feedbacks.order(:created_at => 'desc').limit(10)
-      end
+
+      feedback_attributes = data_object[0]
+      feedback_attributes.merge!( screenshot_path: filename, :text => feedback_attributes.delete('relato') )
+
+      current_user_application.feedbacks.create!(feedback_attributes)
     end
+
+    desc 'Retorna últimos 10 feedbacks de uma app'
+    get do
+      current_user_application.feedbacks.order(:created_at => 'desc').limit(10)
+    end
+  end
 end

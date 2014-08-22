@@ -21,7 +21,7 @@ private
       [
         #link_to(feedback.id, feedback),
         feedback.view_id,
-        feedback.category,
+        feedback.tipo_relato,
         feedback.server_date_time.strftime("%B %e, %Y"),
         feedback.text
         #number_to_currency(product.price)
@@ -40,7 +40,7 @@ private
   def fetch_feedbacks
     feedbacks = all_feedbacks#.paginate(:page => page, :per_page => per_page)
     if params[:sSearch].present?
-      feedbacks = feedbacks.any_of({"text" => /#{params[:sSearch]}/}, {:category => /#{params[:sSearch]}/})
+      feedbacks = feedbacks.any_of({"text" => /#{params[:sSearch]}/i}, {:tipo_relato => /#{params[:sSearch]}/i})
     end
     feedbacks
   end

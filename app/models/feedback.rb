@@ -1,6 +1,6 @@
 class Feedback
   include Mongoid::Document
-  #include Mongoid::Attributes::Dynamic
+  include Mongoid::Attributes::Dynamic
 
   belongs_to :user_application
 
