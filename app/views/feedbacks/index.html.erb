@@ -11,10 +11,12 @@
   </thead>
   <tbody>
     <% @feedbacks.each do |feedback| %>
-      <td><%= feedback.view_id %></td>
-      <td><%= feedback.category %></td>
-      <td><%= feedback.server_date_time %></td>
-      <td><%= feedback.text %></td>
+      <tr>
+        <td><%= feedback.view_id %></td>
+        <td><%= feedback.category %></td>
+        <td><%= feedback.server_date_time %></td>
+        <td><%= feedback.text %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>

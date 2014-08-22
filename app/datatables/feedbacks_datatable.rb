@@ -8,8 +8,8 @@ class FeedbacksDatatable
   def as_json(options = {})
     {
       sEcho: params[:sEcho].to_i,
-      iTotalRecords: all_feedbacks.count,
-      iTotalDisplayRecords: feedbacks.count,
+      recordsTotal:  all_feedbacks.count,
+      recordsFiltered: feedbacks.count,
       aaData: data
     }
   end
@@ -17,7 +17,7 @@ class FeedbacksDatatable
 private
 
   def data
-    feedbacks.map do |feedback|
+    feedbacks.paginate(page: page, per_page: per_page).map do |feedback|
       [
         #link_to(feedback.id, feedback),
         feedback.view_id,
@@ -38,7 +38,7 @@ private
   end
 
   def fetch_feedbacks
-    feedbacks = all_feedbacks#.page(page).per_page(per_page)
+    feedbacks = all_feedbacks#.paginate(:page => page, :per_page => per_page)
     if params[:sSearch].present?
       feedbacks = feedbacks.any_of({"text" => /#{params[:sSearch]}/}, {:category => /#{params[:sSearch]}/})
     end
@@ -50,7 +50,7 @@ private
   end
 
   def per_page
-    params[:iDisplayLength].to_i > 0 ? params[:iDisplayLength].to_i : 10
+    params[:iDisplayLength].to_i > 0 ? params[:iDisplayLength].to_i : 15
   end
 
   def sort_column
