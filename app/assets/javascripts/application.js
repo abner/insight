@@ -12,14 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
+//= require data-confirm-modal
 //= require jquery-ui
 //= require dataTables/jquery.dataTables
 //= require turbolinks
-
 //= require_tree .
 
 
 $(function() {
   $(document).foundation();
 
+});
+dataConfirmModal.setDefaults({
+  title: 'Confirmação de Ação',
+  commit: 'Confirmar',
+  cancel: 'Cancelar'
 });
