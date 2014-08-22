@@ -38,7 +38,7 @@ private
   end
 
   def fetch_feedbacks
-    feedbacks = all_feedbacks#.paginate(:page => page, :per_page => per_page)
+    feedbacks = all_feedbacks
     if params[:sSearch].present?
       feedbacks = feedbacks.any_of({"text" => /#{params[:sSearch]}/i}, {:tipo_relato => /#{params[:sSearch]}/i})
     end

@@ -14,6 +14,10 @@ class UserApplication
 
   has_many :feedbacks
 
+  def to_s
+    name
+  end
+
   def to_param
     name
   end

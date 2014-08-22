@@ -1,5 +1,5 @@
+#encoding: UTF-8
 class UserApplicationsController < ProtectedController
-
   def index
     @user_applications = current_user.user_applications
   end
