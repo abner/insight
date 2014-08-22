@@ -46,7 +46,6 @@
   gem "twitter-bootstrap-rails"
   gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 
-
   group :development do
     gem 'rails_layout'
     gem 'pry-rails'
