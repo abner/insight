@@ -41,6 +41,7 @@ pt:
           attributes:
             name:
               taken: 'já existe'
+              blank: 'não pode ser vazio'
             authentication_token:
               taken: 'já existe'
         user:
