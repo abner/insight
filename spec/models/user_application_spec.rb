@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe UserApplication, :type => :model do
 
+  before :each do
+    I18n.locale = :en
+  end
+
   let(:valid_factory) do
     user_application = FactoryGirl.build(:user_application)
     # not necessary FactoryGirl.lint on support/factory_girl validates all factories
