@@ -55,7 +55,7 @@
   group :test do
     gem 'database_cleaner', "~> 1.3"
     gem 'rspec'
-    #gem 'rspec-rails'
+    gem 'rspec-rails'
     #gem 'shoulda-matchers', require: false
     gem 'mongoid-rspec'
     gem 'rspec-collection_matchers'

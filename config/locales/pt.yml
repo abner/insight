@@ -34,3 +34,20 @@ pt:
   "Feedbacks for application": "Feedbacks da Aplicação"
   "Return": "Retornar"
   "Are you sure": "Tem certeza?"
+  mongoid:
+    errors:
+      models:
+        user_application:
+          attributes:
+            name:
+              taken: 'já existe'
+            authentication_token:
+              taken: 'já existe'
+        user:
+          attributes:
+            email:
+              taken: 'já existe'
+              blank: 'não pode ser vazio'
+            username:
+              taken: 'já existe'
+              blank: 'não pode ser vazio'

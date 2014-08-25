@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
 
+  before :each do
+    I18n.locale = :en
+  end
+
   let(:valid_user) { FactoryGirl.build(:user) }
 
   it 'requires an username' do
