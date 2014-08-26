@@ -66,8 +66,8 @@
   end
 
   gem 'devise',  '~> 3.2.4'
+  gem 'devise-i18n-views'
   gem 'net-ldap',  '~> 0.3.1'
-
   #gem "devise_ldap_authenticatable", '~> 0.8.1'
   gem "devise_ldap_authenticatable", :git => "git://github.com/cschiewek/devise_ldap_authenticatable.git"
 

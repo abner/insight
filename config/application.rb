@@ -15,7 +15,7 @@ Bundler.require(*Rails.groups)
 
 module FeedbackServer
   class Application < Rails::Application
-    
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -31,7 +31,9 @@ module FeedbackServer
     #config.autoload_paths << Dir[Rails.root.join('app', 'api', '*.{rb,yml}').to_s]
 
     #config.autoload_paths << Dir["#{config.root}/app/api"]
-    # config.i18n.default_locale = :de
+    config.i18n.default_locale =  :'pt-BR'
+
+    config.assets.paths << "#{Rails}/vendor/assets/fonts"
 
     config.middleware.use Rack::Cors do
       allow do

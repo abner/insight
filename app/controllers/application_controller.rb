@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
   end
 
   def define_locale
-    I18n.locale = :pt
+    I18n.locale = :'pt-BR'
   end
 end

@@ -1,5 +1,7 @@
 #encoding: UTF-8
 class UserApplicationsController < ProtectedController
+  before_filter :define_breadcrumbs, :only => [:show, :edit]
+
   def index
     @user_applications = current_user.user_applications
   end
@@ -9,13 +11,12 @@ class UserApplicationsController < ProtectedController
   end
 
   def show
-    @user_application = current_user.user_applications.find(id_param)
-    add_breadcrumb  @user_application
+    @user_application = user_application
   end
 
   def edit
-    @user_application = current_user.user_applications.find(id_param)
-
+    @user_application = user_application
+    add_breadcrumb  t('Edit')
   end
 
   def create
@@ -29,8 +30,7 @@ class UserApplicationsController < ProtectedController
   end
 
   def update
-    @user_application = current_user.user_applications.find(id_param)
-    if @user_application.update_attributes(user_application_params)
+    if user_application.update_attributes(user_application_params)
         flash[:notice] = translate('User application changed successfully!')
         redirect_to :action => :index
     else
@@ -39,13 +39,20 @@ class UserApplicationsController < ProtectedController
   end
 
   def destroy
-    @user_application = current_user.user_applications.find(id_param)
-    @user_application.destroy
+    user_application.destroy
     flash[:notice] = translate('User application removed successfully!')
     redirect_to :action => :index
   end
 
 private
+  def user_application
+    current_user.user_applications.find(id_param)
+  end
+
+  def define_breadcrumbs
+    add_breadcrumb  user_application
+  end
+
   def id_param
     params[:id]
   end

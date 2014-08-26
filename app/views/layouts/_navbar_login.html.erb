@@ -1,0 +1,36 @@
+<!--
+<ul class="nav pull-right">
+  <li class="dropdown" id="menuLogin">
+    <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login</a>
+    <div class="dropdown-menu" style="padding:17px;">
+      <form class="form" id="formLogin">
+        <input name="username" id="username" type="text" placeholder="Username">
+        <input name="password" id="password" type="password" placeholder="Password"><br>
+        <button type="button" id="btnLogin" class="btn">Login</button>
+      </form>
+    </div>
+  </li>
+</ul> -->
+
+<ul class="nav pull-right">
+    <% if current_user.blank? %>
+      
+    <% end %>
+    <% if current_user.present? %>
+      <li class="dropdown" id="menuUser" style="display: list-item;">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="See your Bootply collection and profile">
+              <i class="icon-user icon-xxlarge"> </i> <span id="lblUsername"><%= current_user.username %></span>
+              <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+              <li><a href="/user">Dashboard</a></li>
+              <li><a href="/new">Create New Bootply</a></li>
+
+              <li><%= link_to t('Logout'), destroy_user_session_path, :method => :delete %></li>
+              <li class="divider"> </li>
+              <li><a href="/bootstrap-community">Community</a></li>
+              <li><a href="/about">About</a></li>
+          </ul>
+      </li>
+    <% end %>
+</ul>
