@@ -61,6 +61,8 @@
     gem 'rspec-collection_matchers'
     #gem "factory_girl", "~> 4.0"
     gem 'factory_girl_rails', "~> 4.0", :require => false
+
+    gem 'simplecov', :require => false
   end
 
   gem 'devise',  '~> 3.2.4'
@@ -84,3 +86,5 @@
   gem "will_paginate_mongoid"
 
   gem 'rack-cors',  require: 'rack/cors'
+
+  gem 'mongoid_slug'

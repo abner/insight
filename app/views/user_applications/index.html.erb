@@ -13,7 +13,7 @@
   <tr>
   <% @user_applications.each do  |user_application | %>
   <tr>
-    <td><%= user_application.name %></td>
+    <td><%= link_to user_application.name, user_application_path(user_application) %></td>
     <td><%= user_application.authentication_token %></td>
     <td>
       <%= link_to translate('Edit'), edit_user_application_path(user_application), :class=> 'action'%>

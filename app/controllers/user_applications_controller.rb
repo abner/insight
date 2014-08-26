@@ -9,11 +9,13 @@ class UserApplicationsController < ProtectedController
   end
 
   def show
-    @user_application = current_user.user_applications.find_by(name: params[:id])
+    @user_application = current_user.user_applications.find(id_param)
+    add_breadcrumb  @user_application
   end
 
   def edit
-    @user_application = current_user.user_applications.find_by(:name => params[:id])
+    @user_application = current_user.user_applications.find(id_param)
+
   end
 
   def create
@@ -27,7 +29,7 @@ class UserApplicationsController < ProtectedController
   end
 
   def update
-    @user_application = current_user.user_applications.find_by(:name => params[:id])
+    @user_application = current_user.user_applications.find(id_param)
     if @user_application.update_attributes(user_application_params)
         flash[:notice] = translate('User application changed successfully!')
         redirect_to :action => :index
@@ -37,13 +39,17 @@ class UserApplicationsController < ProtectedController
   end
 
   def destroy
-    @user_application = current_user.user_applications.find_by(name: params[:id])
+    @user_application = current_user.user_applications.find(id_param)
     @user_application.destroy
     flash[:notice] = translate('User application removed successfully!')
     redirect_to :action => :index
   end
 
 private
+  def id_param
+    params[:id]
+  end
+
   def user_application_params
     params.require(:user_application).permit :name
     # if current_user.nil? # Guest

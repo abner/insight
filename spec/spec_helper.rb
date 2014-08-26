@@ -16,6 +16,9 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'devise'
 
+require 'simplecov'
+SimpleCov.start
+
 RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
 # The settings below are suggested to provide a good initial experience
