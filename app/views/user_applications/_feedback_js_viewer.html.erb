@@ -1,0 +1,18 @@
+<%= content_for :head do %>
+  <link href="/prism/prism.css" rel="stylesheet" />
+  <style type="text/css">
+  pre {
+    font-size:10px;
+  }
+  </style>
+<% end %>
+  <h3>Código Javascript do Feedback </h3>
+  <small>
+  Coloque o seguinte código javascript em sua página:
+  </small>
+  <pre>
+    <code class="language-javascript"><%= render_code(@user_application) %></code>
+  </pre>
+<%= content_for :body_end do %>
+  <script src="/prism/prism.js"></script>
+<% end %>

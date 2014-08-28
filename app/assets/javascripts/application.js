@@ -22,7 +22,8 @@
 
 
 $(function() {
-  $(document).foundation();
+  //$(document).foundation();
+  
 
 });
 dataConfirmModal.setDefaults({

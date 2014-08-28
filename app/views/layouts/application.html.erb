@@ -9,6 +9,7 @@
     <%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    <%= yield :head%>
   </head>
   <body>
     <header>
@@ -18,5 +19,6 @@
        <%= render 'layouts/messages' %>
        <%= yield %>
     </main>
+    <%= yield :body_end %>
   </body>
 </html>

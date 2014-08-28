@@ -1,6 +1,7 @@
 #encoding: UTF-8
 class UserApplicationsController < ProtectedController
   before_filter :define_breadcrumbs, :only => [:show, :edit]
+  helper_method :render_code
 
   def index
     @user_applications = current_user.user_applications
@@ -44,6 +45,10 @@ class UserApplicationsController < ProtectedController
     redirect_to :action => :index
   end
 
+protected
+  def render_code user_application
+    render_to_string(:partial => 'feedback_js_code', :layout => false)
+  end
 private
   def user_application
     current_user.user_applications.find(id_param)

@@ -29,3 +29,7 @@ document.addEventListener "page:change", ->
       oAria:
         sSortAscending: ": Ordenar colunas de forma ascendente"
         sSortDescending: ": Ordenar colunas de forma descendente"
+
+### Row Details
+http://www.datatables.net/examples/server_side/row_details.html
+###
