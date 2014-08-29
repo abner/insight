@@ -47,7 +47,7 @@ class UserApplicationsController < ProtectedController
 
 protected
   def render_code user_application
-    render_to_string(:partial => 'feedback_js_code', :layout => false)
+    render_to_string(:partial => 'feedback_js_code', :layout => false, :locals => {:user_application => user_application})
   end
 private
   def user_application

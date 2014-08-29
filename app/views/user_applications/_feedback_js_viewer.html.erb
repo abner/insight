@@ -1,5 +1,6 @@
 <%= content_for :head do %>
-  <link href="/prism/prism.css" rel="stylesheet" />
+  <!-- <link href="/prism/prism.css" rel="stylesheet" />-->
+  <link href="/highlight/styles/googlecode.css" rel="stylesheet" />
   <style type="text/css">
   pre {
     font-size:10px;
@@ -11,8 +12,13 @@
   Coloque o seguinte código javascript em sua página:
   </small>
   <pre>
-    <code class="language-javascript"><%= render_code(@user_application) %></code>
+    <code class="xhtml">&lt;div&gt;&lt;/div&gt;&lt;script type=text/javascript&gt;
+      <%= render_code(@user_application) %>
+      &lt;/script&gt;</code>
+    <!-- <code class="language-javascript"><%#= render_code(@user_application) %></code> -->
   </pre>
 <%= content_for :body_end do %>
-  <script src="/prism/prism.js"></script>
+  <!-- <script src="/prism/prism.js"></script> -->
+  <script src="/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 <% end %>

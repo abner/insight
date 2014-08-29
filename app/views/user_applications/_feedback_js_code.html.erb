@@ -1,9 +1,9 @@
-  $(document).ready(function() {
+    $(document).ready(function() {
       Feedback(
               {
                   label: "Reportar",
                   header: "Registro de ocorrência",
-                  url: "http://127.0.0.1:3000/api/v1/feedbacks?access_token=v9ADAoFZq8hMadZQPSadug",
+                  url: "http://<%= request.env['HTTP_HOST'] %>/api/v1/feedbacks?access_token=<%= user_application.authentication_token %>",
                   nextLabel: "Continuar",
                   reviewLabel: "Revisar",
                   sendLabel:  "Enviar",

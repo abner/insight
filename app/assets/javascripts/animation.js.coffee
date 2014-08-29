@@ -1,6 +1,6 @@
  document.addEventListener "page:change", ->
 #   document.body.className += "animated zoomInUp"
-   Prism.highlightAll()
+  #  Prism.highlightAll()
    return
 #
 #

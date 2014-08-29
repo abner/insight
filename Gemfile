@@ -69,6 +69,7 @@
   gem 'devise-i18n-views'
   gem 'net-ldap',  '~> 0.3.1'
   #gem "devise_ldap_authenticatable", '~> 0.8.1'
+  #using master from github => some issue related with rails 4 compatibility found
   gem "devise_ldap_authenticatable", :git => "git://github.com/cschiewek/devise_ldap_authenticatable.git"
 
   gem 'foreman'
