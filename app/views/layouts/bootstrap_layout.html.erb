@@ -35,10 +35,11 @@
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
     <%= javascript_include_tag "application" %>
+    <%= yield :head %>
   </head>
   <body>
 
-    <div class="navbar navbar-default navbar-static-top">
+    <div class="navbar navbar-inverse navbar-static-top">
       <div class="container">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
           <span class="icon-bar"></span>
@@ -48,10 +49,11 @@
         <a class="navbar-brand" href="#">Feedback.SERPRO</a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Link1", "/path1"  %></li>
-            <li><%= link_to "Link2", "/path2"  %></li>
-            <li><%= link_to "Link3", "/path3"  %></li>
+            <li><%= link_to translate("Dashboard"), "/dashboard"  %></li>
+            <li><%= link_to translate("Applications"), "/user_applications"  %></li>
+            <li><%= link_to translate("Last Feedbacks"), "/last_feedbacks"  %></li>
           </ul>
+          <%= render :partial => "/layouts/navbar_login" %>
         </div>
       </div>
     </div>
@@ -80,6 +82,6 @@
       </footer>
 
     </div> <!-- /container -->
-
+  <%= yield :body_end %>
   </body>
 </html>

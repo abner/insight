@@ -19,7 +19,7 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-pt:
+pt-BR:
   hello: "Olá"
   "My applications": "Minhas Aplicações"
   "User application changed successfully!": "Aplicação alterada com sucesso!"
@@ -34,7 +34,23 @@ pt:
   "Feedbacks for application": "Feedbacks da Aplicação"
   "Return": "Retornar"
   "Are you sure": "Tem certeza?"
-  mongoid:
+  "view feedbacks": "Visualizar Feedbacks"
+  "Show": "Exibir"
+  "Feedbacks": "Feedbacks"
+  "Edit": "Alterar"
+  devise:
+    failure:
+      user:
+        unauthenticated: ''
+    sessions:
+      user:
+        signed_in: 'Usuário logado com sucesso'
+  activemodel:
+    attributes:
+      user:
+        name: 'Nome'
+        email: 'E-mail'
+        password: 'Senha'
     errors:
       models:
         user_application:

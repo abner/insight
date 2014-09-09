@@ -13,10 +13,10 @@ class ApplicationController < ActionController::Base
   before_filter :define_locale, :breadcrumb
 
   def breadcrumb
-    add_breadcrumb 'Início', root_path
+    add_breadcrumb 'Início', user_applications_path
   end
 
   def define_locale
-    I18n.locale = :pt
+    I18n.locale = :'pt-BR'
   end
 end

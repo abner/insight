@@ -20,24 +20,24 @@ authorizations: &AUTHORIZATIONS
 
 ## Environment
 
-# development:
-#   host: slave-sdr-reg.sdr.serpro
-#   port: 389
-#   attribute: uid
-#   base: dc=serpro,dc=gov,dc=br
-#   admin_user: uid=webdesdr,ou=Servicos,ou=corp,dc=serpro,dc=gov,dc=br
-#   admin_password: webdesdr
-#   ssl: false
+development:
+  host: slave-sdr-reg.sdr.serpro
+  port: 389
+  attribute: uid
+  base: dc=serpro,dc=gov,dc=br
+  admin_user: uid=webdesdr,ou=Servicos,ou=corp,dc=serpro,dc=gov,dc=br
+  admin_password: webdesdr
+  ssl: false
   # <<: *AUTHORIZATIONS
 
-development:
-   host: 127.0.0.1
-   port: 389
-   base: dc=kanban,dc=com
-   attribute: uid
-   admin_user: cn=admin,dc=kanban,dc=com
-   admin_password: r3dfr0g
-   ssl: false
+# development:
+#    host: 127.0.0.1
+#    port: 389
+#    base: dc=kanban,dc=com
+#    attribute: uid
+#    admin_user: cn=admin,dc=kanban,dc=com
+#    admin_password: r3dfr0g
+#    ssl: false
 
 test:
   host: localhost

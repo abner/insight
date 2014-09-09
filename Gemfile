@@ -61,12 +61,15 @@
     gem 'rspec-collection_matchers'
     #gem "factory_girl", "~> 4.0"
     gem 'factory_girl_rails', "~> 4.0", :require => false
+
+    gem 'simplecov', :require => false
   end
 
   gem 'devise',  '~> 3.2.4'
+  gem 'devise-i18n-views'
   gem 'net-ldap',  '~> 0.3.1'
-
   #gem "devise_ldap_authenticatable", '~> 0.8.1'
+  #using master from github => some issue related with rails 4 compatibility found
   gem "devise_ldap_authenticatable", :git => "git://github.com/cschiewek/devise_ldap_authenticatable.git"
 
   gem 'foreman'
@@ -84,3 +87,5 @@
   gem "will_paginate_mongoid"
 
   gem 'rack-cors',  require: 'rack/cors'
+
+  gem 'mongoid_slug'

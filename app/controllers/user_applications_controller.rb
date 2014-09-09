@@ -1,5 +1,8 @@
 #encoding: UTF-8
 class UserApplicationsController < ProtectedController
+  before_filter :define_breadcrumbs, :only => [:show, :edit]
+  helper_method :render_code
+
   def index
     @user_applications = current_user.user_applications
   end
@@ -9,11 +12,12 @@ class UserApplicationsController < ProtectedController
   end
 
   def show
-    @user_application = current_user.user_applications.find_by(name: params[:id])
+    @user_application = user_application
   end
 
   def edit
-    @user_application = current_user.user_applications.find_by(:name => params[:id])
+    @user_application = user_application
+    add_breadcrumb  t('Edit')
   end
 
   def create
@@ -27,8 +31,7 @@ class UserApplicationsController < ProtectedController
   end
 
   def update
-    @user_application = current_user.user_applications.find_by(:name => params[:id])
-    if @user_application.update_attributes(user_application_params)
+    if user_application.update_attributes(user_application_params)
         flash[:notice] = translate('User application changed successfully!')
         redirect_to :action => :index
     else
@@ -37,13 +40,28 @@ class UserApplicationsController < ProtectedController
   end
 
   def destroy
-    @user_application = current_user.user_applications.find_by(name: params[:id])
-    @user_application.destroy
+    user_application.destroy
     flash[:notice] = translate('User application removed successfully!')
     redirect_to :action => :index
   end
 
+protected
+  def render_code user_application
+    render_to_string(:partial => 'feedback_js_code', :layout => false, :locals => {:user_application => user_application})
+  end
 private
+  def user_application
+    current_user.user_applications.find(id_param)
+  end
+
+  def define_breadcrumbs
+    add_breadcrumb  user_application
+  end
+
+  def id_param
+    params[:id]
+  end
+
   def user_application_params
     params.require(:user_application).permit :name
     # if current_user.nil? # Guest
