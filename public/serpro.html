@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)http://twitter.github.com/bootstrap/examples/hero.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Bootstrap, from Twitter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="assets/serpro.css"  type="text/css" media="screen" />
+
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#_">Feedback.js Example</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#_">Home</a></li>
+              <li><a href="#_">About</a></li>
+              <li><a href="#_">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="hero-unit">
+        <h1>Feedback SERPRO</h1>
+        <p>Página de exemplo de utilização do componente de feedback do SERPRO, contemplando as modificações realizadas pelo SERPRO. Clique no botão "Reportar" e experimente.</p>
+        <p><a class="btn btn-primary btn-large">Learn more »</a></p>
+      </div>
+
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="span4">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn" href="#_">View details »</a></p>
+        </div>
+        <div class="span4">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn" href="#_">View details »</a></p>
+       </div>
+        <div class="span4">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn" href="#_">View details »</a></p>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>Feedback.js - tell us more!</p>
+      </footer>
+    </div> <!-- /container -->
+
+    <!-- Le javascript -->
+    
+    <script src="assets/feedback_client.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+          Feedback(
+                  {
+                      label: "Reportar",
+                      header: "Registro de ocorrência",
+                      url: "http://127.0.0.1:3000/api/v1/feedbacks?access_token=8o0n8lkNHoWbegVzVN4Dew",
+                      nextLabel: "Continuar",
+                      reviewLabel: "Revisar",
+                      sendLabel:  "Enviar",
+                      closeLabel: "Fechar",
+                      highlightBlackoutHelp: "Você pode destacar informações úteis ou ocultar informações sensíveis.",
+                      blackoutButtonLabel: "Ocultar",
+                      highlightButtonLabel: "Destacar",
+                      messageSuccess: "O seu relato foi enviado com sucesso!",
+                      messageError: "Houve um erro ao enviar o relato...",
+                      pages: [
+                              new window.Feedback.Form([
+                                      {
+                                          type: "select",
+                                          name: "tipo_relato",
+                                          label: "Tipo de Relato",
+                                          options: ["Sugestão", "Erro"],
+                                          required: true
+                                      },
+                                      {
+                                              type: "select",
+                                              name: "severidade",
+                                              label: "Severidade",
+                                              options: ["Leve", "Média", "Crítica"],
+                                              required: true
+                                      },
+                                      {
+                                          type: "starrating",
+                                          name: "starrating",
+                                          label: "Avalie",
+                                          options: ["Insatisfeito", "2", "3", "4", "Muito Satisfeito"],
+                                          required: true
+                                      },
+                                     {
+                                          type: "textarea",
+                                          name: "relato",
+                                          label: "Relato",
+                                          required: true
+                                      },
+                                      {
+                                          type: "hidden",
+                                          name: "situacao",
+                                          value: "aberto",
+                                          review: false
+                                      }
+                                      ]
+                              ),
+                              new window.Feedback.Screenshot(),
+                              new window.Feedback.Review()
+                      ]
+                   });
+        });
+    </script>
+</body></html>

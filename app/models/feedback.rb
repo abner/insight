@@ -6,6 +6,8 @@ class Feedback
 
   field :server_date_time, type: DateTime
 
+  field :screenshot_path
+
   field :text, type: String
 
   field :category, type: String
