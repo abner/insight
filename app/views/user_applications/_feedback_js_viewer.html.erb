@@ -7,14 +7,14 @@
   }
   </style>
 <% end %>
-  <h3>Código Javascript do Feedback </h3>
-  <small>
-  Coloque o seguinte código javascript em sua página:
-  </small>
+<hr/>
+  <p>Incluir o código abaixo nas páginas da aplicação <strong><%= @user_application.name %></strong></p>
   <pre>
-    <code class="xhtml">&lt;div&gt;&lt;/div&gt;&lt;script type=text/javascript&gt;
-      <%= render_code(@user_application) %>
-      &lt;/script&gt;</code>
+    <code class="xhtml">
+<%= render_js_include() %>
+&lt;script type=text/javascript&gt;
+<%= render_code(@user_application) %>
+&lt;/script&gt;</code>
     <!-- <code class="language-javascript"><%#= render_code(@user_application) %></code> -->
   </pre>
 <%= content_for :body_end do %>

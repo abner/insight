@@ -1,11 +1,11 @@
-<span>Nome da Aplicação: <%= @user_application.name %></span>
-
+<h4>Código do Feedback</h4>
+<!--
 <h5>Dependências</h5>
 <ul>
   <li>jQuery</li>
   <li>html2canvas</li>
 </ul>
-
+-->
 <%= render :partial => 'feedback_js_viewer' %>
 
 <%= link_to t('view feedbacks'), user_application_feedbacks_path(@user_application) %>
