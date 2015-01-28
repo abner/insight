@@ -10,7 +10,7 @@
   gem "mongoid", "~> 4.0.0"
 
   # Use SCSS for stylesheets
-  gem 'sass-rails', '~> 4.0.3'
+  gem 'sass-rails', '~> 4.0.2'
   # Use Uglifier as compressor for JavaScript assets
   gem 'uglifier', '>= 1.3.0'
   # Use CoffeeScript for .js.coffee assets and views
@@ -40,7 +40,7 @@
 
   gem 'compass-rails'
 
-  #gem 'zurb-foundation'
+  gem 'zurb-foundation'
   gem 'therubyracer'
   gem 'less-rails'
   gem "twitter-bootstrap-rails"
@@ -65,7 +65,8 @@
     gem 'simplecov', :require => false
   end
 
-  gem 'devise',  '~> 3.2.4'
+  #gem 'devise',  '~> 3.2.4'
+  gem 'devise',  '~> 3.4.1'
   gem 'devise-i18n-views'
   gem 'net-ldap',  '~> 0.3.1'
   #gem "devise_ldap_authenticatable", '~> 0.8.1'
@@ -89,3 +90,5 @@
   gem 'rack-cors',  require: 'rack/cors'
 
   gem 'mongoid_slug'
+
+gem 'libv8', '3.16.14.3'
