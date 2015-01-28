@@ -79,7 +79,7 @@
 
 #group :assets do
 
-  gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+  gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
   gem 'jquery-ui-rails'
 #end
 
