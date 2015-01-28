@@ -44,7 +44,7 @@
   gem 'therubyracer'
   gem 'less-rails'
   gem "twitter-bootstrap-rails"
-  gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+  gem 'data-confirm-modal', :git => 'https://github.com/ifad/data-confirm-modal.git'
 
   group :development do
     gem 'rails_layout'
@@ -70,7 +70,7 @@
   gem 'net-ldap',  '~> 0.3.1'
   #gem "devise_ldap_authenticatable", '~> 0.8.1'
   #using master from github => some issue related with rails 4 compatibility found
-  gem "devise_ldap_authenticatable", :git => "git://github.com/cschiewek/devise_ldap_authenticatable.git"
+  gem "devise_ldap_authenticatable", :git => "https://github.com/cschiewek/devise_ldap_authenticatable.git"
 
   gem 'foreman'
 
