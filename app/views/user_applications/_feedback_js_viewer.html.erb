@@ -20,5 +20,11 @@
 <%= content_for :body_end do %>
   <!-- <script src="/prism/prism.js"></script> -->
   <script src="/highlight/highlight.pack.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
+  <script type="text/javascript">   
+   jQuery(document).on('page:load', function(){
+       jQuery('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
 <% end %>
