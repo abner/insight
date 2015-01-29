@@ -1,9 +1,8 @@
 <%= content_for :head do %>
-  <!-- <link href="/prism/prism.css" rel="stylesheet" />-->
-  <link href="/highlight/styles/googlecode.css" rel="stylesheet" />
+  <link href="/highlight/styles/atelier-lakeside.light.css" rel="stylesheet" />
   <style type="text/css">
   pre {
-    font-size:10px;
+    border:none;
   }
   </style>
 <% end %>
@@ -18,17 +17,14 @@
     <!-- <code class="language-javascript"><%#= render_code(@user_application) %></code> -->
   </pre>
 <%= content_for :body_end do %>
-  <!-- <script src="/prism/prism.js"></script> -->
   <script src="/highlight/highlight.pack.js"></script>
-  <script type="text/javascript">   
+  <script type="text/javascript">
     function loadHighlights(){
       jQuery('pre code').each(function(i, block) {
         hljs.highlightBlock(block);
       });
     }
     
-    jQuery(document).on('page:load', loadHighlights);
-    jQuery(document).ready(loadHighlights);
-  
+    jQuery(document).on('ready page:load', loadHighlights);
   </script>
 <% end %>
