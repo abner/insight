@@ -10,7 +10,7 @@
   gem "mongoid", "~> 4.0.0"
 
   # Use SCSS for stylesheets
-  gem 'sass-rails', '~> 4.0.3'
+  gem 'sass-rails', '~> 4.0.2'
   # Use Uglifier as compressor for JavaScript assets
   gem 'uglifier', '>= 1.3.0'
   # Use CoffeeScript for .js.coffee assets and views
@@ -40,11 +40,11 @@
 
   gem 'compass-rails'
 
-  #gem 'zurb-foundation'
+  gem 'zurb-foundation'
   gem 'therubyracer'
   gem 'less-rails'
   gem "twitter-bootstrap-rails"
-  gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+  gem 'data-confirm-modal', :git => 'https://github.com/ifad/data-confirm-modal.git'
 
   group :development do
     gem 'rails_layout'
@@ -65,12 +65,13 @@
     gem 'simplecov', :require => false
   end
 
-  gem 'devise',  '~> 3.2.4'
+  #gem 'devise',  '~> 3.2.4'
+  gem 'devise',  '~> 3.4.1'
   gem 'devise-i18n-views'
   gem 'net-ldap',  '~> 0.3.1'
   #gem "devise_ldap_authenticatable", '~> 0.8.1'
   #using master from github => some issue related with rails 4 compatibility found
-  gem "devise_ldap_authenticatable", :git => "git://github.com/cschiewek/devise_ldap_authenticatable.git"
+  gem "devise_ldap_authenticatable", :git => "https://github.com/cschiewek/devise_ldap_authenticatable.git"
 
   gem 'foreman'
 
@@ -79,7 +80,7 @@
 
 #group :assets do
 
-  gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+  gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
   gem 'jquery-ui-rails'
 #end
 
@@ -89,3 +90,5 @@
   gem 'rack-cors',  require: 'rack/cors'
 
   gem 'mongoid_slug'
+
+gem 'libv8', '3.16.14.3'

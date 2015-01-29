@@ -42,9 +42,8 @@ class FeedbackServerAPI < Grape::API
       requires :access_token, type: String, desc: "Token da aplicação cadastrada em Feedback.serpro."
     end
     post do
-      data_object = JSON.parse(params[:data])
       #authenticate!
-      base_64_param = data_object[1]
+      base_64_param = params.delete('screenshot')
 
       public_folder = "#{Rails.root}/public/"
 
@@ -57,8 +56,13 @@ class FeedbackServerAPI < Grape::API
       end
 
 
-      feedback_attributes = data_object[0]
-      feedback_attributes.merge!( screenshot_path: filename, :text => feedback_attributes.delete('relato') )
+      feedback_attributes = {
+        :tipo_relato => params[:tipo_relato],
+        :severidade => params[:tipo_relato],
+        :starrating => params[:starrating],
+        :text => params[:relato],
+        :screenshot_path => filename
+      }
 
       current_user_application.feedbacks.create!(feedback_attributes)
     end

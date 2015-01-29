@@ -38,6 +38,8 @@ pt-BR:
   "Show": "Exibir"
   "Feedbacks": "Feedbacks"
   "Edit": "Alterar"
+  "Home": "Início"
+  "Applications": "Aplicações"
   devise:
     failure:
       user:

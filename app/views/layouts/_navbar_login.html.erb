@@ -23,13 +23,13 @@
               <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-              <li><a href="/user">Dashboard</a></li>
-              <li><a href="/new">Create New Bootply</a></li>
+              <li><%= link_to translate("Home"), "/"  %></li>
+              <li><%= link_to translate("Create new application"), "/user_applications/new"  %></li>
 
               <li><%= link_to t('Logout'), destroy_user_session_path, :method => :delete %></li>
               <li class="divider"> </li>
-              <li><a href="/bootstrap-community">Community</a></li>
-              <li><a href="/about">About</a></li>
+              <!--<li><a href="/bootstrap-community">Community</a></li>
+              <li><a href="/about">About</a></li>-->
           </ul>
       </li>
     <% end %>

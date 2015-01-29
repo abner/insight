@@ -1,7 +1,7 @@
 #encoding: UTF-8
 class UserApplicationsController < ProtectedController
   before_filter :define_breadcrumbs, :only => [:show, :edit]
-  helper_method :render_code
+  helper_method :render_code, :render_js_include
 
   def index
     @user_applications = current_user.user_applications
@@ -48,6 +48,10 @@ class UserApplicationsController < ProtectedController
 protected
   def render_code user_application
     render_to_string(:partial => 'feedback_js_code', :layout => false, :locals => {:user_application => user_application})
+  end
+
+  def render_js_include
+    render_to_string(:partial => 'feedback_js_include', :layout => false)
   end
 private
   def user_application
