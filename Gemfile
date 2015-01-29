@@ -2,7 +2,7 @@
 
 
   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-  gem 'rails', '4.1.4'
+  gem 'rails', '4.2.0'
 
   gem 'grape'
 
@@ -10,7 +10,7 @@
   gem "mongoid", "~> 4.0.0"
 
   # Use SCSS for stylesheets
-  gem 'sass-rails', '~> 4.0.2'
+  gem 'sass-rails'#, '~> 4.0.2'
   # Use Uglifier as compressor for JavaScript assets
   gem 'uglifier', '>= 1.3.0'
   # Use CoffeeScript for .js.coffee assets and views
@@ -37,6 +37,7 @@
 
   # Use unicorn as the app server
   gem 'puma'
+  #gem 'thin'
 
   gem 'compass-rails'
 
@@ -92,3 +93,6 @@
   gem 'mongoid_slug'
 
 gem 'libv8', '3.16.14.3'
+
+
+gem 'rack', '~> 1.6.0'

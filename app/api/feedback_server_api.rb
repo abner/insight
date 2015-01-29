@@ -42,19 +42,21 @@ class FeedbackServerAPI < Grape::API
       requires :access_token, type: String, desc: "Token da aplicação cadastrada em Feedback.serpro."
     end
     post do
-      #authenticate!
       base_64_param = params.delete('screenshot')
 
-      public_folder = "#{Rails.root}/public/"
+      filename = nil
 
-      filename = "images/screenshots/#{SecureRandom.urlsafe_base64}.png"
-      full_filename = "#{public_folder}#{filename}"
+      if(base_64_param)
+        public_folder = "#{Rails.root}/public/"
 
-      File.open(full_filename, 'w:binary') do |f|
-        data = base_64_param.split(',')[1]
-        f.write(Base64.decode64(data))
+        filename = "images/screenshots/#{SecureRandom.urlsafe_base64}.png"
+        full_filename = "#{public_folder}#{filename}"
+      
+        File.open(full_filename, 'w:binary') do |f|
+          data = base_64_param.split(',')[1]
+          f.write(Base64.decode64(data))
+        end
       end
-
 
       feedback_attributes = {
         :tipo_relato => params[:tipo_relato],

@@ -5,8 +5,9 @@
     <tr>
       <th>Id</th>
       <th>Tipo Relato</th>
-      <th>Date</th>
-      <th>Text</th>
+      <th>Data</th>
+      <th>Texto</th>
+      <th>Captura de Tela</th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +17,7 @@
         <td><%= feedback.tipo_relato %></td>
         <td><%= feedback.server_date_time %></td>
         <td><%= feedback.text %></td>
+        <td><img src='/<%= url_for(feedback.screenshot_path) %>'/></td>
       </tr>
     <% end %>
   </tbody>
