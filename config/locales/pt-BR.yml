@@ -48,6 +48,9 @@ pt-BR:
     sessions:
       user:
         signed_in: 'Usuário logado com sucesso'
+    registrations:
+      registered_user:
+        signed_up: 'Seja bem vindo ao serviço de feedback. Obrigado por se registrar'
   activemodel:
     attributes:
       user:

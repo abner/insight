@@ -8,6 +8,8 @@ class UserApplication
 
   belongs_to :owner, :class_name => 'User'
 
+  has_many :members, :class_name => 'User'
+
   slug :name, history: true, scope: :owner
 
   validates :name, uniqueness: { :case_sensitive => false }

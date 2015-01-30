@@ -20,11 +20,9 @@
   <script src="/highlight/highlight.pack.js"></script>
   <script type="text/javascript">
     function loadHighlights(){
-      jQuery('pre code').each(function(i, block) {
-        hljs.highlightBlock(block);
-      });
+        $('pre code').each(function(i, e) {hljs.highlightBlock(e)});    
     }
-    
-    jQuery(document).on('ready page:load', loadHighlights);
+
+    jQuery(document).on('ready page:load page:restore page:change', loadHighlights);
   </script>
 <% end %>
