@@ -1,20 +1,13 @@
 class User
   include Mongoid::Document
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
-  devise :ldap_authenticatable, :registerable,
-  :recoverable, :rememberable, :trackable,
-  :authentication_keys => [:username]#, :validatable
 
-  ## Database authenticatable
+  ## Database and Ldap authenticatable
   field :username, :type => String, :default => ''
   field :email,              :type => String, :default => ""
-  field :encrypted_password, :type => String, :default => ""
 
-  ## Recoverable
-  field :reset_password_token,   :type => String
-  field :reset_password_sent_at, :type => Time
+
+
+
 
   ## Rememberable
   field :remember_created_at, :type => Time
@@ -47,21 +40,9 @@ class User
   validates :username, uniqueness: {:case_sensitive => false }
   validates :email, uniqueness: { :case_sensitive => false }
 
-  before_create :get_missing_info_from_ldap
+
 
   #add_index  :users, :authentication_token, :unique => true
 
-  class << self
-    def serialize_into_session(record)
-      [record.id.to_s, record.authenticatable_salt]
-    end
-  end
-
-  protected
-
-  def get_missing_info_from_ldap
-    self.email = ldap_get_param(:mail) if self.email.blank?
-    raise "email not provided" if self.email.nil?
-  end
-
+  
 end

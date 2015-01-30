@@ -25,6 +25,7 @@ pt-BR:
   "User application changed successfully!": "Aplicação alterada com sucesso!"
   "User application removed successfully!": "Aplicação removida com sucesso!"
   "User application created!": Aplicação criada!
+  "No application registered yet": "Nenhuma aplicação cadastrada"
   "Edit": "Alterar"
   "Destroy": "Excluir"
   "Create new application": "Adicionar uma nova Aplicação"

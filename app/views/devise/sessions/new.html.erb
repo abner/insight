@@ -1,13 +1,16 @@
 <h2><%= t('.sign_in', :default => "Sign in") %></h2>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :username %><br />
-  <%= f.text_field :username %></div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+<div class='login_panel'>
+	
+	<%= form_for(resource, :as => 'user', :url => create_session_path) do |f| %>
+	  <div><%= f.label :username %><br />
+	  <%= f.text_field :username %></div>
+	  <div><%= f.label :password %><br />
+	  <%= f.password_field :password %></div>
 
-  <div><%= f.submit t('.sign_in', :default => "Sign in") %></div>
-<% end %>
+	  <div><%= f.submit t('.sign_in', :default => "Sign in") %></div>
+	<% end %>
+</div>
 
-<%#= render "devise/shared/links" %>
+<%= render "devise/shared/links" %>
