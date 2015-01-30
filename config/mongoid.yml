@@ -5,7 +5,7 @@ development:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: app_rails_jruby_development
+      database: feedback_server_dev
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
@@ -58,7 +58,7 @@ development:
 test:
   sessions:
     default:
-      database: app_rails_jruby_test
+      database: feedback_server_test
       hosts:
         - localhost:27017
       options:
@@ -67,3 +67,12 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
+production:
+  sessions:
+    default:
+      database: feedback_server
+      hosts:
+        - localhost:27017
+      options:
+        read: primary
+        retry_interval: 0.25
