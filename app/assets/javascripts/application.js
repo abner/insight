@@ -32,4 +32,13 @@ dataConfirmModal.setDefaults({
   cancel: 'Cancelar'
 });
 
+function loadHighlights(){
+  $('pre code').each(function(i, e) {
+    try { hljs.highlightBlock(e); } catch(e) {}
+  });
+}
+
+jQuery(document).on('ready page:load', loadHighlights);
+
+
 Turbolinks.enableProgressBar();
