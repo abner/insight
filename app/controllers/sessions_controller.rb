@@ -19,7 +19,12 @@ class SessionsController < Devise::SessionsController
     end
 
     # Use Warden to authenticate the user, if we get nil back, it failed.
-    self.resource = warden.authenticate scope: user_class
+    begin
+      self.resource = warden.authenticate scope: user_class
+    rescue Exception => e
+        Rails.logger.info("Session create error: #{e.message}")
+       self.resource = nil
+    end
 
     if self.resource.nil?
       flash[:error] = t 'sessions.create.failure'
