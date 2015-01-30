@@ -41,4 +41,4 @@ function loadHighlights(){
 jQuery(document).on('ready page:load', loadHighlights);
 
 
-Turbolinks.enableProgressBar();
+//Turbolinks.enableProgressBar();
