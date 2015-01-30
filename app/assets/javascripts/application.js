@@ -23,7 +23,7 @@
 
 $(function() {
   //$(document).foundation();
-  
+
 
 });
 dataConfirmModal.setDefaults({
@@ -31,3 +31,5 @@ dataConfirmModal.setDefaults({
   commit: 'Confirmar',
   cancel: 'Cancelar'
 });
+
+Turbolinks.enableProgressBar();
