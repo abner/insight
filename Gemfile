@@ -75,7 +75,7 @@
   gem "devise_ldap_authenticatable", :git => "https://github.com/cschiewek/devise_ldap_authenticatable.git"
 
   gem 'foreman'
-  gem 'foreman-export-initscript'
+  gem 'foreman-export-initd'
 
   # Use Capistrano for deployment
   # gem 'capistrano-rails', group: :development
