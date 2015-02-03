@@ -13,6 +13,10 @@
   <tbody>
     <% @feedbacks.each do |feedback| %>
       <tr>
+        <% feedback.columns.each do |c| %>
+          <%= c[:key] %> => <%= c[:value] %><br/>
+        <% end %>
+
         <td><%= feedback.view_id %></td>
         <td><%= feedback.tipo_relato %></td>
         <td><%= feedback.server_date_time %></td>

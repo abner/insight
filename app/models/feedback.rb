@@ -16,12 +16,21 @@ class Feedback
 
   embeds_one :feedback_requester
 
-  validates_presence_of :text
+  #validates_presence_of :text
 
   before_save :fill_automatic_fields
 
   def view_id
     id.to_s
+  end
+
+  def columns
+    columns = self.attributes.reject do |k,v|
+      k == "user_application_id"
+    end
+    columns.map do |c|
+      { :key => c[0], :value => c[1]}
+    end.flatten
   end
 
 

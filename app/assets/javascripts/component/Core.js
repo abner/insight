@@ -1,5 +1,5 @@
-if ( window.Feedback !== undefined ) { 
-    return; 
+if ( window.Feedback !== undefined ) {
+    return;
 }
 
 // log proxy function
@@ -20,7 +20,7 @@ removeElements = function( remove ) {
 loader = function() {
     var div = document.createElement("div"), i = 3;
     div.className = "feedback-loader";
-    
+
     while (i--) { div.appendChild( document.createElement( "span" )); }
     return div;
 },
@@ -79,16 +79,16 @@ window.Feedback = function( options ) {
     options.header = options.header || "Send Feedback";
     options.url = options.url || "/";
     options.adapter = options.adapter || new window.Feedback.XHR( options.url );
-    
+
     options.nextLabel = options.nextLabel || "Continue";
     options.reviewLabel = options.reviewLabel || "Review";
     options.sendLabel = options.sendLabel || "Send";
     options.closeLabel = options.closeLabel || "Close";
-    
+
     options.messageSuccess = options.messageSuccess || "Your feedback was sent successfully.";
     options.messageError = options.messageError || "There was an error sending your feedback to the server.";
-    
-  
+
+
     if (options.pages === undefined ) {
         options.pages = [
             new window.Feedback.Form(),
@@ -148,14 +148,14 @@ window.Feedback = function( options ) {
             nextButton.type = "submit";
             nextButton.className =  "feedback-btn";
             nextButton.onclick = function() {
-                
+
                 if (currentPage > 0 ) {
                     if ( options.pages[ currentPage - 1 ].end( modal ) === false ) {
                         // page failed validation, cancel onclick
                         return;
                     }
                 }
-                
+
                 emptyElements( modalBody );
 
                 if ( currentPage === len ) {
@@ -163,12 +163,12 @@ window.Feedback = function( options ) {
                 } else {
 
                     options.pages[ currentPage ].start( modal, modalHeader, modalFooter, nextButton, options );
-                    
+
                     if ( options.pages[ currentPage ] instanceof window.Feedback.Review ) {
                         // create DOM for review page, based on collected data
                         options.pages[ currentPage ].render( options.pages );
                     }
-                    
+
                     // add page DOM to modal
                     modalBody.appendChild( options.pages[ currentPage++ ].dom );
 
@@ -176,12 +176,12 @@ window.Feedback = function( options ) {
                     if ( currentPage === len ) {
                         nextButton.firstChild.nodeValue = options.sendLabel;
                     }
-                    
+
                     // if next page is review page, change button label
-                    if ( options.pages[ currentPage ] instanceof window.Feedback.Review ) {   
+                    if ( options.pages[ currentPage ] instanceof window.Feedback.Review ) {
                         nextButton.firstChild.nodeValue = options.reviewLabel;
                     }
-                        
+
 
                 }
 
@@ -196,7 +196,7 @@ window.Feedback = function( options ) {
 
 
             modal.appendChild( modalHeader );
-            
+
             // fake form
             formBody.id = "feedback-form";
             formBody.action = "#";
@@ -220,8 +220,8 @@ window.Feedback = function( options ) {
             if (currentPage > 0 ) {
                 options.pages[ currentPage - 1 ].end( modal );
             }
-                
-            // call close events for all pages    
+
+            // call close events for all pages
             for (var i = 0, len = options.pages.length; i < len; i++) {
                 options.pages[ i ].close();
             }
@@ -229,23 +229,23 @@ window.Feedback = function( options ) {
             return false;
 
         },
-        
+
         // send data
         send: function( adapter ) {
-            
+
             // make sure send adapter is of right prototype
             if ( !(adapter instanceof window.Feedback.Send) ) {
                 throw new Error( "Adapter is not an instance of Feedback.Send" );
             }
-            
-            // fetch data from all pages   
+
+            // fetch data from all pages
             for (var i = 0, len = options.pages.length, data = {}, p = 0, tmp; i < len; i++) {
                 if ( (tmp = options.pages[ i ].data()	 ) !== false ) {
                 	// if is an object, all fields go to data
                 	if (tmp instanceof Object) {
                 		for (var key in tmp) {
                 	        if(tmp.hasOwnProperty(key)) {
-                	        	data[key] = tmp[key];
+                	        	data['data_' + key] = tmp[key];
                 	        }
                 		}
                 	} else {// if remain unkown fields, we send it without restrictions
@@ -255,31 +255,31 @@ window.Feedback = function( options ) {
             }
 
             nextButton.disabled = true;
-                
+
             emptyElements( modalBody );
             modalBody.appendChild( loader() );
 
             // send data to adapter for processing
             adapter.send( data, function( success ) {
-                
+
                 emptyElements( modalBody );
                 nextButton.disabled = false;
-                
+
                 nextButton.firstChild.nodeValue = options.closeLabel;
-                
+
                 nextButton.onclick = function() {
                     returnMethods.close();
-                    return false;  
+                    return false;
                 };
-                
+
                 if ( success === true ) {
                     modalBody.appendChild( document.createTextNode( options.messageSuccess ) );
                 } else {
                     modalBody.appendChild( document.createTextNode( options.messageError ) );
                 }
-                
+
             } );
-  
+
         }
     };
 
@@ -295,10 +295,10 @@ window.Feedback = function( options ) {
     button.setAttribute(H2C_IGNORE, true);
 
     button.onclick = returnMethods.open;
-    
+
     if ( options.appendTo !== null ) {
         ((options.appendTo !== undefined) ? options.appendTo : document.body).appendChild( button );
     }
-    
+
     return returnMethods;
 };

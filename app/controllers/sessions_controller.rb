@@ -22,7 +22,7 @@ class SessionsController < Devise::SessionsController
     begin
       self.resource = warden.authenticate scope: user_class
     rescue Exception => e
-        Rails.logger.info("Session create error: #{e.message}")
+        Rails.logger.error("Session create error: #{e.inspect}")
        self.resource = nil
     end
 

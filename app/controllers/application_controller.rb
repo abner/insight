@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :define_locale, :breadcrumb
 
+
   def breadcrumb
     add_breadcrumb 'Início', user_applications_path
   end

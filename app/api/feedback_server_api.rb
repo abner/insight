@@ -42,7 +42,7 @@ class FeedbackServerAPI < Grape::API
       requires :access_token, type: String, desc: "Token da aplicação cadastrada em Feedback.serpro."
     end
     post do
-      base_64_param = params.delete('screenshot')
+      base_64_param = params.delete('data_screenshot')
 
       filename = nil
 
@@ -51,7 +51,7 @@ class FeedbackServerAPI < Grape::API
 
         filename = "images/screenshots/#{SecureRandom.urlsafe_base64}.png"
         full_filename = "#{public_folder}#{filename}"
-      
+
         File.open(full_filename, 'w:binary') do |f|
           data = base_64_param.split(',')[1]
           f.write(Base64.decode64(data))
@@ -66,7 +66,21 @@ class FeedbackServerAPI < Grape::API
         :screenshot_path => filename
       }
 
-      current_user_application.feedbacks.create!(feedback_attributes)
+      params.merge!(screenshot_path: filename)
+
+
+      #current_user_application.feedbacks.create!(feedback_attributes)
+      feedback = current_user_application.feedbacks.new
+
+      fields = params.dup.reject {|k,v| ! k.start_with? "data_"}
+
+      fields.merge!(screenshot_path: filename)
+
+      fields.each do |k, v|
+        field_name = k.gsub "data_", ""
+        feedback.attributes[field_name] = v
+      end
+      feedback.save!
     end
 
     desc 'Retorna últimos 10 feedbacks de uma app'
