@@ -6,9 +6,6 @@ class User
   field :email,              :type => String, :default => ""
 
 
-
-
-
   ## Rememberable
   field :remember_created_at, :type => Time
 
@@ -35,14 +32,11 @@ class User
   has_many :user_applications
 
   validates_presence_of :username
-  validates_presence_of :email, :unless => Proc.new { |user| user.new_record? }
+  validates_presence_of :email, :unless => Proc.new { |user| user.new_record? && user.is_a?(LdapUser) }
 
   validates :username, uniqueness: {:case_sensitive => false }
   validates :email, uniqueness: { :case_sensitive => false }
 
-
-
   #add_index  :users, :authentication_token, :unique => true
 
-  
 end

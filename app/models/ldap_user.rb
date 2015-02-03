@@ -10,7 +10,7 @@ protected
 
   def get_missing_info_from_ldap
     if ldap_get_param(:mail)
-      self.email = ldap_get_param(:mail)
+      self.email = ldap_get_param(:mail)[0]
       raise "email not provided"  if self.email.nil?
     end
   end
