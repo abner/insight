@@ -8,15 +8,24 @@ Rails.application.routes.draw do
   #
   # get 'user_applications/destroy'
 
-  devise_for :users
+  devise_for :registered_user, :ldap_users, skip: [ :sessions ]
+
+  devise_scope :ldap_user do
+    root to: "sessions#new"
+  end
+
+  devise_scope :registered_user do
+    root to: "sessions#new", :as => 'registered_user_root'
+    get 'sign_in' => 'sessions#new', :as => :new_session
+    post 'sign_in' => 'sessions#create', :as => :create_session
+    delete 'sign_out' => 'sessions#destroy', :as => :destroy_session
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  root 'user_applications#index'
 
   get 'protected' => 'protected#index'
-
-  #get 'user_applications' => 'user_applications#index'
 
   resources  :user_applications do
     # member do
@@ -24,6 +33,8 @@ Rails.application.routes.draw do
     # end
     resources :feedbacks
   end
+
+  get '/users/autocomplete', to: 'users#autocomplete', as: 'autocomplete_user'
 
   mount FeedbackServerAPI => '/api/'
 

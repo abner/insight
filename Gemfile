@@ -2,7 +2,7 @@
 
 
   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-  gem 'rails', '4.1.4'
+  gem 'rails', '4.2.0'
 
   gem 'grape'
 
@@ -10,7 +10,7 @@
   gem "mongoid", "~> 4.0.0"
 
   # Use SCSS for stylesheets
-  gem 'sass-rails', '~> 4.0.2'
+  gem 'sass-rails'#, '~> 4.0.2'
   # Use Uglifier as compressor for JavaScript assets
   gem 'uglifier', '>= 1.3.0'
   # Use CoffeeScript for .js.coffee assets and views
@@ -37,6 +37,7 @@
 
   # Use unicorn as the app server
   gem 'puma'
+  #gem 'thin'
 
   gem 'compass-rails'
 
@@ -53,10 +54,14 @@
   end
 
   group :test do
-    gem 'database_cleaner', "~> 1.3"
+    gem 'database_cleaner', "~> 1.4"
+
     gem 'rspec'
     gem 'rspec-rails'
     #gem 'shoulda-matchers', require: false
+
+    gem 'mongoid-tree'
+
     gem 'mongoid-rspec'
     gem 'rspec-collection_matchers'
     #gem "factory_girl", "~> 4.0"
@@ -68,12 +73,16 @@
   #gem 'devise',  '~> 3.2.4'
   gem 'devise',  '~> 3.4.1'
   gem 'devise-i18n-views'
+
+  gem 'rails-i18n', '~> 4.0.0'
+
   gem 'net-ldap',  '~> 0.3.1'
   #gem "devise_ldap_authenticatable", '~> 0.8.1'
   #using master from github => some issue related with rails 4 compatibility found
   gem "devise_ldap_authenticatable", :git => "https://github.com/cschiewek/devise_ldap_authenticatable.git"
 
   gem 'foreman'
+  gem 'foreman-export-initd'
 
   # Use Capistrano for deployment
   # gem 'capistrano-rails', group: :development
@@ -92,3 +101,7 @@
   gem 'mongoid_slug'
 
 gem 'libv8', '3.16.14.3'
+
+
+gem 'rack', '~> 1.6.0'
+gem 'active_model_serializers'

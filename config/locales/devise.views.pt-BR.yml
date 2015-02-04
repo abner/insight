@@ -10,6 +10,15 @@ pt-BR:
         remember_me: 'Lembrar'
     models:
       user:
+    errors:
+      models:
+        user:
+          attributes:
+            username:
+              blank: 'não informado'
+  errors:
+     messages:
+        not_saved: 'Não foi salvo'
   devise:
     confirmations:
       new:

@@ -1,5 +1,7 @@
 class ProtectedController < ApplicationController
-  before_filter :authenticate_user!
+  include UserHelper
+
+  before_filter :authenticate_user!#, :unless => :devise_controller?
   #after_action :verify_authorized
 
   def index

@@ -20,11 +20,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 pt-BR:
+  will_paginate:
+    previous_label: "&#8592; Anterior"
+    next_label: "Próxima &#8594;"
+    page_gap: "&hellip;"
   hello: "Olá"
   "My applications": "Minhas Aplicações"
   "User application changed successfully!": "Aplicação alterada com sucesso!"
   "User application removed successfully!": "Aplicação removida com sucesso!"
   "User application created!": Aplicação criada!
+  "No application registered yet": "Nenhuma aplicação cadastrada"
   "Edit": "Alterar"
   "Destroy": "Excluir"
   "Create new application": "Adicionar uma nova Aplicação"
@@ -47,6 +52,9 @@ pt-BR:
     sessions:
       user:
         signed_in: 'Usuário logado com sucesso'
+    registrations:
+      registered_user:
+        signed_up: 'Seja bem vindo ao serviço de feedback. Obrigado por se registrar'
   activemodel:
     attributes:
       user:

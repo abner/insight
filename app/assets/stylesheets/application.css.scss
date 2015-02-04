@@ -11,7 +11,15 @@
  * file per style scope.
  *
  *= require_self
- 
+
  *= require_tree .
  *
 */
+pre {
+  border:none;
+}
+
+.screenshot_thumbnail {
+  width: 250px;
+  height: 80px;
+}

@@ -14,6 +14,10 @@
 
     <%= stylesheet_link_tag "application", :media => "all" %>
 
+    <script src="/highlight/highlight.pack.js"></script>
+
+    <link href="/highlight/styles/atelier-lakeside.light.css" rel="stylesheet" />
+
     <!-- For third-generation iPad with high-resolution Retina display: -->
     <!-- Size should be 144 x 144 pixels -->
     <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
@@ -36,6 +40,11 @@
 
     <%= javascript_include_tag "application" %>
     <%= yield :head %>
+    <style type="text/css">
+    .breadcrumb > li + li:before {
+      display:none
+    }
+    </style>
   </head>
   <body>
 
@@ -59,7 +68,7 @@
     </div>
     <div class="container">
       <div class="row">
-        <%= render_breadcrumbs("") %>
+        <%= render_breadcrumbs("/") %>
         <div class="col-lg-12">
           <%= bootstrap_flash %>
           <%= yield %>
