@@ -104,3 +104,4 @@ gem 'libv8', '3.16.14.3'
 
 
 gem 'rack', '~> 1.6.0'
+gem 'active_model_serializers'

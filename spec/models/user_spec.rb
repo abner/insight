@@ -45,4 +45,20 @@ RSpec.describe User, :type => :model do
     expect(user2.errors[:email]).to include 'is already taken'
   end
 
+  it 'finds by username' do
+    FactoryGirl.create(:user, :username => 'joao', :email => 'maria@serpro.c.d')
+    FactoryGirl.create(:user, :username => 'maria', :email => 'joao@serpro.c.d')
+
+    user_found = User.by_username('jo').first
+    expect(user_found.username).to eq('joao')
+
+    user_found = User.by_username('ma').first
+    expect(user_found.username).to eq('maria')
+  end
+
+  it 'not find by username' do
+    FactoryGirl.create(:user, :username => 'joao', :email => 'maria@serpro.c.d')
+    expect(User.by_username('PESSOA').to_a).to be_empty
+  end
+
 end

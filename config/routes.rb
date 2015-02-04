@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     resources :feedbacks
   end
 
+  get '/users/autocomplete', to: 'users#autocomplete', as: 'autocomplete_user'
+
   mount FeedbackServerAPI => '/api/'
 
   # You can have the root of your site routed with "root"
