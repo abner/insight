@@ -1,30 +1,39 @@
 <h1><%= translate('Feedbacks for application') %> <%= @user_application.name %></h1>
-
 <table id="feedbacks" style="width:100%" data-source="<%= user_application_feedbacks_url(:id=> params[:id], format: "json") %>">
   <thead>
     <tr>
-      <th>Id</th>
+        <td colspan="<%= all_columns_for_collection(@feedbacks).count %>">
+          <%= will_paginate @feedbacks, :class => 'apple_pagination' %>
+        </td>
+    </tr>
+    <tr>
+      <!-- <th>Id</th>
       <th>Tipo Relato</th>
       <th>Data</th>
       <th>Texto</th>
-      <th>Captura de Tela</th>
+      <th>Captura de Tela</th> -->
+      <% all_columns_for_collection(@feedbacks).each do |column_name| %>
+        <%= content_tag :th, humanize_column(column_name) %>
+      <% end %>
     </tr>
   </thead>
   <tbody>
     <% @feedbacks.each do |feedback| %>
       <tr>
-        <% feedback.columns.each do |c| %>
-          <%= c[:key] %> => <%= c[:value] %><br/>
+        <% all_columns_for_collection(@feedbacks).each do |column_name| %>
+          <td><%= show_column_value(column_name, feedback.read_attribute(column_name)) %></td>
         <% end %>
-
-        <td><%= feedback.view_id %></td>
-        <td><%= feedback.tipo_relato %></td>
-        <td><%= feedback.server_date_time %></td>
-        <td><%= feedback.text %></td>
-        <td><img src='/<%= url_for(feedback.screenshot_path) %>'/></td>
       </tr>
     <% end %>
   </tbody>
+  <tfooter>
+  <tr>
+      <td colspan="<%= all_columns_for_collection(@feedbacks).count %>">
+        <%= will_paginate @feedbacks, :class => 'apple_pagination' %>
+      </td>
+  </tr>
+  </tfooter>
 </table>
+<%= will_paginate @feedbacks, :class => 'apple_pagination' %>
 <hr />
 <%= link_to translate('Return'), user_applications_url %>

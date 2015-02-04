@@ -20,6 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 pt-BR:
+  will_paginate:
+    previous_label: "&#8592; Anterior"
+    next_label: "Próxima &#8594;"
+    page_gap: "&hellip;"
   hello: "Olá"
   "My applications": "Minhas Aplicações"
   "User application changed successfully!": "Aplicação alterada com sucesso!"

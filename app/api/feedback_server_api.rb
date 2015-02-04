@@ -4,7 +4,7 @@ class FeedbackServerAPI < Grape::API
   version 'v1', using: :path, vendor: 'serpro'
   format :json
 
-  #rescue_from :all, :backtrace => true
+  rescue_from :all, :backtrace => true
   #error_formatter :json, Grape::API::ErrorFormatter
 
   before do

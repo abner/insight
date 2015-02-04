@@ -18,6 +18,9 @@ module FeedbackServer
 
     config.non_digest_named_assets = ["feedback_client_com_jquery.js","feedback_client.js", "feedback.css"]
 
+    config.i18n.available_locales = ['pt-BR', :en]
+
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
