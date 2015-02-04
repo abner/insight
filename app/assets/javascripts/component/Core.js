@@ -145,7 +145,7 @@ window.Feedback = function( options ) {
 
             // Next button
             nextButton = element( "button", options.nextLabel );
-            nextButton.type = "submit";
+            nextButton.type = "button";
             nextButton.className =  "feedback-btn";
             nextButton.onclick = function() {
 
