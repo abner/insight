@@ -16,6 +16,8 @@ Bundler.require(*Rails.groups)
 module FeedbackServer
   class Application < Rails::Application
 
+    config.non_digest_named_assets = ["feedback_client_com_jquery.js","feedback_client.js", "feedback.css"]
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

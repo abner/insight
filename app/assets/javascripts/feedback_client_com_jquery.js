@@ -1,3 +1,4 @@
+//= require jquery.js
 //= require html2canvas.js
 //= require component/license.txt.js
 //= require component/pre.txt.js
