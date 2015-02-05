@@ -10,7 +10,7 @@
 
 
 <div class="row">
-  <div class="large-4 columns">
+  <div class="large-6 columns">
     <h5>Adicionar Usuários</h5>
     <%= form_tag( url_for(add_members_for_user_application_path), remote: true, :id => 'form_members') do %>
       <%= hidden_field_tag :team_members_ids, "",
@@ -24,7 +24,7 @@
           %>
       <% end %>
   </div>
-  <div class="large-8 columns">
+  <div class="large-6 columns">
     <h5>Usuários com acesso</h5>
     <div id='members_list'>
     <%= render :partial => 'members_list', :locals => {:members => @user_application.members} %>
