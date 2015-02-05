@@ -18,6 +18,8 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require turbolinks
+//= require select2
+//= require select2_locale_pt-BR
 // #require_tree .
 
 

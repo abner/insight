@@ -1,0 +1,69 @@
+<h1><%= translate('My applications') %></h1>
+
+
+
+<%= form_for @user_application do |f| %>
+  <%= f.label 'name' %>
+  <%= f.text_field 'name', :autofocus => 'true' %>
+  <%= f.button translate('Submit'), :class => 'button small alternative' %>
+<% end %>
+
+<h5>Adicionar desenvolvedores</h5>
+
+<%= text_field_tag :team_members_ids, "1",
+data: {
+  placeholder: "Selecione os membros de sua equipe:",
+  #@user_application.team_members.to_json :each_serializer UserAutocompleteSerializer
+  saved: '[]',
+  url: autocomplete_user_path},
+  class: "autocomplete",
+    style: "width:100%"
+%>
+
+<h5>Cliente</h5>
+
+<script type="text/javascript">
+function configurarAutocomplete() {
+  $('.autocomplete').each(function() {
+    var url = $(this).data('url');
+    var placeholder = $(this).data('placeholder');
+    var saved = $(this).data('saved');
+    $(this).select2({
+      minimumInputLength: 2,
+      multiple: true,
+      placeholder : placeholder,
+      allowClear: true,
+      ajax: {
+        url: url,
+        dataType: 'json',
+        quietMillis: 500,
+        data: function (term) {
+          return {
+            username: term
+          };
+        },
+        results: function (data) {
+          return {results: data};
+        }
+      },
+
+      formatResult: function (item, page) {
+        return item.username;
+      },
+
+      formatSelection: function (item, page) {
+        return item.username;
+      },
+
+      initSelection : function (element, callback) {
+        if (saved) {
+          callback(saved);
+        }
+      }
+
+    });
+  });
+}
+jQuery(document).on('ready page:load', configurarAutocomplete());
+
+</script>

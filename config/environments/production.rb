@@ -1,4 +1,6 @@
 Rails.application.configure do
+  require 'uglifier'
+  config.assets.js_compressor = Uglifier.new(output: {ascii_only: true, quote_keys: true})
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

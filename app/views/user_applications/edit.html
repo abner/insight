@@ -1,7 +1,0 @@
-<h1><%= translate('My applications') %></h1>
-
-<%= form_for @user_application do |f| %>
-  <%= f.label 'name' %>
-  <%= f.text_field 'name', :autofocus => 'true' %>
-  <%= f.button translate('Submit'), :class => 'button small alternative' %>
-<% end %>

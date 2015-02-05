@@ -42,7 +42,4 @@ class User
   scope :by_username, ->(regex){
       where(:username => /#{Regexp.escape(regex)}/i)
   }
-
-  def id
-  end
 end

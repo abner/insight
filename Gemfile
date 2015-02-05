@@ -41,6 +41,8 @@
 
   gem 'compass-rails'
 
+  gem "select2-rails"
+
   gem 'zurb-foundation'
   gem 'therubyracer'
   gem 'less-rails'

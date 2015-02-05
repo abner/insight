@@ -13,4 +13,3 @@ module UserHelper
     current_ldap_user or current_registered_user
   end
 end
-
