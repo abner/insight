@@ -3,6 +3,9 @@ Rails.application.configure do
   config.assets.js_compressor = Uglifier.new(output: {ascii_only: true, quote_keys: true})
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.app_host = 'feedback.participa.br'
+  config.app_port = 80
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
