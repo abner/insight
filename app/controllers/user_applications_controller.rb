@@ -39,6 +39,43 @@ class UserApplicationsController < ProtectedController
     end
   end
 
+  def search_for_members
+    @users = user_application.list_members_candidates(params[:username])
+    render json: @users, :root => false, :each_serializer => UserAutocompleteSerializer
+  end
+
+  def remove_member
+    respond_to do |format|
+     if user_application.remove_member params[:member_id]
+       format.html { redirect_to user_application, notice: 'Members successfully removed.' }
+       format.json { render json: user_application.members, :root => false, :each_serializer => UserAutocompleteSerializer }
+       # added:
+       format.js   { render action: 'members_list' }
+     else
+       format.html { render action: 'edit' }
+       format.json { render json: user_application.errors, status: :unprocessable_entity }
+       # added:
+       format.js   { render json: user_application.errors, status: :unprocessable_entity }
+     end
+   end
+  end
+
+  def add_members
+    respond_to do |format|
+     if user_application.include_members params[:team_members_ids]
+       format.html { render action: 'edit', notice: 'Members successfully added.' }
+       format.json { render json: user_application.members, :root => false, :each_serializer => UserAutocompleteSerializer }
+       # added:
+       format.js   { render action: 'members_list' }
+     else
+       format.html { render action: 'edit' }
+       format.json { render json: user_application.errors, status: :unprocessable_entity }
+       # added:
+       format.js   { render json: user_application.errors, status: :unprocessable_entity }
+     end
+   end
+  end
+
   def destroy
     user_application.destroy
     flash[:notice] = translate('User application removed successfully!')
@@ -55,7 +92,7 @@ protected
   end
 private
   def user_application
-    current_user.user_applications.find(id_param)
+    @user_application ||= current_user.user_applications.find(id_param)
   end
 
   def define_breadcrumbs

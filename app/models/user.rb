@@ -1,6 +1,9 @@
 class User
   include Mongoid::Document
 
+
+  #has_and_belongs_to_many :registered, :class_name => 'UserApplication', inverse_of: :members
+
   ## Database and Ldap authenticatable
   field :username, :type => String, :default => ''
   field :email,              :type => String, :default => ""
@@ -29,7 +32,7 @@ class User
 
   ## Token authenticatable
   # field :authentication_token, :type => String
-  has_many :user_applications
+  has_many :user_applications,:class_name => 'UserApplication', inverse_of: :owner
 
   validates_presence_of :username
   validates_presence_of :email, :unless => Proc.new { |user| user.new_record? && user.is_a?(LdapUser) }
@@ -39,7 +42,7 @@ class User
 
   #add_index  :users, :authentication_token, :unique => true
 
-  scope :by_username, ->(regex){
-      where(:username => /#{Regexp.escape(regex)}/i)
+  scope :by_username, ->(regex, usernames_filter=[]){
+      where(:username => /#{Regexp.escape(regex)}/i).and(:username.nin => usernames_filter )
   }
 end

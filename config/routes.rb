@@ -28,13 +28,17 @@ Rails.application.routes.draw do
   get 'protected' => 'protected#index'
 
   resources  :user_applications do
-    # member do
-    #   get 'feedbacks' => 'feedbacks#index'
-    # end
+     member do
+       #get 'feedbacks' => 'feedbacks#index'
+       get 'search_for_members' => 'user_applications#search_for_members', as: 'members_for'
+       post 'add_members' => 'user_applications#add_members', as: 'add_members_for'
+       delete 'remove_member' => 'user_applications#remove_member', as: 'remove_member_for'
+     end
     resources :feedbacks
   end
 
   get '/users/autocomplete', to: 'users#autocomplete', as: 'autocomplete_user'
+
 
   mount FeedbackServerAPI => '/api/'
 

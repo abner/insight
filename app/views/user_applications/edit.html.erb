@@ -8,26 +8,44 @@
   <%= f.button translate('Submit'), :class => 'button small alternative' %>
 <% end %>
 
-<h5>Adicionar desenvolvedores</h5>
 
-<%= text_field_tag :team_members_ids, "1",
-data: {
-  placeholder: "Selecione os membros de sua equipe:",
-  #@user_application.team_members.to_json :each_serializer UserAutocompleteSerializer
-  saved: '[]',
-  url: autocomplete_user_path},
-  class: "autocomplete",
-    style: "width:100%"
-%>
+<div class="row">
+  <div class="large-4 columns">
+    <h5>Adicionar Usuários</h5>
+    <%= form_tag( url_for(add_members_for_user_application_path), remote: true, :id => 'form_members') do %>
+      <%= hidden_field_tag :team_members_ids, "",
+      data: {
+        placeholder: "Selecione os membros de sua equipe:",
+        #@user_application.team_members.to_json :each_serializer UserAutocompleteSerializer
+        saved: '[]',
+        url: members_for_user_application_path},
+        class: "autocomplete",
+          style: "width:100%"
+          %>
+      <% end %>
+  </div>
+  <div class="large-8 columns">
+    <h5>Usuários com acesso</h5>
+    <div id='members_list'>
+    <%= render :partial => 'members_list', :locals => {:members => @user_application.members} %>
+    </div>
+  </div>
+</div>
 
-<h5>Cliente</h5>
+<h5>Convidar</h5>
+<p>Em breve será possível enviar convite por email!</p>
+
 
 <script type="text/javascript">
 function configurarAutocomplete() {
-  $('.autocomplete').each(function() {
+  $('#invite_members_emails').each(function(){
+    //tags: true,
+    //tokenSeparators: [',', ' '],
+  });
+  $('#team_members_ids').each(function() {
     var url = $(this).data('url');
     var placeholder = $(this).data('placeholder');
-    var saved = $(this).data('saved');
+    var saved = <%= raw @user_application.members_user_names.as_json %> ;
     $(this).select2({
       minimumInputLength: 2,
       multiple: true,
@@ -61,6 +79,10 @@ function configurarAutocomplete() {
         }
       }
 
+    }).on('change', function() {
+                      if($(this).val() !== '') {
+                        $('#form_members').submit();
+                    }
     });
   });
 }
