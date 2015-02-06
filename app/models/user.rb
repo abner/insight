@@ -19,6 +19,8 @@ class User
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
 
+  field :blocked, :type => Boolean, :default => false
+
   ## Confirmable
   # field :confirmation_token,   :type => String
   # field :confirmed_at,         :type => Time
@@ -46,6 +48,14 @@ class User
 
   def my_apps
     UserApplication.all_apps_for_user(self)
+  end
+
+  def owns?(user_application)
+    self.id.eql?(user_application.owner.id)
+  end
+
+  def is_member?(user_application)
+    user_application.member_ids.include? self.id
   end
 
   scope :by_username, ->(regex){

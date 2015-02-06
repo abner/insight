@@ -9,4 +9,4 @@
 <% end %>
 
 
-<%= render :partial => 'members_edit' %>
+<%= render :partial => 'members_edit' if  current_user_can?(:admin_team_members, @user_application)%>

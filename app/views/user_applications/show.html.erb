@@ -7,7 +7,7 @@
   %>
 </span>
 
-<%= render :partial => 'members_edit' if @user_application.owner.id.eql?(current_user.id)%>
+<%= render :partial => 'members_edit' if  current_user_can?(:admin_team_members, @user_application)%>
 
 <hr/>
 <h4>Código do Feedback</h4>

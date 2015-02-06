@@ -16,8 +16,10 @@ class UserApplicationsController < ProtectedController
   end
 
   def edit
-    @user_application = user_application
-    add_breadcrumb  t('Edit')
+    authorize!(:write_user_application, user_application) do
+      @user_application = user_application
+      add_breadcrumb  t('Edit')
+    end
   end
 
   def create
@@ -31,11 +33,13 @@ class UserApplicationsController < ProtectedController
   end
 
   def update
-    if user_application.update_attributes(user_application_params)
-        flash[:notice] = translate('User application changed successfully!')
-        redirect_to :action => :index
-    else
-      render :edit
+    authorize!(:write_user_application, user_application) do
+      if user_application.update_attributes(user_application_params)
+          flash[:notice] = translate('User application changed successfully!')
+          redirect_to :action => :index
+      else
+        render :edit
+      end
     end
   end
 
@@ -45,41 +49,47 @@ class UserApplicationsController < ProtectedController
   end
 
   def remove_member
-    respond_to do |format|
-     if user_application.remove_member params[:member_id]
-       format.html { redirect_to user_application, notice: 'Members successfully removed.' }
-       format.json { render json: user_application.members, :root => false, :each_serializer => UserAutocompleteSerializer }
-       # added:
-       format.js   { render action: 'members_list' }
-     else
-       format.html { render action: 'edit' }
-       format.json { render json: user_application.errors, status: :unprocessable_entity }
-       # added:
-       format.js   { render json: user_application.errors, status: :unprocessable_entity }
-     end
-   end
+    authorize!(:admin_team_members, user_application) do
+      respond_to do |format|
+       if user_application.remove_member params[:member_id]
+         format.html { redirect_to user_application, notice: 'Members successfully removed.' }
+         format.json { render json: user_application.members, :root => false, :each_serializer => UserAutocompleteSerializer }
+         # added:
+         format.js   { render action: 'members_list' }
+       else
+         format.html { render action: 'edit' }
+         format.json { render json: user_application.errors, status: :unprocessable_entity }
+         # added:
+         format.js   { render json: user_application.errors, status: :unprocessable_entity }
+       end
+      end
+    end
   end
 
   def add_members
-    respond_to do |format|
-     if user_application.include_members params[:team_members_ids]
-       format.html { render action: 'edit', notice: 'Members successfully added.' }
-       format.json { render json: user_application.members, :root => false, :each_serializer => UserAutocompleteSerializer }
-       # added:
-       format.js   { render action: 'members_list' }
-     else
-       format.html { render action: 'edit' }
-       format.json { render json: user_application.errors, status: :unprocessable_entity }
-       # added:
-       format.js   { render json: user_application.errors, status: :unprocessable_entity }
-     end
-   end
+    authorize!(:admin_team_members, user_application) do
+      respond_to do |format|
+       if user_application.include_members params[:team_members_ids]
+         format.html { render action: 'edit', notice: 'Members successfully added.' }
+         format.json { render json: user_application.members, :root => false, :each_serializer => UserAutocompleteSerializer }
+         # added:
+         format.js   { render action: 'members_list' }
+       else
+         format.html { render action: 'edit' }
+         format.json { render json: user_application.errors, status: :unprocessable_entity }
+         # added:
+         format.js   { render json: user_application.errors, status: :unprocessable_entity }
+       end
+      end
+    end
   end
 
   def destroy
-    user_application.destroy
-    flash[:notice] = translate('User application removed successfully!')
-    redirect_to :action => :index
+    authorize!(:remove_user_application, user_application) do
+      user_application.destroy
+      flash[:notice] = translate('User application removed successfully!')
+      redirect_to :action => :index
+    end
   end
 
 protected

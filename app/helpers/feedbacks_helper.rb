@@ -5,6 +5,7 @@ module FeedbacksHelper
         f.columns.collect {|c| c[:key] }
     end
     result = arr_column_names.flatten!
+    return [] if result.nil?
     result.uniq.nil? ? result : result.uniq
   end
 
