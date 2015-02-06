@@ -49,7 +49,7 @@ class UserApplication
 
   def list_members_candidates(username_filter)
     already_members_filter = members_user_names + [owner.username]
-    User.by_username(username_filter, already_members_filter)
+    User.by_username_or_email(username_filter) & User.where(:username.nin => already_members_filter)
   end
 
   # def to_param

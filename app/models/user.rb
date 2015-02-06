@@ -42,7 +42,10 @@ class User
 
   #add_index  :users, :authentication_token, :unique => true
 
-  scope :by_username, ->(regex, usernames_filter=[]){
-      where(:username => /#{Regexp.escape(regex)}/i).and(:username.nin => usernames_filter )
+  scope :by_username, ->(regex){
+      where(:username => /#{Regexp.escape(regex.to_s)}/i) 
+  }
+  scope :by_username_or_email, ->(regex){
+     any_of({:username => /#{Regexp.escape(regex.to_s)}/i},{:email => /#{Regexp.escape(regex.to_s)}/i})
   }
 end
