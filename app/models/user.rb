@@ -44,6 +44,10 @@ class User
 
   #add_index  :users, :authentication_token, :unique => true
 
+  def my_apps
+    UserApplication.all_apps_for_user(self)
+  end
+
   scope :by_username, ->(regex){
       where(:username => /#{Regexp.escape(regex.to_s)}/i)
   }

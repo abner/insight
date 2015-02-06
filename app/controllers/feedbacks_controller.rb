@@ -2,7 +2,7 @@ class FeedbacksController < ProtectedController
 
 
   def index
-    @user_application = current_user.user_applications.find(params[:user_application_id])
+    @user_application = current_user.my_apps.find(params[:user_application_id])
 
     #@feedbacks = @user_application.feedbacks.order(:name => 'ASC').limit(15)
 
