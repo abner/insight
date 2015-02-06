@@ -34,6 +34,8 @@ class User
   # field :authentication_token, :type => String
   has_many :user_applications,:class_name => 'UserApplication', inverse_of: :owner
 
+  has_and_belongs_to_many :memberships, :class_name => 'UserApplication', inverse_of: :members
+
   validates_presence_of :username
   validates_presence_of :email, :unless => Proc.new { |user| user.new_record? && user.is_a?(LdapUser) }
 
@@ -43,7 +45,7 @@ class User
   #add_index  :users, :authentication_token, :unique => true
 
   scope :by_username, ->(regex){
-      where(:username => /#{Regexp.escape(regex.to_s)}/i) 
+      where(:username => /#{Regexp.escape(regex.to_s)}/i)
   }
   scope :by_username_or_email, ->(regex){
      any_of({:username => /#{Regexp.escape(regex.to_s)}/i},{:email => /#{Regexp.escape(regex.to_s)}/i})

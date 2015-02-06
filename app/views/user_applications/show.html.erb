@@ -1,11 +1,17 @@
+<h4>Dados da Aplicação</h4>
+<strong>Nome:</strong><span><%= @user_application.name %> <%= link_to_if(
+  @user_application.owner.id.eql?(current_user.id),
+  content_tag(:span, pad(translate('Edit')), class: 'fa fa-edit'),
+  edit_user_application_path(@user_application), :class=> 'action') do
+  end
+  %>
+</span>
+
+<%= render :partial => 'members_edit' if @user_application.owner.id.eql?(current_user.id)%>
+
+<hr/>
 <h4>Código do Feedback</h4>
-<!--
-<h5>Dependências</h5>
-<ul>
-  <li>jQuery</li>
-  <li>html2canvas</li>
-</ul>
--->
+
 <%= render :partial => 'feedback_js_viewer' %>
 
 <%= link_to t('view feedbacks'), user_application_feedbacks_path(@user_application) %>

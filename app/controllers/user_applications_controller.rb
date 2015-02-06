@@ -4,7 +4,7 @@ class UserApplicationsController < ProtectedController
   helper_method :render_code, :render_js_include
 
   def index
-    @user_applications = current_user.user_applications
+    @user_applications = UserApplication.all_apps_for_user(current_user)
   end
 
   def new
@@ -92,7 +92,7 @@ protected
   end
 private
   def user_application
-    @user_application ||= current_user.user_applications.find(id_param)
+    @user_application ||= UserApplication.all_apps_for_user(current_user).find(id_param)
   end
 
   def define_breadcrumbs

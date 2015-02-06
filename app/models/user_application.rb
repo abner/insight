@@ -8,7 +8,7 @@ class UserApplication
 
   belongs_to :owner, :class_name => 'User', inverse_of: :user_applications, :foreign_key => 'owner_id'
 
-  has_and_belongs_to_many :members, :class_name => 'User', inverse_of: nil
+  has_and_belongs_to_many :members, :class_name => 'User', inverse_of: :memberships
 
   #has_many :members, :class_name => 'User'
 
@@ -21,6 +21,10 @@ class UserApplication
   validates_presence_of :name
 
   has_many :feedbacks
+
+  scope :all_apps_for_user, ->(user){
+      any_of({:owner => user}, {:member_ids.in => [user.id]})
+  }
 
   def to_s
     name
