@@ -31,6 +31,7 @@ protected
   end
 
   def access_denied!
-    render "errors/access_denied", layout: "errors", status: 403
+    #render "errors/access_denied", layout: "errors", status: 403
+    render "errors/access_denied", status: 403
   end
 end
