@@ -12,7 +12,11 @@ module FeedbacksHelper
   def show_column_value(column_name, value)
     #puts "Tipo: #{value.class.name} - value: #{value}"
     if 'screenshot_path'.eql?(column_name)
-      tag 'img', :src => "/" + url_for(value), :width => 150, height: 80
+      raw "<ul class='clearing-thumbs small-block-grid-4' data-clearing><li>"  +
+      #"<a href='#{"/" + url_for(value)}'><img src='#{"/" + url_for(value)}'/></a>"+
+      (link_to(tag('img', :src => "/" + url_for(value), :width => 150, height: 80), "/" + url_for(value)))+
+      '</li></ul>'
+      #(link_to(tag('img', :src => "/" + url_for(value), :width => 150, height: 80), url_for(value))).to_s
     elsif value.is_a? Time
       l value, :format => '%d/%m/%y %H:%M'
     else

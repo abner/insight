@@ -35,3 +35,18 @@
   </tfooter>
 </table>
 <%= will_paginate @feedbacks, :class => 'apple_pagination' %>
+<div id="screenshot_modal" class="reveal-modal">
+  <img height="auto" width="auto"/>
+</div>
+<script type="text/javascript">
+  var clickOnThumbnail = function(){
+    var image_url = $(this).attr('src');
+    $('#screenshot_modal img').attr('src', image_url);
+    $('#screenshot_modal').foundation('reveal', 'open');
+  }
+  var configurarModal = function(){
+    $(document).foundation();
+    $('.screenshot_thumbnail').on('click', clickOnThumbnail);
+  }
+  $(document).on('ready page:load', configurarModal)
+</script>

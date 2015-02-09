@@ -20,14 +20,10 @@
 //= require turbolinks
 //= require select2
 //= require select2_locale_pt-BR
+//= require foundation
 // #require_tree .
 
 
-$(function() {
-  //$(document).foundation();
-
-
-});
 dataConfirmModal.setDefaults({
   title: 'Confirmação de Ação',
   commit: 'Confirmar',
@@ -39,6 +35,7 @@ function loadHighlights(){
     try { hljs.highlightBlock(e); } catch(e) {}
   });
 }
+
 
 jQuery(document).on('ready page:load', loadHighlights);
 
