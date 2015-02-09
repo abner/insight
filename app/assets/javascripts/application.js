@@ -20,6 +20,7 @@
 //= require turbolinks
 //= require select2
 //= require select2_locale_pt-BR
+//= require magnific
 // #require_tree .
 
 
@@ -42,5 +43,21 @@ function loadHighlights(){
 
 jQuery(document).on('ready page:load', loadHighlights);
 
+// Add it after jquery.magnific-popup.js and before first initialization code
+$.extend(true, $.magnificPopup.defaults, {
+  tClose: 'Fechar (Esc)', // Alt text on close button
+  tLoading: 'Carregando...', // Text that is displayed during loading. Can contain %curr% and %total% keys
+  gallery: {
+    tPrev: 'Anterior (Seta para esquerda)', // Alt text on left arrow
+    tNext: 'Próximo (Seta para a direnta)', // Alt text on right arrow
+    tCounter: '%curr% de %total%' // Markup for "1 of 7" counter
+  },
+  image: {
+    tError: '<a href="%url%">Imagem</a> não pode ser carregada.' // Error message when image could not be loaded
+  },
+  ajax: {
+    tError: '<a href="%url%">O conteúdo</a> não pode ser carregado loaded.' // Error message when ajax request failed
+  }
+})
 
 //Turbolinks.enableProgressBar();

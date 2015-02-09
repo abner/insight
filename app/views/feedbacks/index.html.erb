@@ -35,3 +35,11 @@
   </tfooter>
 </table>
 <%= will_paginate @feedbacks, :class => 'apple_pagination' %>
+<script type='text/javascript'>
+$(document).on('ready page:change', function(){
+  $('.screenshot_link').magnificPopup({
+    type:'image',
+    midClick: true //
+  });
+});
+</script>
