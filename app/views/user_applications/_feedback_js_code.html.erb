@@ -3,7 +3,7 @@
               {
                   label: "Reportar",
                   header: "Registro de ocorrência",
-                  url: "http://<%= request.env['HTTP_HOST'] %>/api/v1/feedbacks?access_token=<%= user_application.authentication_token %>",
+                  url: "://<%= app_base_url %>/api/v1/feedbacks?access_token=<%= user_application.authentication_token %>",
                   nextLabel: "Continuar",
                   reviewLabel: "Revisar",
                   sendLabel:  "Enviar",
