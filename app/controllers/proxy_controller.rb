@@ -1,5 +1,6 @@
 class ProxyController < ApplicationController
-  skip_before_action :verify_authenticity_token, if: :json_request?
+  skip_before_action :verify_authenticity_token, if: :js_request?
+  #skip_before_action :verify_authenticity_token
 
   def index
     image_url = params['url']
@@ -20,8 +21,8 @@ class ProxyController < ApplicationController
   end
 
 protected
-  def json_request?
-   request.format.html?
+  def js_request?
+    request.format.js?
   end
 private
 
