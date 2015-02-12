@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   get 'protected' => 'protected#index'
 
+  get 'proxy' => 'proxy#index'
+
   resources  :user_applications do
      member do
        #get 'feedbacks' => 'feedbacks#index'

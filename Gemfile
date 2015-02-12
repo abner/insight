@@ -129,3 +129,7 @@ gem 'active_model_serializers' # better way to handle json serialization
 
 #global values request based
 gem 'request_store', '~> 1.1.0'
+
+gem 'faraday'
+
+gem 'omniauth-expressov3'

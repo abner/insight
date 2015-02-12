@@ -291,6 +291,8 @@ window.Feedback.Screenshot.prototype.render = function() {
                 $this.h2cDone = true;
             };
 
+            options.proxy = "://feedback.participa.br/proxy";
+
             window.html2canvas([ document.body ], options);
 
         } catch( e ) {

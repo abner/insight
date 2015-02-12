@@ -32,8 +32,8 @@ module FeedbackServer
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
 
-    config.paths.add Dir[Rails.root.join('app', 'api', '*.{rb,yml}')].to_s
-    #config.autoload_paths << Dir[Rails.root.join('app', 'api', '*.{rb,yml}').to_s]
+    config.paths.add Dir[Rails.root.join('app', 'api', '*.{rb,yml}', 'lib/expressov3/*.rb')].to_s
+    config.autoload_paths << Dir[Rails.root.join('app', 'api', '*.{rb,yml}', 'lib/expressov3/*.rb')].to_s
 
     #config.autoload_paths << Dir["#{config.root}/app/api"]
     config.i18n.default_locale =  :'pt-BR'
@@ -45,6 +45,7 @@ module FeedbackServer
         origins '*'
         #resource '*', :headers => :any, :methods => [:get, :post, :options]
         resource '/api/*', :headers => :any, :methods => [:get, :post, :options, :put]
+        resource '/proxy', :headers => :any, :methods => [:get, :post, :options, :put]
       end
     end
   end

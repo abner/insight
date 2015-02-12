@@ -131,6 +131,8 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.6)
     ffi (1.9.6-java)
     foreman (0.77.0)
@@ -165,7 +167,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
-    hashie (3.3.2)
+    hashie (3.4.0)
     hike (1.2.3)
     hitimes (1.2.2)
     hitimes (1.2.2-java)
@@ -222,6 +224,7 @@ GEM
       optionable (~> 0.2.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
+    multipart-post (2.0.0)
     nenv (0.2.0)
     net-ldap (0.3.1)
     nokogiri (1.6.6.2)
@@ -230,6 +233,11 @@ GEM
     notiffany (0.0.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    omniauth (1.2.2)
+      hashie (>= 1.2, < 4)
+      rack (~> 1.0)
+    omniauth-expressov3 (1.0.3)
+      omniauth (~> 1.0)
     optionable (0.2.0)
     origin (2.1.1)
     orm_adapter (0.5.0)
@@ -403,6 +411,7 @@ DEPENDENCIES
   devise-i18n-views
   devise_ldap_authenticatable!
   factory_girl_rails (~> 4.0)
+  faraday
   foreman
   foreman-export-initd
   grape
@@ -418,6 +427,7 @@ DEPENDENCIES
   mongoid-tree
   mongoid_slug
   net-ldap (~> 0.3.1)
+  omniauth-expressov3
   pry-rails
   puma
   rack (~> 1.6.0)
