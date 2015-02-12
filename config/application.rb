@@ -40,6 +40,8 @@ module FeedbackServer
 
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
 
+    config.middleware.use Rack::Deflater
+
     config.middleware.use Rack::Cors do
       allow do
         origins '*'
