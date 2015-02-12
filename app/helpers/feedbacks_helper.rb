@@ -10,6 +10,7 @@ module FeedbacksHelper
   end
 
   def show_column_value(column_name, value)
+    return '' if value.nil?
     #puts "Tipo: #{value.class.name} - value: #{value}"
     if 'screenshot_path'.eql?(column_name)
       #tag 'img', :src => "/" + url_for(value), :width => 150, height: 80
@@ -20,11 +21,7 @@ module FeedbacksHelper
     elsif value.is_a? Time
       l value, :format => '%d/%m/%y %H:%M'
     else
-      if value.nil?
-        return ""
-      else
-        return value.to_s
-      end
+      value.to_s
     end
   end
 
