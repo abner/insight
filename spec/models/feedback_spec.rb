@@ -6,6 +6,10 @@ RSpec.describe Feedback, :type => :model do
     FactoryGirl.build(:feedback)
   end
 
+  let(:inactive_feedback) do
+    FactoryGirl.build(:feedback, active: false)
+  end
+
   context 'validations' do
 
   end
@@ -13,8 +17,6 @@ RSpec.describe Feedback, :type => :model do
   context 'basic attributes' do
 
   end
-
-
 
   it 'has a view_id method' do
     feedback = valid_feedback
@@ -58,5 +60,36 @@ RSpec.describe Feedback, :type => :model do
 
   it 'return 0 on min field count if there is no feedback recorded' do
     expect(Feedback.min_field_count).to eq(0)
+  end
+
+  context 'active and archived scopes' do
+    it 'is active when created' do
+     feedback = valid_feedback
+     feedback.save!
+     expect(feedback.active).to eq(true)
+    end
+
+    it 'has active scope' do
+      feedback_active = valid_feedback
+      feedback_active.save!
+      expect(Feedback.active.count).to eq(1)
+    end
+
+    it 'has archived scope' do
+      feedback_inactive = inactive_feedback
+      feedback_inactive.save!
+      expect(Feedback.archived.count).to eq(1)
+    end
+
+    it 'separates archived from active' do
+      feedback_active = valid_feedback
+      feedback_active.save!
+
+      feedback_inactive = inactive_feedback
+      feedback_inactive.save!
+
+      expect(Feedback.active.count + Feedback.archived.count).to eq(2)
+      expect(Feedback.all.count).to eq(2)
+    end
   end
 end

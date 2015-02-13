@@ -19,4 +19,26 @@ class FeedbacksController < ProtectedController
       format.json { render json: FeedbacksDatatable.new(view_context) }
     end
   end
+
+  def archive
+    respond_to do |format|
+      format.html
+      format.js do
+        feedback.archive!
+        render json: respond_success_json(:object => feedback), :content_type => 'application/javascript'
+      end
+    end
+  end
+
+protected
+  def feedback
+    @feedback ||= user_application.feedbacks.find params[:id]
+  end
+  def user_application
+    @user_application ||= UserApplication.all_apps_for_user(current_user).find(user_applciation_id_param)
+  end
+
+  def user_applciation_id_param
+    params[:user_application_id]
+  end
 end

@@ -2,7 +2,7 @@
 <table id="feedbacks" style="width:100%" data-source="<%= user_application_feedbacks_url(:id=> params[:id], format: "json") %>">
   <thead>
     <tr>
-        <td colspan="<%= all_columns_for_collection(@feedbacks).count %>">
+        <td colspan="<%= all_columns_for_collection(@feedbacks).count + 1 %>">
           <%= will_paginate @feedbacks, :class => 'apple_pagination' %>
         </td>
     </tr>
@@ -15,6 +15,7 @@
       <% all_columns_for_collection(@feedbacks).each do |column_name| %>
         <%= content_tag :th, humanize_column(column_name) %>
       <% end %>
+      <th><%= t 'Actions' %></th>
     </tr>
   </thead>
   <tbody>
@@ -23,12 +24,13 @@
         <% all_columns_for_collection(@feedbacks).each do |column_name| %>
           <td><%= show_column_value(column_name, feedback.read_attribute(column_name)) %></td>
         <% end %>
+        <td><%= link_to t('Archive'), archive_user_application_feedback_path( @user_application, feedback), :remote => true, :method => :post, :data => {:type => 'json', :target_selector => 'a'} %></td>
       </tr>
     <% end %>
   </tbody>
   <tfooter>
   <tr>
-      <td colspan="<%= all_columns_for_collection(@feedbacks).count %>">
+      <td colspan="<%= all_columns_for_collection(@feedbacks).count + 1%>">
         <%= will_paginate @feedbacks, :class => 'apple_pagination' %>
       </td>
   </tr>
@@ -43,3 +45,7 @@ $(document).on('ready page:change', function(){
   });
 });
 </script>
+
+<% content_for :body_end do %>
+  <%= javascript_include_tag 'feedbacks' %>
+<% end %>

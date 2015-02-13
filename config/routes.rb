@@ -36,7 +36,12 @@ Rails.application.routes.draw do
        post 'add_members' => 'user_applications#add_members', as: 'add_members_for'
        delete 'remove_member' => 'user_applications#remove_member', as: 'remove_member_for'
      end
-    resources :feedbacks
+    resources :feedbacks do
+      member do
+        post 'archive' => 'feedbacks#archive'
+      end
+    end
+
   end
 
   get '/users/autocomplete', to: 'users#autocomplete', as: 'autocomplete_user'

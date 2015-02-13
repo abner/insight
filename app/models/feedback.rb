@@ -16,11 +16,24 @@ class Feedback
 
   embeds_one :feedback_requester
 
+  field :active, type: Boolean, :default => true
+
+  scope :active, -> { where(active: true)}
+
+  default_scope -> { where(active: true) }
+
+  scope :archived, -> { where(active: false) }
+
   #pagination definition
   def self.per_page
     10
   end
 
+  def archive!
+    self.active = false
+    self.save!
+    self
+  end
 
   #validates_presence_of :text
 

@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 pt-BR:
+  Archive: 'Arquivar'
   Screenshot: 'Tela'
   remove_member: 'Remover'
   will_paginate:

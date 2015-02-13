@@ -10,4 +10,5 @@ module ApplicationHelper
       request.base_url
     end
   end
+
 end

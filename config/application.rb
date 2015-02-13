@@ -37,9 +37,12 @@ module FeedbackServer
 
     #config.autoload_paths << Dir["#{config.root}/app/api"]
     config.i18n.default_locale =  :'pt-BR'
+    #config.i18n.default_locale =  :'en'
 
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
 
+    # opção de habilitar o deflater condicionalmente
+    #config.middleware.use Rack::Deflater, :if => lambda { |env, status, headers, body| /\/proxy/.match(env["PATH_INFO"]) }
     config.middleware.use Rack::Deflater
 
     config.middleware.use Rack::Cors do
