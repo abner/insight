@@ -13,6 +13,7 @@ module ZeroOidFix
   #   end
   # end
 
+#FIX the problem with json cookie serialization on devise + mongoid
   def to_key
     id.to_s
   end
