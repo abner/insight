@@ -60,4 +60,4 @@ $.extend(true, $.magnificPopup.defaults, {
   }
 })
 
-//Turbolinks.enableProgressBar();
+Turbolinks.enableProgressBar();
