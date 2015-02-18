@@ -48,7 +48,7 @@
   gem "select2-rails"
 
   #foundation css framework
-  gem 'zurb-foundation'
+  #gem 'zurb-foundation'
 
   #assets compilation
   gem 'therubyracer'

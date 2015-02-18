@@ -1,6 +1,8 @@
 #encoding: UTF-8
 class ApplicationController < ActionController::Base
   layout 'bootstrap_layout'
+  #layout 'layout2'
+  
   #add_breadcrumb 'Início', root_path
  before_action :configure_permitted_parameters, if: :devise_controller?
   rescue_from DeviseLdapAuthenticatable::LdapException do |exception|

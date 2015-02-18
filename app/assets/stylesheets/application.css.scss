@@ -13,7 +13,11 @@
  *= require_self
  *= require select2
  *= require magnific/main
- *= require_tree .
+ *= require pagination
+ *= require users
+ *= require user_applications
+ *= require bootstrap_and_overrides
+ 
  *
 */
 pre {
