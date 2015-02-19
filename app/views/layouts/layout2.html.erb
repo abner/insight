@@ -66,7 +66,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="toogleMenu navbar-brand" href="javascript:;" id=""><i class='fa fa-bars'>&nbsp;</i></a>
-                <%= link_to 'Feedback.Serpro', url_for(root_path), :class => "navbar-brand" %>
+                <%= link_to 'Feedback.Serpro', url_for(dashboard_path), :class => "navbar-brand" %>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -185,6 +185,7 @@
     <script src="js/plugins/morris/morris-data.js"></script-->
 
     <%= yield :body_end %>
+    <div class="logo_serpro_50_anos"></div>
 </body>
 
 </html>

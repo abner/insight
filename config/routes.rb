@@ -11,8 +11,10 @@ Rails.application.routes.draw do
   devise_for :registered_user, :ldap_users, skip: [ :sessions ]
 
   devise_scope :ldap_user do
-     root to: "dashboard#index"
+    root to: "sessions#new"
+    delete 'sign_out' => 'sessions#destroy'
    end
+
 
   devise_scope :registered_user do
     root to: "sessions#new", :as => 'registered_user_root'
@@ -23,6 +25,8 @@ Rails.application.routes.draw do
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+
+  get 'dashboard' => "dashboard#index"
 
 
   get 'protected' => 'protected#index'

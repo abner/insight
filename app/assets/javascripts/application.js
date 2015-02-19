@@ -96,6 +96,7 @@ function init(){
 
   $('.toogleMenu').on('click', function(){
       $('div.main_wrapper').toggleClass('collapsed');
+      $('div.logo_serpro_50_anos').toggleClass('collapsed');
   });
 
 }

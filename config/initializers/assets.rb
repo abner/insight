@@ -8,4 +8,4 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 
 
-Rails.application.config.assets.precompile += %w(feedbacks.js feedback_client_com_jquery.js feedback_client.js layout2.css feedback.css )
+Rails.application.config.assets.precompile += %w(feedbacks.js feedback_client_com_jquery.js feedback_client.js layout2.css feedback.css login.css)

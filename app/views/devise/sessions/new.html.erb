@@ -1,16 +1,17 @@
-<h2><%= t('.sign_in', :default => "Sign in") %></h2>
 
 
-<div class='login_panel'>
-	
-	<%= form_for(resource, :as => 'user', :url => create_session_path) do |f| %>
-	  <div><%= f.label :username %><br />
-	  <%= f.text_field :username %></div>
-	  <div><%= f.label :password %><br />
-	  <%= f.password_field :password %></div>
 
-	  <div><%= f.submit t('.sign_in', :default => "Sign in") %></div>
+
+	<%= bootstrap_form_for(resource, :as => 'user', :url => create_session_path, :class => 'form-signin') do |f| %>
+	<h2 class="form-signin-heading">Feedback para Aplicações Web</h2>
+	<hr style="height:1px"/>
+	  <%= f.text_field :username, :placeholder => 'Login/CPF', :class =>  'sr-only' %>
+	  <%= f.password_field :password, :placeholder => 'Senha', :class =>  'sr-only' %>
+
+
+			<%= f.submit t('.sign_in', :default => "Sign in"), :class => "btn btn-lg btn-primary btn-block" %>
+
+			<hr style="height:1px"/>
+			<%= render "devise/shared/links" %>
 	<% end %>
-</div>
-
-<%= render "devise/shared/links" %>
+	<div class="logo_serpro_50_anos"></div>

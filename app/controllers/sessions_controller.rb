@@ -1,5 +1,5 @@
 class SessionsController < Devise::SessionsController
-
+layout 'simple_page'
   def create
     user_class = nil
 
