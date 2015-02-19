@@ -25,56 +25,57 @@
 <h6>Convidar</h6>
 <p>Em breve será possível enviar convite por email!</p>
 
-
-<script type="text/javascript">
-function configurarAutocomplete() {
-  // $('#invite_members_emails').each(function(){
-  //   //tags: true,
-  //   //tokenSeparators: [',', ' '],
-  // });
-  $('#team_members_ids').each(function() {
-    var url = $(this).data('url');
-    var placeholder = $(this).data('placeholder');
-    var saved = <%= raw @user_application.members_user_names.as_json %> ;
-    $(this).select2({
-      minimumInputLength: 2,
-      multiple: true,
-      placeholder : placeholder,
-      allowClear: true,
-      ajax: {
-        url: url,
-        dataType: 'json',
-        quietMillis: 500,
-        data: function (term) {
-          return {
-            username: term
-          };
+<% content_for :body_end  do%>
+  <script type="text/javascript">
+  function configurarAutocomplete() {
+    // $('#invite_members_emails').each(function(){
+    //   //tags: true,
+    //   //tokenSeparators: [',', ' '],
+    // });
+    $('#team_members_ids').each(function() {
+      var url = $(this).data('url');
+      var placeholder = $(this).data('placeholder');
+      var saved = <%= raw @user_application.members_user_names.as_json %> ;
+      $(this).select2({
+        minimumInputLength: 2,
+        multiple: true,
+        placeholder : placeholder,
+        allowClear: true,
+        ajax: {
+          url: url,
+          dataType: 'json',
+          quietMillis: 500,
+          data: function (term) {
+            return {
+              username: term
+            };
+          },
+          results: function (data) {
+            return {results: data};
+          }
         },
-        results: function (data) {
-          return {results: data};
+
+        formatResult: function (item, page) {
+          return item.username + '(' + item.email + ')';
+        },
+
+        formatSelection: function (item, page) {
+          return item.username ;
+        },
+
+        initSelection : function (element, callback) {
+          if (saved) {
+            callback(saved);
+          }
         }
-      },
 
-      formatResult: function (item, page) {
-        return item.username + '(' + item.email + ')';
-      },
-
-      formatSelection: function (item, page) {
-        return item.username ;
-      },
-
-      initSelection : function (element, callback) {
-        if (saved) {
-          callback(saved);
-        }
-      }
-
-    }).on('change', function() {
-                      if($(this).val() !== '') {
-                        $('#form_members').submit();
-                    }
+      }).on('change', function() {
+                        if($(this).val() !== '') {
+                          $('#form_members').submit();
+                      }
+      });
     });
-  });
-}
-jQuery(document).on('ready page:load', configurarAutocomplete);
-</script>
+  }
+  jQuery(document).on('ready page:load', configurarAutocomplete);
+  </script>
+<% end %>

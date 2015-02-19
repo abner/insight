@@ -1,37 +1,64 @@
-<h1><%= translate('My applications') %></h1>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            <%= translate('My applications') %>
+        </h1>
+        <!-- <ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-dashboard"></i> Dashboard
+            </li>
+        </ol> -->
+    </div>
+</div>
 
-<% if @user_applications.empty? %>
 
-<p> <%= translate("No application registered yet") %></p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h3 class="panel-title"><%= t('User Applications') %></h3>
+  </div>
+  <div class="panel-body">
+    <% if @user_applications.empty? %>
 
-<% else  %>
-<table>
-  <tr>
-    <th><%= translate('Name') %></th>
-    <th><%= translate('Token') %></th>
-    <th><%= translate('Actions') %></th>
-  <tr>
-  <% @user_applications.each do  |user_application | %>
-  <tr>
-    <td><%= link_to user_application.name, user_application_path(user_application) %></td>
-    <td><%= user_application.authentication_token %></td>
-    <td>
-      <%= link_to(
-            content_tag(:span, pad(translate('Edit')), class: 'fa fa-edit'),
-            edit_user_application_path(user_application), :class=> 'action') if current_user_can?(:write_user_application, user_application)
-        %>
-      <%= link_to(
-            content_tag(:span, pad(translate('Destroy')), :class => 'fa fa-trash-o'),
-            user_application_path(user_application), :method=> 'DELETE', :data => {:confirm => translate('Are you sure')}) if current_user_can?(:remove_user_application, user_application)
-          %>
-      <%= link_to(
-          content_tag(:span, pad(translate('Feedbacks')) + " ", :class => 'fa fa-comment-o'),
-          user_application_feedbacks_path(user_application))%>
-    </td>
-  </tr>
-  <% end %>
-</table>
+      <p> <%= translate("No application registered yet") %></p>
 
-<% end %>
+    <% else  %>
 
-<%= link_to translate('Create new application'), new_user_application_path, :class => 'btn btn-default' %>
+      <div class="table-responsive">
+          <table class="table table-bordered table-hover table-striped">
+              <thead>
+                  <tr>
+                    <th><%= translate('Name') %></th>
+                    <th><%= translate('Token') %></th>
+                    <th><%= translate('Actions') %></th>
+                  </tr>
+              </thead>
+              <tbody>
+                 <% @user_applications.each do  |user_application | %>
+                    <tr>
+                      <td><%= link_to user_application.name, user_application_path(user_application) %></td>
+                      <td><%= user_application.authentication_token %></td>
+                      <td>
+                        <%= link_to(
+                              content_tag(:span, pad(translate('Edit')), class: 'fa fa-edit'),
+                              edit_user_application_path(user_application), :class=> 'action') if current_user_can?(:write_user_application, user_application)
+                          %>
+                        <%= link_to(
+                              content_tag(:span, pad(translate('Destroy')), :class => 'fa fa-trash-o'),
+                              user_application_path(user_application), :method=> 'DELETE', :data => {:confirm => translate('Are you sure')}) if current_user_can?(:remove_user_application, user_application)
+                            %>
+                        <%= link_to(
+                            content_tag(:span, pad(translate('Feedbacks')) + " ", :class => 'fa fa-comment-o'),
+                            user_application_feedbacks_path(user_application))%>
+                      </td>
+                    </tr>
+                 <% end %>
+              </tbody>
+          </table>
+      </div>
+      <% end %>
+      <div class="text-right">
+          <%= link_to translate('Create new application'), new_user_application_path, :class => 'btn btn-default' %>
+      </div>
+  </div>
+</div>
+

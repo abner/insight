@@ -1,7 +1,8 @@
-<h1><%= translate('My applications') %></h1>
+<h1 class="page-header"><%= translate('New application') %></h1>
 
-<%= form_for @user_application do |f| %>
-  <%= f.label 'name' %>
-  <%= f.text_field 'name', :autofocus => true %>
-  <%= f.button translate('Submit'), :class => 'button small alternative' %>
+<%=  bootstrap_form_for @user_application, :role => 'form' do |f| %>
+	
+  		<%= f.text_field 'name', :autofocus => true, :label => t('Name') %>
+  	
+  <%= f.button translate('Submit'), :class => 'btn btn-primary' %>
 <% end %>

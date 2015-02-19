@@ -11,26 +11,36 @@
     </div>
   </li>
 </ul> -->
+<% if current_user.present? %>
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.username %><b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li>
+        <%= link_to  "/"   do%>
+          <i class="fa fa-fw fa-dashboard"></i> <%= t("Dashboard") %>
+        <% end %>
 
-<ul class="nav pull-right">
-    <% if current_user.blank? %>
-
-    <% end %>
-    <% if current_user.present? %>
-      <li class="dropdown" id="menuUser" style="display: list-item;">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="See your Bootply collection and profile">
-              <i class="icon-user icon-xxlarge"> </i> <span id="lblUsername"><%= current_user.username %></span>
-              <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-              <li><%= link_to translate("Home"), "/"  %></li>
-              <li><%= link_to translate("Create new application"), "/user_applications/new"  %></li>
-
-              <li><%= link_to t('Logout'), destroy_session_path, :method => :delete %></li>
-              <li class="divider"> </li>
-              <!--<li><a href="/bootstrap-community">Community</a></li>
-              <li><a href="/about">About</a></li>-->
-          </ul>
-      </li>
-    <% end %>
-</ul>
+        </li>
+        <li>
+          <%= link_to  "/user_applications/new"  do%>
+            <i class="fa fa-fw fa-plus"></i><%= t("Application") %>
+          <% end %>
+        </li>
+        <li class='disabled'>
+            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+        </li>
+        <li class='disabled'>
+            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+        </li>
+        <li class='disabled'>
+            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+        </li>
+        <li class="divider"></li>
+        <li>
+        <%= link_to destroy_session_path, :method => :delete do %>
+              <i class="fa fa-fw fa-power-off"></i><%= t 'Logout' %>
+          <% end %>
+        </li>
+    </ul>
+</li>
+<% end %>

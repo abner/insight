@@ -75,6 +75,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.9)
     bcrypt (3.1.9-java)
+    bootstrap_form (2.3.0)
     bson (2.3.0)
     bson (2.3.0-java)
     builder (3.2.2)
@@ -233,6 +234,7 @@ GEM
     notiffany (0.0.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    nprogress-rails (0.1.6.6)
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
@@ -401,6 +403,7 @@ DEPENDENCIES
   active_model_serializers
   activerecord-jdbcsqlite3-adapter
   bcrypt (~> 3.1.7)
+  bootstrap_form
   coffee-rails (~> 4.0.0)
   compass-rails
   data-confirm-modal!
@@ -425,6 +428,7 @@ DEPENDENCIES
   mongoid-tree
   mongoid_slug
   net-ldap (~> 0.3.1)
+  nprogress-rails
   omniauth-expressov3
   pry-rails
   puma

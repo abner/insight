@@ -10,14 +10,17 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_self
+ 
  *= require select2
  *= require magnific/main
  *= require pagination
  *= require users
  *= require user_applications
  *= require bootstrap_and_overrides
- 
+ *= require nprogress
+ *= require nprogress-bootstrap
+ *= require rails_bootstrap_forms
+ *= require_self
  *
 */
 pre {
@@ -27,4 +30,18 @@ pre {
 .screenshot_thumbnail {
   width: 250px;
   height: 80px;
+}
+
+#nprogress .spinner {
+  top: 55px;
+  left: 235px
+}
+
+.preview_source {
+	background-color: #ebf8ff;
+	border-radius: 14px;
+}
+
+*:focus {
+    outline: 0 !important;
 }

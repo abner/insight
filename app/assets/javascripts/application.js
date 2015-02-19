@@ -11,8 +11,11 @@
 // about supported directives.
 //
 //= require jquery
+
 //= require jquery_ujs
 //= require twitter/bootstrap
+  
+
 //= require data-confirm-modal
 //= require jquery-ui
 //= require dataTables/jquery.dataTables
@@ -21,6 +24,10 @@
 //= require select2
 //= require select2_locale_pt-BR
 //= require magnific
+
+//= require nprogress
+//= require nprogress-turbolinks
+
 // #require_tree .
 
 
@@ -35,13 +42,21 @@ dataConfirmModal.setDefaults({
   cancel: 'Cancelar'
 });
 
-function loadHighlights(){
+function init(){
   $('pre code').each(function(i, e) {
     try { hljs.highlightBlock(e); } catch(e) {}
   });
+  $('.dropdown-toggle').dropdown();
+  
+  $('.toogleMenu').on('click', function(){
+      $('div.main_wrapper').toggleClass('collapsed'); 
+  });
+        
 }
 
-jQuery(document).on('ready page:load', loadHighlights);
+jQuery(document).on('ready page:load', init);
+
+
 
 // Add it after jquery.magnific-popup.js and before first initialization code
 $.extend(true, $.magnificPopup.defaults, {
@@ -60,4 +75,4 @@ $.extend(true, $.magnificPopup.defaults, {
   }
 })
 
-Turbolinks.enableProgressBar();
+//Turbolinks.enableProgressBar();

@@ -20,6 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 pt-BR:
+  Application: 'Aplicação'
+  "Application Info": "Dados da Aplicação"
+  "User Applications": "Aplicações do Usuário"
+  "Feedback Javascript Source": "Código Javascript"
   Archive: 'Arquivar'
   Screenshot: 'Tela'
   remove_member: 'Remover'
@@ -48,6 +52,7 @@ pt-BR:
   "Edit": "Alterar"
   "Home": "Início"
   "Applications": "Aplicações"
+  Submit: "Salvar"
   devise:
     failure:
       user:
@@ -58,12 +63,16 @@ pt-BR:
     registrations:
       registered_user:
         signed_up: 'Seja bem vindo ao serviço de feedback. Obrigado por se registrar'
+  helpers:
+
   activemodel:
     attributes:
       user:
         name: 'Nome'
         email: 'E-mail'
         password: 'Senha'
+      user_application:
+        name: 'Nome'
     errors:
       models:
         user_application:

@@ -1,12 +1,12 @@
-<h1><%= translate('My applications') %></h1>
+
+<h1 class="page-header"><%= translate('Edit application') %></h1>
 
 
-
-<%= form_for @user_application do |f| %>
-  <%= f.label 'name' %>
-  <%= f.text_field 'name', :autofocus => 'true' %>
-  <%= f.button translate('Submit'), :class => 'button small alternative' %>
+<%= bootstrap_form_for @user_application, :role =>  'form' do |f| %>
+	<%= f.text_field 'name', :autofocus => 'true', label: t('Name') %>
+	<%= f.submit t("Submit") %>
 <% end %>
+
 
 
 <%= render :partial => 'members_edit' if  current_user_can?(:admin_team_members, @user_application)%>

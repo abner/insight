@@ -28,6 +28,10 @@
 
   # Use jquery as the JavaScript library
   gem 'jquery-rails'
+
+  gem 'nprogress-rails'
+  #gem 'jquery-turbolinks'
+
   # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
   gem 'turbolinks', '~> 2.5'
   # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -133,3 +137,6 @@ gem 'request_store', '~> 1.1.0'
 gem 'faraday'
 
 gem 'omniauth-expressov3'
+
+#Forms for Bootstrap
+gem 'bootstrap_form'
