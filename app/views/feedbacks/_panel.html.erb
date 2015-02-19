@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h3 class="panel-title"><%= t('Recents Feedbacks') %></h3>
+  </div>
+  <div class="panel-body">
+    <% if @last_feedbacks.empty? %>
+
+      <p> <%= translate("No feedbacks registered yet") %></p>
+
+    <% else  %>
+
+      <div class="table-responsive">
+          <table class="table table-bordered table-hover table-striped">
+              <thead>
+                  <tr>
+                    <th><%= translate('When') %>?</th>
+                    <th><%= translate('Application') %></th>
+                    <th><%= translate('Description') %></th>
+                  </tr>
+              </thead>
+              <tbody>
+                 <% @last_feedbacks.each do  |feedback| %>
+                    <tr>
+                      <td><%= time_ago_in_words feedback.created_at %></td>
+                      <td><%= feedback.user_application.name %></td>
+                      <td><%= feedback.description %></td>
+                    </tr>
+                 <% end %>
+              </tbody>
+          </table>
+      </div>
+      <% end %>
+      <div class="text-right">
+          <%= link_to translate('All_male'), user_applications_path%>
+      </div>
+  </div>
+</div>

@@ -42,5 +42,13 @@ class ApplicationController < ActionController::Base
     }.to_json
   end
 
+  def respond_error_json(args = {})
+    {
+      :error => true,
+      :error_message => args[:message],
+      :action => args[:action] || action_name,
+      :data => args[:object]
+    }.to_json
+  end
 
 end

@@ -14,9 +14,10 @@
 
 //= require jquery_ujs
 //= require twitter/bootstrap
-  
 
-//= require data-confirm-modal
+
+
+
 //= require jquery-ui
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
@@ -27,8 +28,52 @@
 
 //= require nprogress
 //= require nprogress-turbolinks
+//= require nprogress-ajax
 
 // #require_tree .
+
+
+//require noty/jquery.noty
+//require noty/layouts/center
+//require noty/themes/bootstrap
+// $.noty.defaults.timeout = 8000
+// $.noty.defaults.layout = 'center'
+// $.noty.defaults.theme = 'bootstrapTheme'
+// $.noty.defaults = {
+//                     layout: 'center',
+//                     theme: 'defaultTheme',
+//                     type: 'alert',
+//                     /*text: '',*/
+//                     dismissQueue: true, // If you want to use queue feature set this true
+//                     /* template: '',*/
+//                     animation: {
+//                     open: { height: 'toggle' },
+//                     close: { height: 'toggle' },
+//                     easing: 'swing',
+//                     speed: 500 // opening & closing animation speed
+//                     },
+//                     timeout: true, // delay for closing event. Set false for sticky notifications
+//                     force: false, // adds notification to the beginning of queue when set to true
+//                     modal: true,
+//                     timeout: 8000,
+//                     maxVisible: 5, // you can set max visible notification for dismissQueue true option
+//                     closeWith: ['click'], // ['click', 'button', 'hover']
+//                     callback: {
+//                       onShow: function () { },
+//                       afterShow: function () { },
+//                       onClose: function () { },
+//                       afterClose: function () { }
+//                     },
+//                     buttons: false // an array of buttons
+// };
+
+//= require i18n
+//= require i18n/translations
+//= require i18n_set_locale
+//= require alertify
+
+//código para utilizar o alertify para as confirmações do link
+//= require rails-alertify
 
 
 $(function() {
@@ -36,23 +81,26 @@ $(function() {
 
 
 });
-dataConfirmModal.setDefaults({
-  title: 'Confirmação de Ação',
-  commit: 'Confirmar',
-  cancel: 'Cancelar'
-});
+// dataConfirmModal.setDefaults({
+//   title: 'Confirmação de Ação',
+//   commit: 'Confirmar',
+//   cancel: 'Cancelar'
+// });
+
 
 function init(){
   $('pre code').each(function(i, e) {
     try { hljs.highlightBlock(e); } catch(e) {}
   });
   $('.dropdown-toggle').dropdown();
-  
+
   $('.toogleMenu').on('click', function(){
-      $('div.main_wrapper').toggleClass('collapsed'); 
+      $('div.main_wrapper').toggleClass('collapsed');
   });
-        
+
 }
+
+
 
 jQuery(document).on('ready page:load', init);
 

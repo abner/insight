@@ -21,17 +21,23 @@ class FeedbacksController < ProtectedController
   end
 
   def archive
+    @feedback = nil
     respond_to do |format|
       format.html
       format.js do
-        feedback.archive!
-        render json: respond_success_json(:object => feedback), :content_type => 'application/javascript'
+        begin
+          @feedback = feedback_from_params
+          @feedback.archive!
+          render json: respond_success_json(:object => @feedback), :content_type => 'application/javascript'
+        rescue Exception => e
+          render json: respond_error_json(:message => e.message ,:object => @feedback), :content_type => 'application/javascript'
+        end
       end
     end
   end
 
 protected
-  def feedback
+  def feedback_from_params
     @feedback ||= user_application.feedbacks.find params[:id]
   end
   def user_application

@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h3 class="panel-title"><%= t('User Applications') %></h3>
+  </div>
+  <div class="panel-body">
+    <% if @user_applications.empty? %>
+
+      <p> <%= translate("No application registered yet") %></p>
+
+    <% else  %>
+
+      <div class="table-responsive">
+          <table class="table table-bordered table-hover table-striped">
+              <thead>
+                  <tr>
+                    <th><%= translate('Name') %></th>
+                    <th><%= translate('Token') %></th>
+                  </tr>
+              </thead>
+              <tbody>
+                 <% @user_applications.each do  |user_application | %>
+                    <tr>
+                      <td><%= link_to user_application.name, user_application_path(user_application) %></td>
+                      <td><%= user_application.authentication_token %></td>
+                    </tr>
+                 <% end %>
+              </tbody>
+          </table>
+      </div>
+      <% end %>
+      <div class="text-right">
+          <%= link_to translate('All'), user_applications_path%>
+      </div>
+  </div>
+</div>

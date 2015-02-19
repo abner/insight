@@ -1,6 +1,7 @@
 class Feedback
   include Mongoid::Document
   include Mongoid::Attributes::Dynamic
+  include Mongoid::Timestamps::Created
 
   belongs_to :user_application
 
@@ -27,6 +28,10 @@ class Feedback
   #pagination definition
   def self.per_page
     10
+  end
+
+  def description
+    attributes.to_s
   end
 
   def archive!
@@ -102,6 +107,10 @@ class Feedback
     self.min_field_count_for_relation(self.all)
   end
 
+  def self.last_feedbacks_for_user(user)
+    apps_ids = UserApplication.all_apps_for_user(user).map {|app| app.id.to_s }
+    Feedback.in(user_application_id:  apps_ids).order(created_at: 'DESC').paginate(page: 1, per_page: 5)
+  end
 
 protected
     def fill_automatic_fields

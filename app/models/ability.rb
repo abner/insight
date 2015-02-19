@@ -31,7 +31,7 @@ class Ability
 
     def feedback_abilities(user, feedback)
       rules = []
-      if user.is_member?(feedback.user_application)
+      if user.is_member?(feedback.user_application) or user.owns?(feedback.user_application)
         rules << :read_feedback
         rules << :change_feedback_status
         rules << :comment_on_feedback

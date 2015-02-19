@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   devise_for :registered_user, :ldap_users, skip: [ :sessions ]
 
   devise_scope :ldap_user do
-    root to: "sessions#new"
-  end
+     root to: "dashboard#index"
+   end
 
   devise_scope :registered_user do
     root to: "sessions#new", :as => 'registered_user_root'

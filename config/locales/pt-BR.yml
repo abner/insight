@@ -20,7 +20,22 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 pt-BR:
+  "Recents Feedbacks": Feedbacks recentes
+  "All": "Ver todas"
+  "All_male": "Ver todos"
+  "No feedbacks registered yet": "Nenhum feedback registrado"
+  Dashboard: Painél Principal
+  Configurations: Configurações
+  Templates: Modelos de Formulários
   Application: 'Aplicação'
+  alertify:
+    Confirmation: 'Confirmação'
+    OK: 'OK'
+    Cancel: 'Cancelar'
+  user_application:
+    confirmation_question: 'Tem certeza que deseja excluir a aplicação?'
+  feedback:
+    confirmation_question: Tem certeza que deseja arquivar o feedback?
   "Application Info": "Dados da Aplicação"
   "User Applications": "Aplicações do Usuário"
   "Feedback Javascript Source": "Código Javascript"
@@ -37,7 +52,9 @@ pt-BR:
   "User application removed successfully!": "Aplicação removida com sucesso!"
   "User application created!": Aplicação criada!
   "No application registered yet": "Nenhuma aplicação cadastrada"
-  "Edit": "Alterar"
+  Edit: Alterar
+  Description: Descrição
+  "When": "Quando"
   "Destroy": "Excluir"
   "Create new application": "Adicionar uma nova Aplicação"
   "Name": "Nome"

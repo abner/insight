@@ -7,13 +7,6 @@ GIT
       net-ldap (>= 0.3.1, < 0.6.0)
 
 GIT
-  remote: https://github.com/ifad/data-confirm-modal.git
-  revision: 209afd0f05500b36e43b1ea601da3937ac275d7c
-  specs:
-    data-confirm-modal (1.0.1)
-      railties (>= 3.0)
-
-GIT
   remote: https://github.com/rweng/jquery-datatables-rails.git
   revision: 94c874998e343d72ac50176348962e816017f172
   specs:
@@ -173,6 +166,8 @@ GEM
     hitimes (1.2.2)
     hitimes (1.2.2-java)
     i18n (0.7.0)
+    i18n-js (3.0.0.rc8)
+      i18n (~> 0.6)
     ice_nine (0.11.1)
     jbuilder (2.2.6)
       activesupport (>= 3.0.0, < 5)
@@ -406,7 +401,6 @@ DEPENDENCIES
   bootstrap_form
   coffee-rails (~> 4.0.0)
   compass-rails
-  data-confirm-modal!
   database_cleaner (~> 1.4)
   devise (~> 3.4.1)
   devise-i18n-views
@@ -417,6 +411,7 @@ DEPENDENCIES
   foreman-export-initd
   grape
   guard-rspec
+  i18n-js (>= 3.0.0.rc8)
   jbuilder (~> 2.0)
   jquery-datatables-rails!
   jquery-rails

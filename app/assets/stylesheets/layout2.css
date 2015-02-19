@@ -278,3 +278,8 @@ a.toggleMenu.navbar-brand:visited a.toggleMenu.navbar-brand:focus {
 #error_explanation h2 {
     font-size: 1em;
 }
+
+#ajax_error_alert {
+    display: none;
+}
+

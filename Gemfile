@@ -1,4 +1,4 @@
-  source 'https://rubygems.org'
+source 'https://rubygems.org'
 
 
   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -60,7 +60,12 @@
 
   #bootstrap
   gem "twitter-bootstrap-rails"
-  gem 'data-confirm-modal', :git => 'https://github.com/ifad/data-confirm-modal.git'
+
+  #gem 'data-confirm-modal', :git => 'https://github.com/ifad/data-confirm-modal.git'
+
+  #gem 'noty-rails'
+
+  gem "i18n-js", ">= 3.0.0.rc8"  #i18n for javascripts
 
   group :development do
     gem 'rails_layout'
