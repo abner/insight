@@ -5,8 +5,8 @@
 	<%= bootstrap_form_for(resource, :as => 'user', :url => create_session_path, :class => 'form-signin') do |f| %>
 	<h2 class="form-signin-heading">Feedback para Aplicações Web</h2>
 	<hr style="height:1px"/>
-	  <%= f.text_field :username, :placeholder => 'Login/CPF', :class =>  'sr-only' %>
-	  <%= f.password_field :password, :placeholder => 'Senha', :class =>  'sr-only' %>
+	  <%= f.text_field :username, :placeholder => 'Login/CPF', :class =>  'sr-only', :required => true %>
+	  <%= f.password_field :password, :placeholder => 'Senha', :class =>  'sr-only', :required => true %>
 
 
 			<%= f.submit t('.sign_in', :default => "Sign in"), :class => "btn btn-lg btn-primary btn-block" %>
