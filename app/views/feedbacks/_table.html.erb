@@ -1,7 +1,7 @@
 <% if 'archived'.eql? @scope %>
-<%= link_to t('feedback.show_active_feedbacks'), url_for(user_application_feedbacks_path(@user_application,pagination_params)), :data => {:remote => true} %>
+<%= link_to t('feedback.show_active_feedbacks'), url_for(user_application_feedbacks_path(@user_application,pagination_params)), :class=>'scope_action', :data => {:remote => true, :updatable_element_selector => '#feedbacks_table'} %>
 <% else %>
-<%= link_to t('feedback.show_archived_feedbacks'), url_for(user_application_feedbacks_path(@user_application, pagination_params.merge(:scope => 'archived'))), :data => {:remote => true} %>
+<%= link_to t('feedback.show_archived_feedbacks'), url_for(user_application_feedbacks_path(@user_application, pagination_params.merge(:scope => 'archived'))), :class=>'scope_action', :data => {:remote => true, :updatable_element_selector => '#feedbacks_table'} %>
 <% end %>
 <p class="pull-right">Listados dos mais recentes para os mais antigos</p>
 <%#= will_paginate @feedbacks, :class => 'apple_pagination' %>
@@ -44,3 +44,10 @@
   </tr>
   </tfooter>
 </table>
+<script type='text/javascript'>
+$('#feedbacks_table a[data-remote].scope_action').on('click', function(){
+  var element_selector = $(this).data('updatableElementSelector');
+
+  $(element_selector).hide();
+})
+</script>

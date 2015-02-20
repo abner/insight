@@ -1,3 +1,4 @@
-$('#feedbacks_table').slideUp(100);
-$('#feedbacks_table').html("<%= escape_javascript (render partial: 'table') %>");
-$('#feedbacks_table').slideDown(350);
+$('#feedbacks_table').slideUp(200 , function(){
+  $('#feedbacks_table').html("<%= escape_javascript (render partial: 'table') %>");
+  $('#feedbacks_table').slideDown(350);
+});
