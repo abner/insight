@@ -1,5 +1,5 @@
 class SessionsController < Devise::SessionsController
-layout 'simple_page'
+layout 'login_page'
   def create
     user_class = nil
 
@@ -18,12 +18,16 @@ layout 'simple_page'
       user_class = :ldap_user
     end
 
+    puts user_class.to_s
+
     # Use Warden to authenticate the user, if we get nil back, it failed.
     begin
       self.resource = warden.authenticate scope: user_class
     rescue Exception => e
+      puts "Here"
         Rails.logger.error("Session create error: #{e.inspect}")
-       self.resource = nil
+       flash[:error] = t('sessions.create.error') + "\n#{e.inspect}"
+       return redirect_to new_session_path
     end
 
     if self.resource.nil?
