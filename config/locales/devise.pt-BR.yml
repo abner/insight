@@ -1,120 +1,13 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
+# encoding: UTF-8
+# pt-BR translations for Devise
 pt-BR:
-  "Recents Feedbacks": Feedbacks recentes
-  "All": "Ver todas"
-  "All_male": "Ver todos"
-  "No feedbacks registered yet": "Nenhum feedback registrado"
-  Dashboard: Painel Principal
-  Configurations: Configurações
-  Templates: Modelos de Formulários
-  Application: 'Aplicação'
-  alertify:
-    Confirmation: 'Confirmação'
-    OK: 'OK'
-    Cancel: 'Cancelar'
-  user_application:
-    confirmation_question: 'Tem certeza que deseja excluir a aplicação?'
-  feedback:
-    confirmation_question: Tem certeza que deseja arquivar o feedback?
-  "Application Info": "Dados da Aplicação"
-  "User Applications": "Aplicações do Usuário"
-  "Feedback Javascript Source": "Código Javascript"
-  Archive: 'Arquivar'
-  Screenshot: 'Tela'
-  remove_member: 'Remover'
-  will_paginate:
-    previous_label: "&#8592; Anterior"
-    next_label: "Próxima &#8594;"
-    page_gap: "&hellip;"
-  hello: "Olá"
-  "My applications": "Minhas Aplicações"
-  "User application changed successfully!": "Aplicação alterada com sucesso!"
-  "User application removed successfully!": "Aplicação removida com sucesso!"
-  "User application created!": Aplicação criada!
-  "No application registered yet": "Nenhuma aplicação cadastrada"
-  Edit: Alterar
-  Description: Descrição
-  "When": "Quando"
-  "Destroy": "Excluir"
-  "Create new application": "Adicionar uma nova Aplicação"
-  "Name": "Nome"
-  "Actions": "Ações"
-  "FeedbackSERPRO": "Feedback.SERPRO"
-  "Feedbacks for application": "Feedbacks da Aplicação"
-  "Return": "Retornar"
-  "Are you sure": "Tem certeza?"
-  "view feedbacks": "Visualizar Feedbacks"
-  "Show": "Exibir"
-  "Feedbacks": "Feedbacks"
-  "Edit": "Alterar"
-  "Home": "Início"
-  "Applications": "Aplicações"
-  Submit: "Salvar"
-  devise:
-    failure:
-      user:
-        unauthenticated: ''
-    sessions:
-      user:
-        signed_in: 'Usuário logado com sucesso'
-    registrations:
-      registered_user:
-        signed_up: 'Seja bem vindo ao serviço de feedback. Obrigado por se registrar'
-  helpers:
-
-  activemodel:
-    attributes:
-      user:
-        name: 'Nome'
-        email: 'E-mail'
-        password: 'Senha'
-      user_application:
-        name: 'Nome'
-    errors:
-      models:
-        user_application:
-          attributes:
-            name:
-              taken: 'já existe'
-              blank: 'não pode ser vazio'
-            authentication_token:
-              taken: 'já existe'
-        user:
-          attributes:
-            email:
-              taken: 'já existe'
-              blank: 'não pode ser vazio'
-            username:
-              taken: 'já existe'
-              blank: 'não pode ser vazio'
-
   devise:
     confirmations:
       confirmed: 'Sua conta foi confirmada com sucesso. Você está logado.'
       send_instructions: 'Dentro de minutos, você receberá um e-mail com instruções para a confirmação da sua conta.'
       send_paranoid_instructions: 'Se o seu endereço de e-mail estiver cadastrado, você receberá uma mensagem com instruções para confirmação da sua conta.'
     failure:
-      already_authenticated: ''
+      already_authenticated: 'a'
       inactive: 'Sua conta ainda não foi ativada.'
       invalid: 'E-mail ou senha inválidos.'
       invalid_token: 'O token de autenticação não é válido.'
@@ -151,7 +44,7 @@ pt-BR:
       signed_in: 'Login efetuado com sucesso!'
       signed_out: 'Saiu com sucesso.'
       create:
-          failure: 'Erro na autenticação. Verifique se o nome de usuário (CPF) ou senha estão corretos'
+          failure: 'Erro ao logar'
     unlocks:
       send_instructions: 'Dentro de minutos, você receberá um email com instruções para o desbloqueio da sua conta.'
       send_paranoid_instructions: 'Se sua conta existir, você receberá um e-mail com instruções para desbloqueá-la em alguns minutos.'

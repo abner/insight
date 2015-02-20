@@ -96,7 +96,7 @@ function init(){
   });
   $('.dropdown-toggle').dropdown();
 
-  $('.toogleMenu').on('click', function(){
+  $('.toggleMenu').on('click', function(){
       $('div.main_wrapper').toggleClass('collapsed');
       $('div.logo_serpro_50_anos').toggleClass('collapsed');
 

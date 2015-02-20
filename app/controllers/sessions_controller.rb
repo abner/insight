@@ -31,7 +31,7 @@ layout 'login_page'
     end
 
     if self.resource.nil?
-      flash[:error] = t 'sessions.create.failure'
+      flash[:error] = t 'devise.sessions.create.failure'
       return redirect_to new_session_path
     end
 

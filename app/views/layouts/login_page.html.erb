@@ -35,10 +35,11 @@
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
+    <%= javascript_include_tag "login" %>
+
   </head>
   <body>
     <div class="container">
-<%= bootstrap_flash %>
 <%= yield %>
     </div>
 </body>
