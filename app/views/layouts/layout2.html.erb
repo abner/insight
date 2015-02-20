@@ -53,7 +53,7 @@
   </head>
   <body>
 
-    <div id="wrapper" class="main_wrapper">
+    <%= wrapper_div do %>
 
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -170,7 +170,7 @@
         </div>
         <!-- /#page-wrapper -->
 
-    </div>
+    <% end %>
     <!-- /#wrapper -->
 
     <!-- jQuery -->
@@ -185,7 +185,7 @@
     <script src="js/plugins/morris/morris-data.js"></script-->
 
     <%= yield :body_end %>
-    <div class="logo_serpro_50_anos"></div>
+    <%= serpro_logo %>
 </body>
 
 </html>

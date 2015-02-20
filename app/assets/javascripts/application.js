@@ -30,6 +30,8 @@
 //= require nprogress-turbolinks
 //= require nprogress-ajax
 
+//= require cookies-1.2.1
+
 // #require_tree .
 
 
@@ -97,6 +99,8 @@ function init(){
   $('.toogleMenu').on('click', function(){
       $('div.main_wrapper').toggleClass('collapsed');
       $('div.logo_serpro_50_anos').toggleClass('collapsed');
+
+      Cookies.set('feedback_menu_collapsed', $('div.main_wrapper').hasClass('collapsed'));
   });
 
 }
