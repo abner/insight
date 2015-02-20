@@ -21,7 +21,7 @@
               <tbody>
                  <% @last_feedbacks.each do  |feedback| %>
                     <tr>
-                      <td><%= time_ago_in_words feedback.created_at %></td>
+                      <td><%= time_ago_in_words feedback.created_at if feedback.created_at%></td>
                       <td><%= feedback.user_application.name %></td>
                       <td><%= feedback.description %></td>
                     </tr>
