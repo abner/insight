@@ -10,7 +10,7 @@ class ProxyController < ApplicationController
     end
 
     begin
-      request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
+      #request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
       base64_img, ctype = download_image(image_url)
       img_data_src = build_data_img_src(base64_img, ctype)
       render :json => img_data_src.to_json, :callback => callback

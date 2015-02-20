@@ -103,6 +103,11 @@ function init(){
       Cookies.set('feedback_menu_collapsed', $('div.main_wrapper').hasClass('collapsed'));
   });
 
+  //handler de click nos screenshots
+  $(document).on('click', 'a.screenshot_link', null, function(){
+    alertify.alert('<img src="' + $(this).attr('href') + '" width="800" height="600"></img>').set('resizable',true).resizeTo(800,600).set('basic', true);
+    return false;
+  });
 }
 
 

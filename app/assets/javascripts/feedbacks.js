@@ -18,12 +18,6 @@ $('a').on('ajax:success', function(event, result, status, xhr) {
    }
 });
 
-$(document).on('ready page:change page:load', function(){
-  $('.screenshot_link').magnificPopup({
-    type:'image',
-    midClick: true //
-  });
-});
 
 $('a').on('ajax:error', function(xhr, status, error) {
    // insert the failure message inside the "#account_settings" element
