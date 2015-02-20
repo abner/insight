@@ -18,7 +18,7 @@ $('a').on('ajax:success', function(event, result, status, xhr) {
    }
 });
 
-$(document).on('ready page:change', function(){
+$(document).on('ready page:change page:load', function(){
   $('.screenshot_link').magnificPopup({
     type:'image',
     midClick: true //

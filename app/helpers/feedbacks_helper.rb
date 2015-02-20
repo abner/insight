@@ -19,7 +19,7 @@ module FeedbacksHelper
             url_for( "/" + value),
             :class => 'screenshot_link')
     elsif value.is_a? Time
-      l value, :format => '%d/%m/%y %H:%M'
+      l value.in_time_zone, :format => '%d/%m/%y %H:%M'
     else
       value.to_s
     end
