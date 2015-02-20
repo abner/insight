@@ -25,6 +25,7 @@ pt-BR:
   "All_male": "Ver todos"
   "No feedbacks registered yet": "Nenhum feedback registrado"
   Dashboard: Painel Principal
+  Dashboard_Reduced: Painel
   Configurations: Configurações
   Templates: Modelos de Formulários
   Application: 'Aplicação'
@@ -35,11 +36,15 @@ pt-BR:
   user_application:
     confirmation_question: 'Tem certeza que deseja excluir a aplicação?'
   feedback:
-    confirmation_question: Tem certeza que deseja arquivar o feedback?
+    archive_confirmation_question: Tem certeza que deseja arquivar o feedback?
+    unarchive_confirmation_question: Tem certeza que deseja desarquivar o feedback?
+    show_active_feedbacks: "Exibir Ativos"
+    show_archived_feedbacks: "Exibir Arquivados"
   "Application Info": "Dados da Aplicação"
   "User Applications": "Aplicações do Usuário"
   "Feedback Javascript Source": "Código Javascript"
   Archive: 'Arquivar'
+  Unarchive: 'Restaurar'
   Screenshot: 'Tela'
   remove_member: 'Remover'
   will_paginate:

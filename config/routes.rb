@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     resources :feedbacks do
       member do
         post 'archive' => 'feedbacks#archive'
+        post 'unarchive' => 'feedbacks#unarchive'
       end
     end
 

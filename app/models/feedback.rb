@@ -40,6 +40,12 @@ class Feedback
     self
   end
 
+  def unarchive!
+    self.active = true
+    self.save
+    self
+  end
+
   #validates_presence_of :text
 
   before_save :fill_automatic_fields

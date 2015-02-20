@@ -36,6 +36,7 @@ class Ability
         rules << :change_feedback_status
         rules << :comment_on_feedback
         rules << :archive_feedback
+        rules << :unarchive_feedback
       end
       rules
     end

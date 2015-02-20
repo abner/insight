@@ -4,55 +4,12 @@
       <h3 class="panel-title">Feedbacks</h3>
   </div>
   <div class="panel-body">
-      <div class="table-responsive">
-        <quote>Listados dos mais recentes para os mais antigos</quote>
-        <table id="feedbacks" class="table table-bordered table-hover table-striped" data-source="<%= user_application_feedbacks_url(:id=> params[:id], format: "json") %>">
-          <thead>
-            <tr>
-                <td colspan="<%= all_columns_for_collection(@feedbacks).count + 1 %>">
-                  <%= will_paginate @feedbacks, :class => 'apple_pagination' %>
-                </td>
-            </tr>
-            <tr>
-              <!-- <th>Id</th>
-              <th>Tipo Relato</th>
-              <th>Data</th>
-              <th>Texto</th>
-              <th>Captura de Tela</th> -->
-              <% all_columns_for_collection(@feedbacks).each do |column_name| %>
-                <%= content_tag :th, humanize_column(column_name) %>
-              <% end %>
-              <th><%= t 'Actions' %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @feedbacks.each do |feedback| %>
-              <tr>
-                <% all_columns_for_collection(@feedbacks).each do |column_name| %>
-                  <td><%= show_column_value(column_name, feedback.read_attribute(column_name)) %></td>
-                <% end %>
-                <td><%#= link_to t('Archive'), archive_user_application_feedback_path( @user_application, feedback), :remote => true, :method => :post, :data => {:type => 'json', :target_selector => 'a'} %>
-                  <%= link_to(
-                                        content_tag(:span, pad(t('Archive')), :class => 'fa fa-trash-o'),
-                                      archive_user_application_feedback_path(@user_application, feedback), :method=> 'POST', :remote => true, :data => {:confirm => t('feedback.confirmation_question'), :type => 'json', :target_selector => 'a'})  if current_user_can?(:archive_feedback, feedback)
-                                    %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-          <tfooter>
-          <tr>
-              <td colspan="<%= all_columns_for_collection(@feedbacks).count + 1%>">
-                <%= will_paginate @feedbacks, :class => 'apple_pagination' %>
-              </td>
-          </tr>
-          </tfooter>
-        </table>
+      <div id="feedbacks_table" class="table-responsive">
+        <%= render :partial => 'table' %>
       </div>
-      <%= will_paginate @feedbacks, :class => 'apple_pagination' %>
+
   </div>
 </div>
-
 
 <% content_for :body_end do %>
   <%= javascript_include_tag 'feedbacks' %>

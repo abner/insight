@@ -1,0 +1,46 @@
+<% if 'archived'.eql? @scope %>
+<%= link_to t('feedback.show_active_feedbacks'), url_for(user_application_feedbacks_path(@user_application,pagination_params)), :data => {:remote => true} %>
+<% else %>
+<%= link_to t('feedback.show_archived_feedbacks'), url_for(user_application_feedbacks_path(@user_application, pagination_params.merge(:scope => 'archived'))), :data => {:remote => true} %>
+<% end %>
+<p class="pull-right">Listados dos mais recentes para os mais antigos</p>
+<%#= will_paginate @feedbacks, :class => 'apple_pagination' %>
+<table id="feedbacks" class="table table-bordered table-hover table-striped" data-source="<%= user_application_feedbacks_url(:id=> params[:id], format: "json") %>">
+  <thead>
+    <tr>
+        <td colspan="<%= all_columns_for_collection(@feedbacks).count + 1 %>">
+          <%= will_paginate @feedbacks, :class => 'apple_pagination' %>
+        </td>
+    </tr>
+    <tr>
+      <!-- <th>Id</th>
+      <th>Tipo Relato</th>
+      <th>Data</th>
+      <th>Texto</th>
+      <th>Captura de Tela</th> -->
+      <% all_columns_for_collection(@feedbacks).each do |column_name| %>
+        <%= content_tag :th, humanize_column(column_name) %>
+      <% end %>
+      <th><%= t 'Actions' %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @feedbacks.each do |feedback| %>
+      <tr>
+        <% all_columns_for_collection(@feedbacks).each do |column_name| %>
+          <td><%= show_column_value(column_name, feedback.read_attribute(column_name)) %></td>
+        <% end %>
+        <td><%#= link_to t('Archive'), archive_user_application_feedback_path( @user_application, feedback), :remote => true, :method => :post, :data => {:type => 'json', :target_selector => 'a'} %>
+          <%= 'default'.eql?(@scope) ? link_to_archive(feedback) : link_to_unarchive(feedback) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfooter>
+  <tr>
+      <td colspan="<%= all_columns_for_collection(@feedbacks).count + 1%>">
+        <%= will_paginate @feedbacks, :class => 'apple_pagination' %>
+      </td>
+  </tr>
+  </tfooter>
+</table>
