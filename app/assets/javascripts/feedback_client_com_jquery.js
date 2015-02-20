@@ -1,4 +1,4 @@
-//= require jquery.js
+//require jquery.js #removido jquery
 //= require html2canvas.js
 //= require component/license.txt.js
 //= require component/pre.txt.js
