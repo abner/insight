@@ -233,7 +233,7 @@ GEM
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
-    omniauth-expressov3 (1.0.5)
+    omniauth-expressov3 (1.0.6)
       omniauth (~> 1.0)
     optionable (0.2.0)
     origin (2.1.1)

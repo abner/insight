@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   devise_scope :expresso_user do
     match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+    get '/auth/failure', to: 'sessions#omniauth_failure'
     get 'sign_out' => 'sessions#destroy'
   end
 

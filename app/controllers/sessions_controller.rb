@@ -13,6 +13,11 @@ layout 'login_page'
     end
   end
 
+  def omniauth_failure
+    flash[:error] = t 'devise.sessions.create.failure'
+    redirect_to '/sign_in'
+  end
+
   def destroy
     sign_out
     #set_flash_message :notice, :signed_out if sign_out && is_navigational_format?
