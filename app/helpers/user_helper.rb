@@ -5,11 +5,13 @@ module UserHelper
     if registered_user_signed_in?
       authenticate_registered_user!
     else
-      authenticate_ldap_user!
+      #authenticate_ldap_user!
+      authenticate_expresso_user!
     end
   end
 
   def current_user
-    current_ldap_user or current_registered_user
+    #current_ldap_user or current_registered_user
+    current_expresso_user or current_registered_user
   end
 end

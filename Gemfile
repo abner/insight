@@ -141,6 +141,8 @@ gem 'request_store', '~> 1.1.0'
 gem 'faraday'
 
 gem 'omniauth-expressov3'
+gem 'recursive-open-struct'
+
 
 #Forms for Bootstrap
 gem 'bootstrap_form'

@@ -8,7 +8,13 @@ Rails.application.routes.draw do
   #
   # get 'user_applications/destroy'
 
-  devise_for :registered_user, :ldap_users, skip: [ :sessions ]
+  devise_for :expresso_user, :registered_user, :ldap_users, skip: [ :sessions ]
+
+  devise_scope :expresso_user do
+    match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+    get 'sign_out' => 'sessions#destroy'
+  end
+
 
   devise_scope :ldap_user do
     root to: "sessions#new"
@@ -50,6 +56,7 @@ Rails.application.routes.draw do
   end
 
   get '/users/autocomplete', to: 'users#autocomplete', as: 'autocomplete_user'
+
 
 
   mount FeedbackServerAPI => '/api/'
