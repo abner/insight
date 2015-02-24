@@ -49,6 +49,8 @@ Rails.application.routes.draw do
      end
     resources :feedbacks do
       member do
+      delete 'destroy_comment' => 'feedbacks#destroy_comment'
+        post 'add_comment' => 'feedbacks#add_comment'
         post 'archive' => 'feedbacks#archive'
         post 'unarchive' => 'feedbacks#unarchive'
       end

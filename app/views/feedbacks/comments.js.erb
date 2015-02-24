@@ -1,0 +1,5 @@
+var selector = '<%= "#feedback_detail_#{@feedback.id.to_s} .comment_column" %>';
+$(selector).fadeOut(200 , function(){
+  $(selector).html("<%= escape_javascript (render partial: 'comment_panel', :locals => {:feedback => @feedback}) %>");
+  $(selector).fadeIn(350);
+});

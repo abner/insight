@@ -20,6 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 pt-BR:
+  Details: Detalhes
+  close: Fechar
+  Comments: Comentários
   "Recents Feedbacks": Feedbacks recentes
   "All": "Ver todas"
   "All_male": "Ver todos"
@@ -36,6 +39,13 @@ pt-BR:
   user_application:
     confirmation_question: 'Tem certeza que deseja excluir a aplicação?'
   feedback:
+    detail_panel:
+      title: 'Dados do Feedback'
+    comment:
+      destroy_confirm: 'Tem certeza que deseja excluir esse comentário?'
+      remove_tooltip: 'Clique para excluir o comentário'
+      placeholder: 'Digite aqui o seu comentário'
+      send: 'Enviar'
     archive_confirmation_question: Tem certeza que deseja arquivar o feedback?
     unarchive_confirmation_question: Tem certeza que deseja desarquivar o feedback?
     show_active_feedbacks: "Exibir Ativos"

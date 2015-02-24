@@ -1,12 +1,20 @@
 module FeedbacksHelper
 
+  def all_columns_for feedback
+    columns = feedback.columns.collect {|c| c[:key] }
+    columns.delete 'comments'
+    columns
+  end
+
   def all_columns_for_collection(collection)
     arr_column_names = collection.map do |f|
         f.columns.collect {|c| c[:key] }
     end
     result = arr_column_names.flatten!
     return [] if result.nil?
-    result.uniq.nil? ? result : result.uniq
+    result = result.uniq.nil? ? result : result.uniq
+    result.delete 'comments'
+    result
   end
 
   def show_column_value(column_name, value)
@@ -52,7 +60,8 @@ module FeedbacksHelper
         :method=> 'POST', :remote => true, :data => {:confirm => t('feedback.archive_confirmation_question'),
         :type => 'script', :target_selector => 'a'}
         ) do
-          content_tag(:span, pad(t('Archive')), :class => 'fa fa-trash-o')
+            raw("<i class='fa fa-trash-o'></i>") +
+            content_tag(:span, pad(t('Archive')))
         end
     end
   end
@@ -67,5 +76,9 @@ module FeedbacksHelper
           content_tag(:span, pad(t('Unarchive')), :class => 'fa fa-trash-o')
         end
     end
+  end
+
+  def id_for_panel_feedback_detail feedback
+    "feedback_detail_#{feedback.id}"
   end
 end

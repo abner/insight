@@ -1,0 +1,10 @@
+
+<ul class="comments_list">
+  <% feedback.comments.all.sort(:created_at => -1).each_with_index do |comment, i| %>
+    <% if i == 0 || i %2 ==0 %>
+      <%= render partial: 'left_comment', :locals => {:comment => comment, :feedback => feedback} %>
+    <% else %>
+      <%= render partial: 'right_comment', :locals => {:comment => comment, :feedback => feedback}  %>
+    <% end %>
+  <% end %>
+</ul>

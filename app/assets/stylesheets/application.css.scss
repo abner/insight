@@ -37,6 +37,7 @@ pre {
   height: 80px;
 }
 
+
 @media(min-width:768px) {
   #nprogress .spinner {
     top: 55px;
@@ -44,15 +45,37 @@ pre {
   }
 }
 
-#wrapper.collapsed #nprogress .spinner {
-  top: 14px;
-  left: 15px
-}
+// #wrapper.collapsed #nprogress .spinner {
+//   top: 14px;
+//   left: 15px
+// }
+//
+// #nprogress .spinner {
+//   top: 14px;
+//   left: 5px
+// }
+
 
 #nprogress .spinner {
-  top: 14px;
-  left: 5px
+  z-index: 9999;
+  left: 0;
+  right: 0;
+  top: 3px;
+  bottom: 0;
+  margin: 0 0;
+  width: 100%;
+  height:100%;
+  background-color:lightblue;
+  opacity: 0.3;
+  padding: 0px;
 }
+
+#nprogress .spinner-icon {
+   height:332px;
+   width:332px;
+   margin: 0 auto  0 auto;
+   display: none;
+ }
 
 .preview_source {
 	background-color: #ebf8ff;
@@ -61,4 +84,43 @@ pre {
 
 *:focus {
     outline: 0 !important;
+}
+
+.feedback_detail {
+  display: none;
+}
+
+a.close_panel, a.feedback_detail_link, tr.feedback_line {
+  cursor: pointer;
+}
+
+.table-hover > tbody > tr.feedback_line:hover {
+  background-color: #E0E7EA;
+}
+
+.comments_list {
+    list-style: outside none none;
+    padding-left: 0px;
+}
+.comments_list li {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #999;
+}
+
+.comments_list li.left .chat-body {
+    margin-left: 60px;
+}
+
+.comments_list li.right .chat-body {
+    margin-right: 60px;
+}
+
+.comments_list li .chat-body p {
+    margin: 0px;
+}
+
+.comment-panel .panel-body {
+    height: 150px;
+    overflow-y: scroll;
 }

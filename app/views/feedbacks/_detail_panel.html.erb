@@ -1,0 +1,31 @@
+<div class="panel panel-default" >
+  <div class="panel-heading">
+      <span class="panel-title"><i class='fa fa-info-circle fa-fw'></i><%= t('feedback.detail_panel.title') %></span>
+      <span class="pull-right">
+        <%= content_tag :a, :class => 'close_panel', :data => {:feedback => feedback.id} do %>
+          <i class="fa fa-times"></i>
+        <% end %>
+      </span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-lg-7">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <% all_columns_for(feedback).each do |column_name| %>
+              <label class="col-sm-3 control-label"><%= column_name.humanize %></label>
+              <div class="col-sm-9">
+                <p class="form-control-static"><%= show_column_value(column_name, feedback.read_attribute(column_name)) %></p>
+              </div>
+            <% end %>
+
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-5 comment_column">
+        <%= render :partial => 'comment_panel', :locals => { :feedback =>  feedback} %>
+      </div>
+    </div>
+  </div>
+
+</div>

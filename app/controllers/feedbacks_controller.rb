@@ -38,6 +38,13 @@ class FeedbacksController < ProtectedController
           render json: respond_error_json(:message => e.message ,:object => @feedback), :content_type => 'application/javascript'
         end
       end
+      format.js do
+        @feedback = feedback_from_params
+        @feedback.comments.create(:user => current_user, :text => params[:comment][:text])
+        @feedback.save!
+        @comment = Comment.new
+        render :comments
+      end
     end
   end
 
@@ -52,6 +59,11 @@ class FeedbacksController < ProtectedController
         rescue Exception => e
           render json: respond_error_json(:message => e.message ,:object => @feedback), :content_type => 'application/javascript'
         end
+      end
+      format.js do
+        @feedback = feedback_from_params
+        @feedback.comments.find(params[:comment_id]).destroy()
+        render :comments
       end
     end
   end
