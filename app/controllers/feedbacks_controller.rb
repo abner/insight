@@ -53,6 +53,7 @@ class FeedbacksController < ProtectedController
           render json: respond_error_json(:message => e.message ,:object => @feedback), :content_type => 'application/javascript'
         end
       end
+    end
   end
 
   def archive
