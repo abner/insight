@@ -34,6 +34,9 @@
           <%= 'default'.eql?(@scope) ? link_to_archive(feedback) : link_to_unarchive(feedback) %>
         </td>
       </tr>
+      <%= content_tag :tr, :id => "feedback_detail_#{feedback.key}"> do
+        
+      <% end %>
     <% end %>
   </tbody>
   <tfooter>
