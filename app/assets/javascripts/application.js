@@ -133,4 +133,6 @@ $.extend(true, $.magnificPopup.defaults, {
   }
 })
 
+NProgress.configure({ parent: '#page-wrapper' });
+
 //Turbolinks.enableProgressBar();

@@ -66,8 +66,6 @@ gem "twitter-bootstrap-rails"
 
 #gem 'noty-rails'
 
-gem "i18n-js", ">= 3.0.0.rc8"  #i18n for javascripts
-
 group :development do
   gem 'rails_layout'
   gem 'pry-rails'
@@ -102,6 +100,7 @@ gem 'devise-i18n-views'
 
 #rails internalizations
 gem 'rails-i18n', '~> 4.0.0'
+gem "i18n-js", ">= 3.0.0.rc8"  #i18n for javascripts
 
 gem 'net-ldap',  '~> 0.3.1'
 

@@ -37,9 +37,21 @@ pre {
   height: 80px;
 }
 
+@media(min-width:768px) {
+  #nprogress .spinner {
+    top: 55px;
+    left: 235px
+  }
+}
+
+#wrapper.collapsed #nprogress .spinner {
+  top: 14px;
+  left: 15px
+}
+
 #nprogress .spinner {
-  top: 55px;
-  left: 235px
+  top: 14px;
+  left: 5px
 }
 
 .preview_source {
