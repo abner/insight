@@ -13,8 +13,8 @@
         <form class="form-horizontal">
           <div class="form-group">
             <% all_columns_for(feedback).each do |column_name| %>
-              <label class="col-sm-3 control-label"><%= column_name.humanize %></label>
-              <div class="col-sm-9">
+              <label class="col-sm-4 control-label"><%= column_name.humanize %></label>
+              <div class="col-sm-8">
                 <p class="form-control-static"><%= show_column_value(column_name, feedback.read_attribute(column_name)) %></p>
               </div>
             <% end %>
