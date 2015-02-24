@@ -124,3 +124,11 @@ a.close_panel, a.feedback_detail_link, tr.feedback_line {
     height: 150px;
     overflow-y: scroll;
 }
+
+.comments_list pre {
+  background-color: #fefefe;
+}
+
+.comments_list li.right .chat-body pre {
+    text-align: right;
+}
