@@ -46,6 +46,8 @@ module FeedbackServer
     #config.middleware.use Rack::Deflater, :if => lambda { |env, status, headers, body| /\/proxy/.match(env["PATH_INFO"]) }
     config.middleware.use Rack::Deflater
 
+  
+
     config.middleware.use Rack::Cors do
       allow do
         origins '*'

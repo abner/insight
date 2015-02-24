@@ -12,6 +12,49 @@ class FeedbacksController < ProtectedController
     end
   end
 
+  def comments
+    begin
+      @feedback = feedback_from_params
+      @comments = @feedback.comments
+      respond_to do |format|
+        format.js {}
+        format.html {}
+        format.json { render :json =>  respond_success_json(:object => @comments) }
+      end
+    rescue Exception => ex
+
+    end
+  end
+
+  def add_comment
+    respond_to do |format|
+      format.json do
+        begin
+          @feedback = feedback_from_params
+          @comment = @feedback.comments.create(:user => current_user, :text => params[:comment][:text])
+          @feedback.save!
+          render :json => respond_success_json(:object => @comment)
+        rescue Exception => e
+          render json: respond_error_json(:message => e.message ,:object => @feedback), :content_type => 'application/javascript'
+        end
+      end
+    end
+  end
+
+  def destroy_comment
+    respond_to do |format|
+      format.json do
+        begin
+          @feedback = feedback_from_params
+          @comment = @feedback.comments.find(params[:comment_id])
+          @comment.destroy
+          render :json => respond_success_json(:object => @comment)
+        rescue Exception => e
+          render json: respond_error_json(:message => e.message ,:object => @feedback), :content_type => 'application/javascript'
+        end
+      end
+  end
+
   def archive
     @feedback = nil
     @scope = 'default'

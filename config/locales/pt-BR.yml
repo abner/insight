@@ -82,6 +82,8 @@ pt-BR:
     sessions:
       user:
         signed_in: 'Usuário logado com sucesso'
+      expresso_user:
+        success: 'Usuário logado com sucesso'
     registrations:
       registered_user:
         signed_up: 'Seja bem vindo ao serviço de feedback. Obrigado por se registrar'
@@ -157,6 +159,8 @@ pt-BR:
       signed_out: 'Saiu com sucesso.'
       create:
           failure: 'Erro na autenticação. Verifique se o nome de usuário (CPF) ou senha estão corretos'
+      expresso_user:
+        success: 'Login efetuado com sucesso!'
     unlocks:
       send_instructions: 'Dentro de minutos, você receberá um email com instruções para o desbloqueio da sua conta.'
       send_paranoid_instructions: 'Se sua conta existir, você receberá um e-mail com instruções para desbloqueá-la em alguns minutos.'

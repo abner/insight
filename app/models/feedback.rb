@@ -25,6 +25,8 @@ class Feedback
 
   scope :archived, -> { where(active: false) }
 
+  embeds_many :comments
+
   #pagination definition
   def self.per_page
     10
