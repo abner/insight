@@ -18,7 +18,7 @@ module FeedbacksHelper
   end
 
   def show_column_value(column_name, value)
-    return '' if value.nil?
+    return raw '&nbsp;' if value.nil?
     #puts "Tipo: #{value.class.name} - value: #{value}"
     if 'screenshot_path'.eql?(column_name)
       #tag 'img', :src => "/" + url_for(value), :width => 150, height: 80
