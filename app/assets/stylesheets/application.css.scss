@@ -127,8 +127,12 @@ a.close_panel, a.feedback_detail_link, tr.feedback_line {
 
 .comments_list pre {
   background-color: #fefefe;
+  white-space: pre-wrap;
+  word-break: normal;
+  width: 100%;
 }
 
 .comments_list li.right .chat-body pre {
     text-align: right;
+
 }
