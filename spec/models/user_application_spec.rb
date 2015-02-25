@@ -4,6 +4,7 @@ RSpec.describe UserApplication, :type => :model do
 
   before :each do
     I18n.locale = :en
+    DataSetup.run!
   end
 
   let(:valid_factory) do
@@ -11,6 +12,18 @@ RSpec.describe UserApplication, :type => :model do
     # not necessary FactoryGirl.lint on support/factory_girl validates all factories
     # user_application.valid?
     user_application
+  end
+
+  context 'create' do
+    let(:created) do
+      user_app = valid_factory
+      user_app.save!
+      user_app
+    end
+    it 'has a default form after created' do
+      expect(created.feedback_forms.count).to eq(1)
+      expect(created.default_feedback_form).to eq(FeedbackFormTemplate.default_template_name)
+    end
   end
 
   #let!(:token_format) { /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i }

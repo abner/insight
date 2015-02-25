@@ -15,7 +15,7 @@ class UserApplication
 
   has_many :feedback_forms, :class_name => 'FeedbackForm'
 
-  field :default_feedback_name, type: String
+  field :default_feedback_form, type: String
 
   #has_many :members, :class_name => 'User'
 
@@ -68,7 +68,7 @@ class UserApplication
   end
 #protected
   def set_default_form feedback_form
-    write_attribute(:default_feedback_name, feedback_form.name)
+    write_attribute(:default_feedback_form, feedback_form.name)
   end
 
   def create_default_form!
