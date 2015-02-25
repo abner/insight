@@ -1,17 +1,21 @@
 <li class="right clearfix">
   <span class="chat-img pull-right">
+    <% if comment.user %>
       <img src="/images/50x50_red.gif" alt="<%= comment.user.name %>" class="img-circle">
+    <% end %>
   </span>
   <div class="chat-body clearfix">
       <div class="header">
           <strong class="primary-font pull-right"><%= comment.user.name %></strong>
           <small class="text-muted">
               <i class="fa fa-clock-o fa-fw"></i> <%= time_ago_in_words comment.created_at %>
-              <%= link_to  destroy_comment_user_application_feedback_path(@user_application, feedback, :comment_id => comment.id),
-                :method => 'delete',
-                :data => {:confirm => t('feedback.comment.destroy_confirm'),:remote => true, 'original-title' => t('feedback.comment.remove_tooltip'), :toggle =>"tooltip", :placement => "top"} do %>
+              <%= if  current_user_can?(:remove_comment, comment)
+                link_to  destroy_comment_user_application_feedback_path(@user_application, feedback, :comment_id => comment.id),
+                  :method => 'delete',
+                  :data => {:confirm => t('feedback.comment.destroy_confirm'),:remote => true, 'original-title' => t('feedback.comment.remove_tooltip'), :toggle =>"tooltip", :placement => "top"} do %>
                   <i class="fa fa-minus fa-fw" alt='<%= t('feedback.comment.remove') %>'></i>
-              <% end %>
+              <% end
+              end %>
           </small>
       </div>
       <pre><%= comment.text %></pre>

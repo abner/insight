@@ -31,4 +31,7 @@ module ApplicationHelper
     content_tag :div, '', :class => css_class
   end
 
+  def layout(layout_name)
+    controller.class.send(:layout, layout_name)
+  end
 end

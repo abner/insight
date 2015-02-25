@@ -72,6 +72,10 @@ group :development do
   gem 'guard-rspec', :require => false
 end
 
+group :development, :test do
+  gem 'debugger'
+end
+
 group :test do
   # clean database before tests
   gem 'database_cleaner', "~> 1.4"

@@ -10,6 +10,10 @@ class UserApplication
 
   has_and_belongs_to_many :members, :class_name => 'User', inverse_of: :memberships
 
+  has_many :feedback_forms, :class_name => 'FeedbackForm'
+
+  field :default_feedback_name, type: String
+
   #has_many :members, :class_name => 'User'
 
   slug :name, history: true, scope: :owner

@@ -48,7 +48,7 @@ class Ability
         rules << :read_comment
       end
 
-      if user.owns?(comment)
+      if user.eql?(comment.user)
         rules << :remove_comment
         rules << :write_comment
       end

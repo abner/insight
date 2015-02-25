@@ -1,21 +1,31 @@
+<% layout('login_page') %>
+<style>
+body {
+
+}
+</style>
 <h2><%= t('.sign_up', :default => "Sign up") %></h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= bootstrap_form_for(resource, :as => resource_name, :url => registration_path(resource_name),:html => {:class => 'form-signin'}) do |f| %>
+<h2 class="form-signin-heading">Feedback para Aplicações Web</h2>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
+  <div>
   <%= f.email_field :email %></div>
 
-  <div><%= f.label :username %><br />
+  <div>
   <%= f.text_field :username %></div>
 
-  <div><%= f.label :password %><br />
+  <div>
   <%= f.password_field :password %></div>
 
-  <div><%= f.label :password_confirmation %><br />
+  <div>
   <%= f.password_field :password_confirmation %></div>
 
   <div><%= f.submit t('.sign_up', :default => "Sign up") %></div>
+  <%= render "devise/shared/links" %>
 <% end %>
 
-<%= render "devise/shared/links" %>
+
+
+<div class="logo_serpro_50_anos"></div>
