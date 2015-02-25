@@ -1,12 +1,19 @@
+<% layout('login_page') %>
+
 <h2><%= t('.forgot_your_password', :default => 'Forgot your password?') %></h2>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+<%= bootstrap_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => 'form-signin' }) do |f| %>
+  <h2 class="form-signin-heading">Feedback para Aplicações Web</h2>
+  <h5 class="form-signin-heading">Esquecí minha senha</h5>
+
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
+  <div>
   <%= f.email_field :email %></div>
 
   <div><%= f.submit t('.send_me_reset_password_instructions', :default => "Send me reset password instructions") %></div>
+
+  <%= render "devise/shared/links" %>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<div class="logo_serpro_50_anos"></div>
