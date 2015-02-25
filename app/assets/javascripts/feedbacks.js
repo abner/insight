@@ -19,12 +19,24 @@ $('a').on('ajax:success', function(event, result, status, xhr) {
 });
 
 
-$('a').on('ajax:error', function(xhr, status, error) {
+$('a').on('ajax:error', function(evt, xhr, error, dta) {
    // insert the failure message inside the "#account_settings" element
-   $('#ajax_error_alert p.errorMessage').html(error);
-   $('#ajax_error_alert').show();
+   //$('#ajax_error_alert p.errorMessage').html(error);
+   //$('#ajax_error_alert').show();
+   alertify.notify('Erro na requisição: ' + error, 'error',0);
 //   console.log(error);
  });
+
+ //$(document).on('ajax:error', function(event, xhr, error_msg, error_obj) {
+
+   //var data = status.
+
+   // insert the failure message inside the "#account_settings" element
+   //$('#ajax_error_alert p.errorMessage').html(error);
+   //$('#ajax_error_alert').show();
+   //alertify.notify('Erro na requisição: ' + error, 'error',0);
+   //   console.log(error);
+ //});
 
 
 $(document).on('click', '.feedback_detail a.close_panel', null, function(){
@@ -43,6 +55,13 @@ $(document).on('click','.comment_form span.submit', null, function(){
   } else {
       var form = $(this).parents('form.comment_form')[0];
       $('<input type="submit">').hide().appendTo(form).click().remove();
+  }
+});
+
+$(document).on('keypress', 'form.comment_form textarea', null, function(e){
+  if (e.ctrlKey && (e.keyCode == 13 || e.keyCode == 10)) {
+    var form = $(this).closest('form')[0];
+    $('<input type="submit">').hide().appendTo(form).click().remove();
   }
 });
 

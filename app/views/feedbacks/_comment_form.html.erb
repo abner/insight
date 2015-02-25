@@ -5,7 +5,7 @@
 <div class="input-group">
   <%= f.text_area :text, :class=>"form-control custom-control", :required => true, :placeholder =>  t('feedback.comment.placeholder'), hide_label: true %>
   <span class="submit input-group-addon btn">
-      <%= t('feedback.comment.send') %>
+      <%= link_to  t('feedback.comment.send'), 'javascript:;' %>
   </span>
 </div>
 <% end %>
