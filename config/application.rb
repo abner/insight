@@ -46,7 +46,11 @@ module FeedbackServer
     #config.middleware.use Rack::Deflater, :if => lambda { |env, status, headers, body| /\/proxy/.match(env["PATH_INFO"]) }
     config.middleware.use Rack::Deflater
 
-  
+    config.to_prepare do
+        Devise::SessionsController.layout proc{ |controller| action_name == 'new' ? "login_page"   : "layout2" }
+        Devise::RegistrationsController.layout proc{ |controller| action_name == 'new' ? "login_page"   : "layout2" }
+        Devise::PasswordsController.layout proc{ |controller| action_name == 'new' ? "login_page"   : "layout2" }
+    end
 
     config.middleware.use Rack::Cors do
       allow do

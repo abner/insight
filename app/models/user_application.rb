@@ -4,6 +4,9 @@ class UserApplication
 
   include Tokenable
 
+  after_create :create_default_form!
+
+
   field :name, type: String
 
   belongs_to :owner, :class_name => 'User', inverse_of: :user_applications, :foreign_key => 'owner_id'
@@ -60,7 +63,25 @@ class UserApplication
     User.by_username_or_email(username_filter) & User.where(:username.nin => already_members_filter)
   end
 
-  # def to_param
-  #    URI.escape(name)
-  # end
+  def default_form
+    feedback_forms.where(:name => default_feedback_name).first
+  end
+#protected
+  def set_default_form feedback_form
+    write_attribute(:default_feedback_name, feedback_form.name)
+  end
+
+  def create_default_form!
+    begin
+      #creates a form using FeedbackFormTemplate.default_template as base
+      form_attributes = FeedbackFormTemplate.default_template.attributes_template
+      form = feedback_forms.create! form_attributes
+      #set as default form for this user_application
+      set_default_form form
+    rescue
+      self.destroy
+      raise 'Error creating application'
+    end
+  end
+
 end

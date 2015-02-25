@@ -7,4 +7,15 @@ class FeedbackFormTemplate
 
   validates_presence_of :name
 
+  def self.default_template
+    where(name: default_template_name).first
+  end
+
+  def self.default_template_name
+    'relato_ou_sugestao'
+  end
+
+  def attributes_template
+    self.attributes.except('_id')
+  end
 end
