@@ -39,11 +39,17 @@ class FeedbacksController < ProtectedController
         end
       end
       format.js do
-        @feedback = feedback_from_params
-        @feedback.comments.create(:user => current_user, :text => params[:comment][:text])
-        @feedback.save!
-        @comment = Comment.new
-        render :comments
+        begin
+          @feedback = feedback_from_params
+          @feedback.comments.create(:user => current_user, :text => params[:comment][:text])
+          @feedback.save!
+          @comment = Comment.new
+          render :comments
+        rescue Exception => e
+          @error_message = e.message
+          @controller_action = "feedbacks##{action_name}"
+          render :comment_error
+        end
       end
     end
   end

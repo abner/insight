@@ -136,3 +136,16 @@ a.close_panel, a.feedback_detail_link, tr.feedback_line {
     text-align: right;
 
 }
+
+form.comment_form .btn a:focus {
+  text-decoration: underline;
+}
+
+form.comment_form .btn a {
+  height: 100%;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+  padding: 0px;
+  margin: 0px;
+}

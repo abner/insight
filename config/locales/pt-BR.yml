@@ -44,7 +44,9 @@ pt-BR:
     comment:
       destroy_confirm: 'Tem certeza que deseja excluir esse comentário?'
       remove_tooltip: 'Clique para excluir o comentário'
-      placeholder: 'Digite aqui o seu comentário'
+      placeholder: |
+                    Digite aqui o seu comentário
+                    Ctrl+Enter para enviar sem o uso do mouse
       send: 'Enviar'
     archive_confirmation_question: Tem certeza que deseja arquivar o feedback?
     unarchive_confirmation_question: Tem certeza que deseja desarquivar o feedback?
