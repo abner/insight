@@ -64,7 +64,7 @@ class UserApplication
   end
 
   def default_form
-    feedback_forms.where(:name => default_feedback_name).first
+    feedback_forms.where(:name => default_feedback_form).first
   end
 #protected
   def set_default_form feedback_form
@@ -78,6 +78,7 @@ class UserApplication
       form = feedback_forms.create! form_attributes
       #set as default form for this user_application
       set_default_form form
+      save!
     rescue
       self.destroy
       raise 'Error creating application'
