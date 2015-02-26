@@ -32,12 +32,26 @@ pt-BR:
   Configurations: Configurações
   Templates: Modelos de Formulários
   Application: 'Aplicação'
+  Forms: 'Formulários'
   alertify:
     Confirmation: 'Confirmação'
     OK: 'OK'
     Cancel: 'Cancelar'
   user_application:
     confirmation_question: 'Tem certeza que deseja excluir a aplicação?'
+  feedback_form:
+    button:
+      new_form: 'Incluir Formulário'
+    form_group:
+      plugins: Plugins
+    table_columns:
+      name: Nome
+      actions: Ações
+    page_title:
+      index: 'Formulários de Feedback'
+      new:   'Novo Formulário de Feedback'
+      show:  'Formulário de Feedback'
+      edit:  'Alteração no Formulário de Feedback'
   feedback:
     detail_panel:
       title: 'Dados do Feedback'
@@ -101,7 +115,7 @@ pt-BR:
         signed_up: 'Seja bem vindo ao serviço de feedback. Obrigado por se registrar'
   helpers:
 
-  activemodel:
+  mongoid:
     attributes:
       user:
         name: 'Nome'
@@ -109,6 +123,10 @@ pt-BR:
         password: 'Senha'
       user_application:
         name: 'Nome'
+      feedback_form:
+        name: 'Nome'
+        grid_columns: 'Colunas no Grid'
+        detail_columns: 'Coluna em Detalhes'
     errors:
       models:
         user_application:

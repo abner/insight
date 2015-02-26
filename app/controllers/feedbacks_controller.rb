@@ -110,6 +110,13 @@ protected
   def list_feedbacks
     @user_application = current_user.my_apps.find(params[:user_application_id])
 
+    if params[:feedback_form_id]
+      @feedback_form = @user_application.feedback_forms.find(params[:feedback_form_id])
+    else
+      @feedback_form = nil
+    end
+
+
     @page = params[:page] || 1
     @per_page = params[:per_page] || Feedback.per_page
 
@@ -117,15 +124,21 @@ protected
 
     feedbacks = []
 
+    if @feedback_form
+      feedbacks_relation = @feedback_form.feedbacks
+    else
+      feedbacks_relation = @user_application.feedbacks
+    end
+
     if 'default'.eql? @scope
-      feedbacks = @user_application.feedbacks.order(server_date_time: 'DESC').paginate(page: @page, per_page: @per_page)
+      feedbacks = feedbacks_relation.order(server_date_time: 'DESC').paginate(page: @page, per_page: @per_page)
       if feedbacks.empty?
-        feedbacks = @user_application.feedbacks.order(server_date_time: 'DESC').paginate(page: 1, per_page: @per_page)
+        feedbacks = feedbacks_relation.order(server_date_time: 'DESC').paginate(page: 1, per_page: @per_page)
       end
     elsif 'archived'.eql? @scope
-      feedbacks = @user_application.feedbacks.archived.order(server_date_time: 'DESC').paginate(page: @page, per_page: @per_page)
+      feedbacks = feedbacks_relation.archived.order(server_date_time: 'DESC').paginate(page: @page, per_page: @per_page)
       if feedbacks.empty?
-        feedbacks = @user_application.feedbacks.archived.order(server_date_time: 'DESC').paginate(page: 1, per_page: @per_page)
+        feedbacks = feedbacks_relation.archived.order(server_date_time: 'DESC').paginate(page: 1, per_page: @per_page)
       end
     end
 

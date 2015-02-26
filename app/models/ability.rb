@@ -9,6 +9,7 @@ class Ability
       when "UserApplication" then user_application_abilities(user, subject)
       when "Feedback" then feedback_abilities(user, subject)
       when "Comment" then comment_abilities(user, subject)
+      when "FeedbackForm" then feedback_form_abilities(user, subject)
       else []
       end
     end
@@ -18,7 +19,10 @@ class Ability
 
       if user.is_member?(user_application) or user.owns?(user_application)
         rules << :read_user_application
+        rules << :list_feedback_forms
+        rules << :create_feedback_form
       end
+
 
       if(user.owns?(user_application))
         rules << :write_user_application
@@ -26,6 +30,15 @@ class Ability
         rules << :admin_team_members
       end
 
+      rules
+    end
+
+    def feedback_form_abilities(user, feedback_form)
+      rules = []
+      if user.is_member?(feedback_form.user_application) or user.owns?(feedback_form.user_application)
+        rules << :read_feedback_form
+        rules << :write_feedback_form
+      end
       rules
     end
 

@@ -19,16 +19,9 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-lg-8">
+        <%= bootstrap_form_tag do |f| %>
         <div class="form-group">
           <label>Nome:</label> <%= @user_application.name %>
-        </div>
-        <div class="form-group">
-          <h5>Grid Columns</h5>
-          <% @user_application.default_form.feedback_attributes.each do |attribute| %>
-            <div class="form-control">
-              <%= bootstrap_checkbox_tag 'attributes[]', :value => attribute.name %>
-            </div>
-          <% end %>
         </div>
         <div class="form-group">
            <%= link_to_if(
@@ -38,6 +31,7 @@
             end
             %>
         </div>
+        <% end %>
       </div>
       <div class="col-lg-4">
         <%= link_to(

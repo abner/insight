@@ -47,8 +47,8 @@
                               user_application_path(user_application), :method=> 'DELETE', :data => {:confirm => translate('user_application.confirmation_question')}) if current_user_can?(:remove_user_application, user_application)
                             %>
                         <%= link_to(
-                            content_tag(:span, pad(translate('Feedbacks')) + " ", :class => 'fa fa-comment-o'),
-                            user_application_feedbacks_path(user_application))%>
+                            content_tag(:span, pad(translate('Forms')) + " ", :class => 'fa fa-plus-o'),
+                            user_application_feedback_forms_path(user_application))%>
                       </td>
                     </tr>
                  <% end %>

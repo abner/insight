@@ -9,5 +9,9 @@ class FeedbackAttribute
   field :required, type: Boolean, default: false
 
   embedded_in :feedback_form
-  
+
+  def label
+    display_label.present? ?  display_label : name.humanize
+  end
+
 end

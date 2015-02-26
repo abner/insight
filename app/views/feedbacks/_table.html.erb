@@ -5,7 +5,7 @@
 <% end %>
 <p class="pull-right">Listados dos mais recentes para os mais antigos</p>
 <%#= will_paginate @feedbacks, :class => 'apple_pagination' %>
-<table id="feedbacks" class="table table-bordered table-hover table-striped" data-source="<%= user_application_feedbacks_url(:id=> params[:id], format: "json") %>">
+<table id="feedbacks" class="table table-bordered table-hover table-responsive table-striped" data-source="<%= user_application_feedbacks_url(:id=> params[:id], format: "json") %>">
   <thead>
     <tr>
         <td colspan="<%= all_columns_for_collection(@feedbacks).count + 1 %>">

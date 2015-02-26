@@ -4,7 +4,8 @@ class Feedback
   include Mongoid::Timestamps::Created
 
   belongs_to :user_application
-
+  belongs_to :feedback_form
+  
   field :server_date_time, type: DateTime
 
   field :screenshot_path

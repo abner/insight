@@ -24,7 +24,7 @@ protected
 
   def authorize!(action, subject)
     if Ability.abilities.allowed?(current_user, action, subject)
-      yield
+      yield if block_given?
     else
       return access_denied!
     end
