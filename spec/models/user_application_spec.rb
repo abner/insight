@@ -22,7 +22,7 @@ RSpec.describe UserApplication, :type => :model do
     end
     it 'has a default form after created' do
       expect(created.feedback_forms.count).to eq(1)
-      expect(created.default_feedback_form).to eq(FeedbackFormTemplate.default_template_name)
+      expect(created.default_feedback_form.name).to eq(FeedbackFormTemplate.default_template_name)
     end
   end
 
@@ -54,7 +54,7 @@ RSpec.describe UserApplication, :type => :model do
   end
 
   it 'not allow store user_applications with same name' do
-    owner = FactoryGirl.create(:user)
+    owner = FactoryGirl.create(:registered_user)
     user_application1 = FactoryGirl.build(:user_application, :owner => owner)
     user_application2 = FactoryGirl.build(:user_application, :owner => owner)
 
@@ -71,7 +71,7 @@ RSpec.describe UserApplication, :type => :model do
   end
 
   it 'not allow store user_applications with same token' do
-    owner = FactoryGirl.create(:user)
+    owner = FactoryGirl.create(:registered_user)
     user_application1 = FactoryGirl.build(:user_application, :owner => owner)
     user_application2 = FactoryGirl.build(:user_application, :name => 'another_user_application', :owner => owner)
 

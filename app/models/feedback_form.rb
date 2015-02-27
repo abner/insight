@@ -1,6 +1,11 @@
 class FeedbackForm
   include Mongoid::Document
   include Mongoid::Slug
+  # Mongoid Paranoia adds soft delete to model
+  # - destroy will set deleted_at to current_time
+  # - models with deleted_at defined will be ignored on default scope
+  # - deleted scope is added to allow list deleted instances
+  include Mongoid::Paranoia
 
   field :name, type: String
 

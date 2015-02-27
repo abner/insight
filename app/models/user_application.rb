@@ -2,34 +2,43 @@ class UserApplication
   include Mongoid::Document
   include Mongoid::Slug
 
+  # Mongoid Paranoia adds soft delete to model
+  # - destroy will set deleted_at to current_time
+  # - models with deleted_at defined will be ignored on default scope
+  # - deleted scope is added to allow list deleted instances
+  include Mongoid::Paranoia
+
   include Tokenable
 
+  # callbacks
   after_create :create_default_form!
 
-
+  # fields
   field :name, type: String
 
-  belongs_to :owner, class_name: 'User', inverse_of: :user_applications, foreign_key: 'owner_id'
-
-  has_and_belongs_to_many :members, class_name: 'User', inverse_of: :memberships
-
-  has_many :feedback_forms, class_name: 'FeedbackForm', inverse_of: :user_application, foreign_key: 'user_application_id'
-
   field :default_feedback_form_id, type: String
-  #belongs_to :default_feedback_form, class_name: 'FeedbackForm'
 
-  #has_many :members, :class_name => 'User'
-
+  # slug definition
   slug :name, history: true, scope: :owner
 
-  validates :name, uniqueness: { :case_sensitive => false }
-
+  # validations
+  validates :name, uniqueness: { :case_sensitive => false, conditions: -> { where(deleted_at: nil) } }
   validates_presence_of :owner
-
   validates_presence_of :name
 
-  has_many :feedbacks
+  # associations
+  belongs_to :owner, class_name: 'User', inverse_of: :user_applications, foreign_key: 'owner_id'
+  has_and_belongs_to_many :members, class_name: 'User', inverse_of: :memberships
+  has_many :feedback_forms,
+            class_name: 'FeedbackForm',
+            inverse_of: :user_application,
+            foreign_key: 'user_application_id',
+            dependent: :destroy
+  has_many :feedbacks, dependent: :destroy
+  #belongs_to :default_feedback_form, class_name: 'FeedbackForm'
+  #has_many :members, :class_name => 'User'
 
+  # scopes
   scope :all_apps_for_user, ->(user){
       any_of({:owner => user}, {:member_ids.in => [user.id]})
   }

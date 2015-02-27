@@ -3,9 +3,15 @@ class Feedback
   include Mongoid::Attributes::Dynamic
   include Mongoid::Timestamps::Created
 
+  # Mongoid Paranoia adds soft delete to model
+  # - destroy will set deleted_at to current_time
+  # - models with deleted_at defined will be ignored on default scope
+  # - deleted scope is added to allow list deleted instances
+  include Mongoid::Paranoia
+
   belongs_to :user_application
   belongs_to :feedback_form
-  
+
   field :server_date_time, type: DateTime
 
   field :screenshot_path

@@ -11,6 +11,7 @@ gem 'sqlite3', :platform => :ruby
 #ORM for mongodb
 gem "mongoid", "~> 4.0.0"
 gem 'mongoid-tree'
+gem 'mongoid_paranoia'
 gem 'mongoid_slug' #create slug creation for mongoid models
 
 # Use SCSS for stylesheets

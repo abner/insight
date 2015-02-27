@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :user, :aliases => [:owner] do
+  factory :registered_user, :aliases => [:owner] do
     username { "user-#{SecureRandom.hex(4)}" }
     email { "#{username}@dominio.com.br" }
 
@@ -26,7 +26,7 @@ FactoryGirl.define do
 
 factory :comment do
      text 'Comment 1'
-     user
+     registered_user
 end
 
   # factory :comment1, :class => :comment do

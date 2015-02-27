@@ -2,10 +2,6 @@ require 'rails_helper'
 
 RSpec.describe DataSetup, :type => :model do
 
-  before :each do
-    DataSetup.run!
-  end
-
   it 'creates initial attribute types' do
     expect(FeedbackAttributeType.count).to eq(7)
     #require 'debugger'; debugger
