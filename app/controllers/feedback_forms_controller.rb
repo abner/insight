@@ -1,23 +1,30 @@
 class FeedbackFormsController < ProtectedController
 
-  before_action :load_resources, except: [:new]
   respond_to :js, :html, :json
 
   def new
-    authorize!(:create_feedback_form, user_application) do
-      @feedback_form = user_application.feedback_forms.new
+    @user_application = find_user_application
+    authorize!(:create_feedback_form, @user_application) do
+      @feedback_form = @user_application.feedback_forms.new
     end
   end
 
   def index
-    authorize!(:list_feedback_forms, @user_application)
+    @user_application = find_user_application
+    authorize!(:list_feedback_forms, @user_application) do
+      #TODO add pagination
+      @feedback_forms = @user_application.feedback_forms
+    end
   end
 
   def show
+    @user_application = find_user_application
+    @feedback_form = find_feedback_for @user_application
     authorize!(:read_feedback_form, @feedback_form)
   end
 
   def create
+    @user_application = find_user_application
     authorize!(:create_feedback_form, @user_application) do
       @feedback_form = @user_application.feedback_forms.create feedback_form_params
       respond_to do |format|
@@ -33,10 +40,14 @@ class FeedbackFormsController < ProtectedController
   end
 
   def edit
+    @user_application = find_user_application
+    @feedback_form = find_feedback_for(@user_application)
     authorize!(:write_feedback_form, @feedback_form)
   end
 
   def update
+    @user_application = find_user_application
+    @feedback_form = find_feedback_for(@user_application)
     authorize!(:write_feedback_form, @feedback_form) do
       respond_to do |format|
         if @feedback_form.update_attributes feedback_form_params
@@ -49,20 +60,39 @@ class FeedbackFormsController < ProtectedController
   end
 
   def destroy
+    @user_application = find_user_application
+    @feedback_form = find_feedback_for(@user_application)
     authorize!(:write_feedback_form, @feedback_form) do
       @feedback_form.destroy
     end
   end
 
 protected
-  def load_resources
-    @feedback_forms = user_application.feedback_forms
+
+  def find_feedback_for(user_application)
     if 'default'.eql? params[:id]
-      @feedback_form = user_application.default_feedback_form
+      return user_application.default_feedback_form
     elsif params[:id]
-      @feedback_form = user_application.feedback_forms.find(params[:id])
+      return user_application.feedback_forms.find(params[:id])
     end
   end
+
+  def find_user_application
+    UserApplication.all_apps_for_user(current_user).find(user_applciation_id_param)
+  end
+
+  def user_applciation_id_param
+    params[:user_application_id]
+  end
+
+
+    def apply_pagination
+      #@collection_resources
+    end
+
+    def apply_scope
+      #collection_resources
+    end
 
 private
 
@@ -73,21 +103,8 @@ private
       { :grid_columns => [], :detail_columns => [] }
   end
 
-  def apply_pagination
-    #@collection_resources
-  end
-
-  def apply_scope
-    #collection_resources
-  end
 
 
-  def user_application
-    @user_application ||= UserApplication.all_apps_for_user(current_user).find(user_applciation_id_param)
-  end
 
-  def user_applciation_id_param
-    params[:user_application_id]
-  end
 
 end

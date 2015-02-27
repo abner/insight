@@ -22,7 +22,7 @@ class FeedbackForm
 
   validates_presence_of :name, :feedback_attributes, :user_application
 
-  has_many :feedbacks
+  has_many :feedbacks, dependent: :destroy
 
 
   slug :name, history: true, scope: :user_application

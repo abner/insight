@@ -9,8 +9,11 @@
     </div>
     <div class="panel-body">
       <div class="form-group">
-        <%= link_to t('feedback_form.button.new_form'), url_for(new_user_application_feedback_form_path), :class => 'btn btn-primary' %>
+        <%= link_to url_for(new_user_application_feedback_form_path), :class => 'btn btn-primary' do%>
+          <i class='fa fa-list-alt'></i> <%= t('feedback_form.button.new_form') %>
+        <% end %>
       </div>
+      <hr />
       <table class="table table-striped table-bordered table-responsive">
         <thead>
           <tr>

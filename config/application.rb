@@ -46,6 +46,7 @@ module FeedbackServer
     #config.middleware.use Rack::Deflater, :if => lambda { |env, status, headers, body| /\/proxy/.match(env["PATH_INFO"]) }
     config.middleware.use Rack::Deflater
 
+    #https://github.com/plataformatec/devise/wiki/How-To:-Create-custom-layouts
     config.to_prepare do
         Devise::SessionsController.layout proc{ |controller| action_name == 'new' ? "login_page"   : "layout2" }
         Devise::RegistrationsController.layout proc{ |controller| action_name == 'new' ? "login_page"   : "layout2" }

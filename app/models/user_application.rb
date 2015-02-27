@@ -34,7 +34,7 @@ class UserApplication
             inverse_of: :user_application,
             foreign_key: 'user_application_id',
             dependent: :destroy
-  has_many :feedbacks, dependent: :destroy
+  has_many :feedbacks #, dependent: :destroy
   #belongs_to :default_feedback_form, class_name: 'FeedbackForm'
   #has_many :members, :class_name => 'User'
 
@@ -85,6 +85,7 @@ class UserApplication
 protected
   def create_default_form!
     begin
+      raise Exception.new "HERE"
       #creates a form using FeedbackFormTemplate.default_template as base
       form_attributes = FeedbackFormTemplate.default_template.attributes_template
       form = feedback_forms.create! form_attributes

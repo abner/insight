@@ -40,6 +40,8 @@ pt-BR:
     Cancel: 'Cancelar'
   user_application:
     confirmation_question: 'Tem certeza que deseja excluir a aplicação?'
+    page_title:
+      new: Nova Aplicação
   feedback_form:
     button:
       new_form: 'Incluir Formulário'

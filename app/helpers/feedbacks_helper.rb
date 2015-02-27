@@ -60,7 +60,7 @@ module FeedbacksHelper
         :method=> 'POST', :remote => true, :data => {:confirm => t('feedback.archive_confirmation_question'),
         :type => 'script', :target_selector => 'a'}
         ) do
-            raw("<i class='fa fa-trash-o'></i>") +
+            raw("<i class='fa fa-archive-o'></i>") +
             content_tag(:span, pad(t('Archive')))
         end
     end
@@ -73,7 +73,7 @@ module FeedbacksHelper
         :method=> 'POST', :remote => true, :data => {:confirm => t('feedback.unarchive_confirmation_question'),
         :type => 'script', :target_selector => 'a'}
         ) do
-          content_tag(:span, pad(t('Unarchive')), :class => 'fa fa-trash-o')
+          content_tag(:span, pad(t('Unarchive')), :class => 'fa fa-undo')
         end
     end
   end

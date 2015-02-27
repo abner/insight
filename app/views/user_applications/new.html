@@ -1,8 +1,27 @@
-<h1 class="page-header"><%= translate('New application') %></h1>
-
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            <%= translate('My applications') %>
+        </h1>
+        <!-- <ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-dashboard"></i> Dashboard
+            </li>
+        </ol> -->
+    </div>
+</div>
 <%=  bootstrap_form_for @user_application, :role => 'form' do |f| %>
-	
-  		<%= f.text_field 'name', :autofocus => true, :label => t('Name') %>
-  	
-  <%= f.button translate('Submit'), :class => 'btn btn-primary' %>
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	      <h3 class="panel-title"><%= translate('user_application.page_title.new') %></h3>
+	  </div>
+	  <div class="panel-body">
+
+
+	  		<%= f.text_field 'name', :autofocus => true, :label => t('Name') %>
+		</div>
+	  <div class="panel-footer">
+			<%= f.button translate('Submit'), :class => 'btn btn-primary large' %>
+		</div>
+	</div>
 <% end %>

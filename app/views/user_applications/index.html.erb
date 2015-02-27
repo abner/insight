@@ -22,7 +22,12 @@
       <p> <%= translate("No application registered yet") %></p>
 
     <% else  %>
-
+    <div class="text-left">
+        <%= link_to new_user_application_path, :class => 'btn btn-primary' do %>
+        <i class="fa fa-desktop"></i> <%= t('Create new application') %>
+        <% end %>
+    </div>
+    <hr />
       <div class="table-responsive">
           <table class="table table-bordered table-hover table-striped">
               <thead>
@@ -47,7 +52,7 @@
                               user_application_path(user_application), :method=> 'DELETE', :data => {:confirm => translate('user_application.confirmation_question')}) if current_user_can?(:remove_user_application, user_application)
                             %>
                         <%= link_to(
-                            content_tag(:span, pad(translate('Forms')) + " ", :class => 'fa fa-plus-o'),
+                            content_tag(:span, pad(translate('Forms')) + " ", :class => 'fa fa-list-alt'),
                             user_application_feedback_forms_path(user_application))%>
                       </td>
                     </tr>
@@ -56,8 +61,5 @@
           </table>
       </div>
       <% end %>
-      <div class="text-right">
-          <%= link_to translate('Create new application'), new_user_application_path, :class => 'btn btn-default' %>
-      </div>
   </div>
 </div>

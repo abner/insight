@@ -1,6 +1,6 @@
 class FeedbacksController < ProtectedController
 
-
+  
   def index
     @feedbacks = list_feedbacks
     add_breadcrumb @user_application
@@ -107,6 +107,11 @@ class FeedbacksController < ProtectedController
   end
 
 protected
+
+  def load_resources
+    @feedback = feedback_from_params
+  end
+
   def list_feedbacks
     @user_application = current_user.my_apps.find(params[:user_application_id])
 
