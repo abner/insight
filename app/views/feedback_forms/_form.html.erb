@@ -6,23 +6,34 @@
   <% end %>
 
   <%= f.form_group class: 'col-lg-12', label: {text: 'Campos do Formulário'} do %>
-    <table class='table-striped table-responsive table-bordered table'>
+    <table class='sorted_table table-striped table-hover table-responsive table-bordered table'>
       <thead>
         <tr>
+          <th>Tipo</th>
           <th>Nome</th>
           <th>Label</th>
-          <th>Tipo</th>
-          <th>Custom Data</th>
+          <th>Options</th>
+          <th>Default</th>
         </tr>
       </thead>
       <tbody>
-        <% @feedback_form.feedback_attributes.each do |attribute| %>
-          <tr>
-            <td><%= attribute.name %></td>
-            <td><%= attribute.label %></td>
-            <td><%= attribute.type.name.humanize %></td>
-            <td><%= attribute.custom_data %></td>
-          </tr>
+        <% @feedback_form.feedback_attributes.all.sort(position: 1).each do |attribute| %>
+          <%= f.fields_for_with_bootstrap :feedback_attributes, attribute do |attribute_form| %>
+            <tr>
+              <td>
+                <%= attribute_form.hidden_field 'position', :class => 'position' %>
+                <%= render :partial => "feedback_forms/attribute_types/#{attribute.type.name.downcase}" %>
+              </td>
+              <td><%= attribute.name %></td>
+              <td><%= attribute.label %></td>
+              <td>
+                <%= attribute.custom_data["options"].join(',') if attribute.custom_data and  attribute.custom_data["options"]%>
+              </td>
+              <td>
+                <%= attribute.custom_data["value"] if attribute.custom_data.present? and attribute.custom_data["value"] %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
       <tbody>
       </table>
@@ -46,3 +57,26 @@
     <%= link_to t('Cancel'), './', :class => 'btn btn-warning'  %>
   <% end %>
 <% end %>
+<ul>
+  <li>Abner</li>
+  <li>Cris</li>
+  <li>Asafe</li>
+  <li>Sofia</li>
+<ul>
+<script type='text/javascript'>
+
+$(document).on('ready page:load',function(){
+  $('.sorted_table').sortable({
+    containerSelector: 'table',
+    itemPath: '> tbody',
+    itemSelector: 'tr',
+     placeholder: '<tr class="placeholder"/>',
+     onDrop: function(){
+       $('.sorted_table tr input.position').each(function(index){
+         $(this).val(index);
+       });
+     }
+  });
+});
+
+</script>

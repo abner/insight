@@ -1,12 +1,21 @@
 class FeedbackFormsController < ProtectedController
-
+  protect_from_forgery with: :exception, :except => [:code]
   respond_to :js, :html, :json
+
+  before_filter :define_breadcrumbs_form, :only => [:show, :edit]
+  before_filter :define_breadcrumbs_index , :only => [:index]
 
   def new
     @user_application = find_user_application
     authorize!(:create_feedback_form, @user_application) do
       @feedback_form = @user_application.feedback_forms.new
     end
+  end
+
+  def code
+    @feedback_form = FeedbackForm.find_by(authentication_token: params[:id])
+
+    render :code, :layout => false, content_type: 'text/javascript'
   end
 
   def index
@@ -50,7 +59,14 @@ class FeedbackFormsController < ProtectedController
     @feedback_form = find_feedback_for(@user_application)
     authorize!(:write_feedback_form, @feedback_form) do
       respond_to do |format|
-        if @feedback_form.update_attributes feedback_form_params
+        @feedback_form.attributes = feedback_form_params
+
+        params[:feedback_form][:feedback_attributes_attributes].values.each do |attribute_hash|
+          feedback_attribute = @feedback_form.feedback_attributes.find(attribute_hash[:id])
+          feedback_attribute.position = attribute_hash[:position]
+        end
+
+        if @feedback_form.save
           format.html { redirect_to user_application_feedback_forms_path(:action => index) }
         else
           format.html { render :edit }
@@ -96,11 +112,22 @@ protected
 
 private
 
+  def define_breadcrumbs_form
+    user_application = find_user_application
+    add_breadcrumb  user_application
+    feedback_form =  find_feedback_for(user_application)
+    add_breadcrumb feedback_form.name,  user_application_feedback_form_path(user_application,feedback_form)
+  end
+
+  def define_breadcrumbs_index
+    add_breadcrumb  find_user_application
+  end
+
   def feedback_form_params
     params.require(:feedback_form).permit :name,
       :screenshot_enabled,
       :review_enabled,
-      { :grid_columns => [], :detail_columns => [] }
+      { :grid_columns => [], :detail_columns => []}
   end
 
 

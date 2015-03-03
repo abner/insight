@@ -3,4 +3,5 @@ module UserApplicationsHelper
     return "" if member.nil?
     return "#{member.username} (#{member.email})"
   end
+
 end

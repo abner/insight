@@ -6,7 +6,7 @@ module Tokenable
 
     validates :authentication_token, uniqueness: { :case_sensitive => false }
 
-    before_create :generate_token
+    before_validation :generate_token, :on => :create
   end
 
   protected
@@ -16,6 +16,7 @@ module Tokenable
       #random_token = SecureRandom.urlsafe_base64(nil, false)
       #random_token = SecureRandom.uuid
       random_token = SecureRandom.urlsafe_base64
+
       break random_token unless self.class.where(authentication_token: random_token).exists?
     end
   end

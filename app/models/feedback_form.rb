@@ -7,9 +7,12 @@ class FeedbackForm
   # - deleted scope is added to allow list deleted instances
   include Mongoid::Paranoia
 
+  include Tokenable
+
   field :name, type: String
 
-  embeds_many :feedback_attributes
+  embeds_many :feedback_attributes, cascade_callbacks: true, order: :position.asc
+  accepts_nested_attributes_for :feedback_attributes
 
   belongs_to :user_application
 
@@ -23,6 +26,8 @@ class FeedbackForm
   validates_presence_of :name, :feedback_attributes, :user_application
 
   has_many :feedbacks, dependent: :destroy
+
+
 
 
   slug :name, history: true, scope: :user_application

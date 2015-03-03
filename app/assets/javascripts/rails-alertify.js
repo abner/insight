@@ -24,5 +24,5 @@ $.rails.showConfirmDialog = function(element){
 <!-- then override glossary values -->
 alertify.defaults.transition = "fade";
 alertify.defaults.glossary.title = I18n.t("alertify.Confirmation", {defaultValue: "Confirmation"});
-alertify.defaults.glossary.ok = I18n.t("alertify.OK", {defaultValue: "OK"});;
-alertify.defaults.glossary.cancel = I18n.t("alertify.Cancel", {defaultValue: "Cancel"});;
+alertify.defaults.glossary.ok = I18n.t("alertify.OK", {defaultValue: "OK"});
+alertify.defaults.glossary.cancel = I18n.t("alertify.Cancel", {defaultValue: "Cancel"});

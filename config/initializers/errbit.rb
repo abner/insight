@@ -4,5 +4,5 @@ Airbrake.configure do |config|
   config.port    = 3031
   config.secure  = config.port == 443
 
-  config.development_environments = []
+  config.development_environments = ['development', 'test']
 end

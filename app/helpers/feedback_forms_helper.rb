@@ -25,4 +25,8 @@ module FeedbackFormsHelper
       user_application_feedback_form_path(user_application, feedback_form)
     end
   end
+
+  def render_js_component feedback_attribute
+    render partial: "feedback_forms/attribute_types/js_components/#{feedback_attribute.type.name.downcase}", :locals => {attribute: feedback_attribute}
+  end
 end

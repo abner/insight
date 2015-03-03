@@ -1,0 +1,109 @@
+var FeedbackLoader = function(window){
+
+  scriptLoader = function( script, func ){
+
+      if (script.onload === undefined) {
+          // IE lack of support for script onload
+
+          if( script.onreadystatechange !== undefined ) {
+
+              var intervalFunc = function() {
+                  if (script.readyState !== "loaded" && script.readyState !== "complete") {
+                      window.setTimeout( intervalFunc, 250 );
+                  } else {
+                      // it is loaded
+                      func();
+                  }
+              };
+
+              window.setTimeout( intervalFunc, 250 );
+
+          } else {
+              log("ERROR: We can't track when script is loaded");
+          }
+
+      } else {
+          return func;
+      }
+
+  };
+
+  this.log = function(a) {
+      if (window.console && window.console.log) {
+          window.console.log(a);
+      }
+  };
+
+  this.add_css = function(){
+    var css = document.createElement("link");
+    css.rel = 'stylesheet';
+    css.media = 'all';
+    css.href = "<%= app_base_url %>/assets/feedback.css";
+
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(css, s);
+    //<link rel="stylesheet" media="all" href="/assets/select2.css?body=1" />
+  };
+
+  this.add_script = function(){
+    var script = document.createElement("script");
+
+    script.src = "<%= app_base_url %>/assets/feedback_client.js";
+    script.onerror = function() {
+        log("Failed to load feedback_client library");
+    };
+
+    script.onload = (scriptLoader)(script, function() {
+
+        if (window.Feedback === undefined) {
+            log("Failed to load feedback_client library");
+            return;
+        }
+
+
+        runFeedback();
+
+
+    });
+
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(script, s);
+  };
+
+  this.runFeedback = function(){
+    window.Feedback(
+            {
+                label: "Reportar",
+                header: "Registro de ocorrência",
+                url: "<%= app_base_url %>/api/v1/feedbacks?access_token=<%= @feedback_form.authentication_token %>",
+                nextLabel: "Continuar",
+                reviewLabel: "Revisar",
+                sendLabel:  "Enviar",
+                closeLabel: "Fechar",
+                highlightBlackoutHelp: "Você pode destacar informações úteis ou ocultar informações sensíveis.",
+                blackoutButtonLabel: "Ocultar",
+                highlightButtonLabel: "Destacar",
+                messageSuccess: "O seu relato foi enviado com sucesso!",
+                messageError: "Houve um erro ao enviar o relato...",
+                pages: [
+                  new window.Feedback.Form([
+                    <% @feedback_form.feedback_attributes.all.each do |attribute| %>
+                      <%= render_js_component attribute %>
+                      <% end %>
+                  ])
+                  <%= render text: ',new window.Feedback.Screenshot()' if @feedback_form.screenshot_enabled %>
+                  <%= render text: ',new window.Feedback.Review()'  if @feedback_form.review_enabled %>
+                ]
+              }
+    );
+  };
+
+  var $this = this;
+
+  return {
+    load: function(){
+      $this.add_css();
+      $this.add_script();
+    }
+  };
+}(window).load();

@@ -34,4 +34,11 @@ module ApplicationHelper
   def layout(layout_name)
     controller.class.send(:layout, layout_name)
   end
+
+  def render_action(action_name, model)
+    model_class = controller.model_name_from_record_or_class(model)
+    model_key = model_class.element.to_sym
+    render partial: "#{controller_name}/actions/#{action_name}", locals: {model_key => model}
+  end
+
 end

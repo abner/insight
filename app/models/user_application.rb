@@ -9,7 +9,7 @@ class UserApplication
   include Mongoid::Paranoia
 
   include Tokenable
-
+  
   # callbacks
   after_create :create_default_form!
 
@@ -84,17 +84,24 @@ class UserApplication
 
 protected
   def create_default_form!
+    form = nil
     begin
-      raise Exception.new "HERE"
+      #raise Exception.new "ABBBB"
       #creates a form using FeedbackFormTemplate.default_template as base
       form_attributes = FeedbackFormTemplate.default_template.attributes_template
-      form = feedback_forms.create! form_attributes
+
+      form_attributes.merge!(:user_application => self)
+
+      form = FeedbackForm.create!(form_attributes)
+
       #set as default form for this user_application
       set_default_form! form
       save!
     rescue Exception => e
       destroy
-      raise "Error creating default form for application #{e.message}"
+      msg = e.message
+      msg = "#{msg} #{form.errors}" if form
+      raise "Error creating default form for application #{msg}"
     end
   end
 
