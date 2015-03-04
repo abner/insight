@@ -10,6 +10,7 @@ FactoryGirl.define do
     owner
   end
 
+
   factory :feedback_form do
     name 'Relato ou Sugestão'
     user_application

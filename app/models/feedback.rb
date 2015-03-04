@@ -9,12 +9,19 @@ class Feedback
   # - deleted scope is added to allow list deleted instances
   include Mongoid::Paranoia
 
-  before_create do
-    self.user_application = feedback_form.user_application
+  # before_create do
+  #   self.user_application = feedback_form.user_application
+  # end
+
+  def user_application
+    feedback_form.user_application if feedback_form
   end
 
+  def user_application_id
+    feedback_form.user_application.id if feedback_form
+  end
 
-  belongs_to :user_application
+  #belongs_to :user_application
 
   belongs_to :feedback_form
 

@@ -137,7 +137,7 @@ private
     def create_templates!
       if FeedbackFormTemplate.count == 0
         # creating feedback form templates
-        FeedbackFormTemplate.create name: 'relato_ou_sugestao' do |template|
+        FeedbackFormTemplate.create name: 'Relato ou Sugestão' do |template|
           template.save!
           template.feedback_attributes.create!(attributes_by_name('tipo_relato'))
           template.feedback_attributes.create!(attributes_by_name('severidade'))
