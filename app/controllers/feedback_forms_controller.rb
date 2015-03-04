@@ -13,7 +13,7 @@ class FeedbackFormsController < ProtectedController
   end
 
   def code
-    @feedback_form = FeedbackForm.find_by(authentication_token: params[:id])
+    @feedback_form = FeedbackForm.find_by(authentication_token: params[:token])
 
     render :code, :layout => false, content_type: 'text/javascript'
   end

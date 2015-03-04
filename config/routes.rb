@@ -35,7 +35,7 @@ Rails.application.routes.draw do
 
   get 'dashboard' => "dashboard#index"
 
-  get 'code' => 'feedback_forms#code'
+  get 'widget/:token' => 'feedback_forms#code'
 
 
   get 'protected' => 'protected#index'

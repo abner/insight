@@ -9,7 +9,13 @@ class Feedback
   # - deleted scope is added to allow list deleted instances
   include Mongoid::Paranoia
 
-  #belongs_to :user_application, thoru
+  before_create do
+    self.user_application = feedback_form.user_application
+  end
+
+
+  belongs_to :user_application
+
   belongs_to :feedback_form
 
   field :server_date_time, type: DateTime
@@ -33,10 +39,6 @@ class Feedback
   scope :archived, -> { where(active: false) }
 
   embeds_many :comments
-
-  def user_application
-    self.feedback_form.user_application
-  end
 
   #pagination definition
   def self.per_page
