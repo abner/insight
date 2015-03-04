@@ -341,3 +341,8 @@ div.logo_serpro_50_anos {
     margin-top: -5px;
     left: -5px;
     border-right: none; }
+
+    div#feedbacks_table {
+      width: 100%;
+      overflow-x: auto;
+    }
