@@ -8,9 +8,7 @@ class CreateAttributesModels < Mongoid::Migration
       attribute.custom_data = {:options => ['Sugestão', 'Erro']}
       attribute.save!
     end
-  end
 
-  def create_severidade_attribute_model
     FeedbackAttributeModel.create do |attribute|
       attribute.name = 'severidade'
       attribute.display_label = "Severidade"
