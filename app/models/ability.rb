@@ -6,7 +6,7 @@ class Ability
       return [] if user.blocked?
 
       case subject.class.name
-      when "UserApplication" then user_application_abilities(user, subject)
+      when "FeedbackTarget" then feedback_target_abilities(user, subject)
       when "Feedback" then feedback_abilities(user, subject)
       when "Comment" then comment_abilities(user, subject)
       when "FeedbackForm" then feedback_form_abilities(user, subject)
@@ -14,19 +14,19 @@ class Ability
       end
     end
 
-    def user_application_abilities(user, user_application)
+    def feedback_target_abilities(user, feedback_target)
       rules = []
 
-      if user.is_member?(user_application) or user.owns?(user_application)
-        rules << :read_user_application
+      if user.is_member?(feedback_target) or user.owns?(feedback_target)
+        rules << :read_feedback_target
         rules << :list_feedback_forms
         rules << :create_feedback_form
       end
 
 
-      if(user.owns?(user_application))
-        rules << :write_user_application
-        rules << :remove_user_application
+      if(user.owns?(feedback_target))
+        rules << :write_feedback_target
+        rules << :remove_feedback_target
         rules << :admin_team_members
       end
 
@@ -35,7 +35,7 @@ class Ability
 
     def feedback_form_abilities(user, feedback_form)
       rules = []
-      if user.is_member?(feedback_form.user_application) or user.owns?(feedback_form.user_application)
+      if user.is_member?(feedback_form.feedback_target) or user.owns?(feedback_form.feedback_target)
         rules << :read_feedback_form
         rules << :write_feedback_form
       end
@@ -44,7 +44,7 @@ class Ability
 
     def feedback_abilities(user, feedback)
       rules = []
-      if user.is_member?(feedback.user_application) or user.owns?(feedback.user_application)
+      if user.is_member?(feedback.feedback_target) or user.owns?(feedback.feedback_target)
         rules << :read_feedback
         rules << :change_feedback_status
         rules << :comment_on_feedback
@@ -57,7 +57,7 @@ class Ability
     def comment_abilities(user, comment)
       rules = []
 
-      if user.is_member?(comment.feedback.user_application)
+      if user.is_member?(comment.feedback.feedback_target)
         rules << :read_comment
       end
 

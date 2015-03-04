@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-12">
-    <h1 class='page-header'><%= @user_application.name %></h1>
+    <h1 class='page-header'><%= @feedback_target.name %></h1>
   </div>
 </div>
   <div class="panel panel-default">
@@ -9,7 +9,7 @@
     </div>
     <div class="panel-body">
       <div class="form-group">
-        <%= link_to url_for(new_user_application_feedback_form_path), :class => 'btn btn-primary' do%>
+        <%= link_to url_for(new_feedback_target_feedback_form_path), :class => 'btn btn-primary' do%>
           <i class='fa fa-list-alt'></i> <%= t('feedback_form.button.new_form') %>
         <% end %>
       </div>

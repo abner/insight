@@ -3,8 +3,8 @@ class FeedbacksController < ProtectedController
 
   def index
     @feedbacks = list_feedbacks
-    add_breadcrumb @user_application
-    add_breadcrumb 'Feedbacks', user_application_feedbacks_path(@user_application)
+    add_breadcrumb @feedback_target
+    add_breadcrumb 'Feedbacks', feedback_target_feedbacks_path(@feedback_target)
     respond_to do |format|
       format.html { render :index }
       format.json { render json: FeedbacksDatatable.new(view_context) }
@@ -84,7 +84,7 @@ class FeedbacksController < ProtectedController
         begin
           @feedback = feedback_from_params
           @feedback.archive!
-          redirect_to user_application_feedback_form_feedbacks_path(@user_application, @feedback.feedback_form, view_context.pagination_params)
+          redirect_to feedback_target_feedback_form_feedbacks_path(@feedback_target, @feedback.feedback_form, view_context.pagination_params)
         rescue Exception => e
           render json: respond_error_json(:message => e.message ,:object => @feedback), :content_type => 'application/javascript'
         end
@@ -101,7 +101,7 @@ class FeedbacksController < ProtectedController
       format.js do
         @feedback = feedback_from_params
         @feedback.unarchive!
-        redirect_to user_application_feedback_form_feedbacks_path(@user_application, @feedback.feedback_form, view_context.pagination_params.merge(:scope => 'archived'))
+        redirect_to feedback_target_feedback_form_feedbacks_path(@feedback_target, @feedback.feedback_form, view_context.pagination_params.merge(:scope => 'archived'))
       end
     end
   end
@@ -113,10 +113,10 @@ protected
   end
 
   def list_feedbacks
-    @user_application = current_user.my_apps.find(params[:user_application_id])
+    @feedback_target = current_user.my_apps.find(params[:feedback_target_id])
 
     if params[:feedback_form_id]
-      @feedback_form = @user_application.feedback_forms.find(params[:feedback_form_id])
+      @feedback_form = @feedback_target.feedback_forms.find(params[:feedback_form_id])
     else
       @feedback_form = nil
     end
@@ -132,7 +132,7 @@ protected
     if @feedback_form
       feedbacks_relation = @feedback_form.feedbacks
     else
-      feedbacks_relation = @user_application.feedbacks
+      feedbacks_relation = @feedback_target.feedbacks
     end
 
     if 'default'.eql? @scope
@@ -152,16 +152,16 @@ protected
   end
   def feedback_from_params
     if 'archived'.eql? @scope
-      @feedback ||= user_application.feedbacks.archived.find params[:id]
+      @feedback ||= feedback_target.feedbacks.archived.find params[:id]
     else
-      @feedback ||= user_application.feedbacks.find params[:id]
+      @feedback ||= feedback_target.feedbacks.find params[:id]
     end
   end
-  def user_application
-    @user_application ||= UserApplication.all_apps_for_user(current_user).find(user_applciation_id_param)
+  def feedback_target
+    @feedback_target ||= FeedbackTarget.all_targets_for_user(current_user).find(user_applciation_id_param)
   end
 
   def user_applciation_id_param
-    params[:user_application_id]
+    params[:feedback_target_id]
   end
 end

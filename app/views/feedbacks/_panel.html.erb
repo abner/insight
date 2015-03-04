@@ -22,7 +22,7 @@
                  <% @last_feedbacks.each do  |feedback| %>
                     <tr>
                       <td><%= time_ago_in_words feedback.created_at if feedback.created_at%></td>
-                      <td><%= feedback.user_application.name %></td>
+                      <td><%= feedback.feedback_target.name %></td>
                       <td><%= feedback.description %></td>
                     </tr>
                  <% end %>
@@ -31,7 +31,7 @@
       </div>
       <% end %>
       <div class="text-right">
-          <%= link_to translate('All_male'), user_applications_path%>
+          <%= link_to translate('All_male'), feedback_targets_path%>
       </div>
   </div>
 </div>

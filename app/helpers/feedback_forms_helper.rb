@@ -5,24 +5,24 @@ module FeedbackFormsHelper
     if current_user_can?(:write_feedback_form, feedback_form)
       actions <<
               link_to(
-                edit_user_application_feedback_form_path(feedback_form.user_application, feedback_form)
+                edit_feedback_target_feedback_form_path(feedback_form.feedback_target, feedback_form)
                 ) do
                     content_tag(:span, pad(t('Edit')), class: 'fa fa-edit')
                   end
     end
     actions << "&nbsp;"
     actions <<
-              link_to(user_application_feedback_form_feedbacks_path(feedback_form.user_application, feedback_form)) do
+              link_to(feedback_target_feedback_form_feedbacks_path(feedback_form.feedback_target, feedback_form)) do
                 content_tag(:span, pad(translate('Feedbacks')) + " ", :class => 'fa fa-comment-o')
               end
     raw actions.join
   end
 
-  def url_for_form(user_application, feedback_form)
+  def url_for_form(feedback_target, feedback_form)
     if feedback_form.new_record?
-      user_application_feedback_forms_path(user_application)
+      feedback_target_feedback_forms_path(feedback_target)
     else
-      user_application_feedback_form_path(user_application, feedback_form)
+      feedback_target_feedback_form_path(feedback_target, feedback_form)
     end
   end
 

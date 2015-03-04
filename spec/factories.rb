@@ -5,14 +5,14 @@ FactoryGirl.define do
 
   end
 
-  factory :user_application do
+  factory :feedback_target do
     name { "SISCOAF #{SecureRandom.hex(4)}" }
     owner
   end
 
   factory :feedback_form do
     name 'Relato ou Sugestão'
-    user_application
+    feedback_target
     feedback_attributes { [FactoryGirl.attributes_for(:relato_attribute)] }
   end
 

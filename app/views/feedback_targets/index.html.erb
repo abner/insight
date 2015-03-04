@@ -17,19 +17,19 @@
       <h3 class="panel-title"><%= t('User Applications') %></h3>
   </div>
   <div class="panel-body">
-    <% if @user_applications.empty? %>
+    <% if @feedback_targets.empty? %>
 
       <p> <%= translate("No application registered yet") %></p>
 
       <div class=''>
-        <%= link_to new_user_application_path, :class => 'btn btn-primary' do %>
+        <%= link_to new_feedback_target_path, :class => 'btn btn-primary' do %>
           <i class="fa fa-desktop"></i> <%= t('Create new application') %>
         <% end %>
       </div>
 
     <% else  %>
     <div class="text-left">
-        <%= link_to new_user_application_path, :class => 'btn btn-primary' do %>
+        <%= link_to new_feedback_target_path, :class => 'btn btn-primary' do %>
         <i class="fa fa-desktop"></i> <%= t('Create new application') %>
         <% end %>
     </div>
@@ -45,14 +45,14 @@
                   </tr>
               </thead>
               <tbody>
-                 <% @user_applications.each do  |user_application | %>
+                 <% @feedback_targets.each do  |feedback_target | %>
                     <tr>
-                      <td><%= link_to user_application.name, user_application_path(user_application) %></td>
-                      <td><%= user_application.authentication_token %></td>
+                      <td><%= link_to feedback_target.name, feedback_target_path(feedback_target) %></td>
+                      <td><%= feedback_target.authentication_token %></td>
                       <td>
-                        <%= render_action 'edit', user_application if current_user_can?(:write_user_application, user_application) %>
-                        <%= render_action 'destroy', user_application if current_user_can?(:remove_user_application, user_application) %>
-                        <%= render_action 'forms', user_application if current_user_can?(:write_user_application, user_application) %>
+                        <%= render_action 'edit', feedback_target if current_user_can?(:write_feedback_target, feedback_target) %>
+                        <%= render_action 'destroy', feedback_target if current_user_can?(:remove_feedback_target, feedback_target) %>
+                        <%= render_action 'forms', feedback_target if current_user_can?(:write_feedback_target, feedback_target) %>
                       </td>
                     </tr>
                  <% end %>

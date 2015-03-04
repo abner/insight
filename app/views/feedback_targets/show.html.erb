@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            <%= @user_application.name %>
+            <%= @feedback_target.name %>
         </h1>
         <!-- <ol class="breadcrumb">
             <li class="active">
@@ -21,13 +21,13 @@
       <div class="col-lg-8">
         <%= bootstrap_form_tag do |f| %>
         <div class="form-group">
-          <label>Nome:</label> <%= @user_application.name %>
+          <label>Nome:</label> <%= @feedback_target.name %>
         </div>
         <div class="form-group">
            <%= link_to_if(
-            @user_application.owner.id.eql?(current_user.id),
+            @feedback_target.owner.id.eql?(current_user.id),
             content_tag(:span, pad(translate('Edit')), class: 'fa fa-edit'),
-            edit_user_application_path(@user_application), :class=> 'action') do
+            edit_feedback_target_path(@feedback_target), :class=> 'action') do
             end
             %>
         </div>
@@ -40,21 +40,21 @@
   <div class="panel-footer">
           <%= link_to(
             content_tag(:span, pad(translate('Feedbacks')) + " ", :class => 'fa fa-comment-o'),
-            user_application_feedbacks_path(@user_application), class: 'btn btn-default')%>
+            feedback_target_feedbacks_path(@feedback_target), class: 'btn btn-default')%>
 
 
           <%= link_to(
               content_tag(:span, pad(translate('Forms')) + " ", :class => 'fa fa-file-o'),
-              user_application_feedback_forms_path(@user_application), class: 'btn btn-default')%>
+              feedback_target_feedback_forms_path(@feedback_target), class: 'btn btn-default')%>
   </div>
 </div>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title"><%= t('user_application.panel_title.members') %></h3>
+    <h3 class="panel-title"><%= t('feedback_target.panel_title.members') %></h3>
   </div>
   <div class="panel-body">
-    <%= render :partial => 'members_edit' if  current_user_can?(:admin_team_members, @user_application)%>
+    <%= render :partial => 'members_edit' if  current_user_can?(:admin_team_members, @feedback_target)%>
   </div>
 </div>
 
@@ -69,4 +69,4 @@
 
 
 
-<%= link_to t('view feedbacks'), user_application_feedbacks_path(@user_application) %>
+<%= link_to t('view feedbacks'), feedback_target_feedbacks_path(@feedback_target) %>

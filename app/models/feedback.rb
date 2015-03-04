@@ -10,11 +10,11 @@ class Feedback
   include Mongoid::Paranoia
 
   before_create do
-    self.user_application = feedback_form.user_application
+    self.feedback_target = feedback_form.feedback_target
   end
 
 
-  belongs_to :user_application
+  belongs_to :feedback_target
 
   belongs_to :feedback_form
 
@@ -71,7 +71,7 @@ class Feedback
 
   def columns
     columns = self.attributes.reject do |k,v|
-      k == "user_application_id"
+      k == "feedback_target_id"
     end
     columns.map do |c|
       { :key => c[0], :value => c[1]}
@@ -129,8 +129,8 @@ class Feedback
   end
 
   def self.last_feedbacks_for_user(user)
-    apps_ids = UserApplication.all_apps_for_user(user).map {|app| app.id.to_s }
-    Feedback.in(user_application_id:  apps_ids).order(created_at: 'DESC').paginate(page: 1, per_page: 5)
+    apps_ids = FeedbackTarget.all_targets_for_user(user).map {|app| app.id.to_s }
+    Feedback.in(feedback_target_id:  apps_ids).order(created_at: 'DESC').paginate(page: 1, per_page: 5)
   end
 
 protected

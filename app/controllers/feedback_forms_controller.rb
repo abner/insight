@@ -6,9 +6,9 @@ class FeedbackFormsController < ProtectedController
   before_filter :define_breadcrumbs_index , :only => [:index]
 
   def new
-    @user_application = find_user_application
-    authorize!(:create_feedback_form, @user_application) do
-      @feedback_form = @user_application.feedback_forms.new
+    @feedback_target = find_feedback_target
+    authorize!(:create_feedback_form, @feedback_target) do
+      @feedback_form = @feedback_target.feedback_forms.new
     end
   end
 
@@ -19,23 +19,23 @@ class FeedbackFormsController < ProtectedController
   end
 
   def index
-    @user_application = find_user_application
-    authorize!(:list_feedback_forms, @user_application) do
+    @feedback_target = find_feedback_target
+    authorize!(:list_feedback_forms, @feedback_target) do
       #TODO add pagination
-      @feedback_forms = @user_application.feedback_forms
+      @feedback_forms = @feedback_target.feedback_forms
     end
   end
 
   def show
-    @user_application = find_user_application
-    @feedback_form = find_feedback_for @user_application
+    @feedback_target = find_feedback_target
+    @feedback_form = find_feedback_for @feedback_target
     authorize!(:read_feedback_form, @feedback_form)
   end
 
   def create
-    @user_application = find_user_application
-    authorize!(:create_feedback_form, @user_application) do
-      @feedback_form = @user_application.feedback_forms.create feedback_form_params
+    @feedback_target = find_feedback_target
+    authorize!(:create_feedback_form, @feedback_target) do
+      @feedback_form = @feedback_target.feedback_forms.create feedback_form_params
       respond_to do |format|
         format.html do
           if @feedback_form.persisted?
@@ -49,14 +49,14 @@ class FeedbackFormsController < ProtectedController
   end
 
   def edit
-    @user_application = find_user_application
-    @feedback_form = find_feedback_for(@user_application)
+    @feedback_target = find_feedback_target
+    @feedback_form = find_feedback_for(@feedback_target)
     authorize!(:write_feedback_form, @feedback_form)
   end
 
   def update
-    @user_application = find_user_application
-    @feedback_form = find_feedback_for(@user_application)
+    @feedback_target = find_feedback_target
+    @feedback_form = find_feedback_for(@feedback_target)
     authorize!(:write_feedback_form, @feedback_form) do
       respond_to do |format|
         @feedback_form.attributes = feedback_form_params
@@ -67,7 +67,7 @@ class FeedbackFormsController < ProtectedController
         end
 
         if @feedback_form.save
-          format.html { redirect_to user_application_feedback_forms_path(:action => index) }
+          format.html { redirect_to feedback_target_feedback_forms_path(:action => index) }
         else
           format.html { render :edit }
         end
@@ -76,8 +76,8 @@ class FeedbackFormsController < ProtectedController
   end
 
   def destroy
-    @user_application = find_user_application
-    @feedback_form = find_feedback_for(@user_application)
+    @feedback_target = find_feedback_target
+    @feedback_form = find_feedback_for(@feedback_target)
     authorize!(:write_feedback_form, @feedback_form) do
       @feedback_form.destroy
     end
@@ -85,20 +85,20 @@ class FeedbackFormsController < ProtectedController
 
 protected
 
-  def find_feedback_for(user_application)
+  def find_feedback_for(feedback_target)
     if 'default'.eql? params[:id]
-      return user_application.default_feedback_form
+      return feedback_target.default_feedback_form
     elsif params[:id]
-      return user_application.feedback_forms.find(params[:id])
+      return feedback_target.feedback_forms.find(params[:id])
     end
   end
 
-  def find_user_application
-    UserApplication.all_apps_for_user(current_user).find(user_applciation_id_param)
+  def find_feedback_target
+    FeedbackTarget.all_targets_for_user(current_user).find(user_applciation_id_param)
   end
 
   def user_applciation_id_param
-    params[:user_application_id]
+    params[:feedback_target_id]
   end
 
 
@@ -113,14 +113,14 @@ protected
 private
 
   def define_breadcrumbs_form
-    user_application = find_user_application
-    add_breadcrumb  user_application
-    feedback_form =  find_feedback_for(user_application)
-    add_breadcrumb feedback_form.name,  user_application_feedback_form_path(user_application,feedback_form)
+    feedback_target = find_feedback_target
+    add_breadcrumb  feedback_target
+    feedback_form =  find_feedback_for(feedback_target)
+    add_breadcrumb feedback_form.name,  feedback_target_feedback_form_path(feedback_target,feedback_form)
   end
 
   def define_breadcrumbs_index
-    add_breadcrumb  find_user_application
+    add_breadcrumb  find_feedback_target
   end
 
   def feedback_form_params
