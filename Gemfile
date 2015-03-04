@@ -80,6 +80,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'railroady'
 end
 
 group :development, :test do
@@ -164,3 +165,5 @@ gem 'recursive-open-struct'
 #Forms for Bootstrap
 #https://github.com/bootstrap-ruby/rails-bootstrap-forms
 gem 'bootstrap_form'
+
+gem 'mongoid_rails_migrations', '~> 1.1.0'

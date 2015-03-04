@@ -13,8 +13,9 @@ describe FeedbacksController, :type => :controller do
   describe "GET index" do
     it 'assigns @feedbacks' do
       user_application = FactoryGirl.create(:user_application, :owner => subject.current_user)
-      feedback = FactoryGirl.create(:feedback, :user_application => user_application)
-      get :index, :user_application_id => feedback.user_application.to_param
+      feedback_form =  FactoryGirl.create(:feedback_form, :user_application => user_application)
+      feedback = FactoryGirl.create(:feedback, :feedback_form => feedback_form)
+      get :index, :user_application_id => feedback.user_application.to_param, :feedback_form_id => feedback_form.id
       expect(assigns(:feedbacks)).to eq([feedback])
     end
   end

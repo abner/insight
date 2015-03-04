@@ -10,15 +10,31 @@ FactoryGirl.define do
     owner
   end
 
+  factory :feedback_form do
+    name 'Relato ou Sugestão'
+    user_application
+    feedback_attributes { [FactoryGirl.attributes_for(:relato_attribute)] }
+  end
+
+  factory :relato_attribute, class: FeedbackAttribute do
+    name 'relato'
+    display_label 'Relato'
+    type { [FactoryGirl.attributes_for(:textarea_type)] }
+  end
+
+  factory :textarea_type, class: FeedbackAttributeType do
+    name 'Textarea'
+  end
+
   factory :feedback do
     active true
     text "Feedback Text provided by application user"
-    user_application
+    feedback_form
 
     factory :feedback_with_comment do
       active true
       text "Feedback Text provided by application user"
-      user_application
+      feedback_form
       comments { [FactoryGirl.attributes_for(:comment)] }
     end
   end
