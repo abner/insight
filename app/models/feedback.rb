@@ -9,7 +9,7 @@ class Feedback
   # - deleted scope is added to allow list deleted instances
   include Mongoid::Paranoia
 
-  belongs_to :user_application
+  #belongs_to :user_application, thoru
   belongs_to :feedback_form
 
   field :server_date_time, type: DateTime
@@ -33,6 +33,10 @@ class Feedback
   scope :archived, -> { where(active: false) }
 
   embeds_many :comments
+
+  def user_application
+    self.feedback_form.user_application
+  end
 
   #pagination definition
   def self.per_page
@@ -99,11 +103,11 @@ class Feedback
   end
 
   def self.max_field_count_for_relation(relation)
-    puts "RELATION: #{relation.inspect} "
+    #puts "RELATION: #{relation.inspect} "
     reduce = relation.map_reduce(object_attributes_count_map, number_array_max_value_reduce).out(:inline => true)
-    puts reduce.send(:command).send(:inspect)
-    puts "INPUT: #{reduce.input}"
-    puts "REDUCED: #{reduce.reduced}"
+    #puts reduce.send(:command).send(:inspect)
+    #puts "INPUT: #{reduce.input}"
+    #puts "REDUCED: #{reduce.reduced}"
     result = reduce.first
     result.nil? ? 0 : result[:value]
   end

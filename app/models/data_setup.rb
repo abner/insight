@@ -118,7 +118,7 @@ private
         attribute.name = 'situacao'
         attribute.display_label = ""
         attribute.type = attribute_type_by_name('Hidden')
-        attribute.custom_data = {value: 'aberto'}
+        attribute.custom_data = {value: 'aberta'}
         attribute.required = true
         attribute.save!
       end

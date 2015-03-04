@@ -26,12 +26,16 @@ class FeedbackServerAPI < Grape::API
     # end
     def authenticated
       #return true if warden.authenticated?
-      params[:access_token] && @user = UserApplication.where(authentication_token: params[:access_token]).first
+      params[:access_token] && @feedback_form = FeedbackForm.where(authentication_token: params[:access_token]).first
     end
 
     def current_user_application
       #warden.user || @user
-      @user
+      @feedback_form.user_application
+    end
+
+    def current_feedback_form
+      @feedback_form
     end
   end
 
@@ -70,14 +74,14 @@ class FeedbackServerAPI < Grape::API
 
 
       #current_user_application.feedbacks.create!(feedback_attributes)
-      feedback = current_user_application.feedbacks.new
+      feedback = current_feedback_form.feedbacks.new
 
       fields = params.dup.reject {|k,v| ! k.start_with? "data_"}
 
       fields.merge!(screenshot_path: filename)
 
       fields.each do |k, v|
-        field_name = k.gsub "data_", ""
+        field_name = k.to_s.gsub "data_", ""
         feedback.attributes[field_name] = v
       end
       feedback.save!

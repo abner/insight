@@ -1,12 +1,12 @@
 class FeedbacksController < ProtectedController
+  respond_to :html, :json, :js
 
-  
   def index
     @feedbacks = list_feedbacks
     add_breadcrumb @user_application
     add_breadcrumb 'Feedbacks', user_application_feedbacks_path(@user_application)
     respond_to do |format|
-      format.html
+      format.html { render :index }
       format.json { render json: FeedbacksDatatable.new(view_context) }
       format.js { render 'index.js.erb' }
     end
@@ -84,7 +84,7 @@ class FeedbacksController < ProtectedController
         begin
           @feedback = feedback_from_params
           @feedback.archive!
-          redirect_to user_application_feedbacks_path(@user_application, view_context.pagination_params)
+          redirect_to user_application_feedback_form_feedbacks_path(@user_application, @feedback.feedback_form, view_context.pagination_params)
         rescue Exception => e
           render json: respond_error_json(:message => e.message ,:object => @feedback), :content_type => 'application/javascript'
         end
@@ -101,7 +101,7 @@ class FeedbacksController < ProtectedController
       format.js do
         @feedback = feedback_from_params
         @feedback.unarchive!
-        redirect_to user_application_feedbacks_path(@user_application, view_context.pagination_params.merge(:scope => 'archived'))
+        redirect_to user_application_feedback_form_feedbacks_path(@user_application, @feedback.feedback_form, view_context.pagination_params.merge(:scope => 'archived'))
       end
     end
   end

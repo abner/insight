@@ -56,7 +56,7 @@ module FeedbacksHelper
   def link_to_archive feedback
     if current_user_can?(:archive_feedback, feedback)
       link_to(
-        archive_user_application_feedback_path(@user_application, feedback, pagination_params),
+        archive_user_application_feedback_form_feedback_path(@user_application, feedback.feedback_form,feedback, pagination_params),
         :method=> 'POST', :remote => true, :data => {:confirm => t('feedback.archive_confirmation_question'),
         :type => 'script', :target_selector => 'a'}
         ) do
@@ -69,7 +69,7 @@ module FeedbacksHelper
   def link_to_unarchive feedback
     if current_user_can?(:unarchive_feedback, feedback)
       link_to(
-        unarchive_user_application_feedback_path(@user_application, feedback, pagination_params),
+        unarchive_user_application_feedback_form_feedback_path(@user_application, feedback.feedback_form,feedback, pagination_params),
         :method=> 'POST', :remote => true, :data => {:confirm => t('feedback.unarchive_confirmation_question'),
         :type => 'script', :target_selector => 'a'}
         ) do

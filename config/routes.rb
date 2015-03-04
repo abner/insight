@@ -49,15 +49,17 @@ Rails.application.routes.draw do
      delete 'remove_member' => 'user_applications#remove_member', as: 'remove_member_for'
     end
     resources :feedbacks do
-      member do
-        delete 'destroy_comment' => 'feedbacks#destroy_comment'
-        post 'add_comment' => 'feedbacks#add_comment'
-        post 'archive' => 'feedbacks#archive'
-        post 'unarchive' => 'feedbacks#unarchive'
-      end
+
     end
     resources :feedback_forms do
-      resources :feedbacks
+      resources :feedbacks do
+        member do
+          delete 'destroy_comment' => 'feedbacks#destroy_comment'
+          post 'add_comment' => 'feedbacks#add_comment'
+          post 'archive' => 'feedbacks#archive'
+          post 'unarchive' => 'feedbacks#unarchive'
+        end
+      end
     end
   end
 

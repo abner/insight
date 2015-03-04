@@ -2,8 +2,8 @@
   {
       type: "hidden",
       name: attribute.name,
-      value: attribute.custom_data[:default_value],
+      value: attribute.custom_data[:value],
       review: false
-  }.to_json + (attribute.eql?(attribute.feedback_form.feedback_attributes.last) ? '' : ',') 
+  }.to_json + (attribute.eql?(attribute.feedback_form.feedback_attributes.last) ? '' : ',')
 )
 %>
