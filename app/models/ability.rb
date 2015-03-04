@@ -38,6 +38,7 @@ class Ability
       if user.is_member?(feedback_form.user_application) or user.owns?(feedback_form.user_application)
         rules << :read_feedback_form
         rules << :write_feedback_form
+        rules << :list_feedback_forms
       end
       rules
     end

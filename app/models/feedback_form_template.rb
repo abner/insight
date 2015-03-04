@@ -12,7 +12,7 @@ class FeedbackFormTemplate
   end
 
   def self.default_template_name
-    'relato_ou_sugestao'
+    'Relato ou Sugestão'
   end
 
   def attributes_template
