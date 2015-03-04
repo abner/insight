@@ -23,7 +23,7 @@
                     <tr>
                       <td><%= link_to user_application.name, user_application_path(user_application) %></td>
                       <td><%= user_application.authentication_token %></td>
-                      <td><%= link_to(
+                      <td><%#= link_to(
                           content_tag(:span, pad(translate('Feedbacks')) + " ", :class => 'fa fa-comment-o'),
                           user_application_feedbacks_path(user_application))%></td>
                     </tr>
