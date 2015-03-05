@@ -320,7 +320,7 @@ div.logo_serpro_50_anos {
   }
 }
 
-.sorted_table tr {
+.sorted_table tbody tr {
   cursor: pointer; }
 /* line 96, /Users/jonasvonandrian/jquery-sortable/source/css/application.css.sass */
 .sorted_table tr.placeholder {

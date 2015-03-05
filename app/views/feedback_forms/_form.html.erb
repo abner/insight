@@ -1,13 +1,10 @@
 <%= bootstrap_form_for @feedback_form, :url => url_for_form(@user_application, @feedback_form) do |f|  %>
-
   <%= f.form_group class: 'col-lg-12' do %>
-  <%= f.error_summary %>
-  <%= f.text_field :name %>
+    <%= f.error_summary %>
   <% end %>
-
+  <%= f.text_field :name %>
 
   <%= render partial: 'attributes_table', :locals => {f: f} %>
-
 
   <%= f.form_group class: 'col-lg-4' do %>
     <%= f.collection_check_boxes :grid_columns, @feedback_form.feedback_attributes, :name, :label %>

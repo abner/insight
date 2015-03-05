@@ -47,6 +47,9 @@ pt-BR:
       new_form: 'Incluir Formulário'
     form_group:
       plugins: Plugins
+    show:
+      tip_drag_and_drop: 'Clique e arraste as linhas da tabela para definir a ordem dos campos'
+      tip_label: Dica
     table_columns:
       name: Nome
       actions: Ações
