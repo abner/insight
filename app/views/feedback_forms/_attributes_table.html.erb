@@ -1,0 +1,35 @@
+<div class='col-lg-12'>
+  <%= f.form_group class: 'row', label: {text: 'Campos do Formulário'} do %>
+  <table class='sorted_table table-responsive table-bordered table'>
+    <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Nome</th>
+        <th>Label</th>
+        <th>Options</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @feedback_form.feedback_attributes.all.sort(position: 1).each do |attribute| %>
+      <%= f.fields_for_with_bootstrap :feedback_attributes, attribute do |attribute_form| %>
+      <tr>
+        <td>
+          <%= attribute_form.hidden_field 'position', :class => 'position' %>
+          <%= render :partial => "feedback_forms/attribute_types/#{attribute.type.name.downcase}" %>
+        </td>
+        <td><%= attribute.name %></td>
+        <td><%= attribute.label %></td>
+        <td>
+          <%= attribute.custom_data["options"].join(',') if attribute.custom_data and  attribute.custom_data["options"]%>
+        </td>
+        <td>
+          <%= attribute.custom_data["value"] if attribute.custom_data.present? and attribute.custom_data["value"] %>
+        </td>
+      </tr>
+      <% end %>
+      <% end %>
+      <tbody>
+  </table>
+</div>
+<% end %>

@@ -93,7 +93,7 @@ $(function() {
 
 
 function init(){
-  $('pre code').each(function(i, e) {
+  $('pre.preview_source code').each(function(i, e) {
     try { hljs.highlightBlock(e); } catch(e) {}
   });
   $('.dropdown-toggle').dropdown();

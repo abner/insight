@@ -1,17 +1,17 @@
 <%= bootstrap_form_for @feedback_form, :url => user_application_feedback_forms_path(@user_application, @feedback_form) do |f|  %>
   <%= f.error_summary %>
   <%= f.static_control :name %>
+  <div class='row'>
+    <%= f.form_group class: 'col-lg-4' do %>
+    <%= f.collection_check_boxes :grid_columns, @feedback_form.feedback_attributes, :name, :label, :disabled => true %>
+    <% end %>
+
+    <%= f.form_group class: 'col-lg-4' do %>
+    <%= f.collection_check_boxes :detail_columns, @feedback_form.feedback_attributes, :name, :label, :disabled => true %>
+    <% end %>
+  </div>
   <%= f.form_group do %>
-    <%= f.static_control :grid_columns %>
-  <% end %>
-  <%= f.form_group do %>
-  <%= f.static_control :grid_columns %>
-  <% end %>
-  <%= f.form_group do %>
-    <%= f.static_control :screenshot_enabled %>
-    <%= f.static_control :review_enabled %>
-  <% end %>
-  <%= f.form_group do %>
-    <%= f.submit %>
+    <%= f.check_box :screenshot_enabled, :disabled => true %>
+    <%= f.check_box :review_enabled, :disabled => true %>
   <% end %>
 <% end %>
