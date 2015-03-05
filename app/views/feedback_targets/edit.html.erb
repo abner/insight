@@ -1,0 +1,12 @@
+
+<h1 class="page-header"><%= translate('Edit application') %></h1>
+
+
+<%= bootstrap_form_for @feedback_target, :role =>  'form' do |f| %>
+	<%= f.text_field 'name', :autofocus => 'true', label: t('Name') %>
+	<%= f.submit t("Submit") %>
+<% end %>
+
+
+
+<%= render :partial => 'members_edit' if  current_user_can?(:admin_team_members, @feedback_target)%>

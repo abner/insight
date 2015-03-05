@@ -10,7 +10,7 @@ class FeedbackAttributeModel
   field :custom_data, type:Hash
   field :required, type: Boolean, default: false
 
-  
+
   def self.template_for name
     model = where(name: name).first
     raise 'not found'  unless model

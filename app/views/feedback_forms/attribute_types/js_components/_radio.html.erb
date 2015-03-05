@@ -1,0 +1,10 @@
+<%=
+raw(
+  {
+    type: "radio",
+    name: attribute.name,
+    label: attribute.label,
+    options: attribute.custom_data[:options],
+    required: true
+  }.to_json.to_s + (attribute.eql?(attribute.feedback_form.feedback_attributes.last) ? '' : ',') 
+%>

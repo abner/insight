@@ -1,5 +1,5 @@
 <%= bootstrap_form_for :comment,
-  :url => add_comment_user_application_feedback_path(@user_application, feedback),
+  :url => add_comment_feedback_target_feedback_form_feedback_path(@feedback_target, feedback.feedback_form, feedback),
   :remote => true, :format => 'js',
   :html => {:class => 'comment_form'} do |f| %>
 <div class="input-group">

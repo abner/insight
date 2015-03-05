@@ -1,28 +1,44 @@
-== README
+== Feedback Web Application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Esta aplicação tem como objetivo fornecer um serviço de captura de feedbacks
+para aplicações web, similar a outros serviços como UserVoice e outros.
 
-Things you may want to cover:
+Como funciona:
 
-* Ruby version
+Usuário acessa o sistema e cria um registro para sua aplicação.
 
-* System dependencies
+Nesse momento um formulário padrão de feedback já é criado e um
+script javascript e um css são disponibilizados para que o usuário adicione
+em sua aplicação.
 
-* Configuration
+Esse trecho de código, quano incorporado adiciona um botão 'Reportar' na
+aplicação hospedeira. Este botão ao ser acionado  um popup com o formulário de
+feedback é apresentado ao visitante/usuário. Após ser preenchido e confirmado,
+há a possibilidade do usuário realizar uma captura de tela automática, que será
+adicionado ao feedback. Sendo que essa funcionalidade de screenshot pode ser
+desabilitada. Além disso o visitante pode escolher destacar ou esconder áreas
+da captura da tela.
+Após isso, é possível ao visitante revisar o conteúdo do feedback antes de confirmar
+o envio. Essa opção de revisão também pode ser desabilitada.
+Uma vez confirmada o envio os dados preenchidos são enviados ao serviço de feedback.
+Dessa forma, os gestores e desenvolvedores da aplicação web podem visualizar os feedbacks recebidos.
+Há a possibilidade também de uma gestão dos feedbacks recebidos.
 
-* Database creation
+Tecnologias envolvidas:
 
-* Database initialization
+Backend do Serviço - Aplicação Ruby on Rails com banco de dados MongoDB
+Html2Canvas - Captura de Tela em Javascript
+Css baseado em Bootstrap 3 para a interface visual do formulário
 
-* How to run the test suite
+Em desenvolvimento:
 
-* Services (job queues, cache servers, search engines, etc.)
+ - Configuração do formulário do componente de forma visual na aplicação Rails
+ - Definiçaõ de Modelos de Formulário
+ - Múltiplos Formulários por Aplicação
+ -
 
-* Deployment instructions
 
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Pessoas envolvidas:
+    - Ábner Oliveira (SERPRO) - 71 2102-1405 - abner.oliveira@serpro.gov.br
+    - Ranulfo Neto   (SERPRO) - 
+    - Leandro Nunes  (SERPRO) -

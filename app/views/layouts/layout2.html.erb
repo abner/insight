@@ -37,7 +37,8 @@
 
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
-    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+    <%#= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+    <link rel="icon"  type="image/png" href="/images/black-balloon-plus-icon.png">
 
     <%= yield :head %>
     <style type="text/css">
@@ -162,6 +163,7 @@
 
             <div class="container-fluid">
                 <%= bootstrap_flash %>
+                <%= render_breadcrumbs %>
                 <%= yield %>
 
             </div>

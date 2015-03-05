@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
 
   def breadcrumb
-    add_breadcrumb 'Início', user_applications_path
+    add_breadcrumb 'Início', feedback_targets_path
   end
 
   def define_locale
@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    user_applications_path
+    feedback_targets_path
   end
 
   def respond_success_json(args={})

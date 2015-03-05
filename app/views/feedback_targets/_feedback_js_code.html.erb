@@ -1,0 +1,57 @@
+    $(document).ready(function() {
+      Feedback(
+              {
+                  label: "Reportar",
+                  header: "Registro de ocorrência",
+                  url: "<%= app_base_url %>/api/v1/feedbacks?access_token=<%= feedback_target.authentication_token %>",
+                  nextLabel: "Continuar",
+                  reviewLabel: "Revisar",
+                  sendLabel:  "Enviar",
+                  closeLabel: "Fechar",
+                  highlightBlackoutHelp: "Você pode destacar informações úteis ou ocultar informações sensíveis.",
+                  blackoutButtonLabel: "Ocultar",
+                  highlightButtonLabel: "Destacar",
+                  messageSuccess: "O seu relato foi enviado com sucesso!",
+                  messageError: "Houve um erro ao enviar o relato...",
+                  pages: [
+                          new window.Feedback.Form([
+                                  {
+                                      type: "select",
+                                      name: "tipo_relato",
+                                      label: "Tipo de Relato",
+                                      options: ["Sugestão", "Erro"],
+                                      required: true
+                                  },
+                                  {
+                                          type: "select",
+                                          name: "severidade",
+                                          label: "Severidade",
+                                          options: ["Leve", "Média", "Crítica"],
+                                          required: true
+                                  },
+                                  {
+                                      type: "starrating",
+                                      name: "starrating",
+                                      label: "Avalie",
+                                      options: ["Insatisfeito", "2", "3", "4", "Muito Satisfeito"],
+                                      required: true
+                                  },
+                                 {
+                                      type: "textarea",
+                                      name: "relato",
+                                      label: "Relato",
+                                      required: true
+                                  },
+                                  {
+                                      type: "hidden",
+                                      name: "situacao",
+                                      value: "aberto",
+                                      review: false
+                                  }
+                                  ]
+                          ),
+                          new window.Feedback.Screenshot(),
+                          new window.Feedback.Review()
+                  ]
+               });
+    });

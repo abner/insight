@@ -1,0 +1,6 @@
+  <ul class="no-bullet users_list">
+    <% members.each do |m| %>
+      <li><%= format_member_for_list(m)%>
+        <%= link_to t('remove_member'), url_for(remove_member_for_feedback_target_path(:member_id => m.id)), :remote => true, :method => :delete%></li>
+    <% end %>
+  </ul>

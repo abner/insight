@@ -1,0 +1,6 @@
+<h1><%= translate('My applications') %></h1>
+
+<%= form_for @feedback_target do |f| %>
+  <%= f.text 'name' %>
+  <%= f.submit translate('Submit'), :class => 'button small alternative' %>
+<% end %>

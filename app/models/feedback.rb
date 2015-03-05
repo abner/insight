@@ -3,7 +3,27 @@ class Feedback
   include Mongoid::Attributes::Dynamic
   include Mongoid::Timestamps::Created
 
-  belongs_to :user_application
+  # Mongoid Paranoia adds soft delete to model
+  # - destroy will set deleted_at to current_time
+  # - models with deleted_at defined will be ignored on default scope
+  # - deleted scope is added to allow list deleted instances
+  include Mongoid::Paranoia
+
+  # before_create do
+  #   self.feedback_target = feedback_form.feedback_target
+  # end
+
+  def feedback_target
+    feedback_form.feedback_target if feedback_form
+  end
+
+  def feedback_target_id
+    feedback_form.feedback_target.id if feedback_form
+  end
+
+  #belongs_to :feedback_target
+
+  belongs_to :feedback_form
 
   field :server_date_time, type: DateTime
 
@@ -58,7 +78,7 @@ class Feedback
 
   def columns
     columns = self.attributes.reject do |k,v|
-      k == "user_application_id"
+      k == "feedback_target_id"
     end
     columns.map do |c|
       { :key => c[0], :value => c[1]}
@@ -92,11 +112,11 @@ class Feedback
   end
 
   def self.max_field_count_for_relation(relation)
-    puts "RELATION: #{relation.inspect} "
+    #puts "RELATION: #{relation.inspect} "
     reduce = relation.map_reduce(object_attributes_count_map, number_array_max_value_reduce).out(:inline => true)
-    puts reduce.send(:command).send(:inspect)
-    puts "INPUT: #{reduce.input}"
-    puts "REDUCED: #{reduce.reduced}"
+    #puts reduce.send(:command).send(:inspect)
+    #puts "INPUT: #{reduce.input}"
+    #puts "REDUCED: #{reduce.reduced}"
     result = reduce.first
     result.nil? ? 0 : result[:value]
   end
@@ -116,8 +136,8 @@ class Feedback
   end
 
   def self.last_feedbacks_for_user(user)
-    apps_ids = UserApplication.all_apps_for_user(user).map {|app| app.id.to_s }
-    Feedback.in(user_application_id:  apps_ids).order(created_at: 'DESC').paginate(page: 1, per_page: 5)
+    apps_ids = FeedbackTarget.all_targets_for_user(user).map {|app| app.id.to_s }
+    Feedback.in(feedback_target_id:  apps_ids).order(created_at: 'DESC').paginate(page: 1, per_page: 5)
   end
 
 protected

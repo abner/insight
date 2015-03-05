@@ -1,5 +1,3 @@
-<% layout('login_page') %>
-
 <h2><%= t('.forgot_your_password', :default => 'Forgot your password?') %></h2>
 
 <%= bootstrap_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => 'form-signin' }) do |f| %>

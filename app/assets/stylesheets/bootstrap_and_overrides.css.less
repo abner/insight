@@ -17,8 +17,9 @@
 // Glyphicons
 @import "twitter/bootstrap/glyphicons.less";
 
-@fa-font-path: "/assets"; // Override fontawesome less variable in order for it to work with Rails asset pipeline 
+@fa-font-path: "/assets"; // Override fontawesome less variable in order for it to work with Rails asset pipeline
 
+@import "twitter/bootstrap/mixins.less";
 
 // Your custom LESS stylesheets goes here
 //
@@ -30,3 +31,15 @@
 //
 // Example:
 // @link-color: #ff0000;
+.breadcrumb {
+  margin-bottom: 0px;
+  padding: 8px 0px;
+  background-color: transparent;
+}
+
+
+
+
+.page-header {
+  margin-top: 10px;
+}

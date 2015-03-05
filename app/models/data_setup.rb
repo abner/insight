@@ -4,16 +4,47 @@ class DataSetup
     def run!
       create_attributes_types!
       create_attributes_models!
-      if create_templates!
-        fill_apps!
-      end
+      create_templates!
+      fill_apps!
+      transfer_feedbacks!
     end
 
 private
 
-  #fill user_application with current template
-  def fill_apps!
-  end
+    #fill feedback_target with current template
+    def fill_apps!
+      FeedbackTarget.all.each do |app|
+        puts "Processando app #{app.name}"
+        if app.default_feedback_form.nil?
+          puts 'app com default form nil'
+          if app.feedback_forms.empty?
+            puts 'não tem form - criando um'
+            form_attributes = FeedbackFormTemplate.default_template.attributes_template
+            form = app.feedback_forms.create! form_attributes
+            #set as default form for this feedback_target
+            puts 'definindo form'
+            app.set_default_form! form
+          else
+            puts 'já tinha form - definindo primeiro form como default'
+            puts "#{app.feedback_forms.first.inspect}"
+            app.set_default_form! app.feedback_forms.first
+          end
+          puts "Defaut form gravado: #{app.default_feedback_form.inspect}"
+          app.reload
+          puts "Defaut form gravado #after_reload: #{app.default_feedback_form.inspect}"
+        end
+      end
+    end
+
+    def transfer_feedbacks!
+      FeedbackTarget.all.each do |app|
+        if(app.default_feedback_form.feedbacks.empty? && app.feedbacks.count > 0)
+          app.feedbacks.each do |feedback|
+            feedback.update_attribute(:feedback_form, app.default_feedback_form) if feedback.feedback_form.nil?
+          end
+        end
+      end
+    end
 
     def attribute_type_by_name name
       FeedbackAttributeType.find_by(name: name)
@@ -87,7 +118,7 @@ private
         attribute.name = 'situacao'
         attribute.display_label = ""
         attribute.type = attribute_type_by_name('Hidden')
-        attribute.custom_data = {value: 'aberto'}
+        attribute.custom_data = {value: 'aberta'}
         attribute.required = true
         attribute.save!
       end
@@ -106,7 +137,7 @@ private
     def create_templates!
       if FeedbackFormTemplate.count == 0
         # creating feedback form templates
-        FeedbackFormTemplate.create name: 'relato_ou_sugestao' do |template|
+        FeedbackFormTemplate.create name: 'Relato ou Sugestão' do |template|
           template.save!
           template.feedback_attributes.create!(attributes_by_name('tipo_relato'))
           template.feedback_attributes.create!(attributes_by_name('severidade'))

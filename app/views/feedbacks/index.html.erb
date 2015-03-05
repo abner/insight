@@ -1,10 +1,10 @@
-<h1 class="page-header"><%= @user_application.name %></h1>
+<h1 class="page-header"><%= @feedback_target.name %></h1>
 <div class="panel panel-default">
   <div class="panel-heading">
       <h3 class="panel-title">Feedbacks</h3>
   </div>
   <div class="panel-body">
-      <div id="feedbacks_table" class="table-responsive">
+      <div id="feedbacks_table">
         <%= render :partial => 'table' %>
       </div>
 

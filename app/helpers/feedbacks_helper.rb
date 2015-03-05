@@ -18,7 +18,6 @@ module FeedbacksHelper
   end
 
   def show_column_value(column_name, value)
-    return raw '&nbsp;' if value.nil?
     return raw '&nbsp;' if value.is_a?(String) and value.empty?
     #puts "Tipo: #{value.class.name} - value: #{value}"
     if 'screenshot_path'.eql?(column_name)
@@ -57,11 +56,11 @@ module FeedbacksHelper
   def link_to_archive feedback
     if current_user_can?(:archive_feedback, feedback)
       link_to(
-        archive_user_application_feedback_path(@user_application, feedback, pagination_params),
+        archive_feedback_target_feedback_form_feedback_path(@feedback_target, feedback.feedback_form,feedback, pagination_params),
         :method=> 'POST', :remote => true, :data => {:confirm => t('feedback.archive_confirmation_question'),
         :type => 'script', :target_selector => 'a'}
         ) do
-            raw("<i class='fa fa-trash-o'></i>") +
+            raw("<i class='fa fa-archive-o'></i>") +
             content_tag(:span, pad(t('Archive')))
         end
     end
@@ -70,11 +69,11 @@ module FeedbacksHelper
   def link_to_unarchive feedback
     if current_user_can?(:unarchive_feedback, feedback)
       link_to(
-        unarchive_user_application_feedback_path(@user_application, feedback, pagination_params),
+        unarchive_feedback_target_feedback_form_feedback_path(@feedback_target, feedback.feedback_form,feedback, pagination_params),
         :method=> 'POST', :remote => true, :data => {:confirm => t('feedback.unarchive_confirmation_question'),
         :type => 'script', :target_selector => 'a'}
         ) do
-          content_tag(:span, pad(t('Unarchive')), :class => 'fa fa-trash-o')
+          content_tag(:span, pad(t('Unarchive')), :class => 'fa fa-undo')
         end
     end
   end

@@ -1,8 +1,0 @@
-<h1 class="page-header"><%= translate('New application') %></h1>
-
-<%=  bootstrap_form_for @user_application, :role => 'form' do |f| %>
-	
-  		<%= f.text_field 'name', :autofocus => true, :label => t('Name') %>
-  	
-  <%= f.button translate('Submit'), :class => 'btn btn-primary' %>
-<% end %>

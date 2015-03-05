@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
+#ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.0'
+ruby '2.2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
+
+
 
 # middleware for api
 gem 'grape'
@@ -11,7 +15,8 @@ gem 'sqlite3', :platform => :ruby
 #ORM for mongodb
 gem "mongoid", "~> 4.0.0"
 gem 'mongoid-tree'
-gem 'mongoid_slug' #create slug creation for mongoid models
+gem 'mongoid_paranoia'
+gem 'mongoid-slug' #create slug creation for mongoid models
 
 # Use SCSS for stylesheets
 gem 'sass-rails'#, '~> 4.0.2'
@@ -70,11 +75,21 @@ group :development do
   gem 'rails_layout'
   gem 'pry-rails'
   gem 'guard-rspec', :require => false
+  #gem 'web-console', '~> 2.0'
+  gem "better_errors"
+  gem 'binding_of_caller'
+  gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'railroady'
 end
 
 group :development, :test do
-  gem 'debugger'
+  gem 'debugger', :platforms => :mri_19
+  gem 'byebug', :platforms => [:mri_20, :ruby_21, :ruby_22]
 end
+
+#errbit / airbrake
+gem 'airbrake'
 
 group :test do
   # clean database before tests
@@ -148,4 +163,7 @@ gem 'recursive-open-struct'
 
 
 #Forms for Bootstrap
+#https://github.com/bootstrap-ruby/rails-bootstrap-forms
 gem 'bootstrap_form'
+
+gem 'mongoid_rails_migrations', '~> 1.1.0'

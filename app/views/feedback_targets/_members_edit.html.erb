@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-lg-6">
+    <h6>Adicionar Usuários</h6>
+    <%= form_tag( url_for(add_members_for_feedback_target_path), remote: true, :id => 'form_members') do %>
+      <%= hidden_field_tag :team_members_ids, "",
+      data: {
+        placeholder: "Selecione os membros de sua equipe:",
+        #@feedback_target.team_members.to_json :each_serializer UserAutocompleteSerializer
+        saved: '[]',
+        url: members_for_feedback_target_path},
+        class: "autocomplete",
+          style: "width:100%"
+          %>
+      <% end %>
+  </div>
+  <div class="col-lg-6">
+    <h6>Usuários com acesso</h6>
+    <div id='members_list'>
+    <%= render :partial => 'members_list', :locals => {:members => @feedback_target.members} %>
+    </div>
+  </div>
+</div>
+
+<h6>Convidar</h6>
+<p>Em breve será possível enviar convite por email!</p>
+
+<% content_for :body_end  do%>
+  <script type="text/javascript">
+  function configurarAutocomplete() {
+    // $('#invite_members_emails').each(function(){
+    //   //tags: true,
+    //   //tokenSeparators: [',', ' '],
+    // });
+    $('#team_members_ids').each(function() {
+      var url = $(this).data('url');
+      var placeholder = $(this).data('placeholder');
+      var saved = <%= raw @feedback_target.members_user_names.as_json %> ;
+      $(this).select2({
+        minimumInputLength: 2,
+        multiple: true,
+        placeholder : placeholder,
+        allowClear: true,
+        ajax: {
+          url: url,
+          dataType: 'json',
+          quietMillis: 500,
+          data: function (term) {
+            return {
+              username: term
+            };
+          },
+          results: function (data) {
+            return {results: data};
+          }
+        },
+
+        formatResult: function (item, page) {
+          return item.username + '(' + item.email + ')';
+        },
+
+        formatSelection: function (item, page) {
+          return item.username ;
+        },
+
+        initSelection : function (element, callback) {
+          if (saved) {
+            callback(saved);
+          }
+        }
+
+      }).on('change', function() {
+                        if($(this).val() !== '') {
+                          $('#form_members').submit();
+                      }
+      });
+    });
+  }
+  jQuery(document).on('ready page:load', configurarAutocomplete);
+  </script>
+<% end %>

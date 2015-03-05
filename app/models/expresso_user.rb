@@ -30,7 +30,7 @@ class ExpressoUser < User
       user.save!
     else
       #create a new expresso user if none was found
-      user = ExpressoUser.create do
+      user = ExpressoUser.create do |user|
         user.username = omniauth_hash[:info][:username]
         user.email = omniauth_hash[:info][:email]
         user.name = omniauth_hash[:info][:name]

@@ -67,6 +67,12 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
+stage:
+  sessions:
+    default:
+      database: feedback_server_dev
+      hosts:
+        - localhost:27017
 production:
   sessions:
     default:

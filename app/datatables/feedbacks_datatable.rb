@@ -34,8 +34,8 @@ private
   end
 
   def all_feedbacks
-    id_url = params[:user_application_id]
-    current_user.user_applications.find(id_url).feedbacks.order("#{sort_column} #{sort_direction}")
+    id_url = params[:feedback_target_id]
+    current_user.feedback_targets.find(id_url).feedbacks.order("#{sort_column} #{sort_direction}")
   end
 
   def fetch_feedbacks

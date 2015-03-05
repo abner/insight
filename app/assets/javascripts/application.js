@@ -19,6 +19,8 @@
 
 
 // require jquery-ui
+
+//= require jquery-sortable
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require turbolinks
@@ -91,7 +93,7 @@ $(function() {
 
 
 function init(){
-  $('pre code').each(function(i, e) {
+  $('pre.preview_source code').each(function(i, e) {
     try { hljs.highlightBlock(e); } catch(e) {}
   });
   $('.dropdown-toggle').dropdown();
@@ -105,7 +107,8 @@ function init(){
 
   //handler de click nos screenshots
   $(document).on('click', 'a.screenshot_link', null, function(){
-    alertify.alert('<img src="' + $(this).attr('href') + '" width="800" height="600"></img>').set('resizable',true).resizeTo(800,600).set('basic', true);
+    //alertify.alert('<img src="' + $(this).attr('href') + '" width="800" height="600"></img>').set('resizable',true).resizeTo(800,600).set('basic', true);
+    alertify.alert('<img src="' + $(this).attr('href') + '"></img>').set('resizable',true).maximize().set('basic', true);
     return false;
   });
 }

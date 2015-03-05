@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  # get 'user_applications/index'
+  # get 'feedback_targets/index'
   #
-  # get 'user_applications/create'
+  # get 'feedback_targets/create'
   #
-  # get 'user_applications/update'
+  # get 'feedback_targets/update'
   #
-  # get 'user_applications/destroy'
+  # get 'feedback_targets/destroy'
 
   devise_for :expresso_user, :registered_user, :ldap_users, skip: [ :sessions ]
 
@@ -35,27 +35,32 @@ Rails.application.routes.draw do
 
   get 'dashboard' => "dashboard#index"
 
+  get 'widget/:token' => 'feedback_forms#code'
+
 
   get 'protected' => 'protected#index'
 
   get 'proxy' => 'proxy#index'
 
-  resources  :user_applications do
-     member do
-       #get 'feedbacks' => 'feedbacks#index'
-       get 'search_for_members' => 'user_applications#search_for_members', as: 'members_for'
-       post 'add_members' => 'user_applications#add_members', as: 'add_members_for'
-       delete 'remove_member' => 'user_applications#remove_member', as: 'remove_member_for'
-     end
+  resources  :feedback_targets do
+    member do
+     get 'search_for_members' => 'feedback_targets#search_for_members', as: 'members_for'
+     post 'add_members' => 'feedback_targets#add_members', as: 'add_members_for'
+     delete 'remove_member' => 'feedback_targets#remove_member', as: 'remove_member_for'
+    end
     resources :feedbacks do
-      member do
-      delete 'destroy_comment' => 'feedbacks#destroy_comment'
-        post 'add_comment' => 'feedbacks#add_comment'
-        post 'archive' => 'feedbacks#archive'
-        post 'unarchive' => 'feedbacks#unarchive'
+
+    end
+    resources :feedback_forms do
+      resources :feedbacks do
+        member do
+          delete 'destroy_comment' => 'feedbacks#destroy_comment'
+          post 'add_comment' => 'feedbacks#add_comment'
+          post 'archive' => 'feedbacks#archive'
+          post 'unarchive' => 'feedbacks#unarchive'
+        end
       end
     end
-
   end
 
   get '/users/autocomplete', to: 'users#autocomplete', as: 'autocomplete_user'

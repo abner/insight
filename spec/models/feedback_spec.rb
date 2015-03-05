@@ -18,6 +18,22 @@ RSpec.describe Feedback, :type => :model do
 
   end
 
+  it 'is possible to recovere after destroyed' do
+    feedback = valid_feedback
+    feedback.save!
+    feedback.destroy
+    expect(Feedback.deleted.where(id: feedback.id).first).not_to be_nil
+    feedback.restore
+    expect(Feedback.all.where(id: feedback.id).first.id).to eq(feedback.id)
+  end
+
+  it 'cannot be restored if destroyed with destroy!' do
+    feedback = valid_feedback
+    feedback.save!
+    feedback.destroy!
+    expect(Feedback.deleted.where(id: feedback.id).first).to be_nil
+  end
+
   it 'has a view_id method' do
     feedback = valid_feedback
     expect(feedback.view_id).not_to be_nil
@@ -47,11 +63,11 @@ RSpec.describe Feedback, :type => :model do
     f2 = feedback_extrafields
     expect(Feedback.count).to eq(2)
 
-    expect(Feedback.max_field_count).to eq(8)
-    expect(Feedback.max_field_count_for_relation(Feedback.all.limit(1).sort(_id:1))).to eq(6)
+    expect(Feedback.max_field_count).to eq(9)
+    expect(Feedback.max_field_count_for_relation(Feedback.all.limit(1).sort(_id:1))).to eq(7)
 
-    expect(Feedback.min_field_count).to eq(6)
-    expect(Feedback.min_field_count_for_relation(Feedback.all.skip(1).limit(1).sort(_id:-1))).to eq(8)
+    expect(Feedback.min_field_count).to eq(7)
+    expect(Feedback.min_field_count_for_relation(Feedback.all.skip(1).limit(1).sort(_id:-1))).to eq(9)
   end
 
   it 'return 0 on max field count if there is no feedback recorded' do
@@ -94,7 +110,7 @@ RSpec.describe Feedback, :type => :model do
   end
 
   context 'is commentable' do
-    let(:valid_user) { FactoryGirl.create(:user) }
+    let(:valid_user) { FactoryGirl.create(:registered_user) }
 
     let(:feedback_with_comment) { FactoryGirl.create(:feedback_with_comment) }
 
