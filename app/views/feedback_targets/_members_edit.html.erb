@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-lg-6">
     <h6>Adicionar Usuários</h6>
-    <%= form_tag( url_for(add_members_for_user_application_path), remote: true, :id => 'form_members') do %>
+    <%= form_tag( url_for(add_members_for_feedback_target_path), remote: true, :id => 'form_members') do %>
       <%= hidden_field_tag :team_members_ids, "",
       data: {
         placeholder: "Selecione os membros de sua equipe:",
-        #@user_application.team_members.to_json :each_serializer UserAutocompleteSerializer
+        #@feedback_target.team_members.to_json :each_serializer UserAutocompleteSerializer
         saved: '[]',
-        url: members_for_user_application_path},
+        url: members_for_feedback_target_path},
         class: "autocomplete",
           style: "width:100%"
           %>
@@ -16,7 +16,7 @@
   <div class="col-lg-6">
     <h6>Usuários com acesso</h6>
     <div id='members_list'>
-    <%= render :partial => 'members_list', :locals => {:members => @user_application.members} %>
+    <%= render :partial => 'members_list', :locals => {:members => @feedback_target.members} %>
     </div>
   </div>
 </div>
@@ -34,7 +34,7 @@
     $('#team_members_ids').each(function() {
       var url = $(this).data('url');
       var placeholder = $(this).data('placeholder');
-      var saved = <%= raw @user_application.members_user_names.as_json %> ;
+      var saved = <%= raw @feedback_target.members_user_names.as_json %> ;
       $(this).select2({
         minimumInputLength: 2,
         multiple: true,

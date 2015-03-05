@@ -1,4 +1,4 @@
-<%= bootstrap_form_for @feedback_form, :url => user_application_feedback_forms_path(@user_application, @feedback_form) do |f|  %>
+<%= bootstrap_form_for @feedback_form, :url => feedback_target_feedback_forms_path(@feedback_target, @feedback_form) do |f|  %>
   <%= f.error_summary %>
   <%= f.static_control :name %>
   <div class='row'>

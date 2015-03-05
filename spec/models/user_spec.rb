@@ -61,28 +61,28 @@ RSpec.describe User, :type => :model do
     expect(User.by_username('PESSOA').to_a).to be_empty
   end
 
-  it 'owns user_application' do
+  it 'owns feedback_target' do
     user = FactoryGirl.create(:registered_user, :username => 'joao', :email => 'maria@serpro.c.d')
-    user_application = FactoryGirl.create(:user_application, :owner => user)
-    expect(user.owns?(user_application)).to eq(true)
+    feedback_target = FactoryGirl.create(:feedback_target, :owner => user)
+    expect(user.owns?(feedback_target)).to eq(true)
   end
 
-  it 'is member of user_applications' do
+  it 'is member of feedback_targets' do
     user = FactoryGirl.create(:registered_user, :username => 'joao', :email => 'maria@serpro.c.d')
-    user_application = FactoryGirl.create(:user_application)
-    user_application.members << user
-    expect(user.is_member?(user_application)).to eq(true)
+    feedback_target = FactoryGirl.create(:feedback_target)
+    feedback_target.members << user
+    expect(user.is_member?(feedback_target)).to eq(true)
   end
 
-  it 'has my_apps collection which lists user_applications he owns and is member of' do
+  it 'has my_apps collection which lists feedback_targets he owns and is member of' do
     user = FactoryGirl.create(:registered_user, :username => 'joao', :email => 'maria@serpro.c.d')
-    user_application_member = FactoryGirl.create(:user_application)
-    user_application_member.members << user
+    feedback_target_member = FactoryGirl.create(:feedback_target)
+    feedback_target_member.members << user
 
-    user_application_owned = FactoryGirl.create(:user_application, :owner => user)
+    feedback_target_owned = FactoryGirl.create(:feedback_target, :owner => user)
 
-    expect(user.my_apps).to include(user_application_member)
-    expect(user.my_apps).to include(user_application_owned)
+    expect(user.my_apps).to include(feedback_target_member)
+    expect(user.my_apps).to include(feedback_target_owned)
   end
 
   it 'is located by username or email' do

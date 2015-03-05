@@ -10,7 +10,7 @@
   </div>
   <div class="panel-body">
     <%= render :partial => 'form_static' %>
-    <%= bootstrap_form_for @feedback_form, :url => url_for_form(@user_application, @feedback_form) do |f|  %>
+    <%= bootstrap_form_for @feedback_form, :url => url_for_form(@feedback_target, @feedback_form) do |f|  %>
       <%= render partial: 'attributes_table', locals: {f: f} %>
     <% end %>
     <hr />
@@ -25,7 +25,7 @@
     </blockquote>
 
     <hr />
-    <%= link_to t('Editar'), edit_user_application_feedback_form_path(@feedback_form.user_application, @feedback_form), class: 'btn btn-success' %>
+    <%= link_to t('Editar'), edit_feedback_target_feedback_form_path(@feedback_form.feedback_target, @feedback_form), class: 'btn btn-success' %>
 
   </div>
   <!-- <div class="panel-footer">

@@ -38,7 +38,7 @@ pt-BR:
     Confirmation: 'Confirmação'
     OK: 'OK'
     Cancel: 'Cancelar'
-  user_application:
+  feedback_target:
     confirmation_question: 'Tem certeza que deseja excluir a aplicação?'
     page_title:
       new: Nova Aplicação
@@ -127,7 +127,7 @@ pt-BR:
         name: 'Nome'
         email: 'E-mail'
         password: 'Senha'
-      user_application:
+      feedback_target:
         name: 'Nome'
       feedback_form:
         name: 'Nome'
@@ -601,7 +601,7 @@ pt-BR:
           resolution: "Don't attempt to delete the parent %{document} when
             it has children, or change the dependent option on the relation."
       models:
-        user_application:
+        feedback_target:
           attributes:
             name:
               taken: 'já existe'

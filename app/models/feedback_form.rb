@@ -14,7 +14,7 @@ class FeedbackForm
   embeds_many :feedback_attributes, cascade_callbacks: true, order: :position.asc
   accepts_nested_attributes_for :feedback_attributes
 
-  belongs_to :user_application
+  belongs_to :feedback_target
 
   field :grid_columns, type: Array
 
@@ -23,14 +23,14 @@ class FeedbackForm
   field :screenshot_enabled, type: Boolean, default: true
   field :review_enabled, type: Boolean, default: true
 
-  validates_presence_of :name, :feedback_attributes, :user_application
+  validates_presence_of :name, :feedback_attributes, :feedback_target
 
   has_many :feedbacks, dependent: :destroy
 
 
 
 
-  slug :name, history: true, scope: :user_application
+  slug :name, history: true, scope: :feedback_target
 
   def to_s
     name

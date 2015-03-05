@@ -31,8 +31,8 @@ layout 'login_page'
   end
 
   def new
-    #redirect_to '/user_applications'  if  registered_user_signed_in? || ldap_user_signed_in?
-    redirect_to '/user_applications'  if  registered_user_signed_in? || expresso_user_signed_in?
+    #redirect_to '/feedback_targets'  if  registered_user_signed_in? || ldap_user_signed_in?
+    redirect_to '/feedback_targets'  if  registered_user_signed_in? || expresso_user_signed_in?
     # Set up a blank resource for the view rendering
     self.resource = User.new
   end

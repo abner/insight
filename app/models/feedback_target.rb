@@ -1,4 +1,4 @@
-class UserApplication
+class FeedbackTarget
   include Mongoid::Document
   include Mongoid::Slug
 
@@ -27,12 +27,12 @@ class UserApplication
   validates_presence_of :name
 
   # associations
-  belongs_to :owner, class_name: 'User', inverse_of: :user_applications, foreign_key: 'owner_id'
+  belongs_to :owner, class_name: 'User', inverse_of: :feedback_targets, foreign_key: 'owner_id'
   has_and_belongs_to_many :members, class_name: 'User', inverse_of: :memberships
   has_many :feedback_forms,
             class_name: 'FeedbackForm',
-            inverse_of: :user_application,
-            foreign_key: 'user_application_id',
+            inverse_of: :feedback_target,
+            foreign_key: 'feedback_target_id',
             dependent: :destroy
   has_many :feedbacks #, dependent: :destroy
   #belongs_to :default_feedback_form, class_name: 'FeedbackForm'
@@ -90,11 +90,11 @@ protected
       #creates a form using FeedbackFormTemplate.default_template as base
       form_attributes = FeedbackFormTemplate.default_template.attributes_template
 
-      form_attributes.merge!(:user_application => self)
+      form_attributes.merge!(:feedback_target => self)
 
       form = FeedbackForm.create!(form_attributes)
 
-      #set as default form for this user_application
+      #set as default form for this feedback_target
       set_default_form! form
       save!
     rescue Exception => e

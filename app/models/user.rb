@@ -2,7 +2,7 @@ class User
   include Mongoid::Document
 
 
-  #has_and_belongs_to_many :registered, :class_name => 'UserApplication', inverse_of: :members
+  #has_and_belongs_to_many :registered, :class_name => 'FeedbackTarget', inverse_of: :members
 
   ## Database and Ldap authenticatable
   field :username, :type => String, :default => ''
@@ -34,9 +34,9 @@ class User
 
   ## Token authenticatable
   # field :authentication_token, :type => String
-  has_many :user_applications,:class_name => 'UserApplication', inverse_of: :owner
+  has_many :feedback_targets,:class_name => 'FeedbackTarget', inverse_of: :owner
 
-  has_and_belongs_to_many :memberships, :class_name => 'UserApplication', inverse_of: :members
+  has_and_belongs_to_many :memberships, :class_name => 'FeedbackTarget', inverse_of: :members
 
   validates_presence_of :username
   validates_presence_of :email, :unless => Proc.new { |user| user.new_record? && user.is_a?(LdapUser) }
@@ -47,15 +47,15 @@ class User
   #add_index  :users, :authentication_token, :unique => true
 
   def my_apps
-    UserApplication.all_apps_for_user(self)
+    FeedbackTarget.all_apps_for_user(self)
   end
 
-  def owns?(user_application)
-    self.id.eql?(user_application.owner.id)
+  def owns?(feedback_target)
+    self.id.eql?(feedback_target.owner.id)
   end
 
-  def is_member?(user_application)
-    user_application.member_ids.include? self.id
+  def is_member?(feedback_target)
+    feedback_target.member_ids.include? self.id
   end
 
   scope :by_username, ->(regex){

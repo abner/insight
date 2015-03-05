@@ -1,0 +1,11 @@
+<%= content_for :head do %>
+
+<% end %>
+<hr/>
+  <p>Incluir o código abaixo nas páginas da aplicação <strong><%= @feedback_target.name %></strong></p>
+  <pre class="preview_source">
+    <code class="xhtml">
+<%= render_js_include() %>
+</code>
+    <!-- <code class="language-javascript"><%#= render_code(@feedback_target) %></code> -->
+  </pre>

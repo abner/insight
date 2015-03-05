@@ -11,9 +11,9 @@ class DataSetup
 
 private
 
-    #fill user_application with current template
+    #fill feedback_target with current template
     def fill_apps!
-      UserApplication.all.each do |app|
+      FeedbackTarget.all.each do |app|
         puts "Processando app #{app.name}"
         if app.default_feedback_form.nil?
           puts 'app com default form nil'
@@ -21,7 +21,7 @@ private
             puts 'não tem form - criando um'
             form_attributes = FeedbackFormTemplate.default_template.attributes_template
             form = app.feedback_forms.create! form_attributes
-            #set as default form for this user_application
+            #set as default form for this feedback_target
             puts 'definindo form'
             app.set_default_form! form
           else
@@ -37,7 +37,7 @@ private
     end
 
     def transfer_feedbacks!
-      UserApplication.all.each do |app|
+      FeedbackTarget.all.each do |app|
         if(app.default_feedback_form.feedbacks.empty? && app.feedbacks.count > 0)
           app.feedbacks.each do |feedback|
             feedback.update_attribute(:feedback_form, app.default_feedback_form) if feedback.feedback_form.nil?

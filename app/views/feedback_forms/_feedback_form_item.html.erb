@@ -1,5 +1,5 @@
 <tr id='feedback_form_<%= feedback_form.id.to_s %>'>
-  <td><%= link_to feedback_form.name, url_for(user_application_feedback_form_path(feedback_form.user_application, feedback_form)) %></td>
+  <td><%= link_to feedback_form.name, url_for(feedback_target_feedback_form_path(feedback_form.feedback_target, feedback_form)) %></td>
   <td><%= feedback_form.authentication_token %></td>
   <td><%= actions_for(feedback_form) %></td>
 </tr>

@@ -10,7 +10,7 @@
           <small class="pull-right text-muted">
               <i class="fa fa-clock-o fa-fw"></i> <%= time_ago_in_words comment.created_at %>
               <%= if current_user_can?(:remove_comment, comment)
-                link_to   destroy_comment_user_application_feedback_form_feedback_path(@user_application, @feedback_form, feedback, :comment_id => comment.id),
+                link_to   destroy_comment_feedback_target_feedback_form_feedback_path(@feedback_target, @feedback_form, feedback, :comment_id => comment.id),
                 :method => 'delete',
                 :data => {:confirm => t('feedback.comment.destroy_confirm'),:remote => true, 'original-title' => t('feedback.comment.remove_tooltip'), :toggle =>"tooltip", :placement => "top"} do %>
                   <i class="fa fa-minus fa-fw" alt='<%= t('feedback.comment.remove') %>'></i>

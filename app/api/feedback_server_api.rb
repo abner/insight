@@ -17,21 +17,21 @@ class FeedbackServerAPI < Grape::API
     #   env['warden']
     # end
 
-    # def current_user_application
-    #   @current_user_application ||= UserApplication.authorize!(env)
+    # def current_feedback_target
+    #   @current_feedback_target ||= FeedbackTarget.authorize!(env)
     # end
     #
     # def authenticate!
-    #   error!('401 Unauthorized', 401) unless current_user_application
+    #   error!('401 Unauthorized', 401) unless current_feedback_target
     # end
     def authenticated
       #return true if warden.authenticated?
       params[:access_token] && @feedback_form = FeedbackForm.where(authentication_token: params[:access_token]).first
     end
 
-    def current_user_application
+    def current_feedback_target
       #warden.user || @user
-      @feedback_form.user_application
+      @feedback_form.feedback_target
     end
 
     def current_feedback_form
@@ -73,7 +73,7 @@ class FeedbackServerAPI < Grape::API
       params.merge!(screenshot_path: filename)
 
 
-      #current_user_application.feedbacks.create!(feedback_attributes)
+      #current_feedback_target.feedbacks.create!(feedback_attributes)
       feedback = current_feedback_form.feedbacks.new
 
       fields = params.dup.reject {|k,v| ! k.start_with? "data_"}
@@ -89,7 +89,7 @@ class FeedbackServerAPI < Grape::API
 
     desc 'Retorna últimos 10 feedbacks de uma app'
     get do
-      current_user_application.feedbacks.order(:created_at => 'desc').limit(10)
+      current_feedback_target.feedbacks.order(:created_at => 'desc').limit(10)
     end
   end
 end
