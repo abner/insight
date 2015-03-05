@@ -1,0 +1,8 @@
+<%= link_to(
+      content_tag(:span, :class => 'fa fa-hand-o-down') do
+        " " + t('feedback_form.links.new_attribute_after') + " "
+      end,
+      'javascript:;',
+      class: 'attribute_new_after',
+      data: {'id' => feedback_attribute.id.to_s })
+    %>

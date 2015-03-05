@@ -43,6 +43,8 @@ pt-BR:
     page_title:
       new: Nova Aplicação
   feedback_form:
+    links:
+      new_attribute_after: "Incluir"
     button:
       new_form: 'Incluir Formulário'
     form_group:

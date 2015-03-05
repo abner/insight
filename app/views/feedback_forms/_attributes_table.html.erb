@@ -14,28 +14,37 @@
         <th>Label</th>
         <th>Options</th>
         <th>Default</th>
+        <% if 'edit'.eql? action_name %>
+        <th></th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
       <% @feedback_form.feedback_attributes.all.sort(position: 1).each do |attribute| %>
-      <%= f.fields_for_with_bootstrap :feedback_attributes, attribute do |attribute_form| %>
-      <tr>
-        <td>
-          <%= attribute_form.hidden_field 'position', :class => 'position' %>
-          <%= render :partial => "feedback_forms/attribute_types/#{attribute.type.name.downcase}" %>
-        </td>
-        <td><%= attribute.name %></td>
-        <td><%= attribute.label %></td>
-        <td>
-          <%= attribute.custom_data["options"].join(',') if attribute.custom_data and  attribute.custom_data["options"]%>
-        </td>
-        <td>
-          <%= attribute.custom_data["value"] if attribute.custom_data.present? and attribute.custom_data["value"] %>
-        </td>
-      </tr>
+        <%= f.fields_for_with_bootstrap :feedback_attributes, attribute do |attribute_form| %>
+        <%= render partial: 'attribute_line', locals: { attribute: attribute, attribute_form: attribute_form } %>
+        <% end %>
       <% end %>
+      <% @new_attribute = @feedback_form.feedback_attributes.new %>
+      <%= f.fields_for_with_bootstrap :feedback_attributes, @new_attribute do |attribute_form| %>
+        <%= render partial: 'attribute_line', locals: { attribute: @new_attribute, attribute_form: attribute_form } %>
       <% end %>
       <tbody>
+        <% if 'edit'.eql?(action_name) %>
+        <tfooter >
+          <tr>
+            <td colspan="6">
+              <%= link_to(
+                    content_tag(:span, :class => 'fa fa-hand-o-up') do
+                      " " + t('feedback_form.links.new_attribute_after') + " "
+                    end,
+                    new_attribute_feedback_target_feedback_form_path(@feedback_form.feedback_target, @feedback_form),
+                    remote: true,
+                    class: 'attribute_new_after btn btn-info')  %>
+            </td>
+          </tr>
+        </tfooter>
+        <% end %>
   </table>
 <% end %>
 </div>

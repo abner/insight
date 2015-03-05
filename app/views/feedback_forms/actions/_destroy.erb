@@ -1,0 +1,6 @@
+<%= link_to(
+      content_tag(:span, " #{t('Destroy')} ", :class => 'fa fa-trash-o'),
+      'javascript:;',
+      class: 'attribute_destroy',
+      data: {'id' => feedback_attribute.id.to_s })
+    %>

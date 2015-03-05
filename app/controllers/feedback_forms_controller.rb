@@ -32,6 +32,14 @@ class FeedbackFormsController < ProtectedController
     authorize!(:read_feedback_form, @feedback_form)
   end
 
+  def new_attribute
+    @feedback_target = find_feedback_target
+    @feedback_form = find_feedback_for @feedback_target
+    authorize!(:write_feedback_form, @feedback_form) do
+      @attribute = @feedback_form.attributes.new
+    end
+  end
+
   def create
     @feedback_target = find_feedback_target
     authorize!(:create_feedback_form, @feedback_target) do

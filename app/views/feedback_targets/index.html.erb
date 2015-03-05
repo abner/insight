@@ -62,25 +62,3 @@
       <% end %>
   </div>
 </div>
-<script type='text/javascript'>
-jQuery(document).on('ready page:load', function(){
-  $('a[data-popover-confirm=true]').on('click', function(e){
-    e.preventDefault();
-    var element = $(this);
-    var id_content = element.data('idContent');
-    if(!element.data('bs.popover')){
-      var options = {
-                    title:  I18n.t("alertify.Confirmation", {defaultValue: "Confirmation"}),
-                    content: $(id_content).html(),
-                    html: true,
-                    trigger: 'focus',
-                    placement: 'bottom'
-                  };
-      $(element).popover(options).popover('show');
-    }
-
-  });
-});
-
-
-</script>

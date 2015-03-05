@@ -21,6 +21,9 @@
 // require jquery-ui
 
 //= require jquery-sortable
+
+// require jquery.ddslick
+
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require turbolinks
@@ -111,6 +114,36 @@ function init(){
     alertify.alert('<img src="' + $(this).attr('href') + '"></img>').set('resizable',true).maximize().set('basic', true);
     return false;
   });
+
+
+    $('a[data-popover-confirm=true]').on('click', function(e){
+      e.preventDefault();
+      var element = $(this);
+      var id_content = element.data('idContent');
+      if(!element.data('bs.popover')){
+        var options = {
+                      title:  I18n.t("alertify.Confirmation", {defaultValue: "Confirmation"}),
+                      content: $(id_content).html(),
+                      html: true,
+                      trigger: 'focus',
+                      placement: 'bottom'
+                    };
+        $(element).popover(options).popover('show');
+      }
+
+    });
+
+    $('a.attribute_destroy').on('click',function(e){
+      //$(this).closest('tr.attribute_show_line').hide();
+      var id = $(this).data('id');
+      $(this).closest('tr').remove();
+    });
+
+    $('a.add_attribute').on('click',function(e){
+
+    })
+
+
 }
 
 

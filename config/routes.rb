@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+ Rails.application.routes.draw do
 
   # get 'feedback_targets/index'
   #
@@ -52,6 +52,10 @@ Rails.application.routes.draw do
 
     end
     resources :feedback_forms do
+      member do
+        delete 'destroy_attribute' => 'feedback_forms#destroy_attribute'
+        get 'new_attribute' => 'feedback_forms#new_attribute'
+      end
       resources :feedbacks do
         member do
           delete 'destroy_comment' => 'feedbacks#destroy_comment'
@@ -65,7 +69,9 @@ Rails.application.routes.draw do
 
   get '/users/autocomplete', to: 'users#autocomplete', as: 'autocomplete_user'
 
-
+  get '/user_applications', to: redirect('/feedback_targets')
+  get '/user_applications/:feedback_target_id', to: redirect  { |path_params, req| "/feedback_targets/#{path_params[:feedback_target_id]}" }
+  #match '/user_applications' => 'feedback_targets#index',  :via => :get
 
   mount FeedbackServerAPI => '/api/'
 
