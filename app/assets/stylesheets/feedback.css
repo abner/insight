@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
  * Bootstrap v2.0.4
  *
@@ -87,8 +88,8 @@ input[type="radio"]+label {
 
 
     -webkit-transition: all 2s ease 0s;
-    -moz-transition: all 2s ease 0s;  
-    -ms-transition: all 2s ease 0s; 
+    -moz-transition: all 2s ease 0s;
+    -ms-transition: all 2s ease 0s;
     -o-transition: all 2s ease 0s;
 
 }
@@ -381,7 +382,7 @@ button.feedback-btn.small, input[type="submit"].feedback-btn.small {
     height:100%;
     background: #777;
     opacity: 0.5;
-    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; 
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     filter: alpha(opacity=50);
 }
 
@@ -396,7 +397,7 @@ button.feedback-btn.small, input[type="submit"].feedback-btn.small {
 
 #feedback-blackout-element {
     background: #000;
-    opacity: 0.8; 
+    opacity: 0.8;
     position:absolute;
 
 }
@@ -479,8 +480,8 @@ button.feedback-btn.small, input[type="submit"].feedback-btn.small {
 
 .feedback-animate-review {
     -webkit-transition: all 2s ease 0s;
-    -moz-transition: all 2s ease 0s;  
-    -ms-transition: all 2s ease 0s; 
+    -moz-transition: all 2s ease 0s;
+    -ms-transition: all 2s ease 0s;
     -o-transition: all 2s ease 0s;
 
     top: 50%;
@@ -511,7 +512,7 @@ button.feedback-btn.small, input[type="submit"].feedback-btn.small {
 
 
 .feedback-loader {
-    text-align: center;    
+    text-align: center;
 }
 .feedback-loader span {
     display: inline-block;
@@ -565,7 +566,7 @@ button.feedback-btn.small, input[type="submit"].feedback-btn.small {
     display: inline-block;
 }
 
-/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t
    follow these rules. Every browser that supports :checked also supports :not(), so
    it doesn’t make the test unnecessarily selective */
 .feedback-rating:not(:checked) > input {
