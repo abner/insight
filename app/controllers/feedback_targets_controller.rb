@@ -4,7 +4,7 @@ class FeedbackTargetsController < ProtectedController
   helper_method :render_code, :render_js_include
 
   def index
-    @feedback_targets = FeedbackTarget.all_apps_for_user(current_user)
+    @feedback_targets = FeedbackTarget.all_targets_for_user(current_user)
   end
 
   def new
@@ -102,7 +102,7 @@ protected
   end
 private
   def feedback_target
-    @feedback_target ||= FeedbackTarget.all_apps_for_user(current_user).find(id_param)
+    @feedback_target ||= FeedbackTarget.all_targets_for_user(current_user).find(id_param)
   end
 
   def define_breadcrumbs

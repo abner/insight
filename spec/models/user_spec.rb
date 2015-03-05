@@ -74,15 +74,15 @@ RSpec.describe User, :type => :model do
     expect(user.is_member?(feedback_target)).to eq(true)
   end
 
-  it 'has my_apps collection which lists feedback_targets he owns and is member of' do
+  it 'has my_targets collection which lists feedback_targets he owns and is member of' do
     user = FactoryGirl.create(:registered_user, :username => 'joao', :email => 'maria@serpro.c.d')
     feedback_target_member = FactoryGirl.create(:feedback_target)
     feedback_target_member.members << user
 
     feedback_target_owned = FactoryGirl.create(:feedback_target, :owner => user)
 
-    expect(user.my_apps).to include(feedback_target_member)
-    expect(user.my_apps).to include(feedback_target_owned)
+    expect(user.my_targets).to include(feedback_target_member)
+    expect(user.my_targets).to include(feedback_target_owned)
   end
 
   it 'is located by username or email' do

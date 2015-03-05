@@ -136,7 +136,7 @@ class Feedback
   end
 
   def self.last_feedbacks_for_user(user)
-    apps_ids = FeedbackTarget.all_apps_for_user(user).map {|app| app.id.to_s }
+    apps_ids = FeedbackTarget.all_targets_for_user(user).map {|app| app.id.to_s }
     Feedback.in(feedback_target_id:  apps_ids).order(created_at: 'DESC').paginate(page: 1, per_page: 5)
   end
 

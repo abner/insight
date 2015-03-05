@@ -94,10 +94,10 @@ protected
   end
 
   def find_feedback_target
-    FeedbackTarget.all_apps_for_user(current_user).find(user_applciation_id_param)
+    FeedbackTarget.all_targets_for_user(current_user).find(feedback_target_id_param)
   end
 
-  def user_applciation_id_param
+  def feedback_target_id_param
     params[:feedback_target_id]
   end
 

@@ -113,7 +113,7 @@ protected
   end
 
   def list_feedbacks
-    @feedback_target = current_user.my_apps.find(params[:feedback_target_id])
+    @feedback_target = current_user.my_targets.find(params[:feedback_target_id])
 
     if params[:feedback_form_id]
       @feedback_form = @feedback_target.feedback_forms.find(params[:feedback_form_id])
@@ -158,10 +158,10 @@ protected
     end
   end
   def feedback_target
-    @feedback_target ||= FeedbackTarget.all_apps_for_user(current_user).find(user_applciation_id_param)
+    @feedback_target ||= FeedbackTarget.all_targets_for_user(current_user).find(feedback_target_id_param)
   end
 
-  def user_applciation_id_param
+  def feedback_target_id_param
     params[:feedback_target_id]
   end
 end

@@ -34,6 +34,7 @@ class User
 
   ## Token authenticatable
   # field :authentication_token, :type => String
+
   has_many :feedback_targets,:class_name => 'FeedbackTarget', inverse_of: :owner
 
   has_and_belongs_to_many :memberships, :class_name => 'FeedbackTarget', inverse_of: :members
@@ -46,8 +47,8 @@ class User
 
   #add_index  :users, :authentication_token, :unique => true
 
-  def my_apps
-    FeedbackTarget.all_apps_for_user(self)
+  def my_targets
+    FeedbackTarget.all_targets_for_user(self)
   end
 
   def owns?(feedback_target)

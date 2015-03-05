@@ -9,7 +9,7 @@ class FeedbackTarget
   include Mongoid::Paranoia
 
   include Tokenable
-  
+
   # callbacks
   after_create :create_default_form!
 
@@ -34,12 +34,13 @@ class FeedbackTarget
             inverse_of: :feedback_target,
             foreign_key: 'feedback_target_id',
             dependent: :destroy
+            
   has_many :feedbacks #, dependent: :destroy
   #belongs_to :default_feedback_form, class_name: 'FeedbackForm'
   #has_many :members, :class_name => 'User'
 
   # scopes
-  scope :all_apps_for_user, ->(user){
+  scope :all_targets_for_user, ->(user){
       any_of({:owner => user}, {:member_ids.in => [user.id]})
   }
 
