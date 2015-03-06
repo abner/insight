@@ -13,15 +13,7 @@ class Feedback
   #   self.feedback_target = feedback_form.feedback_target
   # end
 
-  def feedback_target
-    feedback_form.feedback_target if feedback_form
-  end
-
-  def feedback_target_id
-    feedback_form.feedback_target.id if feedback_form
-  end
-
-  #belongs_to :feedback_target
+  #belongs_to :feedback_target (replaced by methods to avoid duplication and inconsistence)
 
   belongs_to :feedback_form
 
@@ -46,6 +38,14 @@ class Feedback
   scope :archived, -> { where(active: false) }
 
   embeds_many :comments
+
+  def feedback_target
+    feedback_form.feedback_target if feedback_form
+  end
+
+  def feedback_target_id
+    feedback_form.feedback_target.id if feedback_form
+  end
 
   #pagination definition
   def self.per_page

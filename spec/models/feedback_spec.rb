@@ -15,7 +15,14 @@ RSpec.describe Feedback, :type => :model do
   end
 
   context 'basic attributes' do
-
+    it 'is related to feedback_target through feedback_form' do
+      target = FactoryGirl.create(:feedback_target)
+      form = FactoryGirl.create(:feedback_form, feedback_target: target)
+      feedback = form.feedbacks.build
+      expect(feedback.feedback_form).not_to be_nil
+      expect(feedback.feedback_target).to eq(target)
+      expect(feedback.feedback_target_id).to eq(target.id)
+    end
   end
 
   it 'is possible to recovere after destroyed' do
@@ -106,6 +113,30 @@ RSpec.describe Feedback, :type => :model do
 
       expect(Feedback.active.count + Feedback.archived.count).to eq(2)
       expect(Feedback.unscoped.count).to eq(2)
+    end
+  end
+
+  context 'operations' do
+    it 'archives' do
+      feedback = FactoryGirl.create(:feedback)
+      feedback.archive!
+      expect(Feedback.where(id: feedback.id).first).to be_nil
+      expect(Feedback.archived.where(id: feedback.id).first).to eq(feedback)
+    end
+
+    it 'unarchive' do
+      feedback = FactoryGirl.create(:feedback, active: false)
+      expect(Feedback.unscoped.where(id: feedback.id).first).not_to be_nil
+      feedback.unarchive!
+      expect(Feedback.where(id: feedback.id).first.active).to eq(true)
+    end
+
+    it 'returns columns' do
+      feedback = FactoryGirl.build(:feedback)
+      feedback[:tipo_relato] = 'erro'
+      feedback[:relato] = 'texto relato'
+      feedback.save!
+      expect(feedback.columns.collect {|c| c[:key] }).to include 'tipo_relato', 'relato'
     end
   end
 

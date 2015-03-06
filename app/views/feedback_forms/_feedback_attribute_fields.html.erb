@@ -5,12 +5,12 @@
   <td>
     <%= attribute_form.hidden_field 'position', :class => 'position' %>
     <%#= render :partial => "feedback_forms/attribute_types/#{attribute.type.name.downcase}" %>
-    <%= attribute_form.collection_select_without_bootstrap :type_id, FeedbackAttributeType.all, :id, :description,  { :include_blank => true }%>
+    <%= attribute_form.collection_select_without_bootstrap :type_id, FeedbackAttributeType.all, :id, :description,  { :include_blank => true }, :required => true%>
   </td>
-  <td><%= attribute_form.text_field_without_bootstrap :name, :hide_label => true %></td>
-  <td><%= attribute_form.text_field_without_bootstrap :display_label, :hide_label => true %></td>
-  <td><%= attribute_form.text_field_without_bootstrap :options, :hide_label => true %></td>
-  <td><%= attribute_form.text_field_without_bootstrap :default_value, :hide_label => true %></td>
+  <td><%= attribute_form.text_field_without_bootstrap :name, :hide_label => true, :required => true %></td>
+  <td><%= attribute_form.text_field_without_bootstrap :display_label, :hide_label => true, :required => true %></td>
+  <td><%= attribute_form.text_field_without_bootstrap :options, :hide_label => true, :required => false %></td>
+  <td><%= attribute_form.text_field_without_bootstrap :default_value, :hide_label => true, :required => false %></td>
 
   <td>
     <%#= render_action 'destroy', attribute if current_user_can? :write_feedback_target, @feedback_form.feedback_target %>

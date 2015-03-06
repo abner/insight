@@ -29,13 +29,21 @@
 <script type='text/javascript'>
 
 $(document).on('ready page:load',function(){
+  $(document).on('cocoon:after-remove', function(){
+    //var refresh_positions = function(){
+      $('.sorted_table tr:visible input.position').each(function(index){
+        $(this).val(index);
+      });
+    //}
+    //window.setTimeout(refresh_positions, 250 );
+  });
   $('.sorted_table').sortable({
     containerSelector: 'table',
     itemPath: '> tbody',
     itemSelector: 'tr',
      placeholder: '<tr class="placeholder"/>',
      onDrop: function(){
-       $('.sorted_table tr input.position').each(function(index){
+       $('.sorted_table tr:visible input.position').each(function(index){
          $(this).val(index);
        });
      }

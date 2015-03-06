@@ -11,7 +11,10 @@ class FeedbackForm
 
   field :name, type: String
 
-  embeds_many :feedback_attributes, cascade_callbacks: true, order: :position.asc
+  embeds_many :feedback_attributes,
+   cascade_callbacks: true,
+   order: :position.asc,
+   before_add: :set_position
 
   accepts_nested_attributes_for :feedback_attributes, :reject_if => :all_blank, :allow_destroy => true
 
@@ -33,9 +36,13 @@ class FeedbackForm
 
   slug :name, history: true, scope: :feedback_target
 
-  def to_s
-    name
+protected
+  def set_position(attribute)
+    if attribute and 0.eql?(attribute.position)
+      attribute.position = self.feedback_attributes.count
+    end
   end
+
 
 
 end

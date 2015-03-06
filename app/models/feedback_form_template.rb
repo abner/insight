@@ -3,7 +3,8 @@ class FeedbackFormTemplate
 
   field :name, type: String
 
-  embeds_many :feedback_attributes, :class_name => 'FeedbackAttributeTemplate'
+  embeds_many :feedback_attributes,
+    :class_name => 'FeedbackAttributeTemplate', before_add: :set_position
 
   validates_presence_of :name
 
@@ -17,5 +18,9 @@ class FeedbackFormTemplate
 
   def attributes_template
     self.attributes.except('_id')
+  end
+protected
+  def set_position(feedback_attribute)
+    feedback_attribute.position = feedback_attributes.count
   end
 end

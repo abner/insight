@@ -5,8 +5,8 @@ class DataSetup
       create_attributes_types!
       create_attributes_models!
       create_templates!
-      fill_apps!
-      transfer_feedbacks!
+      #fill_apps!
+      #transfer_feedbacks!
     end
 
 private
@@ -56,7 +56,7 @@ private
 
     def create_attributes_types!
       #Loading required data to database
-      if FeedbackAttributeType.count == 0
+      #if FeedbackAttributeType.count == 0
         # creating feedback data types
         FeedbackAttributeType.create! name: 'Screenshot', description: 'Captura de tela'
         FeedbackAttributeType.create! name: 'Text', description: 'Campo Texto'
@@ -65,7 +65,7 @@ private
         FeedbackAttributeType.create! name: 'Textarea', description: 'Campo Texto de Múltiplas Linhas'
         FeedbackAttributeType.create! name: 'Hidden', description: 'Campo Escondido'
         FeedbackAttributeType.create! name: 'Radio', description: 'Campo Seleção [Radio Button]'
-      end
+      #end
     end
 
 
@@ -125,17 +125,17 @@ private
     end
 
     def create_attributes_models!
-      if FeedbackAttributeModel.count.eql? 0
+      #if FeedbackAttributeModel.count.eql? 0
         create_tipo_relato_attribute_model
         create_severidade_attribute_model
         create_avaliacao_attribute_model
         create_relato_attribute_model
         create_situcao_attribute_model
-      end
+      #end
     end
 
     def create_templates!
-      if FeedbackFormTemplate.count == 0
+      #if FeedbackFormTemplate.count == 0
         # creating feedback form templates
         FeedbackFormTemplate.create name: 'Relato ou Sugestão' do |template|
           template.save!
@@ -147,8 +147,8 @@ private
           template.save!
         end
         return true
-      end
-      return false
+    #  end
+  #    return false
     end
   end
 end
