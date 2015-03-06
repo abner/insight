@@ -133,17 +133,6 @@ function init(){
 
     });
 
-    $('a.attribute_destroy').on('click',function(e){
-      //$(this).closest('tr.attribute_show_line').hide();
-      var id = $(this).data('id');
-      $(this).closest('tr').remove();
-    });
-
-    $('a.attribute_new_after').on('click',function(e){
-      $('tr.attribute_line_template').clone().toggleClass('hidden').appendTo('#feedback_attributes');
-    });
-
-
 }
 
 
