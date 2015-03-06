@@ -69,10 +69,17 @@ class FeedbackFormsController < ProtectedController
       respond_to do |format|
         @feedback_form.attributes = feedback_form_params
 
-        params[:feedback_form][:feedback_attributes_attributes].values.each do |attribute_hash|
-          feedback_attribute = @feedback_form.feedback_attributes.find(attribute_hash[:id])
-          feedback_attribute.position = attribute_hash[:position]
-        end
+        #raise @feedback_form.feedback_attributes.inspect
+
+        # params[:feedback_form][:feedback_attributes_attributes].values.each_with_index do |attribute_hash, index|
+        #   feedback_attribute = @feedback_form.feedback_attributes.find_or_initialize_by(id: attribute_hash[:id])
+        #   feedback_attribute.position = index #attribute_hash[:position]
+        #   feedback_attribute.type_id = attribute_hash[:type_id]
+        #   feedback_attribute.name = attribute_hash[:name]
+        #   feedback_attribute.display_label = attribute_hash[:display_label]
+        #   feedback_attribute.options = attribute_hash[:options]
+        #   feedback_attribute.default_value = attribute_hash[:default_value]
+        # end
 
         if @feedback_form.save
           format.html { redirect_to feedback_target_feedback_forms_path(:action => index) }
@@ -137,7 +144,9 @@ private
     params.require(:feedback_form).permit :name,
       :screenshot_enabled,
       :review_enabled,
-      { :grid_columns => [], :detail_columns => []}
+      :feedback_attributes_attributes => [:id, :name, :display_label, :_destroy, :options, :default_value, :position, :type_id],
+      :grid_columns => [],
+      :detail_columns => []
   end
 
 

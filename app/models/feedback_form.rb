@@ -12,7 +12,8 @@ class FeedbackForm
   field :name, type: String
 
   embeds_many :feedback_attributes, cascade_callbacks: true, order: :position.asc
-  accepts_nested_attributes_for :feedback_attributes
+
+  accepts_nested_attributes_for :feedback_attributes, :reject_if => :all_blank, :allow_destroy => true
 
   belongs_to :feedback_target
 
@@ -35,4 +36,6 @@ class FeedbackForm
   def to_s
     name
   end
+
+
 end

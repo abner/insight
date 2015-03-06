@@ -13,13 +13,19 @@ class FeedbackAttribute
 
   before_create :set_position
 
+
   def options= value
     if value
       arr = value.split(',')
       if arr.size > 0
         arr = arr.map {|x| x.strip if x && !x.empty?}
       end
-      custom_data[:options]= arr.compact!
+      # deep copy used to changing mongoid hash attribute (is wasn't changing using without deep_copy and reassigining)
+      # SOURCE: http://spin.atomicobject.com/2011/04/13/mongoid-hash-field-types-watch-out/
+      hash = read_attribute(:custom_data).deep_dup
+      hash[:options] = arr
+      write_attribute(:custom_data,  hash)
+
     end
   end
 
@@ -29,7 +35,11 @@ class FeedbackAttribute
 
   def default_value= value
     if value
-      custom_data[:value] = value
+      # deep copy used to changing mongoid hash attribute (is wasn't changing using without deep_copy and reassigining)
+      # SOURCE: http://spin.atomicobject.com/2011/04/13/mongoid-hash-field-types-watch-out/
+      hash = self.read_attribute(:custom_data).deep_dup
+      hash[:value] = value
+      write_attribute(:custom_data, hash)
     end
   end
 
@@ -44,7 +54,7 @@ class FeedbackAttribute
   validates_presence_of :name
 
   def set_position
-    position = feedback_form.feedback_attributes.count
+    position = feedback_form.feedback_attributes.count.to_i
   end
 
 end

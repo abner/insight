@@ -8,7 +8,7 @@
     <%= attribute_form.collection_select_without_bootstrap :type_id, FeedbackAttributeType.all, :id, :description,  { :include_blank => true }%>
   </td>
   <td><%= attribute_form.text_field_without_bootstrap :name, :hide_label => true %></td>
-  <td><%= attribute_form.text_field_without_bootstrap :label, :hide_label => true %></td>
+  <td><%= attribute_form.text_field_without_bootstrap :display_label, :hide_label => true %></td>
   <td><%= attribute_form.text_field_without_bootstrap :options, :hide_label => true %></td>
   <td><%= attribute_form.text_field_without_bootstrap :default_value, :hide_label => true %></td>
 
