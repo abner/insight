@@ -22,8 +22,12 @@ class FeedbackAttribute
       end
       # deep copy used to changing mongoid hash attribute (is wasn't changing using without deep_copy and reassigining)
       # SOURCE: http://spin.atomicobject.com/2011/04/13/mongoid-hash-field-types-watch-out/
-      hash = read_attribute(:custom_data).deep_dup
-      hash[:options] = arr
+      if read_attribute(:custom_data)
+        hash = read_attribute(:custom_data).deep_dup
+        hash[:options] = arr
+      else
+        hash = { options: arr }
+      end
       write_attribute(:custom_data,  hash)
 
     end
@@ -35,10 +39,14 @@ class FeedbackAttribute
 
   def default_value= value
     if value
-      # deep copy used to changing mongoid hash attribute (is wasn't changing using without deep_copy and reassigining)
-      # SOURCE: http://spin.atomicobject.com/2011/04/13/mongoid-hash-field-types-watch-out/
-      hash = self.read_attribute(:custom_data).deep_dup
-      hash[:value] = value
+      if self.read_attribute(:custom_data)
+        # deep copy used to changing mongoid hash attribute (is wasn't changing using without deep_copy and reassigining)
+        # SOURCE: http://spin.atomicobject.com/2011/04/13/mongoid-hash-field-types-watch-out/
+        hash = self.read_attribute(:custom_data).deep_dup
+        hash[:value] = value
+      else
+        hash = {value: value}
+      end
       write_attribute(:custom_data, hash)
     end
   end
