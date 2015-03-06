@@ -1,4 +1,4 @@
-<div class='col-lg-12'>
+<div class='col-lg-12 '>
   <%= f.form_group class: "row", label: {text: 'Campos do Formulário'} do %>
 
   <% if 'edit'.eql?(action_name) %>
@@ -6,7 +6,7 @@
     <span class='label label-info'><%= t('feedback_form.show.tip_drag_and_drop') %></span>
   </span>
   <% end %>
-  <table class='table-responsive table-bordered table <%= action_name.eql?('edit')? 'sorted_table ' : ''  %>'>
+  <table id='feedback_attributes' class='table-responsive table-bordered table <%= action_name.eql?('edit')? 'sorted_table ' : ''  %>'>
     <thead>
       <tr>
         <th>Tipo</th>
@@ -22,29 +22,23 @@
     <tbody>
       <% @feedback_form.feedback_attributes.all.sort(position: 1).each do |attribute| %>
         <%= f.fields_for_with_bootstrap :feedback_attributes, attribute do |attribute_form| %>
-        <%= render partial: 'attribute_line', locals: { attribute: attribute, attribute_form: attribute_form } %>
+        <%= render partial: 'feedback_attribute_fields', locals: { attribute: attribute, attribute_form: attribute_form } %>
         <% end %>
       <% end %>
-      <% @new_attribute = @feedback_form.feedback_attributes.new %>
-      <%= f.fields_for_with_bootstrap :feedback_attributes, @new_attribute do |attribute_form| %>
-        <%= render partial: 'attribute_line', locals: { attribute: @new_attribute, attribute_form: attribute_form } %>
-      <% end %>
-      <tbody>
-        <% if 'edit'.eql?(action_name) %>
-        <tfooter >
-          <tr>
-            <td colspan="6">
-              <%= link_to(
-                    content_tag(:span, :class => 'fa fa-hand-o-up') do
-                      " " + t('feedback_form.links.new_attribute_after') + " "
-                    end,
-                    new_attribute_feedback_target_feedback_form_path(@feedback_form.feedback_target, @feedback_form),
-                    remote: true,
-                    class: 'attribute_new_after btn btn-info')  %>
-            </td>
-          </tr>
-        </tfooter>
-        <% end %>
+    </tbody>
   </table>
+  <% if 'edit'.eql?(action_name) %>
+    <%= link_to_add_association content_tag(:span, " " + t('feedback_form.links.new_attribute_after'), :class => 'fa fa-hand-o-up'),
+            f, 'feedback_attributes', 'data-association-insertion-node' => '#feedback_attributes',
+            'data-association-insertion-method' => 'append', :class => 'btn btn-info' %>
+    <%#= link_to(
+          content_tag(:span, :class => 'fa fa-hand-o-up') do
+            " " + t('feedback_form.links.new_attribute_after') + " "
+          end,
+          'javascript:;',
+          #new_attribute_feedback_target_feedback_form_path(@feedback_form.feedback_target, @feedback_form),
+          class: 'attribute_new_after btn btn-info')  %>
+  <% end %>
+
 <% end %>
 </div>

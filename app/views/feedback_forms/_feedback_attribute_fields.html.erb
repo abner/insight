@@ -1,5 +1,7 @@
+<% attribute_form ||= f %>
+<tr class="nested-fields attribute_line attribute_line<%= '_template hidden' if template %>">
 
-<tr class="attribute_line" data-id="<%= attribute.id %>">
+  <% if 'edit'.eql? action_name %>
   <td>
     <%= attribute_form.hidden_field 'position', :class => 'position' %>
     <%#= render :partial => "feedback_forms/attribute_types/#{attribute.type.name.downcase}" %>
@@ -9,10 +11,17 @@
   <td><%= attribute_form.text_field_without_bootstrap :label, :hide_label => true %></td>
   <td><%= attribute_form.text_field_without_bootstrap :options, :hide_label => true %></td>
   <td><%= attribute_form.text_field_without_bootstrap :default_value, :hide_label => true %></td>
-  <% if 'edit'.eql? action_name %>
+
   <td>
-    <%= render_action 'destroy', attribute if current_user_can? :write_feedback_target, @feedback_form.feedback_target %>
+    <%#= render_action 'destroy', attribute if current_user_can? :write_feedback_target, @feedback_form.feedback_target %>
+    <%= link_to_remove_association content_tag(:span, " #{t('Destroy')} ", :class => 'fa fa-trash-o'), attribute_form %>
     <%#= render_action 'new_after', attribute if current_user_can? :write_feedback_target, @feedback_form.feedback_target %>
   </td>
+  <% else %>
+    <td><%= attribute.type.description %></td>
+    <td><%= attribute.name %></td>
+    <td><%= attribute.label %></td>
+    <td><%= attribute.options %></td>
+    <td><%= attribute.default_value %></td>
   <% end %>
 </tr>

@@ -15,7 +15,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 
-
+//= require cocoon
 
 
 // require jquery-ui
@@ -139,9 +139,9 @@ function init(){
       $(this).closest('tr').remove();
     });
 
-    $('a.add_attribute').on('click',function(e){
-
-    })
+    $('a.attribute_new_after').on('click',function(e){
+      $('tr.attribute_line_template').clone().toggleClass('hidden').appendTo('#feedback_attributes');
+    });
 
 
 }
