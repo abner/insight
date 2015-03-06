@@ -8,7 +8,7 @@
 <table id="feedbacks" class="table table-bordered table-hover table-responsive table-striped" data-source="<%= feedback_target_feedbacks_url(:id=> params[:id], format: "json") %>">
   <thead>
     <tr>
-        <td colspan="<%= all_columns_for_collection(@feedbacks).count + 1 %>">
+        <td colspan="100">
           <%= will_paginate @feedbacks, :class => 'apple_pagination' %>
         </td>
     </tr>
@@ -18,8 +18,8 @@
       <th>Data</th>
       <th>Texto</th>
       <th>Captura de Tela</th> -->
-      <% all_columns_for_collection(@feedbacks).each do |column_name| %>
-        <%= content_tag :th, humanize_column(column_name) %>
+      <% @feedback_form.grid_checked_columns.each do |column| %>
+        <%= content_tag :th, humanize_column(column.display_label) unless column.display_label.empty? %>
       <% end %>
       <th><%= t 'Actions' %></th>
     </tr>
@@ -27,8 +27,10 @@
   <tbody>
     <% @feedbacks.each do |feedback| %>
       <tr class='feedback_line' data-target-selector='#<%= id_for_panel_feedback_detail(feedback) %>'>
-        <% all_columns_for_collection(@feedbacks).each do |column_name| %>
+        <% @feedback_form.grid_columns.each do |column_name| %>
+          <% unless column_name.empty? %>
           <td><%= show_column_value(column_name, feedback.read_attribute(column_name)) %></td>
+          <% end %>
         <% end %>
         <td><%#= link_to t('Archive'), archive_feedback_target_feedback_path( @feedback_target, feedback), :remote => true, :method => :post, :data => {:type => 'json', :target_selector => 'a'} %>
           <%= 'default'.eql?(@scope) ? link_to_archive(feedback) : link_to_unarchive(feedback) %>
@@ -44,7 +46,7 @@
   </tbody>
   <tfooter>
   <tr>
-      <td colspan="<%= all_columns_for_collection(@feedbacks).count + 1%>">
+      <td colspan="100">
         <%= will_paginate @feedbacks, :class => 'apple_pagination' %>
       </td>
   </tr>

@@ -1,0 +1,10 @@
+<%=
+raw(
+  {
+    type: "text",
+    name: attribute.name,
+    label: attribute.label,
+    required: true
+  }.to_json.to_s +  (attribute.eql?(attribute.feedback_form.feedback_attributes.last) ? '' : ',')
+)
+%>

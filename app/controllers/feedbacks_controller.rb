@@ -1,10 +1,15 @@
 class FeedbacksController < ProtectedController
   respond_to :html, :json, :js
 
+  before_filter :define_breadcrumbs_index , :only => [:index]
+
   def index
     @feedbacks = list_feedbacks
-    add_breadcrumb @feedback_target
-    add_breadcrumb 'Feedbacks', feedback_target_feedbacks_path(@feedback_target)
+    add_breadcrumb  @feedback_target
+    #add_breadcrumb  'Feedback Forms', feedback_target_feedback_forms_path(feedback_target)
+    add_breadcrumb  @feedback_form.name,feedback_target_feedback_form_path(@feedback_target, @feedback_form)
+    add_breadcrumb  'Feedbacks'
+    #add_breadcrumb 'Feedbacks', feedback_target_feedbacks_path(@feedback_target)
     respond_to do |format|
       format.html { render :index }
       format.json { render json: FeedbacksDatatable.new(view_context) }
@@ -164,4 +169,10 @@ protected
   def feedback_target_id_param
     params[:feedback_target_id]
   end
+
+  private
+    def define_breadcrumbs_index
+      #add_breadcrumb  feedback_target
+      #add_breadcrumb  'Feedback Forms'
+    end
 end

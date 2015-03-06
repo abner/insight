@@ -61,6 +61,8 @@ pt-BR:
       show:  'Formulário de Feedback'
       edit:  'Alteração no Formulário de Feedback'
   feedback:
+    created_date: Data de Registro
+    screenshot: Captura de Tela
     detail_panel:
       title: 'Dados do Feedback'
     comment:

@@ -12,10 +12,10 @@
       <div class="col-lg-7">
         <form class="form-horizontal">
           <div class="form-group">
-            <% all_columns_for(feedback).each do |column_name| %>
-              <label class="col-sm-4 control-label"><%= column_name.humanize %></label>
+            <% feedback.feedback_form.detail_checked_columns.each do |column| %>
+              <label class="col-sm-4 control-label"><%= column.display_label %></label>
               <div class="col-sm-8">
-                <p class="form-control-static"><%= show_column_value(column_name, feedback.read_attribute(column_name)) %></p>
+                <p class="form-control-static"><%= show_column_value(column.name, feedback.read_attribute(column.name)) %></p>
               </div>
             <% end %>
 

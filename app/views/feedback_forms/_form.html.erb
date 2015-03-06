@@ -7,12 +7,12 @@
 
   <%= render partial: 'attributes_table', :locals => {f: f} %>
 
-  <%= f.form_group class: 'col-lg-4' do %>
-    <%= f.collection_check_boxes :grid_columns, @feedback_form.feedback_attributes, :name, :label %>
+  <%= f.form_group class: 'col-lg-4 columns_setup' do %>
+    <%= f.collection_check_boxes :grid_columns, @feedback_form.columns_for_grid_setup, :name, :label %>
   <% end %>
 
-  <%= f.form_group class: 'col-lg-4' do %>
-    <%= f.collection_check_boxes :detail_columns, @feedback_form.feedback_attributes, :name, :label %>
+  <%= f.form_group class: 'col-lg-4 columns_setup' do %>
+    <%= f.collection_check_boxes :detail_columns, @feedback_form.columns_for_detail_setup, :name, :label %>
   <% end %>
 
   <%= f.form_group class: 'col-lg-4', label: {text: t('feedback_form.form_group.plugins') }  do %>
@@ -37,6 +37,14 @@ $(document).on('ready page:load',function(){
     //}
     //window.setTimeout(refresh_positions, 250 );
   });
+
+  $('div.columns_setup').sortable({
+    containerSelector: 'div.form-group',
+    itemPath: '> div',
+    itemSelector: 'div.checkbox',
+    placeholder: '<div class="placeholder"/>'
+  });
+
   $('.sorted_table').sortable({
     containerSelector: 'table',
     itemPath: '> tbody',

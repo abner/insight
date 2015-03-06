@@ -320,6 +320,32 @@ div.logo_serpro_50_anos {
   }
 }
 
+div.placeholder {
+  display: block;
+  background: lightgray;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 1px dotted silver;
+  height: 0px;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+div.placeholder:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  margin-top: -5px;
+  left: -5px;
+  border-right: none; }
+
 .sorted_table tbody tr {
   cursor: pointer; }
 /* line 96, /Users/jonasvonandrian/jquery-sortable/source/css/application.css.sass */
