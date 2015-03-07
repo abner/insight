@@ -138,6 +138,22 @@ RSpec.describe Feedback, :type => :model do
       feedback.save!
       expect(feedback.columns.collect {|c| c[:key] }).to include 'tipo_relato', 'relato'
     end
+
+    it 'returns description text based on form setup' do
+      feedback = FactoryGirl.create(:feedback)
+      feedback.write_attribute(:relato, 'relato descritivo')
+      expect(feedback.description).to eq('relato descritivo')
+    end
+  end
+
+  context 'search' do
+    it 'searchs for last feedbacks for an user' do
+      user = FactoryGirl.create(:user)
+      feedback_target = FactoryGirl.create(:feedback_target, :owner => user)
+      feedback_form = FactoryGirl.create(:feedback_form, :feedback_target => feedback_target)
+      feedback = FactoryGirl.create(:feedback, :feedback_form => feedback_form)
+      expect(Feedback.last_feedbacks_for_user(user).map {|f| f.id}).to include feedback.id
+    end
   end
 
   context 'is commentable' do

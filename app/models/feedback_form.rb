@@ -24,12 +24,16 @@ class FeedbackForm
 
   field :detail_columns, type: Array
 
+  field :description_columns, type: Array
+
   field :screenshot_enabled, type: Boolean, default: true
   field :review_enabled, type: Boolean, default: true
 
   validates_presence_of :name, :feedback_attributes, :feedback_target
 
   has_many :feedbacks, dependent: :destroy
+
+  slug :name, history: true, scope: :feedback_target
 
   def system_columns
     @system_columns ||= {
@@ -111,8 +115,14 @@ class FeedbackForm
     end
   end
 
-
-  slug :name, history: true, scope: :feedback_target
+  def extract_description(feedback)
+    return nil unless feedback
+    return attributes.values.to_s unless description_columns
+    description_values = description_columns.map do |column|
+      feedback.read_attribute(column) if feedback.attributes.has_key? column
+    end
+    description_values.join(" ")
+  end
 
 protected
   def set_position(attribute)

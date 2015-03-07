@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :registered_user, :aliases => [:owner] do
+  factory :registered_user, :aliases => [:owner, :user] do
     username { "user-#{SecureRandom.hex(4)}" }
     email { "#{username}@dominio.com.br" }
 
@@ -14,6 +14,7 @@ FactoryGirl.define do
   factory :feedback_form do
     name 'Relato ou Sugestão'
     feedback_target
+    description_columns ['relato']
     feedback_attributes { [FactoryGirl.attributes_for(:relato_attribute)] }
   end
 
@@ -37,7 +38,6 @@ FactoryGirl.define do
     active true
     text "Feedback Text provided by application user"
     feedback_form
-
     factory :feedback_with_comment do
       active true
       text "Feedback Text provided by application user"

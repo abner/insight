@@ -53,7 +53,7 @@ class Feedback
   end
 
   def description
-    attributes.to_s
+    feedback_form.extract_description(self) if feedback_form
   end
 
   def archive!
@@ -137,7 +137,8 @@ class Feedback
 
   def self.last_feedbacks_for_user(user)
     apps_ids = FeedbackTarget.all_targets_for_user(user).map {|app| app.id.to_s }
-    Feedback.in(feedback_target_id:  apps_ids).order(created_at: 'DESC').paginate(page: 1, per_page: 5)
+    forms_ids = FeedbackForm.in(feedback_target_id: apps_ids).map {|form| form.id.to_s}
+    Feedback.in(feedback_form_id: forms_ids).order(created_at: 'DESC').paginate(page: 1, per_page: 5)
   end
 
 protected
