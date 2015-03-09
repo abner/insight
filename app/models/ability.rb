@@ -15,7 +15,7 @@ class Ability
     end
 
     def feedback_target_abilities(user, feedback_target)
-      rules = []
+      rules = [:create_feedback_target]
 
       if user.is_member?(feedback_target) or user.owns?(feedback_target)
         rules << :read_feedback_target
@@ -26,7 +26,7 @@ class Ability
 
       if(user.owns?(feedback_target))
         rules << :write_feedback_target
-        rules << :remove_feedback_target
+        rules << :destroy_feedback_target
         rules << :admin_team_members
       end
 
@@ -38,7 +38,8 @@ class Ability
       if user.is_member?(feedback_form.feedback_target) or user.owns?(feedback_form.feedback_target)
         rules << :read_feedback_form
         rules << :write_feedback_form
-        rules << :list_feedback_forms
+        rules << :destroy_feedback_form
+        rules << :list_feedbacks
       end
       rules
     end
@@ -58,12 +59,12 @@ class Ability
     def comment_abilities(user, comment)
       rules = []
 
-      if user.is_member?(comment.feedback.feedback_target)
+      if user.is_member?(comment.feedback.feedback_target) || user.owns?(comment.feedback.feedback_target)
         rules << :read_comment
       end
 
       if user.eql?(comment.user)
-        rules << :remove_comment
+        rules << :destroy_comment
         rules << :write_comment
       end
 

@@ -51,7 +51,7 @@
                       <td><%= feedback_target.authentication_token %></td>
                       <td>
                         <%= render_action 'edit', feedback_target if current_user_can?(:write_feedback_target, feedback_target) %>
-                        <%= render_action 'destroy', feedback_target if current_user_can?(:remove_feedback_target, feedback_target) %>
+                        <%= render_action 'destroy', feedback_target if current_user_can?(:destroy_feedback_target, feedback_target) %>
                         <%= render_action 'forms', feedback_target if current_user_can?(:write_feedback_target, feedback_target) %>
                       </td>
                     </tr>

@@ -76,15 +76,16 @@ class FeedbackForm
   end
 
   def columns_for_detail_setup
-    columns_for_setup(self.detail_columns, detail_checked_columns)
+    columns_for_setup(self.detail_columns || [], detail_checked_columns)
   end
 
   def columns_for_grid_setup
-    columns_for_setup(self.grid_columns, grid_checked_columns)
+    columns_for_setup(self.grid_columns || [], grid_checked_columns)
   end
 
   def columns_for_setup(selected_array, checked_columns)
     columns = []
+
     if selected_array and selected_array.size > 0
 
       columns = checked_columns

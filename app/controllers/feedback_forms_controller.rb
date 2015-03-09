@@ -93,7 +93,7 @@ class FeedbackFormsController < ProtectedController
   def destroy
     @feedback_target = find_feedback_target
     @feedback_form = find_feedback_for(@feedback_target)
-    authorize!(:write_feedback_form, @feedback_form) do
+    authorize!(:destroy_feedback_form, @feedback_form) do
       @feedback_form.destroy
     end
   end

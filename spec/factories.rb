@@ -5,6 +5,12 @@ FactoryGirl.define do
 
   end
 
+  factory :ldap_user do
+    username { "user-#{SecureRandom.hex(4)}" }
+    email { "#{username}@dominio.com.br" }
+
+  end
+
   factory :feedback_target do
     name { "SISCOAF #{SecureRandom.hex(4)}" }
     owner
@@ -55,7 +61,7 @@ FactoryGirl.define do
 
 factory :comment do
      text 'Comment 1'
-     registered_user
+     user
 end
 
   # factory :comment1, :class => :comment do

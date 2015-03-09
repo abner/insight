@@ -85,7 +85,7 @@ class FeedbackTargetsController < ProtectedController
   end
 
   def destroy
-    authorize!(:remove_feedback_target, feedback_target) do
+    authorize!(:destroy_feedback_target, feedback_target) do
       feedback_target.destroy
       flash[:notice] = translate('User application removed successfully!')
       redirect_to :action => :index

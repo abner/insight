@@ -4,16 +4,15 @@ class FeedbacksController < ProtectedController
   before_filter :define_breadcrumbs_index , :only => [:index]
 
   def index
-    @feedbacks = list_feedbacks
-    add_breadcrumb  @feedback_target
-    #add_breadcrumb  'Feedback Forms', feedback_target_feedback_forms_path(feedback_target)
-    add_breadcrumb  @feedback_form.name,feedback_target_feedback_form_path(@feedback_target, @feedback_form)
-    add_breadcrumb  'Feedbacks'
-    #add_breadcrumb 'Feedbacks', feedback_target_feedbacks_path(@feedback_target)
-    respond_to do |format|
-      format.html { render :index }
-      format.json { render json: FeedbacksDatatable.new(view_context) }
-      format.js { render 'index.js.erb' }
+    @feedback_form = @feedback_target.feedback_forms.find(params[:feedback_form_id])
+    authorize!(:list_feedbacks, @feedback_form) do
+      @feedbacks = list_feedbacks
+
+      respond_to do |format|
+        format.html { render :index }
+        format.json { render json: FeedbacksDatatable.new(view_context) }
+        format.js { render 'index.js.erb' }
+      end
     end
   end
 
@@ -172,7 +171,9 @@ protected
 
   private
     def define_breadcrumbs_index
-      #add_breadcrumb  feedback_target
-      #add_breadcrumb  'Feedback Forms'
+      add_breadcrumb  feedback_target
+      @feedback_form = @feedback_target.feedback_forms.find(params[:feedback_form_id])
+      add_breadcrumb  @feedback_form.name,feedback_target_feedback_form_path(@feedback_target, @feedback_form)
+      add_breadcrumb  'Feedbacks'
     end
 end

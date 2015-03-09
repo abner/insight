@@ -34,7 +34,7 @@
     $('#team_members_ids').each(function() {
       var url = $(this).data('url');
       var placeholder = $(this).data('placeholder');
-      var saved = <%= raw @feedback_target.members_user_names.as_json %> ;
+      var saved = <%= raw @feedback_target.members_usernames.as_json %> ;
       $(this).select2({
         minimumInputLength: 2,
         multiple: true,

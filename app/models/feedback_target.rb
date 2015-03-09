@@ -34,7 +34,7 @@ class FeedbackTarget
             inverse_of: :feedback_target,
             foreign_key: 'feedback_target_id',
             dependent: :destroy
-            
+
   has_many :feedbacks #, dependent: :destroy
   #belongs_to :default_feedback_form, class_name: 'FeedbackForm'
   #has_many :members, :class_name => 'User'
@@ -43,10 +43,6 @@ class FeedbackTarget
   scope :all_targets_for_user, ->(user){
       any_of({:owner => user}, {:member_ids.in => [user.id]})
   }
-
-  def to_s
-    name
-  end
 
   def include_members member_ids_str
     return if member_ids_str.empty?
@@ -65,12 +61,12 @@ class FeedbackTarget
     return self.members.delete(user).present? #true se o usuario foi removido como membro
   end
 
-  def members_user_names
+  def members_usernames
     members_names = members.empty? ? []  : members.map {|m| m.username}
   end
 
   def list_members_candidates(username_filter)
-    already_members_filter = members_user_names + [owner.username]
+    already_members_filter = members_usernames + [owner.username]
     User.by_username_or_email(username_filter) & User.where(:username.nin => already_members_filter)
   end
 
