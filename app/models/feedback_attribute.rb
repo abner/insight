@@ -56,7 +56,7 @@ class FeedbackAttribute
   end
 
   def label
-    display_label.present? ?  display_label : name.humanize if display_label
+    display_label.present? ?  display_label : name.humanize #if display_label
   end
 
   validates_presence_of :name

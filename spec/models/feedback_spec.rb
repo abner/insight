@@ -67,14 +67,16 @@ RSpec.describe Feedback, :type => :model do
 
   it 'search for max field count on feedbacks' do
     valid_feedback.save!
+    min_count = valid_feedback.attributes.count
     f2 = feedback_extrafields
+    max_count = f2.attributes.count
     expect(Feedback.count).to eq(2)
 
-    expect(Feedback.max_field_count).to eq(9)
-    expect(Feedback.max_field_count_for_relation(Feedback.all.limit(1).sort(_id:1))).to eq(7)
+    expect(Feedback.max_field_count).to eq(max_count)
+    expect(Feedback.max_field_count_for_relation(Feedback.all.limit(1).sort(_id:1))).to eq(min_count)
 
-    expect(Feedback.min_field_count).to eq(7)
-    expect(Feedback.min_field_count_for_relation(Feedback.all.skip(1).limit(1).sort(_id:-1))).to eq(9)
+    expect(Feedback.min_field_count).to eq(min_count)
+    expect(Feedback.min_field_count_for_relation(Feedback.all.skip(1).limit(1).sort(_id:-1))).to eq(max_count)
   end
 
   it 'return 0 on max field count if there is no feedback recorded' do

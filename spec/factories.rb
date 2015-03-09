@@ -24,6 +24,12 @@ FactoryGirl.define do
     type { [FactoryGirl.attributes_for(:textarea_type)] }
   end
 
+  factory :feedback_attribute, class: FeedbackAttribute do
+    name 'attribute'
+    display_label 'attribute label'
+    type { [FactoryGirl.attributes_for(:textarea_type)] }
+  end
+
   factory :feedback_attribute_template do
     name 'attribute_name'
     display_label 'display_label'
