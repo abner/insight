@@ -110,6 +110,16 @@ group :test do
 
   # code coverage
   gem 'simplecov', :require => false
+
+  gem 'fuubar'
+
+  gem 'launchy' # this lets us call save_and_open_page to see what's on a page for debugging capybara tests
+  gem 'capybara'
+  gem 'capybara-screenshot', github: 'parndt/capybara-screenshot', branch: 'fix-rspec-3-0-0-deprecation'
+  gem 'show_me_the_cookies'
+  #gem 'rspec-instafail'
+  #gem 'shoulda-matchers'
+  gem 'poltergeist'
 end
 
 #gem 'devise',  '~> 3.2.4'

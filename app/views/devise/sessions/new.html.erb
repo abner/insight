@@ -2,9 +2,11 @@
 
 
 
-	<%= bootstrap_form_tag(:url => '/auth/expressov3/callback', :html => {:class => 'form-signin'}) do |f| %>
+	<%= bootstrap_form_tag(:url => ('registered_user'.eql?(resource_name.to_s) ? '' :'/auth/expressov3/callback'), :html => {:class => 'form-signin'}) do |f| %>
 	<h2 class="form-signin-heading">Feedback para Aplicações Web</h2>
 	<hr style="height:1px"/>
+	<%= resource_name %>
+	<%= 'registered_user'.eql?(resource_name.to_s) %>
 	<%= bootstrap_flash %>
 	  <%= f.text_field :username, :placeholder => 'Login/CPF', :class =>  'sr-only', :required => true %>
 	  <%= f.password_field :password, :placeholder => 'Senha', :class =>  'sr-only', :required => true %>

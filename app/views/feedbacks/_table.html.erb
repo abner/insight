@@ -27,7 +27,8 @@
   <tbody>
     <% @feedbacks.each do |feedback| %>
       <tr class='feedback_line' data-target-selector='#<%= id_for_panel_feedback_detail(feedback) %>'>
-        <% @feedback_form.grid_columns.each do |column_name| %>
+        <% grid_columns = @feedback_form.grid_columns || @feedback_form.all_columns %>
+        <% grid_columns.each do |column_name| %>
           <% unless column_name.empty? %>
           <td><%= show_column_value(column_name, feedback.read_attribute(column_name)) %></td>
           <% end %>

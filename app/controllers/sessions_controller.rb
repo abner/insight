@@ -1,5 +1,6 @@
 class SessionsController < Devise::SessionsController
 
+  respond_to :html
   skip_before_filter :verify_authenticity_token
 
 layout 'login_page'
@@ -56,6 +57,11 @@ private
   end
 
   def devise_authentication
+    unless request.params['user']
+      request.params['user'] = {}
+      request.params['user']['username'] = request.params['username'] if request.params['username']
+      request.params['user']['password'] = request.params['password'] if request.params['password']
+    end
     # Copy user data to ldap_user and local_user
     request.params['ldap_user'] = request.params['registered_user'] = request.params['user']
 
@@ -85,7 +91,8 @@ private
       sign_in(user_class, self.resource)
     end
 
-    respond_with self.resource, :location => after_sign_in_path_for(self.resource)
+    redirect_to after_sign_in_path_for(self.resource)
+    #respond_with self.resource, :location => after_sign_in_path_for(self.resource)
   end
 
   def define_user user

@@ -38,4 +38,6 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.ldap_enabled = false
+
+  config.integration_test_render_dir = "#{::Rails.root}/tmp/screenshots"
 end

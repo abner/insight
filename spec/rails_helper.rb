@@ -7,6 +7,7 @@ require 'rspec/rails'
 
 require 'factory_girl_rails'
 
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -16,7 +17,22 @@ require 'factory_girl_rails'
 # option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
+require 'simplecov'
+SimpleCov.start 'rails'
 
+require 'capybara/rspec'
+require 'capybara/poltergeist'
+
+#Capybara.javascript_driver = :poltergeist
+Capybara.register_driver :poltergeist_debug do |app|
+  Capybara::Poltergeist::Driver.new(app, :inspector => true)
+end
+# Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :poltergeist_debug
+
+Capybara.app_host = 'http://localhost:3000'
+Capybara.server_port = 3000
+Capybara.asset_host = "http://localhost:3000"
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -24,7 +40,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 #NOT USING ACTIVE RECORD
 #ActiveRecord::Migration.maintain_test_schema!
 
-# RSpec.configure do |config|
+ RSpec.configure do |config|
 #   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
 #   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 #
@@ -46,5 +62,5 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 #   #
 #   # The different available types are documented in the features, such as in
 #   # https://relishapp.com/rspec/rspec-rails/docs
-#   config.infer_spec_type_from_file_location!
-# end
+   config.infer_spec_type_from_file_location!
+ end

@@ -5,6 +5,14 @@ FactoryGirl.define do
 
   end
 
+  factory :expresso_user do
+    username { "user-#{SecureRandom.hex(4)}" }
+    email { "#{username}@dominio.com.br" }
+    json_key 'json_key'
+    tine_key 'tine_key'
+    name 'Ze Tony'
+  end
+
   factory :ldap_user do
     username { "user-#{SecureRandom.hex(4)}" }
     email { "#{username}@dominio.com.br" }

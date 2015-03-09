@@ -127,6 +127,7 @@ protected
 
 
     @page = params[:page] || 1
+
     @per_page = params[:per_page] || Feedback.per_page
 
     @scope = params['scope'] || 'default'
