@@ -34,6 +34,15 @@ require 'capybara-screenshot/rspec'
 #     driver.render(path, :full => true)
 #   end
 # end
+Capybara.register_driver :poltergeist do |app|
+  options = {
+    window_size: [1440,900],
+    inspector: false,
+    phantomjs_options: ['--ignore-ssl-errors=yes']#['--load-images=no', '--ignore-ssl-errors=yes']
+
+  }
+  Capybara::Poltergeist::Driver.new(app, options)
+end
 
 Capybara.javascript_driver = :poltergeist
 
