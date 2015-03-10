@@ -20,6 +20,7 @@
       </tr>
     </thead>
     <tbody>
+
       <% @feedback_form.feedback_attributes.each do |attribute| %>
         <%= f.fields_for_with_bootstrap :feedback_attributes, attribute do |attribute_form| %>
         <%= render partial: 'feedback_attribute_fields', locals: { attribute: attribute, attribute_form: attribute_form } %>

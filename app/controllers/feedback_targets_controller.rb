@@ -106,7 +106,7 @@ private
   end
 
   def define_breadcrumbs
-    add_breadcrumb  feedback_target
+    add_breadcrumb  feedback_target.name, feedback_target
   end
 
   def id_param

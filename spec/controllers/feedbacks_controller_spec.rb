@@ -19,7 +19,6 @@ describe FeedbacksController, :type => :controller do
         feedback_form =  FactoryGirl.create(:feedback_form, :feedback_target => feedback_target)
         feedback = FactoryGirl.create(:feedback, :feedback_form => feedback_form)
         get :index, :feedback_target_id => feedback.feedback_target.to_param, :feedback_form_id => feedback_form.id
-        puts response.body
         expect(assigns(:feedbacks)).to eq([feedback])
       end
     end

@@ -1,5 +1,5 @@
 require 'rails_helper'
-feature 'List feedback targets' do
+feature 'Feedback targets', js: true do
 
   background do
     @user = FactoryGirl.create(:registered_user, :username=> 'joao', :password => 'ninguem')
@@ -7,7 +7,7 @@ feature 'List feedback targets' do
     sign_in_user 'joao', 'ninguem'
   end
 
-  scenario 'the feedback targets user owns are listed', js: true do
+  scenario 'the feedback targets user owns are listed' do
     visit feedback_targets_path
     expect(page).to have_content(@feedback_targets.first.name)
   end
@@ -19,8 +19,15 @@ feature 'List feedback targets' do
     fill_in 'Nome', with: 'My new App'
     click_button 'Salvar'
     expect(current_path).to eq(feedback_targets_path)
+    expect(page).to have_selector('div.alert-success', text: 'Aplicação criada!')
     expect(page).to have_content('APP 1')
     expect(page).to have_content('My new App')
-    page!
+  end
+
+  scenario 'edit a feedback target' do
+    visit feedback_targets_path
+    click_link 'Alterar'
+    expect(current_path).to eq(edit_feedback_target_path(@feedback_targets.first))
+    #render_page('feedback_edit')
   end
 end

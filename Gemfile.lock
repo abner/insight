@@ -1,13 +1,4 @@
 GIT
-  remote: git://github.com/parndt/capybara-screenshot.git
-  revision: 350f5af518df118bcd870343fa78fd433c48a916
-  branch: fix-rspec-3-0-0-deprecation
-  specs:
-    capybara-screenshot (0.3.16)
-      capybara (>= 1.0, < 3)
-      launchy
-
-GIT
   remote: https://github.com/cschiewek/devise_ldap_authenticatable.git
   revision: 2cb27338d36d3cd965a14a79f0a7fb3a0b4a52fa
   specs:
@@ -101,6 +92,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-screenshot (1.0.7)
+      capybara (>= 1.0, < 3)
+      launchy
     celluloid (0.16.0)
       timers (~> 4.0.0)
     chunky_png (1.3.4)
@@ -480,7 +474,7 @@ DEPENDENCIES
   bootstrap_form
   byebug
   capybara
-  capybara-screenshot!
+  capybara-screenshot
   cocoon
   coffee-rails (~> 4.0.0)
   compass-rails

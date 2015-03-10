@@ -22,13 +22,21 @@ SimpleCov.start 'rails'
 
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+require 'capybara-screenshot/rspec'
 
-#Capybara.javascript_driver = :poltergeist
-Capybara.register_driver :poltergeist_debug do |app|
-  Capybara::Poltergeist::Driver.new(app, :inspector => true)
-end
-# Capybara.javascript_driver = :poltergeist
-Capybara.javascript_driver = :poltergeist_debug
+
+# Capybara.register_driver :poltergeist_debug do |app|
+#   Capybara::Poltergeist::Driver.new(app, :inspector => true)
+# end
+#Capybara.javascript_driver = :poltergeist_debug
+# Capybara::Screenshot.class_eval do
+#   register_driver(:poltergeist_debug) do |driver, path|
+#     driver.render(path, :full => true)
+#   end
+# end
+
+Capybara.javascript_driver = :poltergeist
+
 
 Capybara.app_host = 'http://localhost:3000'
 Capybara.server_port = 3000

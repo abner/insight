@@ -26,33 +26,34 @@ FactoryGirl.define do
 
 
   factory :feedback_form do
-    name 'Relato ou Sugestão'
+    name 'Form novo'
     feedback_target
     description_columns ['relato']
-    feedback_attributes { [FactoryGirl.attributes_for(:relato_attribute)] }
+    feedback_attributes { [FactoryGirl.build(:relato_attribute)] }
   end
 
   factory :relato_attribute, class: FeedbackAttribute do
     name 'relato'
     display_label 'Relato'
-    type { [FactoryGirl.attributes_for(:textarea_type)] }
+    type { FeedbackAttributeType.find_by(name: 'Textarea') }
   end
 
   factory :feedback_attribute, class: FeedbackAttribute do
     name 'attribute'
     display_label 'attribute label'
-    type { [FactoryGirl.attributes_for(:textarea_type)] }
+    type { FeedbackAttributeType.find_by(name: 'Textarea') }
   end
 
   factory :feedback_attribute_template do
     name 'attribute_name'
     display_label 'display_label'
-    type { [FactoryGirl.attributes_for(:textarea_type)] }
+    type { FeedbackAttributeType.find_by(name: 'Textarea') }
   end
-
-  factory :textarea_type, class: FeedbackAttributeType do
-    name 'Textarea'
-  end
+  #
+  # factory :textarea_type, class: FeedbackAttributeType, :aliases => [:type]  do
+  #   name 'Textarea'
+  #   description 'Textarea field'
+  # end
 
   factory :feedback do
     active true
