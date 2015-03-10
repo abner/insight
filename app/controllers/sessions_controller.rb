@@ -36,6 +36,7 @@ layout 'login_page'
     redirect_to '/feedback_targets'  if  registered_user_signed_in? || expresso_user_signed_in?
     # Set up a blank resource for the view rendering
     self.resource = User.new
+    #resource_name = :expresso_user
   end
 
 private

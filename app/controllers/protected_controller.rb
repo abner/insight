@@ -7,10 +7,12 @@ class ProtectedController < ApplicationController
   helper_method :abilities, :can?, :authorize!, :current_user_can?
 
 protected
-    # simple delegate method for controller & view
-  def can?(user, action, subject)
-    Ability.abilities.allowed?(user, action, subject)
-  end
+
+  # not necessary yet
+  # simple delegate method for controller & view
+  # def can?(user, action, subject)
+  #   Ability.abilities.allowed?(user, action, subject)
+  # end
 
   def current_user_can?(action, subject)
     Ability.abilities.allowed?(current_user, action, subject)

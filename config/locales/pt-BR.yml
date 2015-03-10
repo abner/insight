@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 pt-BR:
+  alert_errors: "Por favor corrija os erros abaixo:"
   Details: Detalhes
   close: Fechar
   Comments: Comentários
@@ -42,6 +43,7 @@ pt-BR:
     confirmation_question: 'Tem certeza que deseja excluir a aplicação?'
     page_title:
       new: Nova Aplicação
+      edit: Alterar Aplicação
   feedback_form:
     links:
       new_attribute_after: "Incluir"

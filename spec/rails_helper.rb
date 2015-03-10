@@ -38,6 +38,7 @@ Capybara.register_driver :poltergeist do |app|
   options = {
     window_size: [1440,900],
     inspector: false,
+    #debug: true,
     phantomjs_options: ['--ignore-ssl-errors=yes']#['--load-images=no', '--ignore-ssl-errors=yes']
 
   }
@@ -49,6 +50,7 @@ Capybara.javascript_driver = :poltergeist
 
 Capybara.app_host = 'http://localhost:3000'
 Capybara.server_port = 3000
+#Capybara.save_and_open_page_path = 'tmp/'
 Capybara.asset_host = "http://localhost:3000"
 
 # Checks for pending migrations before tests are run.

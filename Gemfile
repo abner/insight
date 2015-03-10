@@ -86,17 +86,19 @@ end
 group :development, :test do
   gem 'debugger', :platforms => :mri_19
   gem 'byebug', :platforms => [:mri_20, :ruby_21, :ruby_22]
+  gem 'rspec-rails'
 end
 
 #errbit / airbrake
 gem 'airbrake'
+
 
 group :test do
   # clean database before tests
   gem 'database_cleaner', "~> 1.4"
 
   gem 'rspec'
-  gem 'rspec-rails'
+
   #gem 'shoulda-matchers', require: false
 
   #mongoid mathcers for rspec
@@ -120,6 +122,8 @@ group :test do
   #gem 'rspec-instafail'
   #gem 'shoulda-matchers'
   gem 'poltergeist'
+
+  #gem 'capybara-select2', github: 'goodwill/capybara-select2'
 end
 
 #gem 'devise',  '~> 3.2.4'

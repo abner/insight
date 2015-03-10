@@ -22,20 +22,24 @@ class FeedbacksController < ProtectedController
       @comments = @feedback.comments
       respond_to do |format|
         format.js {}
-        format.html {}
+        format.html { render :partial => 'feedbacks/comments_list', :locals => { feedback: @feedback} }
         format.json { render :json =>  respond_success_json(:object => @comments) }
       end
     rescue Exception => ex
-
+      raise ex.message
+      respond_to do |format|
+        format.html { render :partial => :comments_list, :locals => { feedback: @feedback} }
+      end
     end
   end
 
   def add_comment
+    @feedback = feedback_from_params
+    @comment = @feedback.comments.create(:user => current_user, :text => params[:comment][:text])
     respond_to do |format|
+      format.html { redirect_to action: :index }
       format.json do
         begin
-          @feedback = feedback_from_params
-          @comment = @feedback.comments.create(:user => current_user, :text => params[:comment][:text])
           @feedback.save!
           render :json => respond_success_json(:object => @comment)
         rescue Exception => e
@@ -44,8 +48,6 @@ class FeedbacksController < ProtectedController
       end
       format.js do
         begin
-          @feedback = feedback_from_params
-          @feedback.comments.create(:user => current_user, :text => params[:comment][:text])
           @feedback.save!
           @comment = Comment.new
           render :comments
@@ -59,21 +61,21 @@ class FeedbacksController < ProtectedController
   end
 
   def destroy_comment
-    respond_to do |format|
-      format.json do
-        begin
-          @feedback = feedback_from_params
-          @comment = @feedback.comments.find(params[:comment_id])
-          @comment.destroy
-          render :json => respond_success_json(:object => @comment)
-        rescue Exception => e
-          render json: respond_error_json(:message => e.message ,:object => @feedback), :content_type => 'application/javascript'
-        end
+    begin
+      @feedback = feedback_from_params
+      @comment = @feedback.comments.find(params[:comment_id])
+      @comment.destroy
+      @comment = Comment.new
+      respond_to do |format|
+        format.html { redirect_to action: :index }
+        format.json { render :json => respond_success_json(:object => @comment) }
+        format.js   { render :comments }
       end
-      format.js do
-        @feedback = feedback_from_params
-        @feedback.comments.find(params[:comment_id]).destroy()
-        render :comments
+    rescue Exception => e
+      respond_to do |format|
+        format.html { redirect_to :index}
+        format.json { render json: respond_error_json(:message => e.message ,:object => @feedback), :content_type => 'application/javascript'}
+        format.js   { render :comments }
       end
     end
   end
@@ -82,12 +84,14 @@ class FeedbacksController < ProtectedController
     @feedback = nil
     @scope = 'default'
 
+    @feedback = feedback_from_params
+    @feedback.archive!
     respond_to do |format|
-      format.html
+      format.html do
+        redirect_to action: :index
+      end
       format.js do
         begin
-          @feedback = feedback_from_params
-          @feedback.archive!
           redirect_to feedback_target_feedback_form_feedbacks_path(@feedback_target, @feedback.feedback_form, view_context.pagination_params)
         rescue Exception => e
           render json: respond_error_json(:message => e.message ,:object => @feedback), :content_type => 'application/javascript'
@@ -100,21 +104,18 @@ class FeedbacksController < ProtectedController
     @feedback = nil
     @scope = 'archived'
 
+    @feedback = feedback_from_params
+    @feedback.unarchive!
+
     respond_to do |format|
-      format.html
+      format.html { redirect_to action: :index }
       format.js do
-        @feedback = feedback_from_params
-        @feedback.unarchive!
         redirect_to feedback_target_feedback_form_feedbacks_path(@feedback_target, @feedback.feedback_form, view_context.pagination_params.merge(:scope => 'archived'))
       end
     end
   end
 
 protected
-
-  def load_resources
-    @feedback = feedback_from_params
-  end
 
   def list_feedbacks
     @feedback_target = current_user.my_targets.find(params[:feedback_target_id])

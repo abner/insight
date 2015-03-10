@@ -102,8 +102,9 @@ RSpec.describe FeedbackTarget, :type => :model do
       target
     end
     it 'filter users which would be added as member' do
-      expect(target_with_member.list_members_candidates('user1')).to eq([user1])
-      expect(target_with_member.list_members_candidates('user')).to eq([user1, user2])
+      expect(target_with_member.list_members_candidates('user1')).to include user1
+      expect(target_with_member.list_members_candidates('user1')).not_to include user2
+      expect(target_with_member.list_members_candidates('user')).to include user1, user2
     end
     it 'not return users which are members already' do
       expect(target_with_member.list_members_candidates('member')).to be_empty

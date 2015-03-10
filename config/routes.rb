@@ -11,6 +11,8 @@
   devise_for :expresso_user, :registered_user, :ldap_users, skip: [ :sessions ]
 
   devise_scope :expresso_user do
+    root to: "sessions#new", :as => 'expresso_user_root'
+    get 'sign_in' => 'sessions#new', :as => :new_session_expresso_user
     match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
     get '/auth/failure', to: 'sessions#omniauth_failure'
     get 'sign_out' => 'sessions#destroy'
@@ -62,6 +64,7 @@
           post 'add_comment' => 'feedbacks#add_comment'
           post 'archive' => 'feedbacks#archive'
           post 'unarchive' => 'feedbacks#unarchive'
+          get 'comments' => 'feedbacks#comments'
         end
       end
     end

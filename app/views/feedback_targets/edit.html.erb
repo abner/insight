@@ -1,5 +1,5 @@
 
-<h1 class="page-header"><%= translate('Edit application') %></h1>
+<h1 class="page-header"><%= translate('feedback_target.page_title.edit') %></h1>
 
 
 <%= bootstrap_form_for @feedback_target, :role =>  'form' do |f| %>
@@ -8,5 +8,6 @@
 <% end %>
 
 
-
+<div id='member_edit_container'>
 <%= render :partial => 'members_edit' if  current_user_can?(:admin_team_members, @feedback_target)%>
+</div>

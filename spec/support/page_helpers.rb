@@ -27,7 +27,7 @@ module Features
     end
 
     def page!
-      save_and_open_page
+      save_and_open_screenshot
     end
   end
 end

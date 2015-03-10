@@ -17,8 +17,6 @@ feature 'User not logged' do
     fill_in 'Username', with: 'user'
     fill_in 'Password', with: 'password'
     click_button 'Login'
-    #save and opens page
-    page!
     expect(page.has_content?('Erro na autenticação. Verifique se o nome de usuário (CPF) ou senha estão corretos')).to eq(true)
   end
 

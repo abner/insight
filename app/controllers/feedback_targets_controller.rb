@@ -1,7 +1,7 @@
 #encoding: UTF-8
 class FeedbackTargetsController < ProtectedController
-  before_filter :define_breadcrumbs, :only => [:show, :edit]
-  helper_method :render_code, :render_js_include
+  before_filter :define_breadcrumbs, :only => [:show]
+  #helper_method :render_code, :render_js_include
 
   def index
     @feedback_targets = FeedbackTarget.all_targets_for_user(current_user)
@@ -16,8 +16,9 @@ class FeedbackTargetsController < ProtectedController
   end
 
   def edit
+    @feedback_target = FeedbackTarget.find(params[:id])
     authorize!(:write_feedback_target, feedback_target) do
-      @feedback_target = feedback_target
+      define_breadcrumbs
       add_breadcrumb  t('Edit')
     end
   end
@@ -49,36 +50,41 @@ class FeedbackTargetsController < ProtectedController
   end
 
   def remove_member
-    authorize!(:admin_team_members, feedback_target) do
+    @feedback_target = feedback_target
+    authorize!(:admin_team_members, @feedback_target) do
       respond_to do |format|
-       if feedback_target.remove_member params[:member_id]
-         format.html { redirect_to feedback_target, notice: 'Members successfully removed.' }
-         format.json { render json: feedback_target.members, :root => false, :each_serializer => UserAutocompleteSerializer }
+       if @feedback_target.remove_member params[:member_id]
+         format.html { redirect_to @feedback_target, notice: 'Members successfully removed.' }
+         format.json { render json: @feedback_target.members, :root => false, :each_serializer => UserAutocompleteSerializer }
          # added:
          format.js   { render action: 'members_list' }
        else
-         format.html { render action: 'edit' }
-         format.json { render json: feedback_target.errors, status: :unprocessable_entity }
+         #byebug
+         format.html { render action: 'edit', :locals => {:feedback_target => feedback_target} }
+         format.json { render json: @feedback_target.errors, status: :unprocessable_entity }
          # added:
-         format.js   { render json: feedback_target.errors, status: :unprocessable_entity }
+         format.js   { render json: @feedback_target.errors, status: :unprocessable_entity }
        end
       end
     end
   end
 
   def add_members
-    authorize!(:admin_team_members, feedback_target) do
+    @feedback_target = feedback_target
+    authorize!(:admin_team_members, @feedback_target) do
       respond_to do |format|
-       if feedback_target.include_members params[:team_members_ids]
+       if @feedback_target.include_members params[:team_members_ids]
          format.html { render action: 'edit', notice: 'Members successfully added.' }
-         format.json { render json: feedback_target.members, :root => false, :each_serializer => UserAutocompleteSerializer }
+         format.json { render json: @feedback_target.members, :root => false, :each_serializer => UserAutocompleteSerializer }
          # added:
-         format.js   { render action: 'members_list' }
+         format.js   do
+           render action: 'members_list'
+         end
        else
          format.html { render action: 'edit' }
-         format.json { render json: feedback_target.errors, status: :unprocessable_entity }
+         format.json { render json: @feedback_target.errors, status: :unprocessable_entity }
          # added:
-         format.js   { render json: feedback_target.errors, status: :unprocessable_entity }
+         format.js   { render json: @feedback_target.errors, status: :unprocessable_entity }
        end
       end
     end
@@ -92,14 +98,7 @@ class FeedbackTargetsController < ProtectedController
     end
   end
 
-protected
-  def render_code feedback_target
-    render_to_string(:partial => 'feedback_js_code', :layout => false, :locals => {:feedback_target => feedback_target})
-  end
 
-  def render_js_include
-    render_to_string(:partial => 'feedback_js_include', :layout => false)
-  end
 private
   def feedback_target
     @feedback_target ||= FeedbackTarget.all_targets_for_user(current_user).find(id_param)
