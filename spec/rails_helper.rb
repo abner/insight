@@ -46,6 +46,7 @@ Capybara.register_driver :poltergeist do |app|
 end
 
 Capybara.javascript_driver = :poltergeist
+#Capybara.javascript_driver = :selenium
 
 
 Capybara.app_host = 'http://localhost:3000'

@@ -7,7 +7,6 @@ feature 'User not logged' do
 
   scenario 'they see the login page', js: true do
     visit '/feedback_targets'
-    expect(status_code).to eq(200)
     expect(current_path).to eq('/')
     expect(find('form.form-signin')).to have_button('Login')
   end
@@ -28,6 +27,6 @@ feature 'User not logged' do
     expect(page.has_content?('Minhas Aplicações')).to eq(true)
     click_link 'joao'
     # render page png (only works when js: true)
-    render_page('feedback_after_login')
+    #render_page('feedback_after_login')
   end
 end

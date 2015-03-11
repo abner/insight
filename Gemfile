@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 #ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.0'
-ruby '2.2.0'
+ruby '2.2.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 
@@ -122,6 +122,7 @@ group :test do
   #gem 'rspec-instafail'
   #gem 'shoulda-matchers'
   gem 'poltergeist'
+  gem 'selenium-webdriver', '>=2.45.0'
 
   #gem 'capybara-select2', github: 'goodwill/capybara-select2'
 end
