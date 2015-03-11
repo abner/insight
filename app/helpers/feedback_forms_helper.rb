@@ -1,21 +1,22 @@
 module FeedbackFormsHelper
   def actions_for feedback_form
-    actions = []
-
-    if current_user_can?(:write_feedback_form, feedback_form)
-      actions <<
-              link_to(
+    capture do
+      if current_user_can?(:write_feedback_form, feedback_form)
+      concat (link_to(
                 edit_feedback_target_feedback_form_path(feedback_form.feedback_target, feedback_form)
                 ) do
                     content_tag(:span, pad(t('Edit')), class: 'fa fa-edit')
-                  end
-    end
-    actions << "&nbsp;"
-    actions <<
-              link_to(feedback_target_feedback_form_feedbacks_path(feedback_form.feedback_target, feedback_form)) do
-                content_tag(:span, pad(translate('Feedbacks')) + " ", :class => 'fa fa-comment-o')
-              end
-    raw actions.join
+                  end).html_safe
+      end
+      if current_user_can?(:destroy_feedback_form, feedback_form)
+        concat "&nbsp;".html_safe
+        concat render :partial => 'feedback_forms/actions/destroy', :locals => {feedback_form: feedback_form}
+      end
+      concat "&nbsp;".html_safe
+      concat (link_to(feedback_target_feedback_form_feedbacks_path(feedback_form.feedback_target, feedback_form)) do
+                  content_tag(:span, pad(translate('Feedbacks')) + " ", :class => 'fa fa-comment-o')
+                end).html_safe
+    end #raw actions.join
   end
 
   def url_for_form(feedback_target, feedback_form)

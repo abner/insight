@@ -26,7 +26,6 @@ class FeedbacksController < ProtectedController
         format.json { render :json =>  respond_success_json(:object => @comments) }
       end
     rescue Exception => ex
-      raise ex.message
       respond_to do |format|
         format.html { render :partial => :comments_list, :locals => { feedback: @feedback} }
       end

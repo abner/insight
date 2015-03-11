@@ -1,0 +1,4 @@
+$('div.panel-body').slideUp(200 , function(){
+  $('div.panel-body').html("<%= escape_javascript (render partial: 'feedback_forms/index/panel_body') %>");
+  $('div.panel-body').slideDown(350);
+});

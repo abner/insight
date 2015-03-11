@@ -1,7 +1,7 @@
 <div class='col-lg-12 '>
   <%= f.form_group class: "row", label: {text: 'Campos do Formulário'} do %>
 
-  <% if 'edit'.eql?(action_name) %>
+  <% if ['edit', 'new'].include?(action_name.to_s) %>
   <span class=''>
     <span class='label label-info'><%= t('feedback_form.show.tip_drag_and_drop') %></span>
   </span>
@@ -28,7 +28,7 @@
       <% end %>
     </tbody>
   </table>
-  <% if 'edit'.eql?(action_name) %>
+  <% if ['edit','new'].include?(action_name) %>
     <%= link_to_add_association content_tag(:span, " " + t('feedback_form.links.new_attribute_after'), :class => 'fa fa-hand-o-up'),
             f, 'feedback_attributes', 'data-association-insertion-node' => '#feedback_attributes',
             'data-association-insertion-method' => 'append', :class => 'btn btn-info' %>

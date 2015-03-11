@@ -1,6 +1,17 @@
+<%= content_tag :div, id: "confirm_feedback_form_#{feedback_form.id.to_s}", class: '', style: 'display:none' do %>
+<p class='text-info text-center'><%= t('feedback_form.confirmation_question') %></p>
+<div class='text-center'>
+  <%= link_to(
+  content_tag(:span, pad(translate('alertify.OK')), :class => 'btn btn-primary btn-sm'),
+  feedback_target_feedback_form_path(feedback_form.feedback_target, feedback_form), :remote => true, :method=> 'DELETE')
+  %>
+  <span class="btn btn-default btn-sm"><%= t('alertify.Cancel') %></span>
+</div>
+<% end %>
+
 <%= link_to(
-      content_tag(:span, " #{t('Destroy')} ", :class => 'fa fa-trash-o'),
-      'javascript:;',
-      class: 'attribute_destroy',
-      data: {'id' => feedback_attribute.id.to_s })
-    %>
+content_tag(:span, pad(translate('Destroy')), :class => 'fa fa-trash-o'),
+'',
+id: "destroy_form_#{feedback_form.id.to_s}", tabindex: '0',
+:data => {'popover-confirm' => 'true', 'id-content' => "#confirm_feedback_form_#{feedback_form.id.to_s}"})
+%>

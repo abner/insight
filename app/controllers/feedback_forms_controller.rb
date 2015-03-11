@@ -9,6 +9,7 @@ class FeedbackFormsController < ProtectedController
     @feedback_target = find_feedback_target
     authorize!(:create_feedback_form, @feedback_target) do
       @feedback_form = @feedback_target.feedback_forms.new
+      @feedback_form.feedback_attributes.build
     end
   end
 
@@ -47,7 +48,7 @@ class FeedbackFormsController < ProtectedController
       respond_to do |format|
         format.html do
           if @feedback_form.persisted?
-            redirect_to :index
+            redirect_to action: :index
           else
             render :new
           end
@@ -95,6 +96,14 @@ class FeedbackFormsController < ProtectedController
     @feedback_form = find_feedback_for(@feedback_target)
     authorize!(:destroy_feedback_form, @feedback_form) do
       @feedback_form.destroy
+    end
+    respond_to do |format|
+      format.html { redirect_to action: :index }
+      format.js do
+        @feedback_target = find_feedback_target
+        @feedback_forms = @feedback_target.feedback_forms
+        render :index
+       end
     end
   end
 

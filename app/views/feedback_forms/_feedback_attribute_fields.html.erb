@@ -1,7 +1,7 @@
 <% attribute_form ||= f %>
 <tr class="nested-fields attribute_line attribute_line<%= '_template hidden' if template %>">
 
-  <% if 'edit'.eql? action_name %>
+  <% if ['edit', 'new'].include? action_name %>
   <td>
     <%= attribute_form.hidden_field 'position', :class => 'position' %>
     <%#= render :partial => "feedback_forms/attribute_types/#{attribute.type.name.downcase}" %>

@@ -3,28 +3,5 @@
     <h1 class='page-header'><%= @feedback_target.name %></h1>
   </div>
 </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class='panel-title'><%= t('feedback_form.page_title.index') %></h3>
-    </div>
-    <div class="panel-body">
-      <div class="form-group">
-        <%= link_to url_for(new_feedback_target_feedback_form_path), :class => 'btn btn-primary' do%>
-          <i class='fa fa-list-alt'></i> <%= t('feedback_form.button.new_form') %>
-        <% end %>
-      </div>
-      <hr />
-      <table class="table table-striped table-bordered table-responsive">
-        <thead>
-          <tr>
-            <th><%= t('feedback_form.table_columns.name') %></th>
-            <th><%= t('feedback_form.table_columns.token') %></th>
-            <th><%= t('feedback_form.table_columns.actions') %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= render partial: 'feedback_form_item', :collection => @feedback_forms, :as => :feedback_form %>
-        </tbody>
-      </table>
-    </div>
+  <%= render partial: 'feedback_forms/index/panel' %>
   </div>

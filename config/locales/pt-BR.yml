@@ -45,6 +45,7 @@ pt-BR:
       new: Nova Aplicação
       edit: Alterar Aplicação
   feedback_form:
+    confirmation_question: 'Tem certeza que deseja excluir o formulário?'
     links:
       new_attribute_after: "Incluir"
     button:
