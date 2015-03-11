@@ -78,8 +78,11 @@ group :development do
   #gem 'web-console', '~> 2.0'
   gem "better_errors"
   gem 'binding_of_caller'
+
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem "spring-commands-cucumber"
+
   gem 'railroady'
 end
 
@@ -96,6 +99,8 @@ gem 'airbrake'
 group :test, :ci do
   # clean database before tests
   gem 'database_cleaner', "~> 1.4"
+
+  gem 'cucumber-rails', :require => false
 
   gem 'rspec'
 
