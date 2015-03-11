@@ -57,11 +57,11 @@ feature 'Feedback targets', js: true do
     end
 
     scenario 'getting error on removing member' do
-      FeedbackTarget.any_instance.stub(:remove_member).and_return(false)
+      allow_any_instance_of(FeedbackTarget).to receive(:remove_member).and_return(false)
       errors = ActiveModel::Errors.new(FeedbackTarget.new).tap {
         |e| e.add(:member, "não foi possível adicionar membro")
       }
-      FeedbackTarget.any_instance.stub(:errors).and_return(errors)
+      allow_any_instance_of(FeedbackTarget).to receive(:errors).and_return(errors)
       new_user_1 = FactoryGirl.create(:user, :username => 'kenedy')
       @feedback_targets.first.members << new_user_1
       visit feedback_targets_path
@@ -73,11 +73,11 @@ feature 'Feedback targets', js: true do
     end
 
     scenario 'getting error o adding a member' do
-      FeedbackTarget.any_instance.stub(:include_members).and_return(false)
+      allow_any_instance_of(FeedbackTarget).to receive(:include_members).and_return(false)
       errors = ActiveModel::Errors.new(FeedbackTarget.new).tap {
         |e| e.add(:member,"não foi possível adicionar membro")
       }
-      FeedbackTarget.any_instance.stub(:errors).and_return(errors)
+      allow_any_instance_of(FeedbackTarget).to receive(:errors).and_return(errors)
 
       new_user_1 = FactoryGirl.create(:user, :username => 'kenedy')
       new_user_2 = FactoryGirl.create(:user, :username => 'steph')
