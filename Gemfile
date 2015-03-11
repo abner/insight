@@ -83,7 +83,7 @@ group :development do
   gem 'railroady'
 end
 
-group :development, :test do
+group :development, :test, :ci do
   gem 'debugger', :platforms => :mri_19
   gem 'byebug', :platforms => [:mri_20, :ruby_21, :ruby_22]
   gem 'rspec-rails'
@@ -93,7 +93,7 @@ end
 gem 'airbrake'
 
 
-group :test do
+group :test, :ci do
   # clean database before tests
   gem 'database_cleaner', "~> 1.4"
 
