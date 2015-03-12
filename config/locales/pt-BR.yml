@@ -42,6 +42,7 @@ pt-BR:
   feedback_target:
     confirmation_question: 'Tem certeza que deseja excluir a aplicação?'
     page_title:
+      index: 'Minhas Aplicações'
       new: Nova Aplicação
       edit: Alterar Aplicação
   feedback_form:

@@ -14,6 +14,10 @@ module Features
       click_button 'Login'
     end
 
+    # def check_logged?
+    #   ! get_me_the_cookie().nil?
+    # end
+
   end
 end
 

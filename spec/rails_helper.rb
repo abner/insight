@@ -30,7 +30,7 @@ SimpleCov.formatters = [
 SimpleCov.start 'rails'
 
 require 'capybara/rspec'
-require 'capybara/poltergeist'
+#require 'capybara/poltergeist'
 require 'capybara-screenshot/rspec'
 
 
@@ -54,8 +54,8 @@ Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, options)
 end
 
-Capybara.javascript_driver = :poltergeist
-#Capybara.javascript_driver = :selenium
+#Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :selenium
 
 
 Capybara.app_host = 'http://localhost:3000'

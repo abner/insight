@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :registered_user, :aliases => [:owner, :user] do
+  factory :registered_user, :aliases => [:owner, :user, 'usuário'] do
     username { "user-#{SecureRandom.hex(4)}" }
     email { "#{username}@dominio.com.br" }
 

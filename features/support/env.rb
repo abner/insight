@@ -11,6 +11,9 @@ require 'capybara/poltergeist'
 
 require 'factory_girl_rails'
 
+Before do
+  DataSetup.run!
+end
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any

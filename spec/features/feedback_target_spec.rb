@@ -1,3 +1,4 @@
+#TODO refatorar para usar page objects
 require 'rails_helper'
 feature 'Feedback targets', js: true do
 
@@ -9,22 +10,25 @@ feature 'Feedback targets', js: true do
   end
 
   context 'Index Page' do
+    let(:feedback_target_page) { PageObject::FeedbackTargetIndexPage.new }
+
     scenario 'the feedback targets user owns are listed' do
-      visit feedback_targets_path
-      expect(page).to have_content(@feedback_targets.first.name)
+      feedback_target_page.visit_page
+      feedback_target_page.assert_has_target_listed(@feedback_targets.first.name)
     end
 
     scenario 'destroy feedback target' do
-      visit feedback_targets_path
-      within 'table#targets_list' do
-        expect(page).to have_content(@feedback_targets.first.name)
-        find("#destroy_user_app_#{@feedback_targets.first.id.to_s}").click
-        #click_link I18n.t('Destroy')
-        expect(page).to have_selector('div.popover-content p', text: I18n.t('feedback_target.confirmation_question'), visible: true)
-        find_link('OK').click
+
+      feedback_target_page.run do |nav|
+        nav.visit_page
+        nav.assert_has_target_listed(@feedback_targets.first.name)
+        nav.click_destroy_target(@feedback_targets.first.name)
+        nav.assert_destroy_popover_visible
+        nav.confirm_destroy
+        nav.verify_destroy_success_message
       end
-      expect(page).to have_selector('div.alert-success', text: I18n.t('User application removed successfully!'))
-      expect(page).not_to have_content(@feedback_targets.first.name)
+
+      # expect(page).not_to have_content(@feedback_targets.first.name)
     end
   end
 
