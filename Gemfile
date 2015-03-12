@@ -117,7 +117,9 @@ group :test, :ci do
 
   # code coverage
   gem 'simplecov', :require => false
-
+  gem 'simplecov-json', :require => false
+  gem 'simplecov-rcov', :require => false
+  
   gem 'fuubar'
 
   gem 'launchy' # this lets us call save_and_open_page to see what's on a page for debugging capybara tests

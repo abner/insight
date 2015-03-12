@@ -18,6 +18,15 @@ require 'factory_girl_rails'
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 require 'simplecov'
+require 'simplecov-json'
+require 'simplecov-rcov'
+
+SimpleCov.formatters = [
+  SimpleCov::Formatter::HTMLFormatter,
+  SimpleCov::Formatter::JSONFormatter,
+  SimpleCov::Formatter::RcovFormatter
+]
+
 SimpleCov.start 'rails'
 
 require 'capybara/rspec'
