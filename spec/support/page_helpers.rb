@@ -13,7 +13,7 @@ module Features
         page.driver.render(path, full: true)
         puts "Screenshot saved on #{path}"
       else
-        raise "Screenshot not rendered (it is not a js feature or driver does not support render )"
+        puts "Screenshot not rendered (it is not a js feature or driver does not support render )"
       end
     end
 

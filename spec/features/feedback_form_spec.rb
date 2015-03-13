@@ -17,7 +17,8 @@ feature 'Feedback forms', js: true do
   scenario 'shows feedback form' do
     visit feedback_target_feedback_forms_path(@feedback_targets.first)
     click_link @feedback_forms.first.name
-    expect(current_path).to eq(feedback_target_feedback_form_path(@feedback_targets.first, @feedback_forms.first))
+    #expect(current_path).to eq(feedback_target_feedback_form_path(@feedback_targets.first, @feedback_forms.first))
+    expect(page).to have_content(@feedback_forms.first.name)
   end
 
   scenario 'creates a new feedback form' do

@@ -1,3 +1,4 @@
+require_relative './base'
 module PageObject
   class FeedbackTargetIndexPage < Base
     def page_url

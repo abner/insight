@@ -43,8 +43,7 @@ feature 'Feedback targets', js: true do
 
       find("li.select2-search-field input[type='text']").click
       find("li.select2-search-field input[type='text']").set('ke')
-      expect(page).to have_selector('li', text: 'kenedy')
-      find('li', text: 'kenedy').click
+      find('li div.select2-result-label', text: 'kenedy').click
 
       expect(page).to have_selector('#members_list li')
 
@@ -92,7 +91,7 @@ feature 'Feedback targets', js: true do
 
       find("li.select2-search-field input[type='text']").click
       find("li.select2-search-field input[type='text']").set('ke')
-      find('li', text: 'kenedy').click
+      find('li div.select2-result-label', text: 'kenedy').click
 
       expect(page).to have_selector('div.alert-danger', I18n.t('alert_errors'))
       expect(page).to have_content('não foi possível adicionar membro')
