@@ -12,6 +12,11 @@ module PageObject
     def visit_page
       raise 'page_url missing' if page_url.nil?
       visit page_url
+      if block_given?
+        yield self
+      else
+        return self
+      end
     end
 
     def page_url

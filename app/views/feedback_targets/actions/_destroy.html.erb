@@ -5,7 +5,7 @@
           content_tag(:span, pad(translate('alertify.OK')), :class => 'btn btn-primary btn-sm'),
           feedback_target_path(feedback_target), :method=> 'DELETE')
         %>
-    <span class="btn btn-default btn-sm"><%= t('alertify.Cancel') %></span>
+    <a href='javascript:;'><span class="btn btn-default btn-sm"><%= t('alertify.Cancel') %></span></a>
   </div>
 <% end %>
 
