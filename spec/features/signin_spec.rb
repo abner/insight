@@ -16,9 +16,10 @@ feature 'Login', js: true do
 
 
   scenario 'authenticate with registered user' do
-    login_page.visit_page
-    login_page.authenticate 'joao', 'ninguem'
-    feedback_target_page.assert_content_on_page!('Minhas Aplicações')
+    login_page.visit_page do |p|
+      p.authenticate 'joao', 'ninguem'
+      p.assert_content_on_page!('Minhas Aplicações')
+    end
   end
 
   scenario 'user cannot access protected page if not logged' do
@@ -27,9 +28,10 @@ feature 'Login', js: true do
   end
 
   scenario 'login fails with invalid credentials' do
-    login_page.authenticate 'not_registered', '1234'
-    auth_message_error = 'Erro na autenticação. Verifique'
-    login_page.assert_content_on_page!(auth_message_error)
+    login_page.visit_page do |p|
+      p.authenticate 'not_registered', '1234'
+      p.assert_content_on_page!('Erro na autenticação. Verifique')
+    end
   end
 
   # scenario 'they see the login page', js: true do
