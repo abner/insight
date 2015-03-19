@@ -14,6 +14,46 @@ RSpec.describe Feedback, :type => :model do
 
   end
 
+  context 'state machine' do
+    #let(:feedback_form) { FactoryGirl.create(:feedback_form)}
+    let(:feedback) { FactoryGirl.create(:feedback) }
+
+
+    context 'feedback form has state machine definitions' do
+      let(:feedback_form_with_machine) do
+        feedback.feedback_form.state_transitions = [
+          { :aberto => :admitido, :on => :admitir },
+          { :admitido => :resolvido, :on => :resolver },
+          { :resolvido => :reaberto, :on => :reabrir },
+          { :reaberto => :resolvido, :on => :resolver },
+          { :resolvido => :fechado, :on => :conferido },
+
+          { :aberto => :cancelado, :admitido => :cancelado, :resolvido => :cancelado, :on => :cancelar }
+        ]
+        feedback.feedback_form.initial_state = :aberto
+        feedback.feedback_form.state_field = 'situacao'
+        feedback.feedback_form.save
+        feedback
+      end
+
+      it 'transites between defined states' do
+        feedback_form_with_machine.state_machine.admitir
+        expect(feedback_form_with_machine.state).to eq(:admitido)
+        feedback_form_with_machine.state_machine.resolver
+        expect(feedback_form_with_machine.state).to eq(:resolvido)
+        feedback_form_with_machine.state_machine.reabrir
+        expect(feedback_form_with_machine.state).to eq(:reaberto)
+        feedback_form_with_machine.state_machine.resolver
+        expect(feedback_form_with_machine.state).to eq(:resolvido)
+        feedback_form_with_machine.state_machine.conferido
+        expect(feedback_form_with_machine.state).to eq(:fechado)
+      end
+    end
+
+    context 'missing state machine definitions on feedback form' do
+    end
+  end
+
   context 'basic attributes' do
     it 'is related to feedback_target through feedback_form' do
       target = FactoryGirl.create(:feedback_target)

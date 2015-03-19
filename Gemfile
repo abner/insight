@@ -195,3 +195,5 @@ gem 'mongoid_rails_migrations', '~> 1.1.0'
 
 
 gem "cocoon"
+
+gem 'state_machine'

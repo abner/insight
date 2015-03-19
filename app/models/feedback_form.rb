@@ -37,6 +37,12 @@ class FeedbackForm
 
   slug :name, history: true, scope: :feedback_target
 
+  field :state_transitions, type: Array
+
+  field :initial_state, type: Symbol
+
+  field :state_field, type: String
+
   def system_columns
     @system_columns ||= {
       'created_at' => I18n.translate('feedback.created_date'),

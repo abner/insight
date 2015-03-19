@@ -15,6 +15,8 @@ class Feedback
 
   #belongs_to :feedback_target (replaced by methods to avoid duplication and inconsistence)
 
+  field :state, type: Symbol
+
   belongs_to :feedback_form
 
   field :server_date_time, type: DateTime
@@ -141,6 +143,14 @@ class Feedback
     Feedback.in(feedback_form_id: forms_ids).order(created_at: 'DESC').paginate(page: 1, per_page: 5)
   end
 
+#### STATE MACHINE IMPLEMENTATION
+  def state_machine
+     feedback = self
+     #@machine ||= Machine.new(feedback, feedback_form.state_field.to_sym , :initial => feedback_form.initial_state, :action => :save) do
+     @machine ||= Machine.new(feedback, :initial => feedback_form.initial_state, :action => :save) do
+       feedback.feedback_form.state_transitions.each {|attrs| transition(attrs)}
+     end
+   end
 protected
     def fill_automatic_fields
       #check app region information

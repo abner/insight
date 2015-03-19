@@ -21,3 +21,15 @@ adotei as seguintes medidas:
     end
     ```
    Outras soluções apontadas em: http://stackoverflow.com/questions/23092181/mongodb-error-code-10068-or-17287-with-rails-4-1-and-devise
+
+
+### Problemas com o DatabaseCleaner rodando antes do teste  Capybara/Poltergeist terminar
+https://github.com/DatabaseCleaner/database_cleaner/issues/273
+http://stackoverflow.com/questions/14881011/rails-rspec-capybara-and-databasecleaner-using-truncation-only-on-feature-test
+http://devblog.avdi.org/2012/08/31/configuring-database_cleaner-with-rails-rspec-capybara-and-selenium/
+https://github.com/rspec/rspec-core/issues/903
+https://github.com/jnicklas/capybara/issues/1089#issuecomment-18312017
+https://github.com/jnicklas/capybara/issues/1089
+
+Solução tomada: Sempre testar have_content ou have_selector ao fim do teste.
+Forçando assim com que o teste aguarde o carregamento da última página navegada
