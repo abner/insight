@@ -16,13 +16,9 @@
     <hr />
     <label><%= t('feedback_form.widget_code')  %></label>
     <p>Adicione o código abaixo em sua página para habilitar o widget.</p>
-    <blockquote>
-      <p>
-        <code>
-          <%= render partial: 'widget_js' %>
-        </code>
-      </p>
-    </blockquote>
+
+    <%= render partial: 'widget_js', locals: { feedback_form: @feedback_form}  %>
+
 
     <hr />
     <%= link_to t('Editar'), edit_feedback_target_feedback_form_path(@feedback_form.feedback_target, @feedback_form), class: 'btn btn-success' %>

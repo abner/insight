@@ -29,6 +29,8 @@ class FeedbackForm
   field :screenshot_enabled, type: Boolean, default: true
   field :review_enabled, type: Boolean, default: true
 
+  field :description_field_name, type: String
+
   validates_presence_of :name, :feedback_attributes, :feedback_target
 
   has_many :feedbacks, dependent: :destroy
@@ -117,6 +119,9 @@ class FeedbackForm
   end
 
   def extract_description(feedback)
+    if self.description_field_name
+      return feedback.read_attribute(description_field_name)
+    end
     return nil unless feedback
     return attributes.values.to_s unless description_columns
     description_values = description_columns.map do |column|

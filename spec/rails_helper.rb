@@ -29,39 +29,7 @@ SimpleCov.formatters = [
 
 SimpleCov.start 'rails'
 
-require 'capybara/rspec'
-require 'capybara/poltergeist'
-require 'capybara-screenshot/rspec'
 
-
-# Capybara.register_driver :poltergeist_debug do |app|
-#   Capybara::Poltergeist::Driver.new(app, :inspector => true)
-# end
-#Capybara.javascript_driver = :poltergeist_debug
-# Capybara::Screenshot.class_eval do
-#   register_driver(:poltergeist_debug) do |driver, path|
-#     driver.render(path, :full => true)
-#   end
-# end
-Capybara.register_driver :poltergeist do |app|
-  options = {
-    window_size: [1440,900],
-    inspector: false,
-    #debug: true,
-    phantomjs_options: ['--ignore-ssl-errors=yes']#['--load-images=no', '--ignore-ssl-errors=yes']
-
-  }
-  Capybara::Poltergeist::Driver.new(app, options)
-end
-
-Capybara.javascript_driver = :poltergeist
-#Capybara.javascript_driver = :selenium
-
-
-Capybara.app_host = 'http://localhost:3000'
-Capybara.server_port = 3000
-#Capybara.save_and_open_page_path = 'tmp/'
-Capybara.asset_host = "http://localhost:3000"
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -93,3 +61,37 @@ Capybara.asset_host = "http://localhost:3000"
 #   # https://relishapp.com/rspec/rspec-rails/docs
    config.infer_spec_type_from_file_location!
  end
+
+ require 'capybara/rspec'
+ require 'capybara/poltergeist'
+ require 'capybara-screenshot/rspec'
+
+
+ # Capybara.register_driver :poltergeist_debug do |app|
+ #   Capybara::Poltergeist::Driver.new(app, :inspector => true)
+ # end
+ #Capybara.javascript_driver = :poltergeist_debug
+ # Capybara::Screenshot.class_eval do
+ #   register_driver(:poltergeist_debug) do |driver, path|
+ #     driver.render(path, :full => true)
+ #   end
+ # end
+ Capybara.register_driver :poltergeist do |app|
+   options = {
+     window_size: [1440,900],
+     inspector: false,
+     #debug: true,
+     phantomjs_options: ['--ignore-ssl-errors=yes']#['--load-images=no', '--ignore-ssl-errors=yes']
+
+   }
+   Capybara::Poltergeist::Driver.new(app, options)
+ end
+
+ Capybara.javascript_driver = :poltergeist
+ #Capybara.javascript_driver = :selenium
+
+
+ Capybara.app_host = 'http://localhost:3000'
+ Capybara.server_port = 3000
+ #Capybara.save_and_open_page_path = 'tmp/'
+ Capybara.asset_host = "http://localhost:3000"

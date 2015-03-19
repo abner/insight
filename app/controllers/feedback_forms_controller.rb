@@ -1,4 +1,7 @@
 class FeedbackFormsController < ProtectedController
+
+  before_filter :authenticate_user!, :except => [:code]
+
   protect_from_forgery with: :exception, :except => [:code]
   respond_to :js, :html, :json
 
@@ -138,19 +141,20 @@ private
 
   def define_breadcrumbs_form
     feedback_target = find_feedback_target
-    add_breadcrumb  feedback_target
+    add_breadcrumb  feedback_target.name, feedback_target_path(feedback_target)
     add_breadcrumb  'Feedback Forms', feedback_target_feedback_forms_path(feedback_target)
     feedback_form =  find_feedback_for(feedback_target)
     add_breadcrumb feedback_form.name,  feedback_target_feedback_form_path(feedback_target,feedback_form)
   end
 
   def define_breadcrumbs_index
-    add_breadcrumb  find_feedback_target
+    feedback_target = find_feedback_target
+    add_breadcrumb  feedback_target.name, feedback_target_path(feedback_target)
     add_breadcrumb  'Feedback Forms'
   end
 
   def feedback_form_params
-    params.require(:feedback_form).permit :name,
+    params.require(:feedback_form).permit :name, :description_field_name,
       :screenshot_enabled,
       :review_enabled,
       :feedback_attributes_attributes => [:id, :name, :display_label, :_destroy, :options, :default_value, :position, :type_id],

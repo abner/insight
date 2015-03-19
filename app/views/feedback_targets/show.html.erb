@@ -37,17 +37,9 @@
     </div>
 
   </div>
-  <div class="panel-footer">
-          <%#= link_to(
-            content_tag(:span, pad(translate('Feedbacks')) + " ", :class => 'fa fa-comment-o'),
-            feedback_target_feedbacks_path(@feedback_target), class: 'btn btn-default')%>
-
-
-          <%= link_to(
-              content_tag(:span, pad(translate('Forms')) + " ", :class => 'fa fa-file-o'),
-              feedback_target_feedback_forms_path(@feedback_target), class: 'btn btn-default')%>
-  </div>
 </div>
+
+<%= render partial: 'feedback_forms/index/panel' %>
 
 <div class="panel panel-default">
   <div class="panel-heading">

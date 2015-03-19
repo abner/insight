@@ -1,5 +1,5 @@
 <div class="form-group">
-  <%= link_to url_for(new_feedback_target_feedback_form_path), :class => 'btn btn-primary' do%>
+  <%= link_to url_for(new_feedback_target_feedback_form_path(@feedback_target)), :class => 'btn btn-primary' do%>
   <i class='fa fa-list-alt'></i> <%= t('feedback_form.button.new_form') %>
   <% end %>
 </div>
@@ -8,11 +8,11 @@
   <thead>
     <tr>
       <th><%= t('feedback_form.table_columns.name') %></th>
-      <th><%= t('feedback_form.table_columns.token') %></th>
+      <th><%= t('feedback_form.table_columns.snippet') %></th>
       <th><%= t('feedback_form.table_columns.actions') %></th>
     </tr>
   </thead>
   <tbody>
-    <%= render partial: 'feedback_form_item', :collection => @feedback_forms, :as => :feedback_form %>
+    <%= render partial: 'feedback_forms/feedback_form_item', :collection => @feedback_target.feedback_forms, :as => :feedback_form %>
   </tbody>
 </table>

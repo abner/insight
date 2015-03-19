@@ -57,6 +57,7 @@ pt-BR:
       tip_drag_and_drop: 'Clique e arraste as linhas da tabela para definir a ordem dos campos'
       tip_label: Dica
     table_columns:
+      snippet: Código
       name: Nome
       actions: Ações
     page_title:
@@ -141,6 +142,7 @@ pt-BR:
         name: 'Nome'
         grid_columns: 'Colunas no Grid'
         detail_columns: 'Coluna em Detalhes'
+        description_field_name: 'Campo Descritivo'
     errors:
       messages:
         blank_in_locale:

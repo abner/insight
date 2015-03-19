@@ -7,17 +7,21 @@
 
   <%= render partial: 'attributes_table', :locals => {f: f} %>
 
-  <%= f.form_group class: 'col-lg-4 columns_setup' do %>
+  <%= f.form_group class: 'col-lg-3 columns_setup' do %>
     <%= f.collection_check_boxes :grid_columns, @feedback_form.columns_for_grid_setup, :name, :label %>
   <% end %>
 
-  <%= f.form_group class: 'col-lg-4 columns_setup' do %>
+  <%= f.form_group class: 'col-lg-3 columns_setup' do %>
     <%= f.collection_check_boxes :detail_columns, @feedback_form.columns_for_detail_setup, :name, :label %>
   <% end %>
 
-  <%= f.form_group class: 'col-lg-4', label: {text: t('feedback_form.form_group.plugins') }  do %>
+  <%= f.form_group class: 'col-lg-3', label: {text: t('feedback_form.form_group.plugins') }  do %>
     <%= f.check_box :screenshot_enabled, label: 'ScreenShot' %>
     <%= f.check_box :review_enabled, label: 'Review' %>
+  <% end %>
+
+  <%= f.form_group class: 'col-lg-3 columns_setup' do %>
+    <%= f.collection_radio_buttons :description_field_name, @feedback_form.columns_for_detail_setup, :name, :label %>
   <% end %>
 
   <%= f.form_group :class => 'col-lg-12' do %>

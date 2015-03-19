@@ -18,7 +18,10 @@
     <%#= render_action 'new_after', attribute if current_user_can? :write_feedback_target, @feedback_form.feedback_target %>
   </td>
   <% else %>
-    <td><%= attribute.type.description %></td>
+  <%# raise attribute.inspect if attribute.type.nil? %>
+
+    <td><%= attribute.type.description %>
+      <%#= attribute.type ? attribute.type.description : '' %></td>
     <td><%= attribute.name %></td>
     <td><%= attribute.label %></td>
     <td><%= attribute.options %></td>
