@@ -2,6 +2,7 @@ require_relative './base'
 module PageObject
   class LoginPage < Base
 
+    # overriding base method
     def page_url
       '/sign_in.registered_user'
     end
@@ -16,8 +17,9 @@ module PageObject
       self
     end
 
+    # overriding base method
     def detector_element_selector
-      'form.form-signin'
+      {css: 'form.form-signin'}
     end
 
   end

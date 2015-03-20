@@ -47,10 +47,26 @@ module PageObject
        raise "Expected to be at #{path_to_check} but currently on #{current_path}"
     end
 
+      def assert_another_page!
+      detector = detector_element_selector.dup
+      css = detector.delete(:css)
+      unless page.has_no_selector?(css, detector)
+        error_msg = "Expected not to be on page #{self.class.name}"
+        raise PageExpectationError.new(error_msg)
+      end
+    end
+
     def assert_on_page!
-      unless page.has_selector?(detector_element_selector)
+      detector = detector_element_selector.dup
+      css = detector.delete(:css)
+      unless page.find(css, detector)
         error_msg = "Expected to be on page #{self.class.name}"
         raise PageExpectationError.new(error_msg)
+      end
+      if block_given?
+        yield self
+      else
+        return self
       end
     end
 
