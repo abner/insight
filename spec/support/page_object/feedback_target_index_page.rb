@@ -1,8 +1,15 @@
 require_relative './base'
 module PageObject
   class FeedbackTargetIndexPage < Base
+
+    # overrides base method
     def page_url
       '/feedback_targets'
+    end
+
+    # overrides base method
+    def detector_element_selector
+      {css: 'h3.panel-title', text: I18n.t('My applications')}
     end
 
     def targets_list_selector
@@ -103,9 +110,18 @@ module PageObject
       end
     end
 
-    def click_on_target_name target_name
+    def click_on_target_name target_name, &block
       within find_target_on_list(target_name) do
         click_on target_name
+      end
+      assert_another_page!
+      show_page = FeedbackTargetShowPage.new target_name
+      if block_given?
+        show_page.assert_on_page! do |p|
+          yield p
+        end
+      else
+        show_page.assert_on_page!
       end
     end
 

@@ -9,9 +9,9 @@ feature 'Feedback targets', js: true do
     sign_in_user 'joao', 'ninguem'
   end
 
-  context 'Visiting Index Page' do
-    let(:feedback_target_page) { PageObject::FeedbackTargetIndexPage.new }
+  let(:feedback_target_page) { PageObject::FeedbackTargetIndexPage.new }
 
+  context 'Visiting Index Page' do
     scenario 'user sees the feedback targets he owns' do
       feedback_target_page.visit_page do |page_object|
         page_object.check_target_listed(@feedback_targets.first.name)
@@ -43,71 +43,67 @@ feature 'Feedback targets', js: true do
     end
   end
 
-  # context 'Members' do
-  #   scenario 'add member' do
-  #     new_user_1 = FactoryGirl.create(:user, :username => 'kenedy')
-  #     new_user_2 = FactoryGirl.create(:user, :username => 'steph')
-  #     visit feedback_targets_path
-  #     find('table#targets_list').click_link 'APP 1'
-  #
-  #     expect(page).not_to have_selector('#members_list li', 'kenedy')
-  #
-  #     find("li.select2-search-field input[type='text']").click
-  #     find("li.select2-search-field input[type='text']").set('ke')
-  #     find('li div.select2-result-label', text: 'kenedy').click
-  #
-  #     expect(page).to have_selector('#members_list li')
-  #
-  #   end
-  #
-  #   scenario 'remove member' do
-  #     new_user_1 = FactoryGirl.create(:user, :username => 'kenedy')
-  #     @feedback_targets.first.members << new_user_1
-  #     visit feedback_targets_path
-  #     find('table#targets_list').click_link 'APP 1'
-  #     expect(page).to have_selector('#members_list li', 'kenedy')
-  #     click_link I18n.t('remove_member')
-  #     expect(page).not_to have_selector('#members_list li', 'kenedy')
-  #   end
-  #
-  #   scenario 'getting error on removing member' do
-  #     allow_any_instance_of(FeedbackTarget).to receive(:remove_member).and_return(false)
-  #     errors = ActiveModel::Errors.new(FeedbackTarget.new).tap {
-  #       |e| e.add(:member, "não foi possível adicionar membro")
-  #     }
-  #     allow_any_instance_of(FeedbackTarget).to receive(:errors).and_return(errors)
-  #     new_user_1 = FactoryGirl.create(:user, :username => 'kenedy')
-  #     @feedback_targets.first.members << new_user_1
-  #     visit feedback_targets_path
-  #     find('table#targets_list').click_link 'APP 1'
-  #     expect(page).to have_selector('#members_list li', 'kenedy')
-  #     click_link I18n.t('remove_member')
-  #     expect(page).to have_selector('div.alert-danger', I18n.t('alert_errors'))
-  #     expect(page).to have_content('não foi possível adicionar membro')
-  #   end
-  #
-  #   scenario 'getting error o adding a member' do
-  #     allow_any_instance_of(FeedbackTarget).to receive(:include_members).and_return(false)
-  #     errors = ActiveModel::Errors.new(FeedbackTarget.new).tap {
-  #       |e| e.add(:member,"não foi possível adicionar membro")
-  #     }
-  #     allow_any_instance_of(FeedbackTarget).to receive(:errors).and_return(errors)
-  #
-  #     new_user_1 = FactoryGirl.create(:user, :username => 'kenedy')
-  #     new_user_2 = FactoryGirl.create(:user, :username => 'steph')
-  #     visit feedback_targets_path
-  #     find('table#targets_list').click_link 'APP 1'
-  #
-  #     expect(page).not_to have_selector('#members_list li', 'kenedy')
-  #
-  #     find("li.select2-search-field input[type='text']").click
-  #     find("li.select2-search-field input[type='text']").set('ke')
-  #     find('li div.select2-result-label', text: 'kenedy').click
-  #
-  #     expect(page).to have_selector('div.alert-danger', I18n.t('alert_errors'))
-  #     expect(page).to have_content('não foi possível adicionar membro')
-  #   end
-  # end
+  context 'Members' do
+    scenario 'add member' do
+      new_user_1 = FactoryGirl.create(:user, :username => 'kenedy')
+      new_user_2 = FactoryGirl.create(:user, :username => 'steph')
+      feedback_target_page.visit_page do |index_page|
+        index_page.click_on_target_name 'APP 1' do |show_page|
+          show_page.assert_not_is_member! 'kenedy'
+          show_page.add_team_member 'kenedy'
+          show_page.assert_is_member! 'kenedy'
+        end
+      end
+    end
+
+    scenario 'remove member' do
+      new_user_1 = FactoryGirl.create(:user, :username => 'kenedy')
+      @feedback_targets.first.members << new_user_1
+      visit feedback_targets_path
+      find('table#targets_list').click_link 'APP 1'
+      expect(page).to have_selector('#members_list li', 'kenedy')
+      click_link I18n.t('remove_member')
+      expect(page).not_to have_selector('#members_list li', 'kenedy')
+    end
+
+    scenario 'getting error on removing member' do
+      allow_any_instance_of(FeedbackTarget).to receive(:remove_member).and_return(false)
+      errors = ActiveModel::Errors.new(FeedbackTarget.new).tap {
+        |e| e.add(:member, "não foi possível adicionar membro")
+      }
+      allow_any_instance_of(FeedbackTarget).to receive(:errors).and_return(errors)
+      new_user_1 = FactoryGirl.create(:user, :username => 'kenedy')
+      @feedback_targets.first.members << new_user_1
+      visit feedback_targets_path
+      find('table#targets_list').click_link 'APP 1'
+      expect(page).to have_selector('#members_list li', 'kenedy')
+      click_link I18n.t('remove_member')
+      expect(page).to have_selector('div.alert-danger', I18n.t('alert_errors'))
+      expect(page).to have_content('não foi possível adicionar membro')
+    end
+
+    scenario 'getting error o adding a member' do
+      allow_any_instance_of(FeedbackTarget).to receive(:include_members).and_return(false)
+      errors = ActiveModel::Errors.new(FeedbackTarget.new).tap {
+        |e| e.add(:member,"não foi possível adicionar membro")
+      }
+      allow_any_instance_of(FeedbackTarget).to receive(:errors).and_return(errors)
+
+      new_user_1 = FactoryGirl.create(:user, :username => 'kenedy')
+      new_user_2 = FactoryGirl.create(:user, :username => 'steph')
+      visit feedback_targets_path
+      find('table#targets_list').click_link 'APP 1'
+
+      expect(page).not_to have_selector('#members_list li', 'kenedy')
+
+      find("li.select2-search-field input[type='text']").click
+      find("li.select2-search-field input[type='text']").set('ke')
+      find('li div.select2-result-label', text: 'kenedy').click
+
+      expect(page).to have_selector('div.alert-danger', I18n.t('alert_errors'))
+      expect(page).to have_content('não foi possível adicionar membro')
+    end
+  end
   #
   # context 'New Page' do
   #
