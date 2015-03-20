@@ -39,7 +39,6 @@
               <thead>
                   <tr>
                     <th><%= translate('Name') %></th>
-                    <th><%= translate('Token') %></th>
                     <th><%= translate('Actions') %></th>
                   </tr>
               </thead>
@@ -47,7 +46,6 @@
                  <% @feedback_targets.each do  |feedback_target | %>
                     <tr>
                       <td><%= link_to feedback_target.name, feedback_target_path(feedback_target) %></td>
-                      <td><%= feedback_target.authentication_token %></td>
                       <td>
                         <%= render_action 'edit', feedback_target if current_user_can?(:write_feedback_target, feedback_target) %>
                         <%= render_action 'destroy', feedback_target if current_user_can?(:destroy_feedback_target, feedback_target) %>

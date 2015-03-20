@@ -12,6 +12,11 @@ class ExpressoUser < User
 
   include ZeroOidFix
 
+  def nickname
+    return 'undefined' unless username
+    username.gsub '@serpro.gov.br', ''
+  end
+
 
   def self.from_omniauth(omniauth_hash)
     #detects if there is a registered user and return it converted as an expresso user

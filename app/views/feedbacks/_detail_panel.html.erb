@@ -1,3 +1,4 @@
+<% feedback.assignee.new unless feedback.assignee.nil? %>
 <div class="panel panel-default" >
   <div class="panel-heading">
       <span class="panel-title"><i class='fa fa-info-circle fa-fw'></i><%= t('feedback.detail_panel.title') %></span>
@@ -10,8 +11,7 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-lg-7">
-        <form class="form-horizontal">
-          <div class="form-group">
+        <%= bootstrap_form_for @feedback_form, layout: :horizontal, label_col: "col-sm-4", control_col: "col-sm-8",:url => feedback_target_feedback_form_feedback_path(@feedback_target, @feedback_form, feedback) do |f|  %>
             <% feedback.feedback_form.detail_checked_columns.each do |column| %>
               <label class="col-sm-4 control-label"><%= column.display_label %></label>
               <div class="col-sm-8">
@@ -19,8 +19,26 @@
               </div>
             <% end %>
 
-          </div>
-        </form>
+            <%= render partial: 'feedback_assignee', locals: { f: f, feedback: feedback } %>
+
+            <%= form_for feedback,
+              :url => fire_event_feedback_target_feedback_form_feedback_path(@feedback_target, feedback.feedback_form, feedback),
+              :remote => true, :format => 'js',
+              :html => {:class => 'fire_event_form'} do |f| %>
+                <% if feedback.state_machine.state_transitions.count > 1 %>
+                    <button type='button' data-toggle="dropdown" class='col-sm-12 btn btn-default text-center'> <span class="caret"></span>
+                      <%= I18n.t('Actions') %>
+                    </button>
+                    <ul class="dropdown-menu col-sm-12 text-align-center" role="menu">
+                    <% feedback.state_machine.state_transitions.each do |state_action| %>
+                      <li><%= link_to state_action.event.to_s.humanize, 'javascript:;'%></li>
+                    <% end %>
+                    </ul>
+                <% elsif feedback.state_machine.state_transitions.count == 1 %>
+                  <%= link_to feedback.state_machine.state_transitions[0].event.to_s.humanize, 'javascript:;', :class => 'btn btn-default col-sm-12 text-align-center'%>
+                <% end %>
+            <% end %>
+          <% end %>
       </div>
       <div class="col-lg-5 comment_column">
         <%= render :partial => 'comment_panel', :locals => { :feedback =>  feedback} %>

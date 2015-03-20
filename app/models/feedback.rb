@@ -3,6 +3,8 @@ class Feedback
   include Mongoid::Attributes::Dynamic
   include Mongoid::Timestamps::Created
 
+  include Assignable
+
   # Mongoid Paranoia adds soft delete to model
   # - destroy will set deleted_at to current_time
   # - models with deleted_at defined will be ignored on default scope
@@ -15,7 +17,7 @@ class Feedback
 
   #belongs_to :feedback_target (replaced by methods to avoid duplication and inconsistence)
 
-  field :state, type: Symbol
+  #field :state, type: Symbol
 
   belongs_to :feedback_form
 
@@ -147,8 +149,8 @@ class Feedback
   def state_machine
      feedback = self
      #@machine ||= Machine.new(feedback, feedback_form.state_field.to_sym , :initial => feedback_form.initial_state, :action => :save) do
-     @machine ||= Machine.new(feedback, :initial => feedback_form.initial_state, :action => :save) do
-       feedback.feedback_form.state_transitions.each {|attrs| transition(attrs)}
+     @machine ||= Machine.new(feedback, feedback_form.state_field, :initial => feedback_form.initial_state, :action => :save) do
+       feedback.feedback_form.build_transitions_hash.each {|attrs| transition(attrs)}
      end
    end
 protected

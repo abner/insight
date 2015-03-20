@@ -35,6 +35,7 @@ pt-BR:
   Application: 'Aplicação'
   Forms: 'Formulários'
   Cancel: Cancelar
+  transitions: Transições
   alertify:
     Confirmation: 'Confirmação'
     OK: 'OK'
@@ -46,9 +47,11 @@ pt-BR:
       new: Nova Aplicação
       edit: Alterar Aplicação
   feedback_form:
+    workflow_fields: Campos
     confirmation_question: 'Tem certeza que deseja excluir o formulário?'
     links:
       new_attribute_after: "Incluir"
+      new_transition_after: "Incluir"
     button:
       new_form: 'Incluir Formulário'
     form_group:
@@ -60,12 +63,15 @@ pt-BR:
       snippet: Código
       name: Nome
       actions: Ações
+    panel_title:
+      workflow: 'Fluxo de Trabalho'
     page_title:
       index: 'Formulários de Feedback'
       new:   'Novo Formulário de Feedback'
       show:  'Formulário de Feedback'
       edit:  'Alteração no Formulário de Feedback'
   feedback:
+    not_yet_assigned: 'ainda não foi atribuído'
     created_date: Data de Registro
     screenshot: Captura de Tela
     detail_panel:
@@ -136,6 +142,8 @@ pt-BR:
         name: 'Nome'
         email: 'E-mail'
         password: 'Senha'
+      feedback:
+        assignee: 'Atribuído a'
       feedback_target:
         name: 'Nome'
       feedback_form:
@@ -143,6 +151,8 @@ pt-BR:
         grid_columns: 'Colunas no Grid'
         detail_columns: 'Coluna em Detalhes'
         description_field_name: 'Campo Descritivo'
+        state_field: 'Campo de estado do fluxo'
+        initial_state: 'Valor inicial'
     errors:
       messages:
         blank_in_locale:

@@ -37,6 +37,8 @@ class User
 
   has_many :feedback_targets,:class_name => 'FeedbackTarget', inverse_of: :owner
 
+  has_many :assigned_feedbacks,   dependent: :destroy, foreign_key: :assignee_id, class_name: "Feedback"
+
   has_and_belongs_to_many :memberships, :class_name => 'FeedbackTarget', inverse_of: :members
 
   validates_presence_of :username

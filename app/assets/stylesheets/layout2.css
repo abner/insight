@@ -372,3 +372,7 @@ div.placeholder:before {
       width: 100%;
       overflow-x: auto;
     }
+
+  form input.machine_state_transition[type="text"] {
+    text-transform: lowercase;
+  }

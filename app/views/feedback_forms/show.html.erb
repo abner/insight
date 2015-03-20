@@ -12,6 +12,9 @@
     <%= render :partial => 'form_static' %>
     <%= bootstrap_form_for @feedback_form, :url => url_for_form(@feedback_target, @feedback_form) do |f|  %>
       <%= render partial: 'attributes_table', locals: {f: f} %>
+
+
+      <%= render partial: 'feedback_forms/workflow/form_workflow', locals: {f: f}%>
     <% end %>
     <hr />
     <label><%= t('feedback_form.widget_code')  %></label>

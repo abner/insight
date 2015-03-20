@@ -1,0 +1,3 @@
+<%= f.fields_for :assignee do |assignee_form| %>
+  <%= assignee_form.collection_select :id, feedback.feedback_form.feedback_target.members.all, :id, :username,  { :include_blank => I18n.t('feedback.not_yet_assigned'),  :label => I18n.t('mongoid.attributes.feedback.assignee') }, :required => true %>
+<% end %>

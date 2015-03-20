@@ -1,0 +1,4 @@
+$('#assignee_content').slideUp(200 , function(){
+  $('#assignee_content').html("<%= escape_javascript (render partial: 'feedback_assignee', locals: {feedback: @feedback}) %>");
+  $('#assignee_content').slideDown(350);
+});

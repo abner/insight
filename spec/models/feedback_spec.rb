@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+require 'ap'
 RSpec.describe Feedback, :type => :model do
 
   let(:valid_feedback) do
@@ -14,21 +14,53 @@ RSpec.describe Feedback, :type => :model do
 
   end
 
+  context 'assignable' do
+    subject { FactoryGirl.create(:feedback) }
+
+    let(:user) { FactoryGirl.create(:user) }
+
+    it 'would be assigned to an user' do
+      subject.assignee = user
+      subject.save!
+      expect(subject.assignee).to eq(user)
+    end
+
+  end
+
+  context 'assigned scope' do
+    let(:user) { FactoryGirl.create(:user) }
+
+    let(:feedbacks_assigned) do
+      [
+        FactoryGirl.create(:feedback_with_assignee, assignee: user),
+        FactoryGirl.create(:feedback_with_assignee, assignee: user)
+      ]
+    end
+
+    let(:feedback) { FactoryGirl.create(:feedback) }
+
+    it 'returns feedbacks assigned to an user' do
+      expect(Feedback.assigned_to(user)).to match_array(feedbacks_assigned)
+    end
+
+    it 'does not return feedback not assigned to an user' do
+      expect(Feedback.assigned_to(user)).not_to include feedback
+    end
+  end
+
   context 'state machine' do
     #let(:feedback_form) { FactoryGirl.create(:feedback_form)}
     let(:feedback) { FactoryGirl.create(:feedback) }
 
 
-    context 'feedback form has state machine definitions' do
+    context 'with state machine defined' do
       let(:feedback_form_with_machine) do
         feedback.feedback_form.state_transitions = [
-          { :aberto => :admitido, :on => :admitir },
-          { :admitido => :resolvido, :on => :resolver },
-          { :resolvido => :reaberto, :on => :reabrir },
-          { :reaberto => :resolvido, :on => :resolver },
-          { :resolvido => :fechado, :on => :conferido },
-
-          { :aberto => :cancelado, :admitido => :cancelado, :resolvido => :cancelado, :on => :cancelar }
+          FactoryGirl.build(:state_transition, state: :aberto, action: :admitir, result_state: :admitido),
+          FactoryGirl.build(:state_transition, state: :admitido, action: :resolver, result_state: :resolvido),
+          FactoryGirl.build(:state_transition, state: :resolvido, action: :reabrir, result_state: :reaberto),
+          FactoryGirl.build(:state_transition, state: :reaberto, action: :resolver, result_state: :resolvido),
+          FactoryGirl.build(:state_transition, state: :resolvido, action: :fechar, result_state: :fechado)
         ]
         feedback.feedback_form.initial_state = :aberto
         feedback.feedback_form.state_field = 'situacao'
@@ -36,17 +68,23 @@ RSpec.describe Feedback, :type => :model do
         feedback
       end
 
-      it 'transites between defined states' do
-        feedback_form_with_machine.state_machine.admitir
-        expect(feedback_form_with_machine.state).to eq(:admitido)
-        feedback_form_with_machine.state_machine.resolver
-        expect(feedback_form_with_machine.state).to eq(:resolvido)
-        feedback_form_with_machine.state_machine.reabrir
-        expect(feedback_form_with_machine.state).to eq(:reaberto)
-        feedback_form_with_machine.state_machine.resolver
-        expect(feedback_form_with_machine.state).to eq(:resolvido)
-        feedback_form_with_machine.state_machine.conferido
-        expect(feedback_form_with_machine.state).to eq(:fechado)
+      it 'transites between states' do
+        state_machine = feedback_form_with_machine.state_machine
+
+        state_machine.admitir
+        expect(state_machine.admitido?).to be true
+
+        state_machine.resolver
+        expect(state_machine.resolvido?).to be true
+
+        state_machine.reabrir
+        expect(state_machine.reaberto?).to be true
+
+        state_machine.resolver
+        expect(state_machine.resolvido?).to be true
+
+        state_machine.fechar
+        expect(state_machine.fechado?).to be true
       end
     end
 

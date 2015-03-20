@@ -16,6 +16,27 @@ class FeedbacksController < ProtectedController
     end
   end
 
+  def fire_event
+    @feedback = feedback_from_params
+    error = nil
+    event = params[:event]
+    begin
+      unless @feedback.state_machine.fire_state_event(params[:event])
+        error = 'invalid_transition'
+      end
+    rescue Exception => e
+      error = "error_on_state_machine_evet"
+    end
+    respond_to do |format|
+      if error
+        result = respond_error_json({ message: I18n.t(error, event), object:  @feedback})
+      else
+        result = respond_success_json({ message: error, object:  @feedback})
+      end
+      render :json =>  result
+    end
+  end
+
   def comments
     begin
       @feedback = feedback_from_params

@@ -157,9 +157,12 @@ private
     params.require(:feedback_form).permit :name, :description_field_name,
       :screenshot_enabled,
       :review_enabled,
+      :initial_state,
+      :state_field,
       :feedback_attributes_attributes => [:id, :name, :display_label, :_destroy, :options, :default_value, :position, :type_id],
       :grid_columns => [],
-      :detail_columns => []
+      :detail_columns => [],
+      :state_transitions_attributes => [:id, :state, :action, :result_state, :_destroy]
   end
 
 

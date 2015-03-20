@@ -84,6 +84,7 @@ group :development do
   gem "spring-commands-cucumber"
 
   gem 'railroady'
+  gem 'awesome_print'
 end
 
 group :development, :test, :ci do

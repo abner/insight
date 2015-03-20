@@ -1,0 +1,24 @@
+<% transition_form ||= f %>
+<tr class="nested-fields transition_line transition_line<%= '_template hidden' if template %>">
+
+  <% if ['edit', 'new'].include? action_name %>
+
+  <td><%= transition_form.text_field_without_bootstrap :state, :hide_label => true, :required => true, class: 'machine_state_transition' %></td>
+  <td><%= transition_form.text_field_without_bootstrap :action, :hide_label => true, :required => true, class: 'machine_state_transition' %></td>
+  <td><%= transition_form.text_field_without_bootstrap :result_state, :hide_label => true, :required => true, class: 'machine_state_transition' %></td>
+
+  <td>
+    <%#= render_action 'destroy', transition if current_user_can? :write_feedback_target, @feedback_form.feedback_target %>
+    <%= link_to_remove_association content_tag(:span, " #{t('Destroy')} ", :class => 'fa fa-trash-o'), transition_form %>
+    <%#= render_action 'new_after', transition if current_user_can? :write_feedback_target, @feedback_form.feedback_target %>
+  </td>
+  <% else %>
+  <%# raise transition.inspect if transition.type.nil? %>
+
+    <td><%= transition.state %>
+      <%#= transition.type ? transition.type.description : '' %></td>
+    <td><%= transition.action %></td>
+    <td><%= transition.result_state %></td>
+
+  <% end %>
+</tr>

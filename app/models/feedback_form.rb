@@ -18,6 +18,10 @@ class FeedbackForm
 
   accepts_nested_attributes_for :feedback_attributes, :reject_if => :all_blank, :allow_destroy => true
 
+  embeds_many :state_transitions, cascade_callbacks: true
+  # field :state_transitions, type: Array, default: []
+  accepts_nested_attributes_for :state_transitions, :reject_if => :all_blank, :allow_destroy => true
+
   belongs_to :feedback_target
 
   field :grid_columns, type: Array
@@ -37,7 +41,7 @@ class FeedbackForm
 
   slug :name, history: true, scope: :feedback_target
 
-  field :state_transitions, type: Array
+
 
   field :initial_state, type: Symbol
 
@@ -134,6 +138,12 @@ class FeedbackForm
       feedback.read_attribute(column) if feedback.attributes.has_key? column
     end
     description_values.join(" ")
+  end
+
+  def build_transitions_hash
+    state_transitions.map do |transition|
+      { transition.state.to_sym => transition.result_state.to_sym, on: transition.action.to_sym }
+    end
   end
 
 protected

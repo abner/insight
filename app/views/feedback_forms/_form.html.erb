@@ -24,6 +24,8 @@
     <%= f.collection_radio_buttons :description_field_name, @feedback_form.columns_for_detail_setup, :name, :label %>
   <% end %>
 
+  <%= render partial: 'feedback_forms/workflow/form_workflow', locals: {f: f}%>
+
   <%= f.form_group :class => 'col-lg-12' do %>
     <%= f.primary t('Submit')  %>
     <%= link_to t('Cancel'), './', :class => 'btn btn-warning'  %>

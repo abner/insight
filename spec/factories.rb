@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :registered_user, :aliases => [:owner, :user, 'usuário'] do
+  factory :registered_user, :aliases => [:owner, :user, :assignee, 'usuário'] do
     username { "user-#{SecureRandom.hex(4)}" }
     email { "#{username}@dominio.com.br" }
 
@@ -38,6 +38,12 @@ FactoryGirl.define do
     type { FeedbackAttributeType.find_by(name: 'Textarea') }
   end
 
+  factory :state_transition do
+    state  'some_state'
+    action 'some_action'
+    result_state 'some_result_state'
+  end
+
   factory :feedback_attribute, class: FeedbackAttribute do
     name 'attribute'
     display_label 'attribute label'
@@ -64,6 +70,9 @@ FactoryGirl.define do
       text "Feedback Text provided by application user"
       feedback_form
       comments { [FactoryGirl.attributes_for(:comment)] }
+    end
+    factory :feedback_with_assignee do
+      assignee
     end
   end
 
