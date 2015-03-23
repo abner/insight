@@ -1,4 +1,4 @@
-<%= bootstrap_form_for feedback, layout: :horizontal, label_col: "col-sm-4", control_col: "col-sm-8", url: feedback_url(feedback), remote: true,  method: 'patch' do |f|  %>
+<%= bootstrap_form_for feedback, layout: :horizontal, label_col: "col-sm-4", control_col: "col-sm-8", url: feedback_url(feedback), remote: true,  method: 'put' do |f|  %>
   <% feedback.feedback_form.detail_checked_columns.each do |column| %>
     <label class="col-sm-4 control-label"><%= column.display_label %></label>
     <div class="col-sm-8">

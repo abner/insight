@@ -48,8 +48,7 @@ module FeedbacksHelper
   def link_to_feedback_transition(feedback ,state_transition, link_to_options={})
     link_text = state_transition.event.to_s.humanize
     url = fire_event_url(feedback,state_transition)
-    options = { data: { remote: true, method: 'patch',event: state_transition.event, feedback: feedback.id } }
-
+    options = { data: { remote: true, method: 'put', event: state_transition.event, feedback: feedback.id } }
     link_to(link_text, url, link_to_options.merge(options))
   end
 
