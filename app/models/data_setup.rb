@@ -77,14 +77,14 @@ private
     end
 
     def create_situcao_attribute_model
-      FeedbackAttributeModel.create do |attribute|
-        attribute.name = 'situacao'
-        attribute.display_label = ""
-        attribute.type = attribute_type_by_name('Hidden')
-        attribute.custom_data = {value: 'aberta'}
-        attribute.required = true
-        attribute.save!
-      end
+      # FeedbackAttributeModel.create do |attribute|
+      #   attribute.name = 'situacao'
+      #   attribute.display_label = ""
+      #   attribute.type = attribute_type_by_name('Hidden')
+      #   attribute.custom_data = {value: 'aberta'}
+      #   attribute.required = true
+      #   attribute.save!
+      # end
     end
 
     def create_attributes_models!
@@ -106,7 +106,7 @@ private
           template.feedback_attributes.create!(attributes_by_name('severidade'))
           template.feedback_attributes.create!(attributes_by_name('avaliacao'))
           template.feedback_attributes.create!(attributes_by_name('relato'))
-          template.feedback_attributes.create!(attributes_by_name('situacao'))
+          # template.feedback_attributes.create!(attributes_by_name('situacao'))
           template.save!
         end
         return true

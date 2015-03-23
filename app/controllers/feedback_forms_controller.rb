@@ -159,6 +159,7 @@ private
       :review_enabled,
       :initial_state,
       :state_field,
+      :state_field_label,
       :feedback_attributes_attributes => [:id, :name, :display_label, :_destroy, :options, :default_value, :position, :type_id],
       :grid_columns => [],
       :detail_columns => [],

@@ -46,9 +46,26 @@ class FeedbackForm
   field :initial_state, type: Symbol
 
   field :state_field, type: String
+  field :state_field_label, type: String
+
+  # before_save :check_state_consistence
+  #
+  # def check_state_consistence
+  #   unless self.state_field.nil?
+  #     #check if initial state value and attribute default value are the same
+  #      if self.initial_state.present?
+  #        state_attribute =  self.feedback_attributes.find_by(name: self.state_field)
+  #        unless state_attribute.default_value.eql?(self.initial_state)
+  #          #fix feedbacks values
+  #          state_attribute.default_value =  self.initial_state
+  #        end
+  #      end
+  #   end
+  # end
 
   def system_columns
     @system_columns ||= {
+      self.state_field => self.state_field_label,
       'created_at' => I18n.translate('feedback.created_date'),
       'screenshot_path' => I18n.translate('feedback.screenshot')
     }

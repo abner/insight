@@ -1,3 +1,6 @@
 <% form ||= f %>
-<%= form.collection_select :state_field, feedback_form.feedback_attributes.all, :name, :display_label,  { :include_blank => true }, :required => true%>
+
+<%#= form.collection_select :state_field, feedback_form.feedback_attributes.all, :name, :display_label,  { :include_blank => true }, :required => true%>
+<%= form.text_field :state_field, :required => true%>
+<%= form.text_field :state_field_label, :required => true%>
 <%= form.text_field :initial_state, :required => true %></td>
