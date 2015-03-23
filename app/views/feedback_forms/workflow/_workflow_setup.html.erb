@@ -1,6 +1,12 @@
 <% form ||= f %>
 
 <%#= form.collection_select :state_field, feedback_form.feedback_attributes.all, :name, :display_label,  { :include_blank => true }, :required => true%>
+<% if 'edit'.eql? action_name %>
 <%= form.text_field :state_field, :required => true%>
 <%= form.text_field :state_field_label, :required => true%>
 <%= form.text_field :initial_state, :required => true %></td>
+<% else %>
+  <%= f.static_control :state_field %>
+  <%= f.static_control :state_field_label %>
+  <%= f.static_control :initial_state %>
+<% end %>
