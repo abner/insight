@@ -9,5 +9,5 @@
         <% end %>
         </ul>
     <% elsif feedback.state_machine.state_transitions.count == 1 %>
-      <%= link_to feedback.state_machine.state_transitions[0].event.to_s.humanize, 'javascript:;', :class => 'btn btn-sm btn-success'%>
+      <%= link_to_feedback_transition(feedback, feedback.state_machine.state_transitions[0], class: 'btn btn-sm btn-success' ) %>
     <% end %>
