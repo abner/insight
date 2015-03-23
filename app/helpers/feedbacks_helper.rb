@@ -17,20 +17,38 @@ module FeedbacksHelper
     result
   end
 
-  def show_column_value(column_name, value)
+  def show_column_value(feedback, column_name)
+    value =  feedback.read_attribute(column_name)
     return raw '&nbsp;' if (value.is_a?(String) and value.empty?) or value.nil?
     #puts "Tipo: #{value.class.name} - value: #{value}"
     if 'screenshot_path'.eql?(column_name)
       #tag 'img', :src => "/" + url_for(value), :width => 150, height: 80
-      link_to(
+      return link_to(
             raw(content_tag(:span, pad(translate('Screenshot')), :class => 'fa fa-camera')),
             url_for( "/" + value),
             :class => 'screenshot_link')
     elsif value.is_a? Time
-      l value.in_time_zone, :format => '%d/%m/%y %H:%M'
+      return l value.in_time_zone, :format => '%d/%m/%y %H:%M'
     else
-      value.to_s
+      result = value.to_s
     end
+  end
+
+  def feedback_url(feedback)
+    feedback_target_feedback_form_feedback_path(feedback.feedback_target, feedback.feedback_form, feedback)
+  end
+
+  def fire_event_url(feedback, state_transition)
+    fire_event_feedback_target_feedback_form_feedback_path(
+      feedback.feedback_target,
+      feedback.feedback_form,
+      feedback, event: state_transition.event)
+  end
+
+  def link_to_feedback_transition(feedback ,state_transition)
+    link_text = state_transition.event.to_s.humanize
+    url = fire_event_url(feedback,state_transition)
+    link_to link_text, url, data: { remote: true, method: 'patch',event: state_transition.event, feedback: feedback.id }
   end
 
   def humanize_column(column_name)

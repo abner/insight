@@ -30,7 +30,7 @@
         <% grid_columns = @feedback_form.grid_columns || @feedback_form.all_columns %>
         <% grid_columns.each do |column_name| %>
           <% unless column_name.empty? %>
-          <td><%= show_column_value(column_name, feedback.read_attribute(column_name)) %></td>
+          <td><%= show_column_value(feedback, column_name) %></td>
           <% end %>
         <% end %>
         <td><%#= link_to t('Archive'), archive_feedback_target_feedback_path( @feedback_target, feedback), :remote => true, :method => :post, :data => {:type => 'json', :target_selector => 'a'} %>

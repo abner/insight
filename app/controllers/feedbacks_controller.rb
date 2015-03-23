@@ -16,24 +16,38 @@ class FeedbacksController < ProtectedController
     end
   end
 
+  def update
+    @feedback = feedback_from_params
+
+    @feedback.update_attributes(feedback_params)
+
+    respond_to do |format|
+      format.html { redirect_to @feeback }
+      format.js { render partial: 'detail_column', locals: { feedback: @feedback} }
+    end
+  end
+
   def fire_event
     @feedback = feedback_from_params
     error = nil
     event = params[:event]
     begin
       unless @feedback.state_machine.fire_state_event(params[:event])
-        error = 'invalid_transition'
+        @error = 'invalid_transition'
       end
     rescue Exception => e
-      error = "error_on_state_machine_evet"
+      @error = "error_on_state_machine_evet"
     end
     respond_to do |format|
-      if error
-        result = respond_error_json({ message: I18n.t(error, event), object:  @feedback})
-      else
-        result = respond_success_json({ message: error, object:  @feedback})
+      format.json do
+        if @error
+          result = respond_error_json({ message: I18n.t(@error, event), object:  @feedback})
+        else
+          result = respond_success_json({ message: @error, object:  @feedback})
+        end
+        render :json =>  result
       end
-      render :json =>  result
+      format.js {}
     end
   end
 
@@ -137,6 +151,10 @@ class FeedbacksController < ProtectedController
 
 protected
 
+  def feedback_params
+    params.require(:feedback).permit :assignee_attributes => [:id]
+  end
+
   def list_feedbacks
     @feedback_target = current_user.my_targets.find(params[:feedback_target_id])
 
@@ -193,7 +211,7 @@ protected
 
   private
     def define_breadcrumbs_index
-      add_breadcrumb  feedback_target
+      add_breadcrumb  feedback_target.name, feedback_target
       @feedback_form = @feedback_target.feedback_forms.find(params[:feedback_form_id])
       add_breadcrumb  @feedback_form.name,feedback_target_feedback_form_path(@feedback_target, @feedback_form)
       add_breadcrumb  'Feedbacks'

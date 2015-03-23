@@ -1,0 +1,5 @@
+var selector = '<%= "#feedback_detail_#{@feedback.id.to_s} .detail_column" %>';
+$(selector).fadeOut(200 , function(){
+  $(selector).html("<%= escape_javascript (render partial: 'detail_column', :locals => {:feedback => @feedback}) %>");
+  $(selector).fadeIn(350);
+});

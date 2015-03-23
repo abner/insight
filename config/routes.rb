@@ -65,7 +65,7 @@
           post 'archive' => 'feedbacks#archive'
           post 'unarchive' => 'feedbacks#unarchive'
           get 'comments' => 'feedbacks#comments'
-          post 'fire_event'=> 'feedbacks#fire_event'
+          patch 'fire_event'=> 'feedbacks#fire_event'
         end
       end
     end

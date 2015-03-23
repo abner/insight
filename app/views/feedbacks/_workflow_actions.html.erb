@@ -1,0 +1,13 @@
+
+    <% if feedback.state_machine.state_transitions.count > 1 %>
+        <button type='button' class='btn btn-sm btn-success' data-toggle="dropdown"> <span class="caret"></span>
+          <%= I18n.t('Actions') %>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+        <% feedback.state_machine.state_transitions.each do |state_transition| %>
+          <li><%= link_to_feedback_transition(feedback, state_transition) %></li>
+        <% end %>
+        </ul>
+    <% elsif feedback.state_machine.state_transitions.count == 1 %>
+      <%= link_to feedback.state_machine.state_transitions[0].event.to_s.humanize, 'javascript:;', :class => 'btn btn-sm btn-success'%>
+    <% end %>
