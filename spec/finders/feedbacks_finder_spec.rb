@@ -26,30 +26,86 @@ describe FeedbacksFinder do
       end
     end
 
-    context 'sort by relato asc' do
+    context 'sort by relato' do
 
-      subject { FeedbacksFinder.new.execute(user, {sort: 'relato.asc'}).to_a }
+      context 'ascending order' do
+        subject { FeedbacksFinder.new.execute(user, {sort: 'relato.asc'}) }
 
-      let!(:first) do
-        FactoryGirl.create(:feedback, feedback_form: feedback_form) do |f|
-          f.write_attribute(:relato, '01 relato' )
+        let!(:prefixed_01) do
+          relato_value = '01 relato'
+          FactoryGirl.create(:feedback, feedback_form: feedback_form) do |f|
+            f.write_attribute(:relato, relato_value)
+            f.save
+          end
+          relato_value
         end
+
+        let!(:prefixed_02) do
+          relato_value = '02 relato'
+          FactoryGirl.create(:feedback, feedback_form: feedback_form) do |f|
+            f.write_attribute(:relato, relato_value)
+            f.save
+          end
+          relato_value
+        end
+
+
+        its("first.attributes") { is_expected.to include({ "relato" => prefixed_01 }) }
+        its("last.attributes")  { is_expected.to include({ "relato" => prefixed_02 }) }
       end
 
-      let!(:second) do
-        FactoryGirl.create(:feedback, feedback_form: feedback_form) do |f|
-          f.write_attribute(:relato, '02 relato' )
-        end
-      end
+      context 'descending order' do
+        subject { FeedbacksFinder.new.execute(user, {sort: 'relato.desc'}) }
 
-      it 'return items alphabetically sorted' do
-        expect(subject.first).to eq(first)
-        expect(subject.last).to eq(second)
+        let!(:prefixed_01) do
+          relato_value = '01 relato'
+          FactoryGirl.create(:feedback, feedback_form: feedback_form) do |f|
+            f.write_attribute(:relato, relato_value)
+            f.save
+          end
+          relato_value
+        end
+
+        let!(:prefixed_02) do
+          relato_value = '02 relato'
+          FactoryGirl.create(:feedback, feedback_form: feedback_form) do |f|
+            f.write_attribute(:relato, relato_value)
+            f.save
+          end
+          relato_value
+        end
+
+
+        its("first.attributes") { is_expected.to include({"relato" => prefixed_02}) }
+        its("last.attributes")  { is_expected.to include({"relato" => prefixed_01}) }
       end
     end
 
+    context 'find assigned to a user' do
+      before(:each) do
+        # 20 feedbacks to db just to be sure find only returns matching records
+        (1..20).each {|i| FactoryGirl.create(:feedback, feedback_form: feedback_form) }
+      end
+
+      subject { FeedbacksFinder.new.execute(user, {assignee_id: user.id }) }
+
+      let!(:assigned_to_user) do
+        FactoryGirl.create(:feedback, feedback_form: feedback_form, assignee: user) do |f|
+          f.write_attribute(:relato, 'assigned to user')
+          f.save
+        end
+      end
+
+      its(:count) { is_expected.to eq(1) }
+
+      it 'returns only feedback assigned to user' do
+        expect(subject.to_a).to match([assigned_to_user])
+      end
+
+    end
+
     context 'sort by created_at' do
-      before(:each) {
+      before(:each) do
         FactoryGirl.build(:feedback, feedback_form: feedback_form) do |f|
           f.write_attribute(:created_at, 3.days.ago )
           f.save
@@ -58,7 +114,7 @@ describe FeedbacksFinder do
           f.write_attribute(:created_at, 2.days.ago )
           f.save
         end
-      }
+      end
 
       let(:oldest) do
         Feedback.order_by(:created_at.desc).first

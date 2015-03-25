@@ -108,6 +108,8 @@ group :test, :ci do
   gem 'pickle'
   gem 'rspec'
 
+  gem 'rspec-its'
+
   # gem 'shoulda-matchers', require: false
 
   # mongoid mathcers for rspec
