@@ -8,7 +8,7 @@ RSpec.describe DataSetup, :type => :model do
   end
 
   it 'creates initial attribute models' do
-    expect(FeedbackAttributeModel.count).to eq(5)
+    expect(FeedbackAttributeModel.count).to eq(4)
   end
 
   context 'form_template' do
@@ -30,8 +30,8 @@ RSpec.describe DataSetup, :type => :model do
         expect(default.name).to eq(default_name)
       end
 
-      it 'has 5 attributes' do
-        expect(default.feedback_attributes.count).to eq(5)
+      it 'has 4 attributes' do
+        expect(default.feedback_attributes.count).to eq(4)
       end
 
       it 'has tipo_relato attribute' do
@@ -40,10 +40,6 @@ RSpec.describe DataSetup, :type => :model do
 
       it 'has severidade attribute' do
         expect(default.feedback_attributes.where(name: 'severidade').count).to eq(1)
-      end
-
-      it 'has situacao attribute' do
-        expect(default.feedback_attributes.where(name: 'situacao').count).to eq(1)
       end
 
       it 'has avaliacao attribute' do
