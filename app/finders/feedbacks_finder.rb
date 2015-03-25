@@ -1,7 +1,9 @@
 class FeedbacksFinder
   attr_accessor :current_user, :params
 
-  def execute(current_user, params)
+  include SortingHelper
+
+  def execute(current_user, params={})
     @current_user = current_user
     @params = params
 
@@ -62,7 +64,8 @@ private
   end
 
   def sort(items)
-    items.sort(params[:sort])
+    sort_args = sort_argument_from_param(params)
+    items.order_by(sort_args)
   end
 
   def feedback_target
