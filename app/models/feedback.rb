@@ -145,6 +145,14 @@ class Feedback
     Feedback.in(feedback_form_id: forms_ids).order(created_at: 'DESC').paginate(page: 1, per_page: 5)
   end
 
+  def self.feedbacks_for_user(user)
+    apps_ids = FeedbackTarget.all_targets_for_user(user).map {|app| app.id.to_s }
+    forms_ids = FeedbackForm.in(feedback_target_id: apps_ids).map {|form| form.id.to_s}
+    Feedback.in(feedback_form_id: forms_ids)
+  end
+
+
+
 #### STATE MACHINE IMPLEMENTATION
   def state_machine
      feedback = self

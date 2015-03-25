@@ -11,6 +11,24 @@ module ApplicationHelper
     end
   end
 
+  def page_filter_path(options={})
+    exist_opts = {
+      state: params[:state],
+      scope: params[:scope],
+      #label_name: params[:label_name],
+      #milestone_id: params[:milestone_id],
+      assignee_id: params[:assignee_id],
+      #author_id: params[:author_id],
+      sort: params[:sort],
+    }
+
+    options = exist_opts.merge(options)
+
+    path = request.path
+    path << "?#{options.to_param}"
+    path
+  end
+
   def wrapper_div
     if "true".eql? cookies['feedback_menu_collapsed']
       css_class = 'main_wrapper collapsed'
