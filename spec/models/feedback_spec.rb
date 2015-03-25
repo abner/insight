@@ -27,6 +27,34 @@ RSpec.describe Feedback, :type => :model do
 
   end
 
+  describe '#is_assigned?' do
+
+    context 'with assignee' do
+      subject { FactoryGirl.create(:feedback_with_assignee) }
+      its(:is_assigned?) { is_expected.to eq(true) }
+    end
+
+    context 'without assignee' do
+      subject { FactoryGirl.create(:feedback, assignee: nil) }
+      its(:is_assigned?) { is_expected.to eq(false) }
+    end
+  end
+
+  describe '#is_being_assigned' do
+    context 'when beeing reassigned' do
+      subject do
+         feedback = FactoryGirl.create(:feedback_with_assignee)
+         feedback.assignee = nil
+         feedback
+       end
+      its(:is_being_reassigned?) { is_expected.to eq(true) }
+    end
+    context 'when not beeing reassigned' do
+      subject { FactoryGirl.create(:feedback_with_assignee) }
+      its(:is_being_reassigned?) { is_expected.to eq(false) }
+    end
+  end
+
   context 'assigned scope' do
     let(:user) { FactoryGirl.create(:user) }
 

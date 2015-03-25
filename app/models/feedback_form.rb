@@ -150,7 +150,7 @@ class FeedbackForm
       return feedback.read_attribute(description_field_name)
     end
     return nil unless feedback
-    return attributes.values.to_s unless description_columns
+    return feedback.attributes.values.to_s unless description_columns
     description_values = description_columns.map do |column|
       feedback.read_attribute(column) if feedback.attributes.has_key? column
     end

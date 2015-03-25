@@ -94,11 +94,27 @@ describe FeedbackForm do
     let(:feedback) do
       feedback = FactoryGirl.create(:feedback, feedback_form: feedback_form)
       feedback.write_attribute(:relato, 'blablabla' )
+      feedback.write_attribute(:campo2, 'campo2' )
       feedback
     end
 
-    it 'returns a text composed by values of fields listed on description_columns' do
-      expect(feedback_form.extract_description(feedback)).to eq('blablabla')
+    context 'description field name not defined' do
+      before(:each){
+        feedback_form.description_field_name = nil
+        feedback_form.description_columns = nil
+      }
+      it 'returns a text composed by values of fields listed on description_columns' do
+        expect(feedback_form.extract_description(feedback)).to eq(feedback.attributes.values.to_s)
+      end
+    end
+
+    context 'description field name defined' do
+      before(:each){
+        feedback_form.description_field_name = 'relato'
+      }
+      it 'returns the value of description field' do
+        expect(feedback_form.extract_description(feedback)).to eq('blablabla')
+      end
     end
   end
 

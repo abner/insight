@@ -74,6 +74,10 @@ FactoryGirl.define do
     factory :feedback_with_assignee do
       assignee
     end
+    factory :feedback_archived do
+      active false
+    end
+
   end
 
 

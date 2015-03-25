@@ -104,6 +104,29 @@ describe FeedbacksFinder do
 
     end
 
+    context 'find by scope' do
+      before(:each) do
+        # 10 feedbacks to db just to be sure find only returns matching records
+        (1..10).each {|i| FactoryGirl.create(:feedback, feedback_form: feedback_form) }
+      end
+
+      let!(:feedbacks_archived) do
+        archived = []
+        (1..2).each do
+          archived << FactoryGirl.create(:feedback_archived, feedback_form: feedback_form)
+        end
+        archived
+      end
+
+      subject { FeedbacksFinder.new.execute(user, {scope: 'archived' }) }
+
+      its(:count) { is_expected.to eq(2) }
+
+      it 'returns only feedback archived' do
+        expect(subject.to_a).to match feedbacks_archived
+      end
+    end
+
     context 'sort by created_at' do
       before(:each) do
         FactoryGirl.build(:feedback, feedback_form: feedback_form) do |f|
