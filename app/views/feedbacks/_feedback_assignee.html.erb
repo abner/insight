@@ -1,5 +1,5 @@
 <% feedback.assignee = User.new if feedback.assignee.nil? %>
 <%= f.fields_for :assignee do |assignee_form| %>
-  <%= assignee_form.collection_select :id, feedback.feedback_form.feedback_target.members.all, :id, :username,  { :prompt => I18n.t('feedback.not_yet_assigned'),  :label => I18n.t('mongoid.attributes.feedback.assignee') },
+  <%= assignee_form.collection_select :id, feedback.feedback_form.feedback_target.users, :id, :username,  { :include_blank => I18n.t('feedback.not_assigned'),  :label => I18n.t('mongoid.attributes.feedback.assignee') },
   :required => true, onchange: "$(this).closest('form').submit()" %>
 <% end %>

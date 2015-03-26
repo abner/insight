@@ -18,6 +18,7 @@ module ApplicationHelper
       #label_name: params[:label_name],
       #milestone_id: params[:milestone_id],
       assignee_id: params[:assignee_id],
+      assignee_to_me: params[:assignee_to_me],
       #author_id: params[:author_id],
       sort: params[:sort],
     }

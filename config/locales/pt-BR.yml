@@ -71,6 +71,9 @@ pt-BR:
       show:  'Formulário de Feedback'
       edit:  'Alteração no Formulário de Feedback'
   feedback:
+    archived: 'Arquivado'
+    assigned_to_me: 'Minhas atribuições'
+    not_assigned: 'não atribuído'
     not_yet_assigned: 'ainda não foi atribuído'
     created_date: Data de Registro
     screenshot: Captura de Tela

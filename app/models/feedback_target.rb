@@ -79,6 +79,10 @@ class FeedbackTarget
     self.save!
   end
 
+  def users
+    @users ||= members.all + [owner]
+  end
+
 protected
   def create_default_form!
     form = nil

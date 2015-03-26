@@ -163,6 +163,15 @@ class FeedbackForm
     end
   end
 
+  def all_machine_states_names
+    feedback_template = Feedback.new(feedback_form: self)
+    if feedback_template.state_machine
+      feedback_template.state_machine.definition.states.map { |s| s.name }
+    else
+        []
+    end
+  end
+
 protected
   def set_position(attribute)
     if attribute and 0.eql?(attribute.position)

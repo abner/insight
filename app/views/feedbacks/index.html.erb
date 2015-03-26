@@ -4,6 +4,55 @@
       <h3 class="panel-title">Feedbacks</h3>
   </div>
   <div class="panel-body">
+      <div id='feedbacks_filter'>
+      <div class="btn-toolbar">
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary btn-sm <%= ('1'.eql?(params[:assigned_to_me])) ? 'active' : '' %>"><input type="checkbox" name="options" id="option8">
+          <%= t('feedback.assigned_to_me') %>
+          <div class='hidden'>
+           <% if '1'.eql?(params[:assigned_to_me]) %>
+             <%= link_to t('feedback.assigned_to_me'), page_filter_path(assigned_to_me: '')%>
+           <% else %>
+           <%= link_to t('feedback.assigned_to_me'), page_filter_path(assigned_to_me: '1')%>
+           <% end %>
+          </div>
+          </label>
+        </div>
+       <div class="btn-group" data-toggle="buttons">
+         <% @feedback_form.all_machine_states_names.each do | state_name |%>
+            <label class="btn btn-default btn-sm <%= state_filtered?(state_name.to_s) ? 'active' : '' %>">
+              <input type="checkbox" name="options" value="<%= state_filtered_value(state_name) %>" id="option5">
+              <%= state_name.to_s.humanize %>
+              <div class="hidden">
+              <%
+              if params[:state] and params[:state].include? state_name.to_s %>
+                <%= link_to page_filter_path(state: '')do %>
+                  <%= state_name.to_s.humanize %>
+                <% end %>
+              <% else %>
+                <%= link_to page_filter_path(state: state_name.to_s)do %>
+                  <%= state_name.to_s.humanize %>
+                <% end %>
+              <% end %>
+              </div>
+            </label>
+         <% end %>
+       </div>
+       <div class="btn-group" data-toggle="buttons">
+         <label class="btn btn-warning btn-sm <%= ( params[:scope] and params[:scope].include? 'archived') ? 'active' : '' %>"><input type="checkbox" name="options" id="option8">
+           <%= t('feedback.archived') %>
+         <div class='hidden'>
+          <% if params[:scope] and params[:scope].include? 'archived' %>
+            <%= link_to t('feedback.archived'), page_filter_path(scope: '')%>
+          <% else %>
+          <%= link_to t('feedback.archived'), page_filter_path(scope: 'archived')%>
+          <% end %>
+         </div>
+         </label>
+       </div>
+      </div>
+
+      </div>
       <div id="feedbacks_table">
         <%= render :partial => 'table' %>
       </div>
@@ -13,4 +62,13 @@
 
 <% content_for :body_end do %>
   <%= javascript_include_tag 'feedbacks' %>
+
+  <script type='text/javascript'>
+  jQuery(document).on('ready page:load', function(e){
+    jQuery('div.btn-toolbar').on('click.bs.button.data-api', 'label.btn', function(){
+      var url = $(this).find('a')[0].href;
+      Turbolinks.visit(url);
+    });
+  });
+  </script>
 <% end %>

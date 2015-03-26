@@ -101,4 +101,16 @@ module FeedbacksHelper
   def id_for_panel_feedback_detail feedback
     "feedback_detail_#{feedback.id}"
   end
+
+  def state_filtered? state_name
+    if params[:state].present?
+      params[:state].include?(state_name.to_s)
+    else
+      return false
+    end
+  end
+
+  def state_filtered_value(state_name)
+    state_filtered?(state_name) ? 1 : 0
+  end
 end

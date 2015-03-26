@@ -156,40 +156,43 @@ protected
   end
 
   def list_feedbacks
-    @feedback_target = current_user.my_targets.find(params[:feedback_target_id])
 
-    if params[:feedback_form_id]
-      @feedback_form = @feedback_target.feedback_forms.find(params[:feedback_form_id])
-    else
-      @feedback_form = nil
-    end
+    # @feedback_target = current_user.my_targets.find(params[:feedback_target_id])
+    #
+    # if params[:feedback_form_id]
+    #   @feedback_form = @feedback_target.feedback_forms.find(params[:feedback_form_id])
+    # else
+    #   @feedback_form = nil
+    # end
+    #
+    #
+     @page = params[:page] || 1
+    #
+     @per_page = params[:per_page] || Feedback.per_page
+    #
+    # @scope = params['scope'] || 'default'
+    #
+    # feedbacks = []
+    #
+    # if @feedback_form
+    #   feedbacks_relation = @feedback_form.feedbacks
+    # else
+    #   feedbacks_relation = @feedback_target.feedbacks
+    # end
 
+    feedbacks = FeedbacksFinder.new.execute(current_user, params).paginate(page: 1, per_page: @per_page)
 
-    @page = params[:page] || 1
-
-    @per_page = params[:per_page] || Feedback.per_page
-
-    @scope = params['scope'] || 'default'
-
-    feedbacks = []
-
-    if @feedback_form
-      feedbacks_relation = @feedback_form.feedbacks
-    else
-      feedbacks_relation = @feedback_target.feedbacks
-    end
-
-    if 'default'.eql? @scope
-      feedbacks = feedbacks_relation.order(server_date_time: 'DESC').paginate(page: @page, per_page: @per_page)
-      if feedbacks.empty?
-        feedbacks = feedbacks_relation.order(server_date_time: 'DESC').paginate(page: 1, per_page: @per_page)
-      end
-    elsif 'archived'.eql? @scope
-      feedbacks = feedbacks_relation.archived.order(server_date_time: 'DESC').paginate(page: @page, per_page: @per_page)
-      if feedbacks.empty?
-        feedbacks = feedbacks_relation.archived.order(server_date_time: 'DESC').paginate(page: 1, per_page: @per_page)
-      end
-    end
+    # if 'default'.eql? @scope
+    #   feedbacks = feedbacks_relation.order(server_date_time: 'DESC').paginate(page: @page, per_page: @per_page)
+    #   if feedbacks.empty?
+    #     feedbacks = feedbacks_relation.order(server_date_time: 'DESC').paginate(page: 1, per_page: @per_page)
+    #   end
+    # elsif 'archived'.eql? @scope
+    #   feedbacks = feedbacks_relation.archived.order(server_date_time: 'DESC').paginate(page: @page, per_page: @per_page)
+    #   if feedbacks.empty?
+    #     feedbacks = feedbacks_relation.archived.order(server_date_time: 'DESC').paginate(page: 1, per_page: @per_page)
+    #   end
+    # end
 
     feedbacks
 
