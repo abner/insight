@@ -1,0 +1,10 @@
+<%
+partial_html = escape_javascript (render partial: 'detail_panel', locals: {feedback: @feedback})
+id_element = '#' + "#{id_for_panel_feedback_detail(@feedback)}"
+id_row = '#' + "#{id_for_line_feedback_detail(@feedback)}"
+%>
+id_element = '<%= id_element %>';
+id_row = '<%= id_row %>';
+$(id_element).html("<%= partial_html %>");
+$(id_row).fadeIn(350);
+window.location = '#<%= feedback_detail_anchor(@feedback) %>';

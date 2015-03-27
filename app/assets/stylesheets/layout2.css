@@ -347,7 +347,8 @@ div.placeholder:before {
   border-right: none; }
 
 .sorted_table tbody tr {
-  cursor: pointer; }
+  /*cursor: pointer; */
+  }
 /* line 96, /Users/jonasvonandrian/jquery-sortable/source/css/application.css.sass */
 .sorted_table tr.placeholder {
   display: block;

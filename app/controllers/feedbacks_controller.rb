@@ -114,6 +114,14 @@ class FeedbacksController < ProtectedController
     end
   end
 
+  def show_detail
+    @feedback = feedback_from_params
+    respond_to do |format|
+      format.js {}
+      format.html { render partial: 'detail_panel', :locals => { feedback: @feedback } }
+    end
+  end
+
   def archive
     @feedback = nil
     @scope = 'default'

@@ -98,7 +98,21 @@ module FeedbacksHelper
     end
   end
 
+  def show_detail_path feedback
+    ft = feedback.feedback_target
+    ff = feedback.feedback_form
+    show_detail_feedback_target_feedback_form_feedback_path(ft, ff, feedback)
+  end
+
   def id_for_panel_feedback_detail feedback
+    "td_feedback_detail_#{feedback.id}"
+  end
+
+  def id_for_line_feedback_detail feedback
+    "tr_feedback_detail_#{feedback.id}"
+  end
+
+  def feedback_detail_anchor feedback
     "feedback_detail_#{feedback.id}"
   end
 

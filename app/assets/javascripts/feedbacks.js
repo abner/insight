@@ -71,7 +71,10 @@ $(document).on('mouseenter', 'table#feedbacks tr.feedback_line', null, function(
 
 $(document).on('click', 'table#feedbacks tr.feedback_line', null, function(){
   var targetSelector = $(this).data('targetSelector');
-  $(targetSelector).fadeIn();
+  // $(targetSelector).fadeIn();
+  // $(this).on('click', function(){
+  //   $(this).find('a.detail_link').click();
+  // });
 });
 
 $(document).tooltip({

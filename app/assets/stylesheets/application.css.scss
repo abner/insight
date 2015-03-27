@@ -91,7 +91,8 @@ pre {
   display: none;
 }
 
-a.close_panel, a.feedback_detail_link, tr.feedback_line {
+
+a.close_panel, a.feedback_detail_link {// tr.feedback_line {
   cursor: pointer;
 }
 

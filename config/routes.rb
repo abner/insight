@@ -66,6 +66,7 @@
           post 'unarchive' => 'feedbacks#unarchive'
           get 'comments' => 'feedbacks#comments'
           put 'fire_event'=> 'feedbacks#fire_event'
+          get 'show_detail'=> 'feedbacks#show_detail'
         end
       end
     end

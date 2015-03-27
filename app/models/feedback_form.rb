@@ -19,7 +19,6 @@ class FeedbackForm
   accepts_nested_attributes_for :feedback_attributes, :reject_if => :all_blank, :allow_destroy => true
 
   embeds_many :state_transitions, cascade_callbacks: true
-  # field :state_transitions, type: Array, default: []
   accepts_nested_attributes_for :state_transitions, :reject_if => :all_blank, :allow_destroy => true
 
   belongs_to :feedback_target
