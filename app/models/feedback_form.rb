@@ -47,6 +47,11 @@ class FeedbackForm
   field :state_field, type: String
   field :state_field_label, type: String
 
+  before_save do
+    self.state_field = 'state'
+    self.state_field_label = I18n.t('feedback_form.state')
+  end
+
   # before_save :check_state_consistence
   #
   # def check_state_consistence
