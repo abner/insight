@@ -36,7 +36,7 @@
         <td><%#= link_to t('Archive'), archive_feedback_target_feedback_path( @feedback_target, feedback), :remote => true, :method => :post, :data => {:type => 'json', :target_selector => 'a'} %>
           <%= feedback.active? ? link_to_archive(feedback) : link_to_unarchive(feedback) %>
           <%#= content_tag :a, t('Details'), :class => 'feedback_detail_link', :data => {:target_selector => "#feedback_detail_#{feedback.id }" } %>
-          <%= link_to I18n.t('Details'), show_detail_path(feedback), class: 'detail_link', remote: true %>
+          <%= link_to '', show_detail_path(feedback), class: 'detail_link', remote: true %>
         </td>
       </tr>
       <%= content_tag :tr, :id => id_for_line_feedback_detail(feedback), :class => 'feedback_detail' do %>
