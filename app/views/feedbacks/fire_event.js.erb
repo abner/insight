@@ -1,4 +1,4 @@
-var selector = '<%= "#feedback_detail_#{@feedback.id.to_s} .detail_column" %>';
+var selector = '#<%= "#{id_for_panel_feedback_detail(@feedback)} .detail_column" %>';
 $(selector).fadeOut(200 , function(){
   $(selector).html("<%= escape_javascript (render partial: 'detail_column', :locals => {:feedback => @feedback}) %>");
   $(selector).fadeIn(350);
