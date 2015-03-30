@@ -21,7 +21,7 @@ class FeedbackForm
   embeds_many :state_transitions, cascade_callbacks: true
   accepts_nested_attributes_for :state_transitions, :reject_if => :all_blank, :allow_destroy => true
 
-  belongs_to :feedback_target
+  belongs_to :feedback_target, index: true
 
   field :grid_columns, type: Array
 

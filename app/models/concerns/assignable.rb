@@ -2,7 +2,7 @@ module Assignable
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :assignee, class_name: "User"
+    belongs_to :assignee, class_name: "User", index: true
 
     accepts_nested_attributes_for :assignee, :reject_if => :all_blank, :allow_destroy => true
 

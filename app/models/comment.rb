@@ -4,7 +4,7 @@ class Comment
 
   field :text, type: String
 
-  belongs_to :user
+  belongs_to :user, index: true
 
   embedded_in :feedback
 end

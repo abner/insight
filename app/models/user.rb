@@ -39,7 +39,7 @@ class User
 
   has_many :assigned_feedbacks,   dependent: :destroy, foreign_key: :assignee_id, class_name: "Feedback"
 
-  has_and_belongs_to_many :memberships, :class_name => 'FeedbackTarget', inverse_of: :members
+  has_and_belongs_to_many :memberships, :class_name => 'FeedbackTarget', inverse_of: :members, index: true
 
   validates_presence_of :username
   validates_presence_of :email, :unless => Proc.new { |user| user.new_record? && user.is_a?(LdapUser) }

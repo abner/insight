@@ -19,7 +19,7 @@ class Feedback
 
   #field :state, type: Symbol
 
-  belongs_to :feedback_form
+  belongs_to :feedback_form, index: true
 
   field :server_date_time, type: DateTime
 
@@ -42,6 +42,7 @@ class Feedback
   scope :archived, -> { where(active: false) }
 
   embeds_many :comments
+
 
   def feedback_target
     feedback_form.feedback_target if feedback_form

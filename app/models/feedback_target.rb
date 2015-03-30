@@ -27,8 +27,9 @@ class FeedbackTarget
   validates_presence_of :name
 
   # associations
-  belongs_to :owner, class_name: 'User', inverse_of: :feedback_targets, foreign_key: 'owner_id'
-  has_and_belongs_to_many :members, class_name: 'User', inverse_of: :memberships
+  belongs_to :owner, class_name: 'User', inverse_of: :feedback_targets,
+    foreign_key: 'owner_id', index: true
+  has_and_belongs_to_many :members, class_name: 'User', inverse_of: :memberships, index: true
   has_many :feedback_forms,
             class_name: 'FeedbackForm',
             inverse_of: :feedback_target,
