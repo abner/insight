@@ -135,6 +135,7 @@ group :test, :ci do
   # gem 'rspec-instafail'
   # gem 'shoulda-matchers'
   gem 'poltergeist'
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
   gem 'selenium-webdriver', '>=2.45.0'
 
   # gem 'capybara-select2', github: 'goodwill/capybara-select2'
@@ -186,7 +187,7 @@ gem 'request_store', '~> 1.1.0'
 
 gem 'faraday'
 
-gem 'omniauth-expressov3'
+gem 'omniauth-expressov3', git: 'https://github.com/abner/omniauth-expressov3.git'
 gem 'recursive-open-struct'
 
 

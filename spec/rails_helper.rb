@@ -81,6 +81,7 @@ SimpleCov.start 'rails'
      window_size: [1440,900],
      inspector: false,
      #debug: true,
+     phantomjs: Phantomjs.path,
      phantomjs_options: ['--ignore-ssl-errors=yes']#['--load-images=no', '--ignore-ssl-errors=yes']
 
    }
